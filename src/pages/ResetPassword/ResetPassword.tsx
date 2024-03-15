@@ -1,45 +1,45 @@
 import React from "react";
-import "./style.css";
+import * as S from "./ResetPassword.styled";
 
 export default function Login() {
   return (
-    <div className="login-container">
-      <div className="login-center">
+    <S.LoginContainter>
+      <S.LoginCenter>
         <div className="login-logo">
-          <div className="login-logo-banner">
-            <img
+          <S.LoginLogoBanner>
+            <S.LogoImg
               className="logo-img"
               src="https://cdn.haitrieu.com/wp-content/uploads/2022/12/Icon-Truong-Dai-hoc-Greenwich-Viet-Nam.png"
               alt=""
             />
             <h1>Greenwich University</h1>
-          </div>
-          <p>
+          </S.LoginLogoBanner>
+          <S.LogoDescription>
             University of Greenwich in London and Kent was established in 1890.
             We are located on the banks of the River Thames in South London.
-          </p>
+          </S.LogoDescription>
         </div>
-        <div className="login-field">
-          <form className="login-field-container">
-            <div className="login-feild-text">
-              <p>Reset password</p>
-            </div>
-            <div className="input-fields">
+        <S.LoginField>
+          <S.LoginFieldContainer>
+            <S.LoginFieldText>
+              <p>Reset Password</p>
+            </S.LoginFieldText>
+            <S.InputField>
               <p>
                 <i className="bi bi-shield-lock-fill"></i>
               </p>
               <input type="text" placeholder="Enter password" />
-            </div>
-            <div className="input-fields">
+            </S.InputField>
+            <S.InputField>
               <p>
                 <i className="bi bi-shield-lock-fill"></i>
               </p>
-              <input type="text" placeholder="Re-enter password" />
-            </div>
-            <button className="sign-in-btn">Save</button>
-          </form>
-        </div>
-      </div>
-    </div>
+              <input type="text" placeholder="Re-Enter password" />
+            </S.InputField>
+            <S.SignInBtn className="sign-in-btn">Reset Password</S.SignInBtn>
+          </S.LoginFieldContainer>
+        </S.LoginField>
+      </S.LoginCenter>
+    </S.LoginContainter>
   );
 }
