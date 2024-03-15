@@ -5,8 +5,9 @@ const HeaderContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: fit-content;
-  padding-top: var(--s-4);
   height: 100%;
+  box-shadow: var(--shadow-md);
+  min-height: 100vh;
 `;
 
 export { HeaderContainer };

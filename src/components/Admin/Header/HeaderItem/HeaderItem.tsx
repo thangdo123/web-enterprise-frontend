@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./HeaderItem.styled";
 
 interface IHeaderItemProps {
@@ -14,8 +14,12 @@ export default function HeaderItem({
   icon,
   openState,
 }: IHeaderItemProps) {
+  const [isSelected, setIsSelected] = useState<boolean>(false);
+  const SelectedToggle = () => {
+    setIsSelected(!isSelected);
+  };
   return (
-    <S.HeaderItem to={path}>
+    <S.HeaderItem isSelected={isSelected} onClick={SelectedToggle} to={path}>
       <S.Icon>{icon}</S.Icon>
       <S.Title
         style={openState === true ? { display: "block" } : { display: "none" }}
