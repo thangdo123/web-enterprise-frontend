@@ -11,8 +11,8 @@ const HEADER_LINKS = [
 export default function LeftHeaderList() {
   return (
     <S.LeftHeaderList>
-      {HEADER_LINKS.map(({ name, path }: { name: string; path: string }) => (
-        <HeaderItem key={path} title={name} to={path} />
+      {HEADER_LINKS.map(({ name, path }, index) => (
+        <HeaderItem key={index} title={name} to={path} />
       ))}
     </S.LeftHeaderList>
   );
