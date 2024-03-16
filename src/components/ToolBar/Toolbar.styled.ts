@@ -8,6 +8,8 @@ const ToolBarContainer = styled.div`
 `;
 
 const Title = styled.div`
+  display: flex;
+  align-items: center;
   font-size: var(--fs-lg);
   font-weight: var(--fw-bold);
 `;

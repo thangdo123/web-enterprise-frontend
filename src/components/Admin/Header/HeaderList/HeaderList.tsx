@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./HeaderList.styled";
 import HeaderItem from "../HeaderItem/HeaderItem";
 
@@ -26,16 +26,24 @@ const HEADER_LIST = [
 ];
 
 export default function HeaderList({ OpenState }: { OpenState: boolean }) {
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const handleSelectedIndex = ({ index }: { index: number }) =>
+    setSelectedIndex(index);
   return (
     <S.ListContainer>
       {HEADER_LIST.map(({ title, path, icon }, index) => (
-        <HeaderItem
+        <S.HeaderItemWrapper
           key={index}
-          title={title}
-          path={path}
-          icon={icon}
-          openState={OpenState}
-        />
+          onClick={() => handleSelectedIndex({ index })}
+        >
+          <HeaderItem
+            title={title}
+            path={path}
+            icon={icon}
+            openState={OpenState}
+            isSelected={selectedIndex === index}
+          />
+        </S.HeaderItemWrapper>
       ))}
     </S.ListContainer>
   );
