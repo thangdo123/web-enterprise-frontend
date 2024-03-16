@@ -7,6 +7,8 @@ const HeaderItem = styled(NavLink)<{ isSelected: boolean }>`
   gap: var(--s-4);
   text-decoration: none;
   color: ${({ isSelected }) => (isSelected ? "var(--blue)" : "var(--black)")};
+  background-color: ${({ isSelected }) =>
+    isSelected ? "var(--blue-light)" : "var(--white)"};
   padding: var(--s-4);
 
   &:hover {
@@ -19,8 +21,8 @@ const Icon = styled.div`
   display: block;
 `;
 
-const Title = styled.div`
-  display: block;
+const Title = styled.div<{ openState: boolean }>`
+  display: ${({ openState }) => (openState ? "block" : "none")};
   padding-right: var(--s-12);
   white-space: nowrap;
 `;

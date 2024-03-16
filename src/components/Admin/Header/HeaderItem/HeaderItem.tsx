@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import * as S from "./HeaderItem.styled";
 
 interface IHeaderItemProps {
@@ -6,6 +6,7 @@ interface IHeaderItemProps {
   path: string;
   icon: JSX.Element;
   openState: boolean;
+  isSelected: boolean;
 }
 
 export default function HeaderItem({
@@ -13,19 +14,12 @@ export default function HeaderItem({
   path,
   icon,
   openState,
+  isSelected,
 }: IHeaderItemProps) {
-  const [isSelected, setIsSelected] = useState<boolean>(false);
-  const SelectedToggle = () => {
-    setIsSelected(!isSelected);
-  };
   return (
-    <S.HeaderItem isSelected={isSelected} onClick={SelectedToggle} to={path}>
+    <S.HeaderItem isSelected={isSelected} to={path}>
       <S.Icon>{icon}</S.Icon>
-      <S.Title
-        style={openState === true ? { display: "block" } : { display: "none" }}
-      >
-        {title}
-      </S.Title>
+      <S.Title openState={openState}>{title}</S.Title>
     </S.HeaderItem>
   );
 }

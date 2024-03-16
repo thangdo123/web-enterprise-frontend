@@ -6,4 +6,8 @@ const ListContainer = styled.div`
   gap: var(--s-2);
 `;
 
-export { ListContainer };
+const HeaderItemWrapper = styled.div`
+  display: block;
+`;
+
+export { ListContainer, HeaderItemWrapper };
