@@ -29,6 +29,7 @@ const SortOptionContainer = styled.div<{ isOpen: boolean }>`
   flex-direction: column;
   box-shadow: var(--shadow-md);
   gap: var(--s-2);
+  background-color: var(--white);
 `;
 
 const SortOption = styled.div`
