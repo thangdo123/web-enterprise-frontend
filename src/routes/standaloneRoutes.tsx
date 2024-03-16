@@ -4,6 +4,7 @@ import Login from "../pages/Login/Login";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import CreateAccount from "../pages/Admin/Accounts/Create/CreateAccount";
 import CreateFaculty from "../pages/Admin/Faculty/Create/CreateFaculty";
+import EditProfile from "../pages/EditProfile/EditProfile";
 
 export const standaloneRoutes: IRoute[] = [
   {
@@ -25,5 +26,9 @@ export const standaloneRoutes: IRoute[] = [
   {
     path: "/createfaculty",
     component: <CreateFaculty />
+  },
+  {
+    path: "/editprofile",
+    component: <EditProfile />
   },
 ];
