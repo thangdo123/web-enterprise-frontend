@@ -23,7 +23,6 @@ const SortOptionContainer = styled.div<{ isOpen: boolean }>`
   position: absolute;
   border-radius: var(--br-lg);
   top: 100%;
-  transform: translateX(-50%);
   cursor: pointer;
   padding: var(--s-2);
   flex-direction: column;

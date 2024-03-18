@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import * as S from "./CreateAccount.Styled";
+import Dropdown from "../../../../components/Dropdown/Dropdown";
+
 
 const CreateAccount = () => {
   const [password, setPassword] = useState("");
   const [visible, setvisible] = useState(false);
 
+  const dropDownItems = [{value: "Student"}, {value: "Marketing Cordinator"}, {value: "Marketing Manager"}, {value: "Admin"}];
+  const title = "Role";
   return (
     <S.CreateAccountLayout>
       <S.CreateAccountContainer>
@@ -37,29 +41,7 @@ const CreateAccount = () => {
         </S.CreateAccountBlock2>
         <S.CreateAccountBlock3>
           <S.CreateAccountLeftTitle>Role:</S.CreateAccountLeftTitle>
-          <S.CreateAccountBlock3Right>
-            <p>
-              Role <i className="bi bi-caret-down-fill"></i>
-            </p>
-            <S.RoleChoosing>
-              <S.RoleChoosingItems>
-                <input type="radio" name="fav_language" value="" />
-                <label>Student</label>
-              </S.RoleChoosingItems>
-              <S.RoleChoosingItems>
-                <input type="radio" name="fav_language" value="" />
-                <label>Marketing Cordinator</label>
-              </S.RoleChoosingItems>
-              <S.RoleChoosingItems>
-                <input type="radio" name="fav_language" value="" />
-                <label>Marketing Manager</label>
-              </S.RoleChoosingItems>
-              <S.RoleChoosingItems>
-                <input type="radio" name="fav_language" value="" />
-                <label>Admin</label>
-              </S.RoleChoosingItems>
-            </S.RoleChoosing>
-          </S.CreateAccountBlock3Right>
+          <Dropdown title={title} optionList={dropDownItems} />
         </S.CreateAccountBlock3>
         <S.BottomBtn>
           <div>
