@@ -80,7 +80,11 @@ const ViewMySubmission = () => {
             <S.Block3Top>
               <S.Block3TopLeft>
                 <S.Block3Sort>
-                  <Dropdown title={title} optionList={dropdownItems} />
+                  <Dropdown
+                    onClick={() => console.log("Cliked")}
+                    title={title}
+                    optionList={dropdownItems}
+                  />
                 </S.Block3Sort>
                 <S.Block3Date>
                   Due Date: Thursday, 16 April 2023, 11:00 PM
@@ -93,7 +97,7 @@ const ViewMySubmission = () => {
             <S.Block3SubmissionList>
               {submissionArr.map((item, index) => (
                 <S.Block3SubmissionItemsContainer key={index}>
-                  <Card imgUrl={item.imgUrl} cardTitle={item.cardTitle}/>
+                  <Card imgUrl={item.imgUrl} cardTitle={item.cardTitle} />
                 </S.Block3SubmissionItemsContainer>
               ))}
             </S.Block3SubmissionList>
