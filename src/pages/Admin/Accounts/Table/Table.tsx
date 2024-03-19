@@ -1,41 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./Table.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store";
-import { fetchAllAccounts } from "../../../../store/slices/accounts";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store";
+import Pagination from "../../../../components/Pagination/Pagination";
+import { IAccount } from "../../../../interfaces/account.interfaces";
 
 export default function Table() {
-  const dispatch = useDispatch<AppDispatch>();
   const { accounts } = useSelector((state: RootState) => state.accountState);
+  const [listOfAccounts, setListOfAccounts] = useState<IAccount[][]>();
+  const [totalPage, setTotalPage] = useState<number>();
+  const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    dispatch(fetchAllAccounts());
-  }, [dispatch]); // Dispatch action only once when component mounts
-
-  const listAccount = Object.entries(accounts);
+    if (accounts.account) {
+      console.log(accounts.account);
+      setListOfAccounts(accounts.account);
+      setTotalPage(accounts.account.length);
+    }
+    if (page < 0) setPage(0);
+    if (page >= accounts.account.length) setPage(accounts.account.length - 1);
+  }, [accounts, page]);
 
   return (
-    <S.Table>
-      <thead>
-        <S.TableHeadRow>
-          <S.TableHeadItem>Username</S.TableHeadItem>
-          <S.TableHeadItem>Email</S.TableHeadItem>
-          <S.TableHeadItem>Role</S.TableHeadItem>
-          <S.TableHeadItem>Created at</S.TableHeadItem>
-          <S.TableHeadItem>Actions</S.TableHeadItem>
-        </S.TableHeadRow>
-      </thead>
-      <tbody>
-        {listAccount.map((innerAccounts, index) => (
-          <React.Fragment key={index}>
-            {innerAccounts[1].map((account, innerIndex) => (
-              <React.Fragment key={innerIndex}>
-                {account.map((key, itemIndex) => (
-                  <S.TableRow key={itemIndex}>
-                    <S.TableItem>{key.name}</S.TableItem>
-                    <S.TableItem>{key.email}</S.TableItem>
-                    <S.TableItem>{key.role}</S.TableItem>
-                    <S.TableItem>{key.createAt}</S.TableItem>
+    <S.TableContainer>
+      {listOfAccounts && listOfAccounts[page] && (
+        <>
+          <S.Table>
+            <thead>
+              <S.TableHeadRow>
+                <S.TableHeadItem>Username</S.TableHeadItem>
+                <S.TableHeadItem>Email</S.TableHeadItem>
+                <S.TableHeadItem>Role</S.TableHeadItem>
+                <S.TableHeadItem>Created at</S.TableHeadItem>
+                <S.TableHeadItem>Actions</S.TableHeadItem>
+              </S.TableHeadRow>
+            </thead>
+            <tbody>
+              {listOfAccounts[page].map((innerAccounts, index) => (
+                <React.Fragment key={index}>
+                  <S.TableRow>
+                    <S.TableItem>{innerAccounts.name}</S.TableItem>
+                    <S.TableItem>{innerAccounts.email}</S.TableItem>
+                    <S.TableItem>{innerAccounts.role}</S.TableItem>
+                    <S.TableItem>{innerAccounts.createAt}</S.TableItem>
                     <S.TableItem>
                       <S.ActionItemContainer>
                         <S.ActionTitle>Edit</S.ActionTitle>
@@ -43,12 +50,18 @@ export default function Table() {
                       </S.ActionItemContainer>
                     </S.TableItem>
                   </S.TableRow>
-                ))}
-              </React.Fragment>
-            ))}
-          </React.Fragment>
-        ))}
-      </tbody>
-    </S.Table>
+                </React.Fragment>
+              ))}
+            </tbody>
+          </S.Table>
+
+          <Pagination
+            totalPage={totalPage!}
+            nextPage={() => setPage(page + 1)}
+            prevPage={() => setPage(page - 1)}
+          />
+        </>
+      )}
+    </S.TableContainer>
   );
 }

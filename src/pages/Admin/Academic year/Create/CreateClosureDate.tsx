@@ -12,7 +12,7 @@ const CreateClosureDate = () => {
           </S.RightCalendar>
         </S.SetDateBlock>
         <S.SetDateBlock>
-          <S.LeftTitle>Closure Date:</S.LeftTitle>
+          <S.LeftTitle>Final Closure Date:</S.LeftTitle>
           <S.RightCalendar>
             <input type="datetime-local" name="" />
           </S.RightCalendar>

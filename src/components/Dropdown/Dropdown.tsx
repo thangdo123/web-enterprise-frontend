@@ -8,17 +8,22 @@ interface IOption {
 interface IDropdownProps {
   title: string;
   optionList: IOption[];
+  onClick: (option: string) => void;
 }
 
-export default function Dropdown({ title, optionList }: IDropdownProps) {
+export default function Dropdown({
+  title,
+  optionList,
+  onClick,
+}: IDropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [defaultTitle, setDefaultTitle] = useState(title);
 
-  const handleSelectedOption= (option:string)=>{
+  const handleSelectedOption = (option: string) => {
     setDefaultTitle(option);
+    onClick(option);
   };
-    
-  
+
   const handleSortOpen = () => setIsOpen(!isOpen);
   return (
     <S.SortContainer>
@@ -28,7 +33,12 @@ export default function Dropdown({ title, optionList }: IDropdownProps) {
       </S.SortBtn>
       <S.SortOptionContainer $isOpen={isOpen}>
         {optionList.map((item, index) => (
-          <S.SortOption key={index} onClick={()=>handleSelectedOption(item.value)}>{item.value}</S.SortOption>
+          <S.SortOption
+            key={index}
+            onClick={() => handleSelectedOption(item.value)}
+          >
+            {item.value}
+          </S.SortOption>
         ))}
       </S.SortOptionContainer>
     </S.SortContainer>

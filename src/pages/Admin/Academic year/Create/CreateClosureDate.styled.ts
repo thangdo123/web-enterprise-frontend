@@ -3,12 +3,14 @@ import styled from "styled-components";
 export const Layout = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
 export const Container = styled.div`
   margin-top: var(--s-8);
-  width: 70%;
+  width: 100%;
   display: flex;
+  justify-content: space-between;
 `;
 
 export const SetDateBlock = styled.div`
@@ -18,14 +20,14 @@ export const SetDateBlock = styled.div`
 `;
 
 export const LeftTitle = styled.div`
-    font-weight: bold;
-    font-size: 20px;
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 export const RightCalendar = styled.div`
-    input{
-        border: var(--gray) solid 1px;
-        border-radius: 5px;
-        font-size: 20px;
-    }
+  input {
+    border: var(--gray) solid 1px;
+    border-radius: 5px;
+    font-size: 20px;
+  }
 `;

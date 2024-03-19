@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+const TableContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  margin-bottom: var(--s-4);
+`;
+
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -39,9 +47,11 @@ const ActionItemContainer = styled.div`
 
 const ActionTitle = styled.div`
   color: var(--blue);
+  cursor: pointer;
 `;
 
 export {
+  TableContainer,
   Table,
   TableHeadItem,
   TableItem,
