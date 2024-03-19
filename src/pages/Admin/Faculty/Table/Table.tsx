@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Table.styled";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../../store";
 import Pagination from "../../../../components/Pagination/Pagination";
+import { deleteFacultyById } from "../../../../store/slices/faculties";
 
 export default function Table() {
   const { allFaculties } = useSelector(
     (state: RootState) => state.facultyState,
   );
+  const dispatch = useDispatch<AppDispatch>();
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
   useEffect(() => {
@@ -38,7 +40,13 @@ export default function Table() {
                     <S.TableItem>
                       <S.ActionItemContainer>
                         <S.ActionTitle>Edit</S.ActionTitle>
-                        <S.ActionTitle>Delete</S.ActionTitle>
+                        <S.ActionTitle
+                          onClick={() =>
+                            dispatch(deleteFacultyById(innerFaculties.id))
+                          }
+                        >
+                          Delete
+                        </S.ActionTitle>
                       </S.ActionItemContainer>
                     </S.TableItem>
                   </S.TableRow>

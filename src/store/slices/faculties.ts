@@ -23,7 +23,27 @@ export const deleteFacultyById = createAsyncThunk(
   async (facultyId: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.delete(
-        API_BASE_URL + API_ENDPOINTS.DELETE_FACULTIES + { facultyId },
+        API_BASE_URL + API_ENDPOINTS.DELETE_FACULTIES + facultyId,
+      );
+      console.log(response.data);
+      return facultyId;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const updateFacultyById = createAsyncThunk(
+  "faculties/updateFacultyById",
+  async (
+    { facultyId, name }: { facultyId: string; name: string },
+    { rejectWithValue },
+  ) => {
+    try {
+      const response = await axiosInstance.put(
+        API_BASE_URL + API_ENDPOINTS.UPDATE_FACULTIES + facultyId,
+        { name },
       );
       console.log(response.data);
       return facultyId;
@@ -68,25 +88,20 @@ export const facultyState = createSlice({
     builder.addCase(fetchAllFaculties.rejected, (state) => {
       state.allFaculties = [];
     });
-    // builder.addCase(deleteFacultyById.fulfilled, (state, action) => {
-    //   state.allFaculties = state.allFaculties.filter(
-    //     (faculty) => faculty !== action.payload,
-    //   );
-    // });
-
+    builder.addCase(deleteFacultyById.fulfilled, (state, action) => {
+      state.allFaculties = state.allFaculties.map((faculties) =>
+        faculties.filter((faculty) => faculty.id !== action.payload),
+      );
+    });
     builder.addCase(createFaculty.fulfilled, (state, action) => {
       const { allFaculties } = state;
-
-      // Find an inner array that has less than 10 faculties
       const facultiesWithLessThan10 = allFaculties.find(
         (arr) => arr.length < 10,
       );
 
       if (facultiesWithLessThan10) {
-        // Push the new faculty into the existing inner array
         facultiesWithLessThan10.push(action.payload.faculty);
       } else {
-        // Create a new inner array and push the new faculty into it
         state.allFaculties.push([action.payload.faculty]);
       }
     });

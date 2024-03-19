@@ -6,6 +6,7 @@ const API_ENDPOINTS = {
   CREATE_ACCOUNTS: "/admin/registerForUser",
   FACULTIES: "/admin/viewFaculties",
   DELETE_FACULTIES: "/admin/deleteFaculty/",
+  UPDATE_FACULTIES: "/admin/updateFaculty/",
   CREATE_FACULTIES: "/admin/createFaculty",
 };
 
