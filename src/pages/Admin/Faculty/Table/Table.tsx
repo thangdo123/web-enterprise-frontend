@@ -57,6 +57,8 @@ export default function Table() {
 
           {totalPage && (
             <Pagination
+              changePage={setPage}
+              currentPage={page}
               totalPage={totalPage}
               nextPage={() => setPage(page + 1)}
               prevPage={() => setPage(page - 1)}
