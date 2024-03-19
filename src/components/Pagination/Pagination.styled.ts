@@ -24,9 +24,13 @@ const PagesList = styled.div`
   gap: var(--s-12);
 `;
 
-const PageItem = styled.div`
+const PageItem = styled.div<{ $selected: boolean }>`
   display: block;
   cursor: pointer;
+  padding: 0 var(--s-2);
+  border-radius: var(--br-md);
+  background-color: ${({ $selected }) =>
+    $selected ? "var(--blue-light)" : "var(--white)"};
 `;
 
 export { PaginationContainer, NextBtn, PrevBtn, PagesList, PageItem };
