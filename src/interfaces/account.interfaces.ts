@@ -1,14 +1,17 @@
 import React from "react";
 
 export interface IAccount {
-  accountId: string;
+  id?: string;
   name: string;
   email: string;
-  password: string;
   role: string;
-  createAt: React.ReactNode;
+  createAt?: React.ReactNode;
+  avatar: string;
+  faculty?: string;
 }
 
 export interface IAccountState {
-  accounts: IAccount[][][];
+  accounts: {
+    account: IAccount[][];
+  };
 }

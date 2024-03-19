@@ -1,24 +1,64 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import * as S from "./CreateAccount.Styled";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../../store";
+import { createAccount } from "../../../../store/slices/accounts";
+import { IAccount } from "../../../../interfaces/account.interfaces";
 
+const CreateAccount = ({ onClose }: { onClose: () => void }) => {
+  // const [visible, setvisible] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [role, setRole] = useState<string>("");
 
-const CreateAccount = () => {
-  const [password, setPassword] = useState("");
-  const [visible, setvisible] = useState(false);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const dropDownItems = [{value: "Student"}, {value: "Marketing Cordinator"}, {value: "Marketing Manager"}, {value: "Admin"}];
+  const handleOnSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const newAccount: IAccount = {
+      name: name,
+      email: email,
+      role: role,
+      avatar: "buh",
+    };
+    onClose();
+    dispatch(createAccount(newAccount));
+  };
+
+  const dropDownItems = [
+    { value: "Student" },
+    { value: "Marketing Coordinator" },
+    { value: "Marketing Manager" },
+    { value: "Admin" },
+  ];
   const title = "Role";
   return (
     <S.CreateAccountLayout>
-      <S.CreateAccountContainer>
+      <S.CreateAccountContainer onSubmit={handleOnSubmit}>
         <S.CreateAccountBlock1>
           <S.CreateAccountLeftTitle>Username:</S.CreateAccountLeftTitle>
           <S.CreateAccountBlock1Right>
-            <input placeholder="Enter Username" />
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter Username"
+              required
+            />
           </S.CreateAccountBlock1Right>
         </S.CreateAccountBlock1>
-        <S.CreateAccountBlock2>
+        <S.CreateAccountBlock1>
+          <S.CreateAccountLeftTitle>Email:</S.CreateAccountLeftTitle>
+          <S.CreateAccountBlock1Right>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter Email"
+              required
+            />
+          </S.CreateAccountBlock1Right>
+        </S.CreateAccountBlock1>
+        {/* <S.CreateAccountBlock2>
           <S.CreateAccountLeftTitle>Password:</S.CreateAccountLeftTitle>
           <S.CreateAccountBlock2Right>
             <S.EnterPasswordField
@@ -38,10 +78,14 @@ const CreateAccount = () => {
               )}
             </S.HidePasswordBtn>
           </S.CreateAccountBlock2Right>
-        </S.CreateAccountBlock2>
+        </S.CreateAccountBlock2> */}
         <S.CreateAccountBlock3>
           <S.CreateAccountLeftTitle>Role:</S.CreateAccountLeftTitle>
-          <Dropdown title={title} optionList={dropDownItems} />
+          <Dropdown
+            onClick={setRole}
+            title={title}
+            optionList={dropDownItems}
+          />
         </S.CreateAccountBlock3>
         <S.BottomBtn>
           <div>

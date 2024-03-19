@@ -22,11 +22,16 @@ export default function Toolbar({
   btnTitle,
   optionList,
 }: IToolbarProps) {
+  const checkClicked = () => console.log("Clicked");
   return (
     <S.ToolBarContainer>
       <S.Title>{pageTitle}</S.Title>
       <S.ToolBar>
-        <Dropdown title={sortTitle} optionList={optionList} />
+        <Dropdown
+          onClick={checkClicked}
+          title={sortTitle}
+          optionList={optionList}
+        />
         <Searchbar />
         <S.AddBtn onClick={onClick}>{btnTitle}</S.AddBtn>
       </S.ToolBar>

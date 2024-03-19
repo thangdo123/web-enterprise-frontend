@@ -1,15 +1,11 @@
-// import React from "react";
+import React from "react";
 
-// export interface IFaculty {
-//   accountId: string;
-//   name: string;
-//   email: string;
-//   password: string;
-//   role: string;
-//   createAt: React.ReactNode;
-// }
+export interface IFaculty {
+  id: string;
+  name: string;
+  createAt: React.ReactNode;
+}
 
-// export interface IAccountState {
-//   accounts: IAccount[][][];
-// }
-export const buh = "";
+export interface IFacultyState {
+  allFaculties: IFaculty[][];
+}

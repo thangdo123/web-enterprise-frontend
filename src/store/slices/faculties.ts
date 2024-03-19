@@ -1,6 +1,7 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
+import { IFacultyState } from "../../interfaces/faculty.interfaces";
 
 export const fetchAllFaculties = createAsyncThunk(
   "accounts/fetchAllFaculties",
@@ -9,7 +10,6 @@ export const fetchAllFaculties = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.FACULTIES,
       );
-      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -17,3 +17,74 @@ export const fetchAllFaculties = createAsyncThunk(
     }
   },
 );
+
+export const deleteFacultyById = createAsyncThunk(
+  "faculties/deleteFacultyById",
+  async (facultyId: string, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.delete(
+        API_BASE_URL + API_ENDPOINTS.DELETE_FACULTIES + { facultyId },
+      );
+      console.log(response.data);
+      return facultyId;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const createFaculty = createAsyncThunk(
+  "faculties/createFaculty",
+  async ({ name }: { name: string }, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.post(
+        API_BASE_URL + API_ENDPOINTS.CREATE_FACULTIES,
+        { name },
+      );
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  },
+);
+
+const initialState: IFacultyState = {
+  allFaculties: [],
+};
+
+export const facultyState = createSlice({
+  name: "facultyState",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchAllFaculties.pending, (state) => {
+      state.allFaculties = [];
+    });
+    builder.addCase(fetchAllFaculties.fulfilled, (state, action) => {
+      state.allFaculties = action.payload.allFaculties;
+      console.log(action.payload);
+    });
+    builder.addCase(fetchAllFaculties.rejected, (state) => {
+      state.allFaculties = [];
+    });
+    // builder.addCase(deleteFacultyById.fulfilled, (state, action) => {
+    //   state.allFaculties = state.allFaculties.filter(
+    //     (faculty) => faculty !== action.payload,
+    //   );
+    // });
+
+    builder.addCase(createFaculty.fulfilled, (state, action) => {
+      const { allFaculties } = state;
+      const facultiesWithLessThan10 = allFaculties.find(
+        (arr) => arr.length < 10,
+      );
+
+      if (facultiesWithLessThan10) {
+        facultiesWithLessThan10.push(action.payload.allFaculties);
+      } else {
+        state.allFaculties.push([action.payload.allFaculties]);
+      }
+    });
+  },
+});
