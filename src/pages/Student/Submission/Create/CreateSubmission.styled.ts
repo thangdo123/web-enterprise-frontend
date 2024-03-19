@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const Layout = styled.form`
     display: flex;
     justify-content: center;
+    p, h3{
+        margin:0;
+    }
 `;
 
 export const Container = styled.div`

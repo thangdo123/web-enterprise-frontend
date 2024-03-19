@@ -6,6 +6,7 @@ import CreateAccount from "../pages/Admin/Accounts/Create/CreateAccount";
 import CreateFaculty from "../pages/Admin/Faculty/Create/CreateFaculty";
 import CreateClosureDate from "../pages/Admin/Academic year/Create/CreateClosureDate";
 import CreateSubmission from "../pages/Student/Submission/Create/CreateSubmission";
+import ViewMySubmission from "../pages/Student/MySubmission/ViewMySubmission";
 
 export const standaloneRoutes: IRoute[] = [
   {
@@ -35,5 +36,9 @@ export const standaloneRoutes: IRoute[] = [
   {
     path: "/createsubmission",
     component: <CreateSubmission />,
+  },
+  {
+    path: "/viewsubmission",
+    component: <ViewMySubmission />,
   },
 ];
