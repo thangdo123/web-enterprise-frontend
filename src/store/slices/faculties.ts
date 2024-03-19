@@ -42,6 +42,7 @@ export const createFaculty = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.CREATE_FACULTIES,
         { name },
       );
+      console.log(response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -63,7 +64,6 @@ export const facultyState = createSlice({
     });
     builder.addCase(fetchAllFaculties.fulfilled, (state, action) => {
       state.allFaculties = action.payload.allFaculties;
-      console.log(action.payload);
     });
     builder.addCase(fetchAllFaculties.rejected, (state) => {
       state.allFaculties = [];
@@ -76,14 +76,18 @@ export const facultyState = createSlice({
 
     builder.addCase(createFaculty.fulfilled, (state, action) => {
       const { allFaculties } = state;
+
+      // Find an inner array that has less than 10 faculties
       const facultiesWithLessThan10 = allFaculties.find(
         (arr) => arr.length < 10,
       );
 
       if (facultiesWithLessThan10) {
-        facultiesWithLessThan10.push(action.payload.allFaculties);
+        // Push the new faculty into the existing inner array
+        facultiesWithLessThan10.push(action.payload.faculty);
       } else {
-        state.allFaculties.push([action.payload.allFaculties]);
+        // Create a new inner array and push the new faculty into it
+        state.allFaculties.push([action.payload.faculty]);
       }
     });
   },

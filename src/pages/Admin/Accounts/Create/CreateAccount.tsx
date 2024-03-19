@@ -16,6 +16,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
+    console.log(role);
     const newAccount: IAccount = {
       name: name,
       email: email,
@@ -26,12 +27,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
     dispatch(createAccount(newAccount));
   };
 
-  const dropDownItems = [
-    { value: "Student" },
-    { value: "Marketing Coordinator" },
-    { value: "Marketing Manager" },
-    { value: "Admin" },
-  ];
+  const dropDownItems = [{ value: "STUDENT" }, { value: "COORDIONATOR" }];
   const title = "Role";
   return (
     <S.CreateAccountLayout>
@@ -90,7 +86,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
         <S.BottomBtn>
           <div>
             <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.CancelBtn>Cancel</S.CancelBtn>
+            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
           </div>
         </S.BottomBtn>
       </S.CreateAccountContainer>

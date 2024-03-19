@@ -30,7 +30,7 @@ export default function Faculty() {
         optionList={OPTION_LIST}
       />
       <Popup show={show} onClose={handlePopup}>
-        <CreateFaculty />
+        <CreateFaculty onClose={handlePopup} />
       </Popup>
       <Table />
     </S.PageContainer>
