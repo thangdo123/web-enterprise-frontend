@@ -5,9 +5,7 @@ import HeaderToggle from "./HeaderToggle/HeaderToggle";
 
 export default function Header() {
   const [openState, setOpenState] = useState<boolean>(false);
-  useEffect(() => {
-    console.log(openState);
-  }, [openState]);
+  useEffect(() => {}, [openState]);
   return (
     <S.HeaderContainer>
       <HeaderList OpenState={openState} />

@@ -1,8 +1,43 @@
-import React from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./Login.styled";
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { postLogin } from "../../store/slices/login";
+
+interface ILogin {
+  email: string;
+  password: string;
+}
 
 export default function Login() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { isLoggedin } = useSelector((state: RootState) => state.loginState);
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    const account: ILogin = {
+      email: emailInput,
+      password: passwordInput,
+    };
+    dispatch(postLogin(account));
+  };
+
+  const [emailInput, setEmailInput] = useState<string>("");
+  const [passwordInput, setPasswordInput] = useState<string>("");
+
+  useEffect(() => {
+    console.log("First: " + isLoggedin);
+    if (isLoggedin) {
+      navigate("/");
+    }
+  }, [isLoggedin]);
+
+  const handleOnSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    handleLogin();
+  };
+
   return (
     <S.LoginContainter>
       <S.LoginCenter>
@@ -21,7 +56,7 @@ export default function Login() {
           </S.LogoDescription>
         </div>
         <S.LoginField>
-          <S.LoginFieldContainer>
+          <S.LoginFieldContainer onSubmit={handleOnSubmit}>
             <S.LoginFieldText>
               <p>Login</p>
             </S.LoginFieldText>
@@ -29,15 +64,29 @@ export default function Login() {
               <p>
                 <i className="bi bi-person-circle"></i>
               </p>
-              <input type="text" placeholder="Enter username" />
+              <input
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                type="text"
+                placeholder="Enter username"
+                required
+              />
             </S.InputField>
             <S.InputField>
               <p>
                 <i className="bi bi-shield-lock-fill"></i>
               </p>
-              <input type="text" placeholder="Enter password" />
+              <input
+                value={passwordInput}
+                onChange={(e) => setPasswordInput(e.target.value)}
+                type="text"
+                placeholder="Enter password"
+                required
+              />
             </S.InputField>
-            <S.ForgotPassword><Link to="/resetpassword">Forgot Password?</Link></S.ForgotPassword>
+            <S.ForgotPassword>
+              <Link to="/resetpassword">Forgot Password?</Link>
+            </S.ForgotPassword>
             <S.SignInBtn className="sign-in-btn">Sign in</S.SignInBtn>
           </S.LoginFieldContainer>
         </S.LoginField>

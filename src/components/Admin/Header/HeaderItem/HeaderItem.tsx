@@ -17,9 +17,9 @@ export default function HeaderItem({
   isSelected,
 }: IHeaderItemProps) {
   return (
-    <S.HeaderItem isSelected={isSelected} to={path}>
+    <S.HeaderItem $isSelected={isSelected} to={path}>
       <S.Icon>{icon}</S.Icon>
-      <S.Title openState={openState}>{title}</S.Title>
+      <S.Title $openState={openState}>{title}</S.Title>
     </S.HeaderItem>
   );
 }

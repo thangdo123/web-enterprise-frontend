@@ -13,7 +13,7 @@ export default function Popup({ children, show, onClose }: IPopupProps) {
     e.stopPropagation();
   };
   return (
-    <S.PopupOverlay show={show} onClick={onClose}>
+    <S.PopupOverlay $show={show} onClick={onClose}>
       <S.PopupContainer onClick={handleClickContent}>
         <S.PopupBody>{children}</S.PopupBody>
       </S.PopupContainer>

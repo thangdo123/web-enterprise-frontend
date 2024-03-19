@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import * as S from "./Accounts.styled";
+import * as S from "./Faculty.styled";
 import Toolbar from "../../../components/ToolBar/Toolbar";
 import Popup from "../../../components/PopUp/Popup";
-import CreateAccount from "./Create/CreateAccount";
+
+import CreateFaculty from "./Create/CreateFaculty";
 import Table from "./Table/Table";
 
-export default function Accounts() {
+export default function Faculty() {
   const [show, setShow] = useState<boolean>(false);
 
   const handlePopup = () => setShow(!show);
@@ -14,13 +15,13 @@ export default function Accounts() {
     <S.PageContainer>
       <Toolbar
         onClick={handlePopup}
-        pageTitle="Accounts List"
+        pageTitle="Faculties List"
         sortTitle="Sort"
-        btnTitle="Add new account"
+        btnTitle="Add new faculty"
         optionList={OPTION_LIST}
       />
       <Popup show={show} onClose={handlePopup}>
-        <CreateAccount />
+        <CreateFaculty />
       </Popup>
       <Table />
     </S.PageContainer>

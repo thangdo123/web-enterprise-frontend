@@ -15,14 +15,14 @@ export const LoginCenter = styled.div`
 `;
 
 export const LogoDescription = styled.p`
-    text-align: center;
+  text-align: center;
 `;
 
 export const LoginLogoBanner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  h1{
+  h1 {
     width: 80%;
   }
 `;
@@ -77,11 +77,39 @@ export const ForgotPassword = styled.p`
   color: var(--blue-2);
 `;
 
-export const SignInBtn = styled.button`
+export const Btn = styled.button<{ $show: boolean }>`
+  display: ${({ $show }) => ($show ? "none" : "block")};
   margin-top: 20px;
   padding: 10px 20px 10px 20px;
   background-color: var(--blue-2);
   color: white;
   border: none;
   border-radius: 5px;
+  width: 100%;
+`;
+
+export const SendBtn = styled.button<{ $show: boolean }>`
+  display: ${({ $show }) => ($show ? "block" : "none")};
+  margin-top: 20px;
+  padding: 10px 20px 10px 20px;
+  background-color: var(--blue-2);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+`;
+
+export const ResendBtn = styled.button<{ $show: boolean }>`
+  display: ${({ $show }) => ($show ? "block" : "none")};
+  margin-top: 20px;
+  padding: 10px 20px 10px 20px;
+  background-color: var(--red);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+`;
+
+export const TimeContainer = styled.div<{ $show: boolean }>`
+  display: ${({ $show }) => ($show ? "block" : "none")};
 `;

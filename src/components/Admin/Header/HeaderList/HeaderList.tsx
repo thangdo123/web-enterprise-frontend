@@ -27,14 +27,13 @@ const HEADER_LIST = [
 
 export default function HeaderList({ OpenState }: { OpenState: boolean }) {
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const handleSelectedIndex = ({ index }: { index: number }) =>
-    setSelectedIndex(index);
+  const handleSelectedIndex = (index: number) => setSelectedIndex(index);
   return (
     <S.ListContainer>
       {HEADER_LIST.map(({ title, path, icon }, index) => (
         <S.HeaderItemWrapper
           key={index}
-          onClick={() => handleSelectedIndex({ index })}
+          onClick={() => handleSelectedIndex(index)}
         >
           <HeaderItem
             title={title}

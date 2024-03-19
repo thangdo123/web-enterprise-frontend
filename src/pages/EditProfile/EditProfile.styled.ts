@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const EditProfieLayout = styled.div`
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
 export const EditProfileContainer = styled.form`
@@ -73,22 +74,22 @@ export const EditProfileHidePswBtn = styled.div`
 `;
 
 export const BottomButtons = styled.div`
-    display: flex;
-    margin-top: 25px;
-    justify-content: center;
-    gap: 20px;
+  display: flex;
+  margin-top: 25px;
+  justify-content: center;
+  gap: 20px;
 `;
 
 export const SaveBtn = styled.button`
-    padding: 10px 20px;
-    background-color: var(--blue);
-    border-radius: 5px;
-    color: white;
+  padding: 10px 20px;
+  background-color: var(--blue);
+  border-radius: 5px;
+  color: white;
 `;
 
 export const CancelBtn = styled.button`
-    padding: 10px 20px;
-    background-color: white;
-    border: var(--gray-light-2) solid 1px;
-    border-radius: 5px;
+  padding: 10px 20px;
+  background-color: white;
+  border: var(--gray-light-2) solid 1px;
+  border-radius: 5px;
 `;

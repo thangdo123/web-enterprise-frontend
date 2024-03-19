@@ -18,8 +18,8 @@ const TitleBtn = styled.div`
   font-weight: var(--fw-light);
 `;
 
-const SortOptionContainer = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+const SortOptionContainer = styled.div<{ $isOpen: boolean }>`
+  display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
   position: absolute;
   border-radius: var(--br-lg);
   top: 100%;
