@@ -26,7 +26,7 @@ export default function Dropdown({ title, optionList }: IDropdownProps) {
         <S.TitleBtn>{defaultTitle}</S.TitleBtn>
         <i className="bi bi-arrow-down-short"></i>
       </S.SortBtn>
-      <S.SortOptionContainer isOpen={isOpen}>
+      <S.SortOptionContainer $isOpen={isOpen}>
         {optionList.map((item, index) => (
           <S.SortOption key={index} onClick={()=>handleSelectedOption(item.value)}>{item.value}</S.SortOption>
         ))}

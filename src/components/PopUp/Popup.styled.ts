@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-const PopupOverlay = styled.div<{ show: boolean }>`
+const PopupOverlay = styled.div<{ $show: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: var(--black-opacity);
-  display: ${({ show }) => (show ? "flex" : "none")};
+  display: ${({ $show }) => ($show ? "flex" : "none")};
   flex-direction: row;
   align-items: center;
   justify-content: center;

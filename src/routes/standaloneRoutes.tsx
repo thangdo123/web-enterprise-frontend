@@ -4,7 +4,6 @@ import Login from "../pages/Login/Login";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import CreateAccount from "../pages/Admin/Accounts/Create/CreateAccount";
 import CreateFaculty from "../pages/Admin/Faculty/Create/CreateFaculty";
-import EditProfile from "../pages/EditProfile/EditProfile";
 import CreateClosureDate from "../pages/Admin/Academic year/Create/CreateClosureDate";
 import CreateSubmission from "../pages/Student/Submission/Create/CreateSubmission";
 
@@ -27,18 +26,14 @@ export const standaloneRoutes: IRoute[] = [
   },
   {
     path: "/createfaculty",
-    component: <CreateFaculty />
-  },
-  {
-    path: "/editprofile",
-    component: <EditProfile />
+    component: <CreateFaculty />,
   },
   {
     path: "/createclosuredate",
-    component: <CreateClosureDate />
+    component: <CreateClosureDate />,
   },
   {
     path: "/createsubmission",
-    component: <CreateSubmission />
+    component: <CreateSubmission />,
   },
 ];

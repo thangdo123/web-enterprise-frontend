@@ -3,7 +3,7 @@ import * as S from "./Accounts.styled";
 import Toolbar from "../../../components/ToolBar/Toolbar";
 import Popup from "../../../components/PopUp/Popup";
 import CreateAccount from "./Create/CreateAccount";
-import Table from "../../../components/Table/Table";
+import Table from "./Table/Table";
 
 export default function Accounts() {
   const [show, setShow] = useState<boolean>(false);
