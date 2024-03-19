@@ -3,27 +3,22 @@ import * as S from "./Table.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../store";
 import Pagination from "../../../../components/Pagination/Pagination";
-import { IAccount } from "../../../../interfaces/account.interfaces";
 
 export default function Table() {
   const { accounts } = useSelector((state: RootState) => state.accountState);
-  const [listOfAccounts, setListOfAccounts] = useState<IAccount[][]>();
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    if (accounts.account) {
-      console.log(accounts.account);
-      setListOfAccounts(accounts.account);
-      setTotalPage(accounts.account.length);
-    }
-    if (page < 0) setPage(0);
-    if (page >= accounts.account.length) setPage(accounts.account.length - 1);
-  }, [accounts, page]);
+    setPage((prevPage) =>
+      Math.min(Math.max(prevPage, 0), accounts.account.length - 1),
+    );
+    setTotalPage(accounts.account.length);
+  }, [page, accounts.account.length]);
 
   return (
     <S.TableContainer>
-      {listOfAccounts && listOfAccounts[page] && (
+      {accounts.account && accounts.account[page] && (
         <>
           <S.Table>
             <thead>
@@ -36,7 +31,7 @@ export default function Table() {
               </S.TableHeadRow>
             </thead>
             <tbody>
-              {listOfAccounts[page].map((innerAccounts, index) => (
+              {accounts.account[page].map((innerAccounts, index) => (
                 <React.Fragment key={index}>
                   <S.TableRow>
                     <S.TableItem>{innerAccounts.name}</S.TableItem>
@@ -55,11 +50,13 @@ export default function Table() {
             </tbody>
           </S.Table>
 
-          <Pagination
-            totalPage={totalPage!}
-            nextPage={() => setPage(page + 1)}
-            prevPage={() => setPage(page - 1)}
-          />
+          {totalPage && (
+            <Pagination
+              totalPage={totalPage}
+              nextPage={() => setPage(page + 1)}
+              prevPage={() => setPage(page - 1)}
+            />
+          )}
         </>
       )}
     </S.TableContainer>

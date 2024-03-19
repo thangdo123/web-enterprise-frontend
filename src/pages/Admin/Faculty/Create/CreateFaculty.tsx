@@ -4,15 +4,15 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { createFaculty } from "../../../../store/slices/faculties";
 
-const CreateFaculty = () => {
+const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const handleNewFaculty = ({ name }: { name: string }) =>
-    dispatch(createFaculty({ name }));
 
   const [nameInput, setNameInput] = useState<string>("");
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    handleNewFaculty({ name: nameInput });
+    onClose();
+    const newFaculty = { name: nameInput };
+    dispatch(createFaculty(newFaculty));
   };
   return (
     <S.CreateFacultyLayout>
@@ -30,7 +30,7 @@ const CreateFaculty = () => {
         <S.BottomBtn>
           <div>
             <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.CancelBtn>Cancel</S.CancelBtn>
+            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
           </div>
         </S.BottomBtn>
       </S.CreateFacultyContainer>
