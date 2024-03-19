@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 50%;
+    width: 60%;
 `;
 
 export const UploadingFileArea = styled.div`
