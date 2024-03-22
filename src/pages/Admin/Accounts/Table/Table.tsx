@@ -27,7 +27,7 @@ export default function Table() {
                 <S.TableHeadItem>Email</S.TableHeadItem>
                 <S.TableHeadItem>Role</S.TableHeadItem>
                 <S.TableHeadItem>Created at</S.TableHeadItem>
-                <S.TableHeadItem>Actions</S.TableHeadItem>
+                {/* <S.TableHeadItem>Actions</S.TableHeadItem> */}
               </S.TableHeadRow>
             </thead>
             <tbody>
@@ -38,12 +38,12 @@ export default function Table() {
                     <S.TableItem>{innerAccounts.email}</S.TableItem>
                     <S.TableItem>{innerAccounts.role}</S.TableItem>
                     <S.TableItem>{innerAccounts.createAt}</S.TableItem>
-                    <S.TableItem>
+                    {/* <S.TableItem>
                       <S.ActionItemContainer>
                         <S.ActionTitle>Edit</S.ActionTitle>
                         <S.ActionTitle>Delete</S.ActionTitle>
                       </S.ActionItemContainer>
-                    </S.TableItem>
+                    </S.TableItem> */}
                   </S.TableRow>
                 </React.Fragment>
               ))}
