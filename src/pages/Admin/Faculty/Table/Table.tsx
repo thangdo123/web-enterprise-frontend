@@ -5,7 +5,17 @@ import { AppDispatch, RootState } from "../../../../store";
 import Pagination from "../../../../components/Pagination/Pagination";
 import { deleteFacultyById } from "../../../../store/slices/faculties";
 
-export default function Table() {
+interface ITableProps {
+  handleEdit: () => void;
+  handleSelectedFacultyName: (name: string) => void;
+  handleSelectedFacultyId: (id: string) => void;
+}
+
+export default function Table({
+  handleEdit,
+  handleSelectedFacultyId,
+  handleSelectedFacultyName,
+}: ITableProps) {
   const { allFaculties } = useSelector(
     (state: RootState) => state.facultyState,
   );
@@ -32,17 +42,25 @@ export default function Table() {
               </S.TableHeadRow>
             </thead>
             <tbody>
-              {allFaculties[page].map((innerFaculties, index) => (
+              {allFaculties[page].map((faculty, index) => (
                 <React.Fragment key={index}>
                   <S.TableRow>
-                    <S.TableItem>{innerFaculties.name}</S.TableItem>
-                    <S.TableItem>{innerFaculties.createAt}</S.TableItem>
+                    <S.TableItem>{faculty.name}</S.TableItem>
+                    <S.TableItem>{faculty.createAt}</S.TableItem>
                     <S.TableItem>
                       <S.ActionItemContainer>
-                        <S.ActionTitle>Edit</S.ActionTitle>
+                        <S.ActionTitle
+                          onClick={() => {
+                            handleEdit();
+                            handleSelectedFacultyId(faculty.id);
+                            handleSelectedFacultyName(faculty.name);
+                          }}
+                        >
+                          Edit
+                        </S.ActionTitle>
                         <S.ActionTitle
                           onClick={() =>
-                            dispatch(deleteFacultyById(innerFaculties.id))
+                            dispatch(deleteFacultyById(faculty.id))
                           }
                         >
                           Delete

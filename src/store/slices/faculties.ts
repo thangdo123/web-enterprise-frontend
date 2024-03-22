@@ -93,6 +93,15 @@ export const facultyState = createSlice({
         faculties.filter((faculty) => faculty.id !== action.payload),
       );
     });
+    builder.addCase(updateFacultyById.fulfilled, (state, action) => {
+      state.allFaculties = state.allFaculties.map((faculties) =>
+        faculties.map((faculty) =>
+          faculty.id === action.payload
+            ? { ...faculty, name: action.meta.arg.name }
+            : faculty,
+        ),
+      );
+    });
     builder.addCase(createFaculty.fulfilled, (state, action) => {
       const { allFaculties } = state;
       const facultiesWithLessThan10 = allFaculties.find(

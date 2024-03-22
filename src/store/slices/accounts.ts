@@ -49,6 +49,7 @@ export const accountState = createSlice({
     });
     builder.addCase(fetchAllAccounts.fulfilled, (state, action) => {
       state.accounts = action.payload;
+      console.log(action.payload);
     });
     builder.addCase(fetchAllAccounts.rejected, (state) => {
       state.accounts.account = [];
