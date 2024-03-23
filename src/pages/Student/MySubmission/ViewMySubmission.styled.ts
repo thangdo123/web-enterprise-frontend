@@ -19,7 +19,6 @@ export const Block1 = styled.div`
   justify-content: center;
   padding: var(--s-6);
   div {
-    width: 30%;
     text-align: center;
     h1 {
       margin: 0;

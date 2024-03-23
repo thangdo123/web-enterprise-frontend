@@ -1,16 +1,23 @@
 import { styled } from "styled-components";
+import { DEVICES } from "../../config/responsiveBreakpoints";
 
 export const LoginContainter = styled.div`
   display: flex;
   justify-content: center;
   background-color: var(--gray-light-1);
   height: 900px;
+  p{
+    margin: 0;
+  }
 `;
 
 export const LoginCenter = styled.div`
   width: 33.33%;
   p {
     color: var(--gray);
+  }
+  @media ${DEVICES.TABLET}{
+    width: 100%;
   }
 `;
 

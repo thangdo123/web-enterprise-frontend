@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveBreakpoints";
 
 const TableContainer = styled.div`
   display: flex;
@@ -43,6 +44,9 @@ const ActionItemContainer = styled.div`
   flex-direction: row;
   width: 100%;
   gap: var(--s-4);
+  @media ${DEVICES.TABLET}{
+    flex-wrap:wrap;
+  }
 `;
 
 const ActionTitle = styled.div`

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../config/responsiveBreakpoints";
 
 const RightHeaderList = styled.div`
   display: flex;
@@ -18,6 +19,11 @@ const RightListItem = styled.div`
     background-color: var(--gray-light);
     border-bottom: 1px solid var(--blue);
     color: var(--blue);
+  }
+  @media ${DEVICES.PHONE}{
+    i{
+      display: none;
+    }
   }
 `;
 

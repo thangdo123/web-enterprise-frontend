@@ -7,9 +7,9 @@ const SIZES = {
 };
 
 export const DEVICES = {
-  PHONE: `(min-width: ${SIZES.PHONE})`,
-  PHONE_L: `(min-width: ${SIZES.PHONE_L})`,
-  TABLET: `(min-width: ${SIZES.TABLET})`,
-  DESKTOP: `(min-width: ${SIZES.DESKTOP})`,
-  DESKTOP_L: `(min-width: ${SIZES.DESKTOP_L})`,
+  PHONE: `(max-width: ${SIZES.PHONE})`,
+  PHONE_L: `(max-width: ${SIZES.PHONE_L})`,
+  TABLET: `(max-width: ${SIZES.TABLET})`,
+  DESKTOP: `(max-width: ${SIZES.DESKTOP})`,
+  DESKTOP_L: `(max-width: ${SIZES.DESKTOP_L})`,
 };
