@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Accounts.styled";
-import Toolbar from "../../../components/ToolBar/Toolbar";
 import Popup from "../../../components/PopUp/Popup";
 import CreateAccount from "./Create/CreateAccount";
 import Table from "./Table/Table";
 import { useDispatch } from "react-redux";
-import { fetchAllAccounts } from "../../../store/slices/accounts";
+import {
+  fetchAllAccounts,
+  searchAccount,
+} from "../../../store/slices/accounts";
 import { AppDispatch } from "../../../store";
+import Toolbar from "./ToolBar/Toolbar";
 
 export default function Accounts() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [show, setShow] = useState<boolean>(false);
   const handlePopup = () => setShow(!show);
-  const OPTION_LIST = [{ value: "By Name" }, { value: "By Date" }];
+  const OPTION_LIST = [
+    { value: "Student" },
+    { value: "Marketing Manager" },
+    { value: "Marketing Coordinator" },
+  ];
 
   useEffect(() => {
     dispatch(fetchAllAccounts());
@@ -21,7 +28,8 @@ export default function Accounts() {
   return (
     <S.PageContainer>
       <Toolbar
-        onClick={handlePopup}
+        onCreate={handlePopup}
+        onSearch={(input: string) => dispatch(searchAccount(input))}
         pageTitle="Accounts List"
         sortTitle="Sort"
         btnTitle="Add new account"

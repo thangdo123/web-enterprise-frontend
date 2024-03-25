@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CreateAccountLayout = styled.div`
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding: 80px 0;
 `;
 
 export const CreateAccountContainer = styled.form`
@@ -63,7 +63,6 @@ export const HidePasswordBtn = styled.div`
 export const CreateAccountBlock3 = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 200px;
 `;
 
 export const CreateAccountBlock3Right = styled.div`

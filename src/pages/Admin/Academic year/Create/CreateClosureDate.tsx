@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./CreateClosureDate.styled";
 
-const CreateClosureDate = () => {
+const CreateClosureDate = ({ onClose }: { onClose: () => void }) => {
   return (
     <S.Layout>
       <S.Container>
@@ -17,6 +17,12 @@ const CreateClosureDate = () => {
             <input type="datetime-local" name="" />
           </S.RightCalendar>
         </S.SetDateBlock>
+        <S.BottomBtn>
+          <div>
+            <S.SaveBtn type="submit">Save</S.SaveBtn>
+            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
+          </div>
+        </S.BottomBtn>
       </S.Container>
     </S.Layout>
   );

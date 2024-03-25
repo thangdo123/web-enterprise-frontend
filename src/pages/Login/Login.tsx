@@ -1,9 +1,10 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./Login.styled";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
 import { postLogin } from "../../store/slices/login";
+import { getCookie } from "../../utils/cookies";
 
 interface ILogin {
   email: string;
@@ -12,7 +13,7 @@ interface ILogin {
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
-  const { isLoggedin } = useSelector((state: RootState) => state.loginState);
+  const token = getCookie("token");
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -27,11 +28,10 @@ export default function Login() {
   const [passwordInput, setPasswordInput] = useState<string>("");
 
   useEffect(() => {
-    console.log("First: " + isLoggedin);
-    if (isLoggedin) {
+    if (token) {
       navigate("/");
     }
-  }, [isLoggedin]);
+  }, [token]);
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();

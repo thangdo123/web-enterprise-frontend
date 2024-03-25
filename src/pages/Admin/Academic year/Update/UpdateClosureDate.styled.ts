@@ -6,7 +6,7 @@ export const Layout = styled.div`
   width: 100%;
 `;
 
-export const Container = styled.div`
+export const Container = styled.form`
   margin-top: var(--s-8);
   width: 100%;
   display: flex;

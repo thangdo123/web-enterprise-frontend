@@ -1,56 +1,57 @@
 import React, { useEffect, useState } from "react";
-import * as S from "./Faculty.styled";
+import * as S from "./AcademicYear.styled";
 import Toolbar from "./ToolBar/Toolbar";
 import Popup from "../../../components/PopUp/Popup";
-import CreateFaculty from "./Create/CreateFaculty";
+import CreateAcademicYear from "./Create/CreateClosureDate";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
-import {
-  fetchAllFaculties,
-  searchFaculty,
-} from "../../../store/slices/faculties";
 import Table from "./Table/Table";
-import UpdateFaculty from "./Update/UpdateFaculty";
+import UpdateClosureDate from "./Update/UpdateClosureDate";
+import { fetchAcademicYears } from "../../../store/slices/academicYear";
 
 export default function Faculty() {
   const dispatch = useDispatch<AppDispatch>();
   const [showCreate, setShowCreate] = useState<boolean>(false);
   const [showUpdate, setShowUpdate] = useState<boolean>(false);
-  const [updateFacultyName, setUpdateFacultyName] = useState<string>("");
-  const [updateFacultyId, setUpdateFacultyId] = useState<string>("");
+  const [updateClosureDate, setUpdateClosureDate] = useState<string>("");
+  const [updateFinalClosureDate, setUpdateFinalClosureDate] =
+    useState<string>("");
+  const [updateAcademicYearId, setUpdateAcademicYearId] = useState<string>("");
 
   const handlePopupCreate = () => setShowCreate(!showCreate);
   const handlePopupUpdate = () => setShowUpdate(!showUpdate);
   const OPTION_LIST = [{ value: "Ascending" }, { value: "Descending" }];
 
   useEffect(() => {
-    dispatch(fetchAllFaculties());
+    dispatch(fetchAcademicYears());
   }, []);
 
   return (
     <S.PageContainer>
       <Toolbar
         onCreate={handlePopupCreate}
-        onSearch={(input: string) => dispatch(searchFaculty(input))}
-        pageTitle="Faculties List"
+        onSearch={(input: string) => console.log(input)}
+        pageTitle="Academic Years List"
         sortTitle="Sort"
-        btnTitle="Add new faculty"
+        btnTitle="Add new closure date"
         optionList={OPTION_LIST}
       />
       <Popup show={showCreate} onClose={handlePopupCreate}>
-        <CreateFaculty onClose={handlePopupCreate} />
+        <CreateAcademicYear onClose={handlePopupCreate} />
       </Popup>
 
       <Popup show={showUpdate} onClose={handlePopupUpdate}>
-        <UpdateFaculty
-          facultyId={updateFacultyId}
-          facultyInput={updateFacultyName}
+        <UpdateClosureDate
+          academicYearId={updateAcademicYearId}
+          closureDate={updateClosureDate}
+          finalClosureDate={updateFinalClosureDate}
           onClose={handlePopupUpdate}
         />
       </Popup>
       <Table
-        handleSelectedFacultyId={setUpdateFacultyId}
-        handleSelectedFacultyName={setUpdateFacultyName}
+        handleSelectedAcademicYearId={setUpdateAcademicYearId}
+        handleSelectedClosureDate={setUpdateClosureDate}
+        handleSelectedFinalClosureDate={setUpdateFinalClosureDate}
         handleEdit={handlePopupUpdate}
       />
     </S.PageContainer>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SearchContainer = styled.div`
+const SearchContainer = styled.form`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -9,10 +9,11 @@ const SearchContainer = styled.div`
   border-radius: var(--br-md);
 `;
 
-const Icon = styled.div`
+const Icon = styled.button`
   cursor: pointer;
   display: block;
   padding-left: var(--s-2);
+  background-color: inherit;
 `;
 
 const Input = styled.input`

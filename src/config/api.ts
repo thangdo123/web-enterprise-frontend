@@ -8,6 +8,10 @@ const API_ENDPOINTS = {
   DELETE_FACULTIES: "/admin/deleteFaculty/",
   UPDATE_FACULTIES: "/admin/updateFaculty/",
   CREATE_FACULTIES: "/admin/createFaculty",
+  ACADEMIC_YEARS: "/admin/viewAcademicYears",
+  DELETE_ACADEMIC_YEARS: "/admin/deleteAcademicYear/",
+  UPDATE_ACADEMIC_YEARS: "/admin/updateAcademicYear/",
+  CREATE_ACADEMIC_YEARS: "/admin/createAcademicYear/",
 };
 
 export { API_BASE_URL, API_ENDPOINTS };
