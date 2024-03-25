@@ -15,6 +15,7 @@ export const postLogin = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.LOGIN,
         data,
       );
+      console.log(response);
       return response.data.token;
     } catch (err) {
       console.log(err);

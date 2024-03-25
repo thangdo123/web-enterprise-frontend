@@ -18,6 +18,38 @@ export const fetchAllAccounts = createAsyncThunk(
   },
 );
 
+export const sortAccounts = createAsyncThunk(
+  "accounts/fetchAllAcounts",
+  async (role: string, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.ACCOUNTS + `/?role=${role}`,
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const searchAccount = createAsyncThunk(
+  "accounts/fetchAllAcounts",
+  async (input: string, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL +
+          API_ENDPOINTS.ACCOUNTS +
+          `/?email=${input}&name=${input}`,
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
 export const createAccount = createAsyncThunk(
   "accounts/createAccount",
   async ({ name, email, role }: IAccount, { rejectWithValue }) => {
@@ -26,6 +58,7 @@ export const createAccount = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.CREATE_ACCOUNTS,
         { name, email, role, avatar: "sd" },
       );
+      console.log(response.data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err);

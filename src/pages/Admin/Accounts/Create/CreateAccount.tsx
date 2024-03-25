@@ -10,6 +10,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
   // const [visible, setvisible] = useState(false);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [faculty, setFaculty] = useState<string>("");
   const [role, setRole] = useState<string>("");
 
   const dispatch = useDispatch<AppDispatch>();
@@ -21,13 +22,18 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
       name: name,
       email: email,
       role: role,
+      faculty: faculty,
       avatar: "buh",
     };
     onClose();
     dispatch(createAccount(newAccount));
   };
 
-  const dropDownItems = [{ value: "STUDENT" }, { value: "COORDIONATOR" }];
+  const dropDownItems = [
+    { value: "Student" },
+    { value: "Marketing Manager" },
+    { value: "Marketing Coordinator" },
+  ];
   const title = "Role";
   return (
     <S.CreateAccountLayout>
@@ -83,6 +89,19 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
             optionList={dropDownItems}
           />
         </S.CreateAccountBlock3>
+        {role === "Marketing Manager" || role === "Marketing Coordinator" ? (
+          <S.CreateAccountBlock1>
+            <S.CreateAccountLeftTitle>Faculty:</S.CreateAccountLeftTitle>
+            <S.CreateAccountBlock1Right>
+              <input
+                value={faculty}
+                onChange={(e) => setFaculty(e.target.value)}
+                placeholder="Enter Faculty"
+                required
+              />
+            </S.CreateAccountBlock1Right>
+          </S.CreateAccountBlock1>
+        ) : null}
         <S.BottomBtn>
           <div>
             <S.SaveBtn type="submit">Save</S.SaveBtn>

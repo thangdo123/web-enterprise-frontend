@@ -3,6 +3,7 @@ import itemState from "./slices/item";
 import { loginState } from "./slices/login";
 import { accountState } from "./slices/accounts";
 import { facultyState } from "./slices/faculties";
+import { academicYearState } from "./slices/academicYear";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     [loginState.name]: loginState.reducer,
     [accountState.name]: accountState.reducer,
     [facultyState.name]: facultyState.reducer,
+    [academicYearState.name]: academicYearState.reducer
   },
 });
 
