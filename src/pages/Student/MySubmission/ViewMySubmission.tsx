@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import Footer from "../../../components/Footer/Footer";
 import * as S from "./ViewMySubmission.styled";
 import Dropdown from "../../../components/Dropdown/Dropdown";
 import Card from "../../../components/Card/Card";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../store";
+import { fetchAllContributions } from "../../../store/slices/contribution";
+import Pagination from "../../../components/Pagination/Pagination";
+import { NavLink } from "react-router-dom";
 
 const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
 const title = "Sort";
@@ -51,6 +56,25 @@ const submissionArr = [
 ];
 
 const ViewMySubmission = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  useEffect(() => {
+    dispatch(fetchAllContributions());
+  }, []);
+
+  const { contribution } = useSelector(
+    (state: RootState) => state.contributionState,
+  );
+  console.log(contribution);
+
+  const [totalPage, setTotalPage] = useState<number>();
+  const [page, setPage] = useState<number>(0);
+  useEffect(() => {
+    setPage((prevPage) =>
+      Math.min(Math.max(prevPage, 0), contribution.length - 1),
+    );
+    setTotalPage(contribution.length);
+  }, [page, contribution.length]);
+
   return (
     <>
       <Header />
@@ -91,19 +115,30 @@ const ViewMySubmission = () => {
                 </S.Block3Date>
               </S.Block3TopLeft>
               <S.Block3TopRight>
-                <button>Add Submission</button>
+                <NavLink to={"/createsubmission"}><button>Add new submission</button></NavLink>
               </S.Block3TopRight>
             </S.Block3Top>
-            <S.Block3SubmissionList>
-              {submissionArr.map((item, index) => (
-                <S.Block3SubmissionItemsContainer key={index}>
-                  <Card imgUrl={item.imgUrl} cardTitle={item.cardTitle} />
-                </S.Block3SubmissionItemsContainer>
-              ))}
-            </S.Block3SubmissionList>
-            <S.Block3Bottom>
-              <button>Load more</button>
-            </S.Block3Bottom>
+            {contribution && contribution[page] && (
+              <S.Block3SubmissionList>
+                {contribution[page].map((item, index) => (
+                  <S.Block3SubmissionItemsContainer key={index}>
+                    <Card
+                      imgUrl="https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
+                      cardTitle={item.title}
+                    />
+                  </S.Block3SubmissionItemsContainer>
+                ))}
+                {totalPage && (
+                  <Pagination
+                    changePage={setPage}
+                    currentPage={page}
+                    totalPage={totalPage}
+                    nextPage={() => setPage(page + 1)}
+                    prevPage={() => setPage(page - 1)}
+                  />
+                )}
+              </S.Block3SubmissionList>
+            )}
           </S.Block3>
         </S.Container>
       </S.Layout>

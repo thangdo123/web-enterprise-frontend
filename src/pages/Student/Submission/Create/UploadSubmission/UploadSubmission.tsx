@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as S from "./UploadSubmission.styled";
 
-const UploadSubmission = () => {
+const UploadSubmission = ({handleImageFiles}: {handleImageFiles: (imageFiles : File[])=>void}) => {
   const [files, setFiles] = useState<File[]>([]);
+  
+
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -19,6 +21,7 @@ const UploadSubmission = () => {
     if (e.target.files) {
       const newFiles = e.target.files;
       setFiles((prevFiles) => [...prevFiles, ...Array.from(newFiles)]);
+     
     }
   };
 
@@ -30,8 +33,12 @@ const UploadSubmission = () => {
     });
   };
 
+  useEffect(()=>{
+    handleImageFiles(files);
+  }, [ files]);
+
   return (
-    <S.Container>
+    <S.Container >
       <S.UploadingFileArea onDragOver={handleDragOver} onDrop={handleDrop}>
         <input
           type="file"

@@ -11,3 +11,11 @@ export const axiosInstance = axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const axiosInstanceFormData = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "multipart/form-data"
+  },
+});

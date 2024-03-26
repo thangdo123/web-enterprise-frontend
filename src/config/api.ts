@@ -12,6 +12,8 @@ const API_ENDPOINTS = {
   DELETE_ACADEMIC_YEARS: "/admin/deleteAcademicYear/",
   UPDATE_ACADEMIC_YEARS: "/admin/updateAcademicYear/",
   CREATE_ACADEMIC_YEARS: "/admin/createAcademicYear/",
+  CONTRIBUTIONS: "/user/viewMyContributions",
+  UPLOAD_CONTRIBUTION: "/user/uploadContribution",
 };
 
 export { API_BASE_URL, API_ENDPOINTS };

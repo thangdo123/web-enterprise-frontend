@@ -90,3 +90,22 @@ export const CancelBtn = styled.button`
         cursor: pointer;
     }
 `;
+
+export const Block4 = styled.div`
+    margin-top: var(--s-10);
+    display: flex;
+    align-items: center;
+`;
+
+export const Block4RightTxtArea = styled.div`
+    flex: 7;
+    border: var(--gray-light-2) solid 1px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    textarea{
+        font-size: var(--fs-md);
+        width: 100%;
+        height: var(--s-12);
+        max-height: 500px;
+    }
+`;
