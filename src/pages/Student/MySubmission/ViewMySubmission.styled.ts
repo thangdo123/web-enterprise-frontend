@@ -105,7 +105,7 @@ export const Block3SubmissionList = styled.div`
 `;
 
 export const Block3SubmissionItemsContainer = styled.div`
-    width: 23.5%;
+    width: 18%;
     margin-bottom: var(--s-10);
 `;
 

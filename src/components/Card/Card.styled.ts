@@ -13,4 +13,7 @@ export const CardImage = styled.div`
 export const CardTitle = styled.div`
       border: var(--gray-light-2) solid 1px;
   padding: var(--s-6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
