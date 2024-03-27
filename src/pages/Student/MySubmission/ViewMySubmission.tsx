@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
 import * as S from "./ViewMySubmission.styled";
 import Dropdown from "../../../components/Dropdown/Dropdown";
 import Card from "../../../components/Card/Card";
@@ -9,6 +7,7 @@ import { AppDispatch, RootState } from "../../../store";
 import { fetchAllContributions } from "../../../store/slices/contribution";
 import Pagination from "../../../components/Pagination/Pagination";
 import { NavLink } from "react-router-dom";
+import Loader from "../../../components/Loader/Loader";
 
 const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
 const title = "Sort";
@@ -77,7 +76,6 @@ const ViewMySubmission = () => {
 
   return (
     <>
-      <Header />
       <S.Layout>
         <S.Container>
           <S.Block1>
@@ -118,31 +116,36 @@ const ViewMySubmission = () => {
                 <NavLink to={"/createsubmission"}><button>Add new submission</button></NavLink>
               </S.Block3TopRight>
             </S.Block3Top>
-            {contribution && contribution[page] && (
-              <S.Block3SubmissionList>
-                {contribution[page].map((item, index) => (
-                  <S.Block3SubmissionItemsContainer key={index}>
-                    <Card
-                      imgUrl="https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
-                      cardTitle={item.title}
+            {
+              contribution && contribution[page] ? (
+                <S.Block3SubmissionList>
+                  {contribution[page].map((item, index) => (
+                    <S.Block3SubmissionItemsContainer key={index}>
+                      <Card
+                        imgUrl="https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
+                        cardTitle={item.title}
+                      />
+                    </S.Block3SubmissionItemsContainer>
+                  ))}
+                  {totalPage && (
+                    <Pagination
+                      changePage={setPage}
+                      currentPage={page}
+                      totalPage={totalPage}
+                      nextPage={() => setPage(page + 1)}
+                      prevPage={() => setPage(page - 1)}
                     />
-                  </S.Block3SubmissionItemsContainer>
-                ))}
-                {totalPage && (
-                  <Pagination
-                    changePage={setPage}
-                    currentPage={page}
-                    totalPage={totalPage}
-                    nextPage={() => setPage(page + 1)}
-                    prevPage={() => setPage(page - 1)}
-                  />
-                )}
-              </S.Block3SubmissionList>
-            )}
+                  )}
+                </S.Block3SubmissionList>
+              )
+                :
+                <Loader />
+            }
+            
           </S.Block3>
+
         </S.Container>
       </S.Layout>
-      <Footer />
     </>
   );
 };

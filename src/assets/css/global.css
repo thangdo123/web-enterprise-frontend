@@ -30,6 +30,7 @@
   --blue: #3b82f6;
   --blue-2: rgb(9, 128, 239);
   --blue-light: #e6f4ff;
+  --blue-light-2: #93dbe9;
   --white: #ffffff;
   --black: #000000;
   --black-opacity: #00000057;
@@ -60,9 +61,11 @@
 
   /* Spacing ------------------------ */
   --s-1: 0.25rem;
+  --s-1-larger: 0.375rem;
   --s-2: 0.5rem;
   --s-3: 0.75rem;
   --s-4: 1rem;
+  --s-4-larger: 1.125rem;
   --s-5: 1.25rem;
   --s-6: 1.5rem;
   --s-7: 1.75rem;
@@ -71,6 +74,10 @@
   --s-10: 2.5rem;
   --s-11: 2.75rem;
   --s-12: 3rem;
+  --s-13: 6.25rem;
+  --s-14: 10.25rem;
+  --s-15: 12.5rem;
+  --s-16: 25rem;
 
   /* Border radius ------------------ */
   --br-sm: 0.2rem;

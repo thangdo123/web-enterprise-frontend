@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "../Admin/Header/Header";
+import Header from "../../Admin/Header/Header";
 import * as S from "./Layout.styled";
 import { Outlet } from "react-router";
 const HEADER_LIST = [
