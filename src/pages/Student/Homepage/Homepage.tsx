@@ -1,7 +1,10 @@
 import React from "react";
+import Loader from "../../../components/Loader/Loader";
 
 const HomePage = () => {
-  return <div></div>;
+  return <>
+    <Loader />
+  </>;
 };
 
 export default HomePage;

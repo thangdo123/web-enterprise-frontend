@@ -4,11 +4,12 @@ import Login from "../pages/Login/Login";
 import ResetPassword from "../pages/ResetPassword/ResetPassword";
 import CreateSubmission from "../pages/Student/Submission/Create/CreateSubmission";
 import ViewMySubmission from "../pages/Student/MySubmission/ViewMySubmission";
+import HomePage from "../pages/Student/Homepage/Homepage";
 
 export const standaloneRoutes: IRoute[] = [
   {
     path: "*",
-    component: <h1>Loader</h1>,
+    component: <h1>Loading..</h1>,
   },
   {
     path: "/login",
@@ -25,5 +26,9 @@ export const standaloneRoutes: IRoute[] = [
   {
     path: "/viewsubmission",
     component: <ViewMySubmission />,
+  },
+  {
+    path: "/homepage",
+    component: <HomePage />,
   },
 ];
