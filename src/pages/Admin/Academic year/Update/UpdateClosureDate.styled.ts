@@ -7,8 +7,14 @@ export const Layout = styled.div`
 `;
 
 export const Container = styled.form`
-  margin-top: var(--s-8);
+  padding: var(--s-8) 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-8);
+`;
+
+export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -17,11 +23,12 @@ export const SetDateBlock = styled.div`
   width: 50%;
   display: flex;
   gap: 10px;
+  align-items: center;
 `;
 
 export const LeftTitle = styled.div`
   font-weight: bold;
-  font-size: 20px;
+  font-size: var(--fs-md);
 `;
 
 export const RightCalendar = styled.div`
@@ -35,11 +42,7 @@ export const RightCalendar = styled.div`
 export const BottomBtn = styled.div`
   display: flex;
   justify-content: center;
-  div {
-    width: 50%;
-    display: flex;
-    justify-content: space-evenly;
-  }
+  gap: var(--s-4);
 `;
 
 export const SaveBtn = styled.button`

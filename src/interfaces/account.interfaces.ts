@@ -6,8 +6,9 @@ export interface IAccount {
   email: string;
   role: string;
   createAt?: React.ReactNode;
-  avatar: string;
+  avatar?: string;
   faculty?: string;
+  is_locked?: boolean;
 }
 
 export interface IAccountState {

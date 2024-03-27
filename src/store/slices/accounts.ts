@@ -52,11 +52,17 @@ export const searchAccount = createAsyncThunk(
 
 export const createAccount = createAsyncThunk(
   "accounts/createAccount",
-  async ({ name, email, role }: IAccount, { rejectWithValue }) => {
+  async ({ name, email, role, faculty }: IAccount, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(
         API_BASE_URL + API_ENDPOINTS.CREATE_ACCOUNTS,
-        { name, email, role, avatar: "sd" },
+        {
+          name,
+          email,
+          role,
+          avatar: "sd",
+          faculty,
+        },
       );
       console.log(response.data);
       return response.data;

@@ -21,9 +21,8 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
     const newAccount: IAccount = {
       name: name,
       email: email,
-      role: role,
-      faculty: faculty,
-      avatar: "buh",
+      role: role.toUpperCase(),
+      faculty: "3ec5e1fd-55e8-458b-84cd-a8b633f94b18",
     };
     onClose();
     dispatch(createAccount(newAccount));
@@ -31,8 +30,8 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
 
   const dropDownItems = [
     { value: "Student" },
-    { value: "Marketing Manager" },
-    { value: "Marketing Coordinator" },
+    { value: "Manager" },
+    { value: "Coordionator" },
   ];
   const title = "Role";
   return (
@@ -89,7 +88,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
             optionList={dropDownItems}
           />
         </S.CreateAccountBlock3>
-        {role === "Marketing Manager" || role === "Marketing Coordinator" ? (
+        {role === "Student" || role === "Coordionator" ? (
           <S.CreateAccountBlock1>
             <S.CreateAccountLeftTitle>Faculty:</S.CreateAccountLeftTitle>
             <S.CreateAccountBlock1Right>

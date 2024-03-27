@@ -24,13 +24,16 @@ const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
               value={nameInput}
               onChange={(e) => setNameInput(e.target.value)}
               placeholder="Enter Username"
+              required
             />
           </S.CreateFacultyBlock1Right>
         </S.CreateFacultyBlock1>
         <S.BottomBtn>
           <div>
             <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
+            <S.CancelBtn type="button" onClick={onClose}>
+              Cancel
+            </S.CancelBtn>
           </div>
         </S.BottomBtn>
       </S.CreateFacultyContainer>

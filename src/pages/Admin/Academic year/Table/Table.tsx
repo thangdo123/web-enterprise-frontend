@@ -24,6 +24,7 @@ export default function Table({
   const dispatch = useDispatch<AppDispatch>();
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
+
   useEffect(() => {
     setPage((prevPage) =>
       Math.min(Math.max(prevPage, 0), allAcademicYears.length - 1),

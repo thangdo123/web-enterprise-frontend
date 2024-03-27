@@ -1,8 +1,8 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./Login.styled";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
 import { postLogin } from "../../store/slices/login";
 import { getCookie } from "../../utils/cookies";
 
@@ -13,7 +13,9 @@ interface ILogin {
 
 export default function Login() {
   const dispatch = useDispatch<AppDispatch>();
-  const token = getCookie("token");
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.loginState.isLoggedin,
+  );
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -26,17 +28,17 @@ export default function Login() {
 
   const [emailInput, setEmailInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
-
-  useEffect(() => {
-    if (token) {
-      navigate("/");
-    }
-  }, [token]);
-
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
     handleLogin();
   };
+
+  useEffect(() => {
+    const token = getCookie("token");
+    if (isLoggedIn || token) {
+      navigate("/");
+    }
+  }, [isLoggedIn]); // Run whenever isLoggedIn changes
 
   return (
     <S.LoginContainter>
