@@ -16,8 +16,6 @@ const API_ENDPOINTS = {
   UPLOAD_CONTRIBUTION: "/user/uploadContribution",
   VIEW_PROFILE: "/user/viewProfile",
   UPDATE_PROFILE: "/user/editProfile/",
-  VIEW_PROFILE: "/user/viewProfile",
-  UPDATE_PROFILE: "/user/editProfile/",
 };
 
 export { API_BASE_URL, API_ENDPOINTS };
