@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
 import * as S from "./ViewMySubmission.styled";
 import Dropdown from "../../../components/Dropdown/Dropdown";
 import Card from "../../../components/Card/Card";
@@ -78,7 +76,6 @@ const ViewMySubmission = () => {
 
   return (
     <>
-      <Header />
       <S.Layout>
         <S.Container>
           <S.Block1>
@@ -149,7 +146,6 @@ const ViewMySubmission = () => {
 
         </S.Container>
       </S.Layout>
-      <Footer />
     </>
   );
 };

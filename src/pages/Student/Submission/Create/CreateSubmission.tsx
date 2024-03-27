@@ -1,8 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import * as S from "./CreateSubmission.styled";
 import UploadSubmission from "./UploadSubmission/UploadSubmission";
-import Header from "../../../../components/Header/Header";
-import Footer from "../../../../components/Footer/Footer";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { createContribution } from "../../../../store/slices/contribution";
@@ -31,7 +29,6 @@ const CreateSubmission = () => {
 
   return (
     <>
-      <Header />
       <S.Layout onSubmit={handleOnSubmit}>
         <S.Container>
           <S.Block1>
@@ -79,7 +76,6 @@ const CreateSubmission = () => {
           </S.ButtonContainer>
         </S.Container>
       </S.Layout>
-      <Footer />
     </>
   );
 };
