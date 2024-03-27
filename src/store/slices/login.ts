@@ -16,7 +16,7 @@ export const postLogin = createAsyncThunk(
         data,
       );
       console.log(response);
-      return response.data.token;
+      return response.data;
     } catch (err) {
       console.log(err);
       return rejectWithValue(err);
@@ -42,7 +42,7 @@ export const loginState = createSlice({
     });
     builder.addCase(postLogin.fulfilled, (state, action) => {
       state.isLoggedin = true;
-      setCookie("token", action.payload);
+      setCookie("token", action.payload.token);
     });
     builder.addCase(postLogin.rejected, (state) => {
       state.isLoggedin = false;

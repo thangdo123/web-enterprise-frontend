@@ -4,7 +4,9 @@ import { loginState } from "./slices/login";
 import { accountState } from "./slices/accounts";
 import { facultyState } from "./slices/faculties";
 import { academicYearState } from "./slices/academicYear";
+import { adminProfileState } from "./slices/userProfile";
 import { contributionState } from "./slices/contribution";
+
 const store = configureStore({
   reducer: {
     [itemState.name]: itemState.reducer,
@@ -12,6 +14,7 @@ const store = configureStore({
     [accountState.name]: accountState.reducer,
     [facultyState.name]: facultyState.reducer,
     [academicYearState.name]: academicYearState.reducer,
+    [adminProfileState.name]: adminProfileState.reducer,
     [contributionState.name]: contributionState.reducer,
   },
 });

@@ -5,7 +5,7 @@ import EditProfile from "../pages/EditProfile/EditProfile";
 import Faculty from "../pages/Admin/Faculty/Faculty";
 import AcademicYear from "../pages/Admin/Academic year/AcademicYear";
 
-export const layoutRoutes: IRoute[] = [
+export const layoutAdminRoutes: IRoute[] = [
   {
     path: "/accounts",
     component: <Accounts />,

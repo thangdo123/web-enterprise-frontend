@@ -19,18 +19,19 @@ const UpdateClosureDate = ({
 }: IAcademicYearUpdateProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [closureDateInput, setClosureDateInput] =
-    useState<string>(closureDate);
-  const [finalClosureDateInput, setFinalClosureDateInput] = useState<string>(
-    finalClosureDate
-  );
+  const [closureDateInput, setClosureDateInput] = useState<string>("");
+  const [finalClosureDateInput, setFinalClosureDateInput] =
+    useState<string>("");
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
     onClose();
-    const selectedAcademicYear = { academicYearId: academicYearId, closure_date: closureDateInput, final_closure_date: finalClosureDateInput };
+    const selectedAcademicYear = {
+      academicYearId: academicYearId,
+      closure_date: new Date(closureDateInput).toISOString(),
+      final_closure_date: new Date(finalClosureDateInput).toISOString(),
+    };
     dispatch(updateAcademicYearById(selectedAcademicYear));
   };
-
 
   useEffect(() => {
     setClosureDateInput(closureDate);
@@ -39,33 +40,35 @@ const UpdateClosureDate = ({
   return (
     <S.Layout>
       <S.Container onSubmit={handleOnSubmit}>
-        <S.SetDateBlock>
-          <S.LeftTitle>Closure Date:</S.LeftTitle>
-          <S.RightCalendar>
-            <input
-              type="datetime-local"
-              value={closureDateInput}
-              onChange={(e) => setClosureDateInput(e.target.value)}
-              name=""
-            />
-          </S.RightCalendar>
-        </S.SetDateBlock>
-        <S.SetDateBlock>
-          <S.LeftTitle>Final Closure Date:</S.LeftTitle>
-          <S.RightCalendar>
-            <input
-              type="datetime-local"
-              value={finalClosureDate}
-              onChange={(e) => setFinalClosureDateInput(e.target.value)}
-              name=""
-            />
-          </S.RightCalendar>
-        </S.SetDateBlock>
+        <S.InputContainer>
+          <S.SetDateBlock>
+            <S.LeftTitle>Closure Date:</S.LeftTitle>
+            <S.RightCalendar>
+              <input
+                type="datetime-local"
+                value={closureDateInput}
+                onChange={(e) => setClosureDateInput(e.target.value)}
+                name=""
+              />
+            </S.RightCalendar>
+          </S.SetDateBlock>
+          <S.SetDateBlock>
+            <S.LeftTitle>Final Closure Date:</S.LeftTitle>
+            <S.RightCalendar>
+              <input
+                type="datetime-local"
+                value={finalClosureDateInput}
+                onChange={(e) => setFinalClosureDateInput(e.target.value)}
+                name=""
+              />
+            </S.RightCalendar>
+          </S.SetDateBlock>
+        </S.InputContainer>
         <S.BottomBtn>
-          <div>
-            <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
-          </div>
+          <S.SaveBtn type="submit">Save</S.SaveBtn>
+          <S.CancelBtn type="button" onClick={onClose}>
+            Cancel
+          </S.CancelBtn>
         </S.BottomBtn>
       </S.Container>
     </S.Layout>

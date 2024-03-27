@@ -43,8 +43,8 @@ export default function Faculty() {
       <Popup show={showUpdate} onClose={handlePopupUpdate}>
         <UpdateClosureDate
           academicYearId={updateAcademicYearId}
-          closureDate={updateClosureDate}
-          finalClosureDate={updateFinalClosureDate}
+          closureDate={updateClosureDate.slice(0, 16)}
+          finalClosureDate={updateFinalClosureDate.slice(0, 16)}
           onClose={handlePopupUpdate}
         />
       </Popup>

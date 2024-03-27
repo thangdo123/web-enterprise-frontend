@@ -93,7 +93,7 @@ export const createAcademicYear = createAsyncThunk(
   ) => {
     try {
       const response = await axiosInstance.post(
-        API_BASE_URL + API_ENDPOINTS.UPDATE_ACADEMIC_YEARS,
+        API_BASE_URL + API_ENDPOINTS.CREATE_ACADEMIC_YEARS,
         { closure_date, final_closure_date },
       );
       console.log(response.data);
@@ -144,9 +144,9 @@ export const academicYearState = createSlice({
       );
 
       if (academicYearsWithLessThan10) {
-        academicYearsWithLessThan10.push(action.payload.faculty);
+        academicYearsWithLessThan10.push(action.payload.academicYear);
       } else {
-        state.allAcademicYears.push([action.payload.faculty]);
+        state.allAcademicYears.push([action.payload.academicYear]);
       }
     });
   },

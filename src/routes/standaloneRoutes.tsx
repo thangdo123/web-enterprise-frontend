@@ -8,7 +8,7 @@ import ViewMySubmission from "../pages/Student/MySubmission/ViewMySubmission";
 export const standaloneRoutes: IRoute[] = [
   {
     path: "*",
-    component: <h1>Co cai lone</h1>,
+    component: <h1>Loader</h1>,
   },
   {
     path: "/login",
