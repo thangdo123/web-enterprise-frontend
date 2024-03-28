@@ -5,6 +5,29 @@ import { IContributionState } from "../../interfaces/contribution.interface";
 
 const initialState: IContributionState = {
   contribution: [],
+  detailContribution: {
+    contribution:{
+      title: "",
+      description: "",
+      createdAt: "",
+    },
+    academicYear: 
+      {
+        closure_date:"",
+      }
+    ,
+    document:[
+      {
+        name: "",
+      }
+    ],
+    image: [
+      {
+        name: "",
+      }
+    ],
+    comment: [],
+  },
 };
 
 export const fetchAllContributions = createAsyncThunk(
@@ -22,29 +45,36 @@ export const fetchAllContributions = createAsyncThunk(
   },
 );
 
-
-// interface IUploadContribution{
-//   title: string,
-//   description: string,
-//   image: File[],
-//   document: File[],
-// }
+export const fetchContributionDetail = createAsyncThunk(
+  "contribution/fetchContributionDetail",
+  async (contributionId: string, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.CONTRIBUTIONS + contributionId,
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
 
 export const createContribution = createAsyncThunk(
   "contributions/createContributions",
-  async (formData : FormData, { rejectWithValue }) =>{
-    try{
+  async (formData: FormData, { rejectWithValue }) => {
+    try {
       const response = await axiosInstanceFormData.post(
         API_BASE_URL + API_ENDPOINTS.UPLOAD_CONTRIBUTION,
         formData,
       );
-      
+
       console.log(response.data);
       return response.data;
-    } catch(err){
+    } catch (err) {
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 export const contributionState = createSlice({
@@ -61,17 +91,8 @@ export const contributionState = createSlice({
     builder.addCase(fetchAllContributions.rejected, (state) => {
       state.contribution = [];
     });
-    // builder.addCase(createContribution.fulfilled, (state, action) => {
-    //   const { contribution } = state;
-    //   const arrayWithLengthLowerThan10 = contribution.find(
-    //     (arr) => arr.length < 10,
-    //   );
-
-    //   if(arrayWithLengthLowerThan10){
-    //     arrayWithLengthLowerThan10.push(action.payload.newContribution);
-    //   }else{
-    //     state.contribution.push([action.payload.newContribution]);
-    //   }
-    // });
+    builder.addCase(fetchContributionDetail.fulfilled, (state, action) => {
+      state.detailContribution = action.payload;
+    });
   },
 });

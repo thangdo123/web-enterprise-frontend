@@ -12,6 +12,7 @@ interface ILogin {
 }
 
 export default function Login() {
+  const [visible, setvisible] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
   const isLoggedIn = useSelector(
     (state: RootState) => state.loginState.isLoggedin,
@@ -81,10 +82,17 @@ export default function Login() {
               <input
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
-                type="text"
+                type={visible ? "text" : "password"}
                 placeholder="Enter password"
                 required
               />
+              <S.HidePasswordBtn onClick={() => setvisible(!visible)}>
+                {visible ? (
+                  <i className="bi bi-eye-slash"></i>
+                ) : (
+                  <i className="bi bi-eye"></i>
+                )}
+              </S.HidePasswordBtn>
             </S.InputField>
             <S.ForgotPassword>
               <Link to="/resetpassword">Forgot Password?</Link>
