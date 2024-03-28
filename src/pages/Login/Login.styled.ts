@@ -67,16 +67,21 @@ export const InputField = styled.div`
   border: var(--gray) solid 1px;
   gap: 2px;
   p {
+    width: 7%;
     i {
       font-size: 20px;
       color: var(--blue-2);
     }
   }
   input {
-    width: 90%;
+    width: 85%;
     border: none;
     outline: none;
   }
+`;
+
+export const HidePasswordBtn = styled.div`
+
 `;
 
 export const ForgotPassword = styled.div`

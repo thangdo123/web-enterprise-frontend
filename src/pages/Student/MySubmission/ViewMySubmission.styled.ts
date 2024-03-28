@@ -89,7 +89,7 @@ export const Block3TopRight = styled.div`
   flex: 2;
   display: flex;
   justify-content: flex-end;
-  button{
+  button {
     background-color: var(--blue-2);
     padding: 5px 10px;
     color: white;
@@ -98,24 +98,25 @@ export const Block3TopRight = styled.div`
 `;
 
 export const Block3SubmissionList = styled.div`
-    display: flex;
-    justify-content: space-evenly;
-    gap: 2%;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2%;
+  flex-wrap: wrap;
 `;
 
 export const Block3SubmissionItemsContainer = styled.div`
-    width: 18%;
-    margin-bottom: var(--s-10);
+  cursor: pointer;
+  width: 18%;
+  margin-bottom: var(--s-10);
 `;
 
 export const Block3Bottom = styled.div`
-    display:flex;
-    justify-content: center;
-    button{
-        background-color: white;
-        border: var(--gray-light-2) solid 1px;
-        border-radius: 3px;
-        padding: 5px 10px;
-    }
+  display: flex;
+  justify-content: center;
+  button {
+    background-color: white;
+    border: var(--gray-light-2) solid 1px;
+    border-radius: 3px;
+    padding: 5px 10px;
+  }
 `;

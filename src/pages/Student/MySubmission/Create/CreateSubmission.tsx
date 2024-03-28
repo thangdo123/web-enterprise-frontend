@@ -4,27 +4,41 @@ import UploadSubmission from "./UploadSubmission/UploadSubmission";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { createContribution } from "../../../../store/slices/contribution";
+import { useNavigate } from "react-router-dom";
 
 const CreateSubmission = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [titleInput, setTitleInput] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [imageFiles, setImageFiles] = useState<File[]>([]);
-
+  const [Files, setFiles] = useState<File[]>([]);
+  const navigate = useNavigate();
 
   const handleOnSubmit = (e: FormEvent) => {
-    const test = new FormData();
+    const formData = new FormData();
     e.preventDefault();
     console.log(titleInput);
     console.log(description);
-    console.log(imageFiles);
-    test.append("title", titleInput);
-    test.append("description", description);
-    imageFiles.forEach((item) => {
-      test.append("files", item);
+    console.log(Files);
+    formData.append("title", titleInput);
+    formData.append("description", description);
+    Files.forEach((item) => {
+      formData.append("files", item);
     });
-    console.log(test.get("files"));
-    dispatch(createContribution(test));
+    console.log(formData.get("files"));
+    dispatch(createContribution(formData))
+      .then(() => {
+        // Redirect to the "/viewsubmission" path after successful submission
+        navigate("/viewsubmission");
+      })
+      .catch((error) => {
+        // Handle error if needed
+        console.error("Error submitting contribution:", error);
+      });
+  };
+
+  const handleResetForm = () => {
+    setTitleInput("");
+    setDescription("");
   };
 
   return (
@@ -54,7 +68,7 @@ const CreateSubmission = () => {
           <S.Block3>
             <S.LeftTile>Files Submission:</S.LeftTile>
             <S.Block3Right>
-              <UploadSubmission handleImageFiles={setImageFiles}/>
+              <UploadSubmission handleImageFiles={setFiles} />
             </S.Block3Right>
           </S.Block3>
           <S.Block4>
@@ -70,8 +84,10 @@ const CreateSubmission = () => {
           </S.Block4>
           <S.ButtonContainer>
             <S.Buttons>
-              <S.SaveBtn>Save</S.SaveBtn>
-              <S.CancelBtn>Cancel</S.CancelBtn>
+              <S.SaveBtn type="submit">Save</S.SaveBtn>
+              <S.CancelBtn type="button" onClick={handleResetForm}>
+                Cancel
+              </S.CancelBtn>
             </S.Buttons>
           </S.ButtonContainer>
         </S.Container>

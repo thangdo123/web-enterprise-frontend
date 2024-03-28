@@ -5,7 +5,7 @@ import HeaderItem from "../HeaderItem/HeaderItem";
 const HEADER_LINKS = [
   { name: "Home", path: "/" },
   { name: "My Submissions", path: "/viewsubmission" },
-  { name: "Contact", path: "/contact" },
+  { name: "Contact", path: "/submissiondetail" },
 ];
 
 export default function LeftHeaderList() {

@@ -12,7 +12,7 @@ const API_ENDPOINTS = {
   DELETE_ACADEMIC_YEARS: "/admin/deleteAcademicYear/",
   UPDATE_ACADEMIC_YEARS: "/admin/updateAcademicYear/",
   CREATE_ACADEMIC_YEARS: "/admin/createAcademicYear/",
-  CONTRIBUTIONS: "/user/viewMyContributions",
+  CONTRIBUTIONS: "/user/viewMyContributions/",
   UPLOAD_CONTRIBUTION: "/user/uploadContribution",
   VIEW_PROFILE: "/user/viewProfile",
   UPDATE_PROFILE: "/user/editProfile/",
