@@ -72,6 +72,26 @@ export const createAccount = createAsyncThunk(
   },
 );
 
+export const updateAccountById = createAsyncThunk(
+  "accounts/updateAccount",
+  async (
+    { name, Id, is_locked }: { name: string; Id: string; is_locked: boolean },
+    { rejectWithValue },
+  ) => {
+    try {
+      const response = await axiosInstance.put(
+        API_BASE_URL + API_ENDPOINTS.EDIT_ACCOUNT + Id,
+        { name, is_locked, avatar: "sdfsd" },
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const initialState: IAccountState = {
   accounts: {
     account: [],
@@ -102,6 +122,15 @@ export const accountState = createSlice({
       } else {
         state.accounts.account.push([action.payload.user]);
       }
+    });
+    builder.addCase(updateAccountById.fulfilled, (state, action) => {
+      state.accounts.account = state.accounts.account.map((listOfAccounts) =>
+        listOfAccounts.map((account) =>
+          account.id === action.meta.arg.Id
+            ? { ...account, name: action.meta.arg.name }
+            : account,
+        ),
+      );
     });
   },
 });
