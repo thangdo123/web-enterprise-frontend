@@ -10,12 +10,17 @@ import {
 } from "../../../store/slices/accounts";
 import { AppDispatch } from "../../../store";
 import Toolbar from "./ToolBar/Toolbar";
+import UpdateAccount from "./Update/UpdateAccount";
 
 export default function Accounts() {
   const dispatch = useDispatch<AppDispatch>();
-
-  const [show, setShow] = useState<boolean>(false);
-  const handlePopup = () => setShow(!show);
+  const [updateAccountName, setUpdateAccountName] = useState<string>("");
+  const [updateAccountId, setUpdateAccountId] = useState<string>("");
+  const [isLocked, setIsLocked] = useState<boolean>(false);
+  const [showCreate, setShowCreate] = useState<boolean>(false);
+  const [showUpdate, setShowUpdate] = useState<boolean>(false);
+  const handlePopupCreate = () => setShowCreate(!showCreate);
+  const handlePopupUpdate = () => setShowUpdate(!showUpdate);
   const OPTION_LIST = [
     { value: "Student" },
     { value: "Marketing Manager" },
@@ -28,17 +33,31 @@ export default function Accounts() {
   return (
     <S.PageContainer>
       <Toolbar
-        onCreate={handlePopup}
+        onCreate={handlePopupCreate}
         onSearch={(input: string) => dispatch(searchAccount(input))}
         pageTitle="Accounts List"
         sortTitle="Sort"
         btnTitle="Add new account"
         optionList={OPTION_LIST}
       />
-      <Popup show={show} onClose={handlePopup}>
-        <CreateAccount onClose={handlePopup} />
+      <Popup show={showCreate} onClose={handlePopupCreate}>
+        <CreateAccount onClose={handlePopupCreate} />
       </Popup>
-      <Table />
+
+      <Popup show={showUpdate} onClose={handlePopupUpdate}>
+        <UpdateAccount
+          accountInput={updateAccountName}
+          accountId={updateAccountId}
+          accountIsLocked={isLocked}
+          onClose={handlePopupUpdate}
+        />
+      </Popup>
+      <Table
+        handleEdit={handlePopupUpdate}
+        handleSelectedAccountId={setUpdateAccountId}
+        handleSelectedAccountIsLocked={setIsLocked}
+        handleSelectedAccountName={setUpdateAccountName}
+      />
     </S.PageContainer>
   );
 }
