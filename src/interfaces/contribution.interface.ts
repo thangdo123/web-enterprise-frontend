@@ -48,7 +48,11 @@ export interface IContributionDetail {
       name: string;
     },
   ];
-  comment: [];
+  comment: [
+    {
+      content: string;
+    }
+  ]
 }
 
 export interface IContributionState {
