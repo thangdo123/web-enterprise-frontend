@@ -7,11 +7,12 @@ import { layoutAdminRoutes } from "./layoutAdminRoutes";
 import LayoutAdmin from "../components/Layout/SideLayout/LayoutAdmin";
 import LayoutManager from "../components/Layout/SideLayout/LayoutManager";
 import { layoutManagerRoutes } from "./layoutManagerRoutes";
+
+import LayoutStudent from "../components/Layout/TopLayout/LayoutStudent";
+import { layoutStudentRoutes } from "./layoutStudentRoutes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 import { getAdminProfile } from "../store/slices/userProfile";
-import LayoutStudent from "../components/Layout/TopLayout/LayoutStudent";
-import { layoutStudentRoutes } from "./layoutStudentRoutes";
 
 export default function AppRoutes() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,15 +20,15 @@ export default function AppRoutes() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      navigate("/");
-    } else {
+    if (!token) {
       navigate("/login");
     }
   }, [token]);
 
   useEffect(() => {
-    dispatch(getAdminProfile());
+    if (decodeCookie(token) === "ADMIN") {
+      dispatch(getAdminProfile());
+    }
   }, []);
 
   return (
@@ -55,9 +56,10 @@ export default function AppRoutes() {
         </Route>
       )}
 
-      {standaloneRoutes.map(({ path, component }) => (
-        <Route key={path} path={path} element={component} />
-      ))}
+      {token === "" &&
+        standaloneRoutes.map(({ path, component }) => (
+          <Route key={path} path={path} element={component} />
+        ))}
     </Routes>
   );
 }

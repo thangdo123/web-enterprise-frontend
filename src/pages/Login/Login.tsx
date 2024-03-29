@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./Login.styled";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { postLogin } from "../../store/slices/login";
@@ -17,7 +17,6 @@ export default function Login() {
   const isLoggedIn = useSelector(
     (state: RootState) => state.loginState.isLoggedin,
   );
-  const navigate = useNavigate();
 
   const handleLogin = () => {
     const account: ILogin = {
@@ -37,7 +36,7 @@ export default function Login() {
   useEffect(() => {
     const token = getCookie("token");
     if (isLoggedIn || token) {
-      navigate("/");
+      window.location.href = "/";
     }
   }, [isLoggedIn]); // Run whenever isLoggedIn changes
 
@@ -70,7 +69,7 @@ export default function Login() {
               <input
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
-                type="text"
+                type="email"
                 placeholder="Enter username"
                 required
               />

@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import * as S from "./Dropdown.styled";
 
 interface IOption {
-  value: string;
+  value?: string;
+  id?: string;
+  name?: string;
 }
 
 interface IDropdownProps {
   title: string;
   optionList: IOption[];
-  onClick: (option: string) => void;
+  onClick: (option: IOption) => void;
 }
 
 export default function Dropdown({
@@ -18,13 +20,14 @@ export default function Dropdown({
 }: IDropdownProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [defaultTitle, setDefaultTitle] = useState(title);
+  const handleSortOpen = () => setIsOpen(!isOpen);
 
-  const handleSelectedOption = (option: string) => {
-    setDefaultTitle(option);
+  const handleSelectedOption = (option: IOption) => {
+    setDefaultTitle(option.name! || option.value!);
     onClick(option);
+    handleSortOpen();
   };
 
-  const handleSortOpen = () => setIsOpen(!isOpen);
   return (
     <S.SortContainer>
       <S.SortBtn onClick={handleSortOpen}>
@@ -32,14 +35,15 @@ export default function Dropdown({
         <i className="bi bi-arrow-down-short"></i>
       </S.SortBtn>
       <S.SortOptionContainer $isOpen={isOpen}>
-        {optionList.map((item, index) => (
-          <S.SortOption
-            key={index}
-            onClick={() => handleSelectedOption(item.value)}
-          >
-            {item.value}
-          </S.SortOption>
-        ))}
+        {optionList &&
+          optionList.map((item, index) => (
+            <S.SortOption
+              key={index}
+              onClick={() => handleSelectedOption(item)}
+            >
+              {item.value || item.name}
+            </S.SortOption>
+          ))}
       </S.SortOptionContainer>
     </S.SortContainer>
   );
