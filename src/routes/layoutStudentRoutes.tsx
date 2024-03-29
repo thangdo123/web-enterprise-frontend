@@ -1,15 +1,16 @@
 import React from "react";
 import { IRoute } from "../interfaces";
-import HomePage from "../pages/Student/Homepage/Homepage";
 import ViewMySubmission from "../pages/Student/MySubmission/ViewMySubmission";
 import SubmissionDetail from "../pages/Student/MySubmission/Detail/SubmissionDetail";
 import CreateSubmission from "../pages/Student/MySubmission/Create/CreateSubmission";
+import { Navigate } from "react-router";
+import EditProfile from "../pages/EditProfile/EditProfile";
 
 
 export const layoutStudentRoutes: IRoute[] = [
   {
     path: "/",
-    component: <HomePage />,
+    component: <Navigate to={"/viewsubmission"}/>,
   },
   {
     path: "/createsubmission",
@@ -22,5 +23,9 @@ export const layoutStudentRoutes: IRoute[] = [
   {
     path: "/viewsubmission/:id",
     component: <SubmissionDetail/>,
+  },
+  {
+    path: "/editprofile",
+    component: <EditProfile/>,
   },
 ];

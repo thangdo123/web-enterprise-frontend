@@ -1,17 +1,14 @@
 import React from "react";
 import * as S from "./LeftHeaderList.styled";
 import HeaderItem from "../HeaderItem/HeaderItem";
+import { ITopHeader } from "../../../interfaces";
 
-const HEADER_LINKS = [
-  { name: "Home", path: "/" },
-  { name: "My Submissions", path: "/viewsubmission" },
-  { name: "Contact", path: "/submissiondetail" },
-];
 
-export default function LeftHeaderList() {
+
+export default function LeftHeaderList({headerLink}:{headerLink:ITopHeader[]}) {
   return (
     <S.LeftHeaderList>
-      {HEADER_LINKS.map(({ name, path }, index) => (
+      {headerLink.map(({ name, path }, index) => (
         <HeaderItem key={index} title={name} to={path} />
       ))}
     </S.LeftHeaderList>
