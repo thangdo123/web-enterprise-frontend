@@ -12,7 +12,7 @@ import LayoutStudent from "../components/Layout/TopLayout/LayoutStudent";
 import { layoutStudentRoutes } from "./layoutStudentRoutes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
-import { getAdminProfile } from "../store/slices/userProfile";
+import { getAdminProfile, getUserProfile } from "../store/slices/userProfile";
 
 export default function AppRoutes() {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,6 +28,8 @@ export default function AppRoutes() {
   useEffect(() => {
     if (decodeCookie(token) === "ADMIN") {
       dispatch(getAdminProfile());
+    }else{
+      dispatch(getUserProfile());
     }
   }, []);
 

@@ -8,3 +8,8 @@ export interface ISideHeader {
   path: string;
   icon: JSX.Element;
 }
+
+export interface ITopHeader{
+  name: string;
+  path: string;
+}
