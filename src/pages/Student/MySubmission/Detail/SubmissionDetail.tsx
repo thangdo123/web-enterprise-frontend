@@ -61,9 +61,11 @@ const SubmissionDetail = () => {
         <S.Block2>
           <S.Block2Row>
             <S.LeftTitle>Submission title</S.LeftTitle>
-            <S.Block2RightText>
-              {detailContribution.contribution.title}
-            </S.Block2RightText>
+            {detailContribution && detailContribution.contribution.title && (
+              <S.Block2RightText>
+                {detailContribution.contribution.title}
+              </S.Block2RightText>
+            )}
           </S.Block2Row>
           <S.Block2Row>
             <S.LeftTitle>Description</S.LeftTitle>
@@ -99,13 +101,13 @@ const SubmissionDetail = () => {
           <S.Block2Row>
             <S.LeftTitle>Feedback comments</S.LeftTitle>
             <S.CommentList>
-              {detailContribution.comment.length === 0 ? (
+              {detailContribution.comment[0] === undefined ? (
                 <S.CommentItem>
                   There is no comment for this contribution
                 </S.CommentItem>
               ) : (
                 detailContribution.comment.map((value, index) => (
-                  <S.CommentItem key={index}>- {value}</S.CommentItem>
+                  <S.CommentItem key={index}>- {value.content}</S.CommentItem>
                 ))
               )}
             </S.CommentList>
