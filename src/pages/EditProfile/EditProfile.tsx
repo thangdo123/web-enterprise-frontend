@@ -2,47 +2,42 @@ import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./EditProfile.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { updateAdminProfile } from "../../store/slices/userProfile";
+
 import { deleteCookie } from "../../utils/cookies";
-import { useNavigate } from "react-router";
+import { updateUserProfile } from "../../store/slices/userProfile";
 
 const EditProfile = () => {
-  // const [password, setPassword] = useState("");
-  // const [visible, setvisible] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
+
   const { userProfile } = useSelector(
     (state: RootState) => state.adminProfileState,
   );
   const [nameInput, setNameInput] = useState<string>("");
-  const [profileId, setProfileId] = useState<string | undefined>("");
-  const navigate = useNavigate();
 
   const handleLogOut = () => {
     deleteCookie("token");
-    navigate("/login");
+    window.location.href = "/login";
   };
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(profileId);
     const newAdminProfile = {
-      Id: profileId!,
       name: nameInput,
       avatar: "asdasd",
     };
-    dispatch(updateAdminProfile(newAdminProfile));
+    dispatch(updateUserProfile(newAdminProfile));
   };
 
   useEffect(() => {
     if (userProfile) {
       setNameInput(userProfile.name);
-      setProfileId(userProfile.id);
+      console.log(userProfile.password);
     }
   }, []);
 
   return (
     <S.EditProfieLayout>
-      {userProfile && (
+      {userProfile && nameInput && (
         <S.EditProfileContainer onSubmit={handleOnSubmit}>
           <S.EditProfileBlock1>
             <h1>Edit Profile</h1>
@@ -74,27 +69,6 @@ const EditProfile = () => {
               />
             </div>
           </S.EditProfileInputArea>
-          {/* <div>
-          <p>Password</p>
-          <S.EditProfilePassword>
-            <S.EditProfilePasswordInput
-              type={visible ? "text" : "password"}
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                console.log(password);
-              }}
-            />
-            <S.EditProfileHidePswBtn onClick={() => setvisible(!visible)}>
-              {visible ? (
-                <i className="bi bi-eye-slash"></i>
-              ) : (
-                <i className="bi bi-eye"></i>
-              )}
-            </S.EditProfileHidePswBtn>
-          </S.EditProfilePassword>
-        </div> */}
           <S.BottomButtons>
             <S.SaveBtn type="submit">Save</S.SaveBtn>
             <S.SaveBtn>Reset Password</S.SaveBtn>

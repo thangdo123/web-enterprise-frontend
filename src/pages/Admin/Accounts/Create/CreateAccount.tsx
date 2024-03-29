@@ -1,17 +1,27 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./CreateAccount.Styled";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../../../store";
 import { createAccount } from "../../../../store/slices/accounts";
 import { IAccount } from "../../../../interfaces/account.interfaces";
+import { fetchAllFaculties } from "../../../../store/slices/faculties";
 
 const CreateAccount = ({ onClose }: { onClose: () => void }) => {
   // const [visible, setvisible] = useState(false);
+  const { allFaculties } = useSelector(
+    (state: RootState) => state.facultyState,
+  );
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [faculty, setFaculty] = useState<string>("");
   const [role, setRole] = useState<string>("");
+  const dropDownItems = [
+    { value: "Student" },
+    { value: "Manager" },
+    { value: "Coordionator" },
+  ];
+  const title = "Role";
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -22,18 +32,16 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
       name: name,
       email: email,
       role: role.toUpperCase(),
-      faculty: "3ec5e1fd-55e8-458b-84cd-a8b633f94b18",
+      faculty: faculty,
     };
     onClose();
     dispatch(createAccount(newAccount));
   };
 
-  const dropDownItems = [
-    { value: "Student" },
-    { value: "Manager" },
-    { value: "Coordionator" },
-  ];
-  const title = "Role";
+  useEffect(() => {
+    dispatch(fetchAllFaculties());
+  }, []);
+
   return (
     <S.CreateAccountLayout>
       <S.CreateAccountContainer onSubmit={handleOnSubmit}>
@@ -59,47 +67,24 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
             />
           </S.CreateAccountBlock1Right>
         </S.CreateAccountBlock1>
-        {/* <S.CreateAccountBlock2>
-          <S.CreateAccountLeftTitle>Password:</S.CreateAccountLeftTitle>
-          <S.CreateAccountBlock2Right>
-            <S.EnterPasswordField
-              type={visible ? "text" : "password"}
-              placeholder="Enter Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-                console.log(password);
-              }}
-            />
-            <S.HidePasswordBtn onClick={() => setvisible(!visible)}>
-              {visible ? (
-                <i className="bi bi-eye-slash"></i>
-              ) : (
-                <i className="bi bi-eye"></i>
-              )}
-            </S.HidePasswordBtn>
-          </S.CreateAccountBlock2Right>
-        </S.CreateAccountBlock2> */}
+
         <S.CreateAccountBlock3>
           <S.CreateAccountLeftTitle>Role:</S.CreateAccountLeftTitle>
           <Dropdown
-            onClick={setRole}
+            onClick={(option) => setRole(option.value!)}
             title={title}
             optionList={dropDownItems}
           />
         </S.CreateAccountBlock3>
         {role === "Student" || role === "Coordionator" ? (
-          <S.CreateAccountBlock1>
-            <S.CreateAccountLeftTitle>Faculty:</S.CreateAccountLeftTitle>
-            <S.CreateAccountBlock1Right>
-              <input
-                value={faculty}
-                onChange={(e) => setFaculty(e.target.value)}
-                placeholder="Enter Faculty"
-                required
-              />
-            </S.CreateAccountBlock1Right>
-          </S.CreateAccountBlock1>
+          <S.CreateAccountBlock3>
+            <S.CreateAccountLeftTitle>Faculties:</S.CreateAccountLeftTitle>
+            <Dropdown
+              onClick={(option) => setFaculty(option.id!)}
+              title={title}
+              optionList={allFaculties[0]}
+            />
+          </S.CreateAccountBlock3>
         ) : null}
         <S.BottomBtn>
           <div>

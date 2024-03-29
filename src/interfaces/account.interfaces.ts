@@ -9,6 +9,7 @@ export interface IAccount {
   avatar?: string;
   faculty?: string;
   is_locked?: boolean;
+  password?: string;
 }
 
 export interface IAccountState {

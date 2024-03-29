@@ -40,7 +40,7 @@ export default function Toolbar({
       <S.Title>{pageTitle}</S.Title>
       <S.ToolBar>
         <Dropdown
-          onClick={sortType}
+          onClick={(option) => sortType(option.value!)}
           title={sortTitle}
           optionList={optionList}
         />
