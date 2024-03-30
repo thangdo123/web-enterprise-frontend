@@ -6,30 +6,28 @@ import { IContributionState } from "../../interfaces/contribution.interface";
 const initialState: IContributionState = {
   contribution: [],
   detailContribution: {
-    contribution:{
+    contribution: {
       title: "",
       description: "",
       createdAt: "",
     },
-    academicYear: 
-      {
-        closure_date:"",
-      }
-    ,
-    document:[
+    academicYear: {
+      closure_date: "",
+    },
+    document: [
       {
         name: "",
-      }
+      },
     ],
     image: [
       {
         name: "",
-      }
+      },
     ],
     comment: [
       {
         content: "",
-      }
+      },
     ],
   },
 };
@@ -77,6 +75,22 @@ export const createContribution = createAsyncThunk(
       console.log(response.data);
       return response.data;
     } catch (err) {
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const deleteContribution = createAsyncThunk(
+  "contributions/deleteContribution",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.delete(
+        API_BASE_URL + API_ENDPOINTS.DELETE_CONTRIBUTION + id,
+      );
+      console.log(API_BASE_URL + API_ENDPOINTS.DELETE_CONTRIBUTION + id);
+      console.log(response.data);
+      return response.data;
+    } catch(err) {
       return rejectWithValue(err);
     }
   },

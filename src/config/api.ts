@@ -16,6 +16,7 @@ const API_ENDPOINTS = {
   VIEW_ADMIN_PROFILE: "/admin/viewProfile/",
   CONTRIBUTIONS: "/user/viewMyContributions/",
   UPLOAD_CONTRIBUTION: "/user/uploadContribution",
+  DELETE_CONTRIBUTION: "/user/deleteContribution/",
   VIEW_PROFILE: "/user/viewProfile",
   UPDATE_PROFILE: "/user/editProfile/",
 };

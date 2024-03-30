@@ -2,11 +2,15 @@ import React, { useEffect } from "react";
 import * as S from "./SubmissionDeatil.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
-import { fetchContributionDetail } from "../../../../store/slices/contribution";
-import { useParams } from "react-router";
+import {
+  deleteContribution,
+  fetchContributionDetail,
+} from "../../../../store/slices/contribution";
+import { useNavigate, useParams } from "react-router";
 
 const SubmissionDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
     dispatch(fetchContributionDetail(id!));
@@ -14,6 +18,15 @@ const SubmissionDetail = () => {
   const { detailContribution } = useSelector(
     (state: RootState) => state.contributionState,
   );
+  
+  const handleReturnPage=() =>{
+    navigate("/viewsubmission");
+  };
+
+  const handleDeleteSubmission = () => {
+    dispatch(deleteContribution(id!));
+    navigate("/viewsubmission");
+  };
 
   const closureDate = new Date(detailContribution.academicYear.closure_date);
   const closureDate_day = closureDate.getDate();
@@ -115,8 +128,8 @@ const SubmissionDetail = () => {
         </S.Block2>
         <S.ButtonGroup>
           <div>
-            <S.ReturnBtn>Return</S.ReturnBtn>
-            <S.DeleteBtn>Remove submission</S.DeleteBtn>
+            <S.ReturnBtn onClick={handleReturnPage}>Return</S.ReturnBtn>
+            <S.DeleteBtn onClick={handleDeleteSubmission}>Remove submission</S.DeleteBtn>
           </div>
         </S.ButtonGroup>
       </S.Container>
