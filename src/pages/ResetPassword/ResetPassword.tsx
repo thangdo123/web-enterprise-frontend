@@ -1,17 +1,45 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./ResetPassword.styled";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { resetPassword, sendOtp } from "../../store/slices/resetPassword";
+import { useNavigate } from "react-router";
 
 export default function Login() {
-  const [time, setTime] = useState<number>(60);
-  const [show, setShow] = useState<boolean>(false);
+  const [time, setTime] = useState<number>(300);
+  const [mailInput, setMailInput] = useState<string>("");
+  const [otp, setOtp] = useState<string>("");
+  const [newPW, setNewPW] = useState<string>("");
+  const [reNewPW, setReNewPW] = useState<string>("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const { isSentOtp } = useSelector(
+    (state: RootState) => state.resetPasswordState,
+  );
 
   const handleShow = () => {
-    setShow(!show);
-    setTime(60);
+    setTime(300);
   };
 
   const handleResendCode = () => {
-    setTime(60);
+    setTime(300);
+    dispatch(sendOtp({ email: mailInput }));
+  };
+
+  const handleTime = (time: number) => {
+    if (time > 60) {
+      const minute = Math.floor(time / 60);
+      const second = time - minute * 60;
+      if (second < 10) {
+        return minute + ":0" + second;
+      }
+      return minute + ":" + second;
+    } else {
+      if (time < 10) {
+        return "00:0" + time;
+      }
+      return "00:" + time;
+    }
   };
 
   useEffect(() => {
@@ -29,6 +57,19 @@ export default function Login() {
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
+    handleShow();
+    if (isSentOtp) {
+      const newPassword = {
+        email: mailInput,
+        otp: otp,
+        newPassword: newPW,
+        reNewPassword: reNewPW,
+      };
+      dispatch(resetPassword(newPassword));
+      navigate("/");
+    } else {
+      dispatch(sendOtp({ email: mailInput }));
+    }
   };
 
   return (
@@ -57,27 +98,64 @@ export default function Login() {
               <p>
                 <i className="bi bi-envelope"></i>
               </p>
-              <input
-                type={show ? "text" : "email"}
-                placeholder={
-                  show
-                    ? "enter your OTP code"
-                    : "enter your email for the reset code"
-                }
-                required
-              />
-              <S.TimeContainer $show={show}>{time}</S.TimeContainer>
+              {!isSentOtp && (
+                <input
+                  value={mailInput}
+                  onChange={(e) => setMailInput(e.target.value)}
+                  type="email"
+                  placeholder="enter your email for the reset code"
+                  required
+                />
+              )}
+              {isSentOtp && (
+                <input
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  placeholder="enter your OTP code"
+                  required
+                />
+              )}
+              <S.TimeContainer $show={isSentOtp}>
+                {handleTime(time)}
+              </S.TimeContainer>
             </S.InputField>
-            <S.Btn $show={show} onClick={handleShow} className="sign-in-btn">
-              Send code
-            </S.Btn>
-            <S.SendBtn $show={show} className="sign-in-btn">
-              Submit
-            </S.SendBtn>
+            {isSentOtp && (
+              <S.InputField>
+                <p>
+                  <i className="bi bi-key"></i>
+                </p>
+
+                <input
+                  value={newPW}
+                  onChange={(e) => setNewPW(e.target.value)}
+                  type="password"
+                  placeholder="enter your new password"
+                  required
+                />
+              </S.InputField>
+            )}
+            {isSentOtp && (
+              <S.InputField>
+                <p>
+                  <i className="bi bi-key"></i>
+                </p>
+
+                <input
+                  value={reNewPW}
+                  onChange={(e) => setReNewPW(e.target.value)}
+                  type="password"
+                  placeholder="Confirm your new password"
+                  required
+                />
+              </S.InputField>
+            )}
+            <S.Btn $show={isSentOtp}>Send code</S.Btn>
+            <S.SendBtn $show={isSentOtp}>Submit</S.SendBtn>
             <S.ResendBtn
+              type="button"
               onClick={handleResendCode}
-              $show={show}
-              className="sign-in-btn"
+              $show={isSentOtp}
             >
               Resend code
             </S.ResendBtn>
