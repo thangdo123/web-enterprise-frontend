@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./UpdateFaculty.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { updateFacultyById } from "../../../../store/slices/faculties";
+import { updateFacultyById } from "../../../../store/slices/Admin/faculties";
 
 interface IFacultyUpdateProps {
   onClose: () => void;

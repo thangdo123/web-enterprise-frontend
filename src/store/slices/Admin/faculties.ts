@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../lib/axios";
-import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
-import { IFacultyState } from "../../interfaces/faculty.interfaces";
+import { axiosInstance } from "../../../lib/axios";
+import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
+import { IFacultyState } from "../../../interfaces/faculty.interfaces";
 
 export const fetchAllFaculties = createAsyncThunk(
   "faculties/fetchAllFaculties",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.FACULTIES,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.FACULTIES,
       );
       console.log(response.data);
       return response.data;
@@ -24,7 +24,7 @@ export const sortFaculties = createAsyncThunk(
   async (sort: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.FACULTIES + `/?sort=${sort}`,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.FACULTIES + `/?sort=${sort}`,
       );
       console.log(response.data);
       return response.data;
@@ -40,7 +40,7 @@ export const searchFaculty = createAsyncThunk(
   async (name: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.FACULTIES + `/?name=${name}`,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.FACULTIES + `/?name=${name}`,
       );
       console.log(response.data);
       return response.data;
@@ -56,7 +56,7 @@ export const deleteFacultyById = createAsyncThunk(
   async (facultyId: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.delete(
-        API_BASE_URL + API_ENDPOINTS.DELETE_FACULTIES + facultyId,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.DELETE_FACULTIES + facultyId,
       );
       console.log(response.data);
       return facultyId;
@@ -75,7 +75,7 @@ export const updateFacultyById = createAsyncThunk(
   ) => {
     try {
       const response = await axiosInstance.put(
-        API_BASE_URL + API_ENDPOINTS.UPDATE_FACULTIES + facultyId,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.UPDATE_FACULTIES + facultyId,
         { name },
       );
       console.log(response.data);
@@ -92,7 +92,7 @@ export const createFaculty = createAsyncThunk(
   async ({ name }: { name: string }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(
-        API_BASE_URL + API_ENDPOINTS.CREATE_FACULTIES,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.CREATE_FACULTIES,
         { name },
       );
       console.log(response.data);

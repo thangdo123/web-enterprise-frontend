@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as S from "./HeaderList.styled";
 import HeaderItem from "../HeaderItem/HeaderItem";
-import { ISideHeader } from "../../../../interfaces";
+import { ISideHeader } from "../../../interfaces";
 
 interface IHeaderListProps {
   OpenState: boolean;

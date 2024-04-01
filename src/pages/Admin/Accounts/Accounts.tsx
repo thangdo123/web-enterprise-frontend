@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import {
   fetchAllAccounts,
   searchAccount,
-} from "../../../store/slices/accounts";
+} from "../../../store/slices/Admin/accounts";
 import { AppDispatch } from "../../../store";
 import Toolbar from "./ToolBar/Toolbar";
 import UpdateAccount from "./Update/UpdateAccount";

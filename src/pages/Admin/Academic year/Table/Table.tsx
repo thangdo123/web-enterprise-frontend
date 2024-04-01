@@ -3,7 +3,7 @@ import * as S from "./Table.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
 import Pagination from "../../../../components/Pagination/Pagination";
-import { deleteAcademicYearById } from "../../../../store/slices/academicYear";
+import { deleteAcademicYearById } from "../../../../store/slices/Admin/academicYear";
 
 interface ITableProps {
   handleEdit: () => void;

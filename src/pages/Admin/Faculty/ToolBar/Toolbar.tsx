@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./Toolbar.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { sortFaculties } from "../../../../store/slices/faculties";
+import { sortFaculties } from "../../../../store/slices/Admin/faculties";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
 import Searchbar from "../../../../components/Searchbar/Searchbar";
 

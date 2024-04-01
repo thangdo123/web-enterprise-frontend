@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./HeaderToggle.styled";
-import Divider from "../../../Divider/Divider";
+import Divider from "../../Divider/Divider";
 
 export default function HeaderToggle({
   OpenState,

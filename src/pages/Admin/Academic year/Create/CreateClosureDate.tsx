@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import * as S from "./CreateClosureDate.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { createAcademicYear } from "../../../../store/slices/academicYear";
+import { createAcademicYear } from "../../../../store/slices/Admin/academicYear";
 
 const CreateClosureDate = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
