@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance, axiosInstanceFormData } from "../../lib/axios";
-import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
-import { IContributionState } from "../../interfaces/contribution.interface";
+import { axiosInstance, axiosInstanceFormData } from "../../../lib/axios";
+import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
+import { IContributionState } from "../../../interfaces/contribution.interface";
 
 const initialState: IContributionState = {
   contribution: [],
@@ -37,7 +37,7 @@ export const fetchAllContributions = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.CONTRIBUTIONS,
+        API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS,
       );
       return response.data;
     } catch (err) {
@@ -52,7 +52,7 @@ export const fetchContributionDetail = createAsyncThunk(
   async (contributionId: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.CONTRIBUTIONS + contributionId,
+        API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
       );
       console.log(response.data);
       return response.data;
@@ -68,7 +68,7 @@ export const createContribution = createAsyncThunk(
   async (formData: FormData, { rejectWithValue }) => {
     try {
       const response = await axiosInstanceFormData.post(
-        API_BASE_URL + API_ENDPOINTS.UPLOAD_CONTRIBUTION,
+        API_BASE_URL + API_ENDPOINTS.USER.UPLOAD_CONTRIBUTION,
         formData,
       );
 

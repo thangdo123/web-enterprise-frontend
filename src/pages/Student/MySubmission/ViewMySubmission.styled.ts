@@ -99,14 +99,13 @@ export const Block3TopRight = styled.div`
 
 export const Block3SubmissionList = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  gap: 2%;
+  gap: 1.5%;
   flex-wrap: wrap;
 `;
 
 export const Block3SubmissionItemsContainer = styled.div`
   cursor: pointer;
-  width: 18%;
+  width: 18.8%;
   margin-bottom: var(--s-10);
 `;
 

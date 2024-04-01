@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./UpdateAccount.Styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { updateAccountById } from "../../../../store/slices/accounts";
+import { updateAccountById } from "../../../../store/slices/Admin/accounts";
 
 interface IAccountUpdateProps {
   onClose: () => void;

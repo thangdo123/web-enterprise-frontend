@@ -1,7 +1,8 @@
 import React from "react";
-import Header from "../../Admin/Header/Header";
+
 import * as S from "./Layout.styled";
 import { Outlet } from "react-router";
+import Header from "../../SideHeader/Header";
 const HEADER_LIST = [
   {
     title: "Overview",
@@ -12,6 +13,11 @@ const HEADER_LIST = [
     title: "Statistic",
     path: "/statistic",
     icon: <i className="bi bi-bar-chart-fill"></i>,
+  },
+  {
+    title: "User Profile",
+    path: "/editprofile",
+    icon: <i className="bi bi-person-circle"></i>,
   },
 ];
 

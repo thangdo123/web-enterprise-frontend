@@ -3,9 +3,9 @@ import * as S from "./CreateAccount.Styled";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
-import { createAccount } from "../../../../store/slices/accounts";
+import { createAccount } from "../../../../store/slices/Admin/accounts";
 import { IAccount } from "../../../../interfaces/account.interfaces";
-import { fetchAllFaculties } from "../../../../store/slices/faculties";
+import { fetchAllFaculties } from "../../../../store/slices/Admin/faculties";
 
 const CreateAccount = ({ onClose }: { onClose: () => void }) => {
   // const [visible, setvisible] = useState(false);

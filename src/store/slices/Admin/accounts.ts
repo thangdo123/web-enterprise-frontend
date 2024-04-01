@@ -1,14 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../lib/axios";
-import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
-import { IAccount, IAccountState } from "../../interfaces/account.interfaces";
+import { axiosInstance } from "../../../lib/axios";
+import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
+import {
+  IAccount,
+  IAccountState,
+} from "../../../interfaces/account.interfaces";
 
 export const fetchAllAccounts = createAsyncThunk(
   "accounts/fetchAllAcounts",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.ACCOUNTS,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.ACCOUNTS,
       );
       return response.data;
     } catch (err) {
@@ -23,7 +26,7 @@ export const sortAccounts = createAsyncThunk(
   async (role: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.ACCOUNTS + `/?role=${role}`,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.ACCOUNTS + `/?role=${role}`,
       );
       return response.data;
     } catch (err) {
@@ -39,7 +42,7 @@ export const searchAccount = createAsyncThunk(
     try {
       const response = await axiosInstance.get(
         API_BASE_URL +
-          API_ENDPOINTS.ACCOUNTS +
+          API_ENDPOINTS.ADMIN.ACCOUNTS +
           `/?email=${input}&name=${input}`,
       );
       return response.data;
@@ -55,7 +58,7 @@ export const createAccount = createAsyncThunk(
   async ({ name, email, role, faculty }: IAccount, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(
-        API_BASE_URL + API_ENDPOINTS.CREATE_ACCOUNTS,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.CREATE_ACCOUNTS,
         {
           name,
           email,
@@ -80,7 +83,7 @@ export const updateAccountById = createAsyncThunk(
   ) => {
     try {
       const response = await axiosInstance.put(
-        API_BASE_URL + API_ENDPOINTS.EDIT_ACCOUNT + Id,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.EDIT_ACCOUNT + Id,
         { name, is_locked, avatar: "sdfsd" },
       );
       console.log(response.data);

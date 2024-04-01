@@ -13,6 +13,8 @@ import { layoutStudentRoutes } from "./layoutStudentRoutes";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 import { getAdminProfile, getUserProfile } from "../store/slices/userProfile";
+import LayoutCoordinator from "../components/Layout/TopLayout/LayoutCoordinator";
+import { layoutCoordinatorRoutes } from "./layoutCoordinator";
 
 export default function AppRoutes() {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,7 +30,7 @@ export default function AppRoutes() {
   useEffect(() => {
     if (decodeCookie(token) === "ADMIN") {
       dispatch(getAdminProfile());
-    }else{
+    } else {
       dispatch(getUserProfile());
     }
   }, []);
@@ -53,6 +55,14 @@ export default function AppRoutes() {
       {decodeCookie(token) === "STUDENT" && (
         <Route path="/" element={<LayoutStudent />}>
           {layoutStudentRoutes.map(({ path, component }) => (
+            <Route key={path} path={path} element={component} />
+          ))}
+        </Route>
+      )}
+
+      {decodeCookie(token) === "COORDIONATOR" && (
+        <Route path="/" element={<LayoutCoordinator />}>
+          {layoutCoordinatorRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />
           ))}
         </Route>

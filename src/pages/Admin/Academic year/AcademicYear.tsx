@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
 import Table from "./Table/Table";
 import UpdateClosureDate from "./Update/UpdateClosureDate";
-import { fetchAcademicYears } from "../../../store/slices/academicYear";
+import { fetchAcademicYears } from "../../../store/slices/Admin/academicYear";
 
 export default function Faculty() {
   const dispatch = useDispatch<AppDispatch>();

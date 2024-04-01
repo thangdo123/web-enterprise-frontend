@@ -4,7 +4,7 @@ import Dropdown from "../../../../components/Dropdown/Dropdown";
 import Searchbar from "../../../../components/Searchbar/Searchbar";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { sortAccounts } from "../../../../store/slices/accounts";
+import { sortAccounts } from "../../../../store/slices/Admin/accounts";
 
 interface IOption {
   value: string;
