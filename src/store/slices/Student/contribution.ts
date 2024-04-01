@@ -80,6 +80,22 @@ export const createContribution = createAsyncThunk(
   },
 );
 
+export const deleteContribution = createAsyncThunk(
+  "contributions/deleteContribution",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.delete(
+        API_BASE_URL + API_ENDPOINTS.USER.DELETE_CONTRIBUTION + id,
+      );
+      console.log(API_BASE_URL + API_ENDPOINTS.USER.DELETE_CONTRIBUTION + id);
+      console.log(response.data);
+      return response.data;
+    } catch(err) {
+      return rejectWithValue(err);
+    }
+  },
+);
+
 export const contributionState = createSlice({
   name: "contributionState",
   initialState,

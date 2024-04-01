@@ -27,11 +27,9 @@ const CreateSubmission = () => {
     console.log(formData.get("files"));
     dispatch(createContribution(formData))
       .then(() => {
-        // Redirect to the "/viewsubmission" path after successful submission
         navigate("/viewsubmission");
       })
       .catch((error) => {
-        // Handle error if needed
         console.error("Error submitting contribution:", error);
       });
   };
