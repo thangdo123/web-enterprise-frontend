@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import * as S from "./SubmissionDeatil.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
-import { fetchContributionDetail } from "../../../../store/slices/contribution";
+import { fetchContributionDetail } from "../../../../store/slices/Student/contribution";
 import { useParams } from "react-router";
 
 const SubmissionDetail = () => {

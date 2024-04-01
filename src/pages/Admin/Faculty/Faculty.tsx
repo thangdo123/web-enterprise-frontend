@@ -8,7 +8,7 @@ import { AppDispatch } from "../../../store";
 import {
   fetchAllFaculties,
   searchFaculty,
-} from "../../../store/slices/faculties";
+} from "../../../store/slices/Admin/faculties";
 import Table from "./Table/Table";
 import UpdateFaculty from "./Update/UpdateFaculty";
 

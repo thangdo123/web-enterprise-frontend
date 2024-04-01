@@ -4,7 +4,7 @@ import Dropdown from "../../../components/Dropdown/Dropdown";
 import Card from "../../../components/Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
-import { fetchAllContributions } from "../../../store/slices/contribution";
+import { fetchAllContributions } from "../../../store/slices/Student/contribution";
 import Pagination from "../../../components/Pagination/Pagination";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
@@ -77,7 +77,11 @@ const ViewMySubmission = () => {
                     onClick={() => navigateContributionDetail(item.id!)}
                   >
                     <Card
-                      imgUrl={item.Image.length > 0 ? item.Image[0].path : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"}
+                      imgUrl={
+                        item.Image.length > 0
+                          ? item.Image[0].path
+                          : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
+                      }
                       cardTitle={item.title}
                     />
                   </S.Block3SubmissionItemsContainer>

@@ -3,7 +3,7 @@ import * as S from "./CreateSubmission.styled";
 import UploadSubmission from "./UploadSubmission/UploadSubmission";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { createContribution } from "../../../../store/slices/contribution";
+import { createContribution } from "../../../../store/slices/Student/contribution";
 import { useNavigate } from "react-router-dom";
 
 const CreateSubmission = () => {

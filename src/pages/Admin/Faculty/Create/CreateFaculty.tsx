@@ -2,7 +2,7 @@ import React, { FormEvent, useState } from "react";
 import * as S from "./CreateFaculty.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { createFaculty } from "../../../../store/slices/faculties";
+import { createFaculty } from "../../../../store/slices/Admin/faculties";
 
 const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();

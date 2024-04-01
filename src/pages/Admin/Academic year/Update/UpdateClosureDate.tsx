@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./UpdateClosureDate.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { updateAcademicYearById } from "../../../../store/slices/academicYear";
+import { updateAcademicYearById } from "../../../../store/slices/Admin/academicYear";
 
 interface IAcademicYearUpdateProps {
   onClose: () => void;

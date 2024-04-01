@@ -8,7 +8,7 @@ export const getUserProfile = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.VIEW_PROFILE,
+        API_BASE_URL + API_ENDPOINTS.USER.VIEW_PROFILE,
       );
       console.log(response.data);
       return response.data;
@@ -24,7 +24,7 @@ export const getAdminProfile = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.VIEW_ADMIN_PROFILE,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.VIEW_ADMIN_PROFILE,
       );
       console.log(response.data);
       return response.data;
@@ -40,7 +40,7 @@ export const updateUserProfile = createAsyncThunk(
   async ({ name }: { name: string }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.put(
-        API_BASE_URL + API_ENDPOINTS.UPDATE_PROFILE,
+        API_BASE_URL + API_ENDPOINTS.USER.UPDATE_PROFILE,
         { name },
       );
       console.log(response.data);

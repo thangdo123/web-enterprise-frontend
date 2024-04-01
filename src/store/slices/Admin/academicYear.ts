@@ -1,14 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../lib/axios";
-import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
-import { IAcademicYearsState } from "../../interfaces/academicYear.interfaces";
+import { axiosInstance } from "../../../lib/axios";
+import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
+import { IAcademicYearsState } from "../../../interfaces/academicYear.interfaces";
 
 export const fetchAcademicYears = createAsyncThunk(
   "academicYears/fetchAcademicYears",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.ACADEMIC_YEARS,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.ACADEMIC_YEARS,
       );
       console.log(response.data);
       return response.data;
@@ -24,7 +24,7 @@ export const sortAcademicYears = createAsyncThunk(
   async (sort: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.ACADEMIC_YEARS + `/?sort=${sort}`,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.ACADEMIC_YEARS + `/?sort=${sort}`,
       );
       console.log(response.data);
       return response.data;
@@ -40,7 +40,7 @@ export const deleteAcademicYearById = createAsyncThunk(
   async (academicYearId: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.delete(
-        API_BASE_URL + API_ENDPOINTS.DELETE_ACADEMIC_YEARS + academicYearId,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.DELETE_ACADEMIC_YEARS + academicYearId,
       );
       console.log(response.data);
       return academicYearId;
@@ -67,7 +67,7 @@ export const updateAcademicYearById = createAsyncThunk(
   ) => {
     try {
       const response = await axiosInstance.put(
-        API_BASE_URL + API_ENDPOINTS.UPDATE_ACADEMIC_YEARS + academicYearId,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.UPDATE_ACADEMIC_YEARS + academicYearId,
         { closure_date, final_closure_date },
       );
       console.log(response.data);
@@ -93,7 +93,7 @@ export const createAcademicYear = createAsyncThunk(
   ) => {
     try {
       const response = await axiosInstance.post(
-        API_BASE_URL + API_ENDPOINTS.CREATE_ACADEMIC_YEARS,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.CREATE_ACADEMIC_YEARS,
         { closure_date, final_closure_date },
       );
       console.log(response.data);
