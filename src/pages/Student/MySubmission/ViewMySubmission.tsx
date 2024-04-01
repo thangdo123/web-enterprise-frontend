@@ -54,7 +54,7 @@ const ViewMySubmission = () => {
               <S.Block3TopLeft>
                 <S.Block3Sort>
                   <Dropdown
-                    onClick={() => console.log("Cliked")}
+                    onClick={() => console.log("")}
                     title={title}
                     optionList={dropdownItems}
                   />

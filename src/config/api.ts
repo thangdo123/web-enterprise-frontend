@@ -25,6 +25,9 @@ const API_ENDPOINTS = {
   MANAGER: {
     CHOSEN_CONTRIBUTIONS: "/manager/getChosenContributions",
   },
+  COORDINATOR: {
+    VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",
+  },
 };
 
 export { API_BASE_URL, API_ENDPOINTS };
