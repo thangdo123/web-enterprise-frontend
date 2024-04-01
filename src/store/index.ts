@@ -18,6 +18,8 @@ const store = configureStore({
     [academicYearState.name]: academicYearState.reducer,
     [adminProfileState.name]: adminProfileState.reducer,
     [contributionState.name]: contributionState.reducer,
+    [resetPasswordState.name]: resetPasswordState.reducer,
+    [coordinatorContributionState.name]: coordinatorContributionState.reducer,
   },
 });
 
