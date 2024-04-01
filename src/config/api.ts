@@ -21,6 +21,7 @@ const API_ENDPOINTS = {
     UPLOAD_CONTRIBUTION: "/user/uploadContribution",
     VIEW_PROFILE: "/user/viewProfile",
     UPDATE_PROFILE: "/user/editProfile/",
+    DELETE_CONTRIBUTION: "/user/deleteContribution/",
   },
   MANAGER: {
     CHOSEN_CONTRIBUTIONS: "/manager/getChosenContributions",

@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import * as S from "./SubmissionDeatil.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
-import {
-  deleteContribution,
-  fetchContributionDetail,
-} from "../../../../store/slices/contribution";
+
 import { useNavigate, useParams } from "react-router";
+import { deleteContribution, fetchContributionDetail } from "../../../../store/slices/Student/contribution";
 
 const SubmissionDetail = () => {
   const { id } = useParams();
