@@ -81,7 +81,10 @@ export const createContribution = createAsyncThunk(
 
 export const editContribution = createAsyncThunk(
   "contributions/editContributions",
-  async ({id, formData} : {id: string, formData: FormData}, { rejectWithValue }) => {
+  async (
+    { id, formData }: { id: string; formData: FormData },
+    { rejectWithValue },
+  ) => {
     try {
       const response = await axiosInstanceFormData.put(
         API_BASE_URL + API_ENDPOINTS.USER.EDIT_CONTRIBUTION + id,
@@ -106,7 +109,7 @@ export const deleteContribution = createAsyncThunk(
       console.log(API_BASE_URL + API_ENDPOINTS.USER.DELETE_CONTRIBUTION + id);
       console.log(response.data);
       return response.data;
-    } catch(err) {
+    } catch (err) {
       return rejectWithValue(err);
     }
   },
@@ -121,7 +124,7 @@ export const contributionState = createSlice({
       state.allMyContributions = [];
     });
     builder.addCase(fetchAllContributions.fulfilled, (state, action) => {
-      state.allMyContributions = action.payload.allMyContributions;
+      state.contribution = action.payload.allMyContributions;
     });
     builder.addCase(fetchAllContributions.rejected, (state) => {
       state.allMyContributions = [];

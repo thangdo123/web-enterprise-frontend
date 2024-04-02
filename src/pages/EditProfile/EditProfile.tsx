@@ -11,7 +11,7 @@ const EditProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const handleReturnHome = () =>{
+  const handleReturnHome = () => {
     navigate("/");
   };
 
@@ -38,9 +38,8 @@ const EditProfile = () => {
   useEffect(() => {
     if (userProfile) {
       setNameInput(userProfile.name);
-      console.log(userProfile.password);
     }
-  }, []);
+  }, [userProfile]);
 
   return (
     <S.EditProfieLayout>
