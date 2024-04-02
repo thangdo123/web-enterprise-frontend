@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate, useParams } from "react-router";
 import {
+  chooseContribution,
   fetchContributionDetailCoordinator,
   giveComment,
 } from "../../../store/slices/Coordinator/coodinatorContribution";
@@ -25,6 +26,7 @@ const ContributionDetail = () => {
   const handleGiveComment = () => {
     if (id) {
       dispatch(giveComment({ content: commentTextArea, id }));
+      setCommentTextArea("");
     } else {
       console.log("Undefined id");
     }
@@ -32,6 +34,14 @@ const ContributionDetail = () => {
 
   const handleReturnPage = () => {
     navigate("/");
+  };
+
+  const handleSetChoosenStatus = () => {
+    if (id) {
+      dispatch(chooseContribution(id));
+    } else {
+      console.log("Undefined id");
+    }
   };
 
   const closureDate = new Date(detailContribution.academicYear.closure_date);
@@ -131,6 +141,23 @@ const ContributionDetail = () => {
               )}
             </S.CommentList>
           </S.Block2Row>
+          <S.Block2Row>
+            <S.LeftTitle>Choosen status</S.LeftTitle>
+            <S.ChoosenStatusBlock>
+              <S.ChoosenStatusBlockLeft>
+                {detailContribution.contribution.is_choosen
+                  ? "This contribution has been choosen"
+                  : "This contribution hasn't been choosen"}
+              </S.ChoosenStatusBlockLeft>
+              {detailContribution.contribution.is_choosen ? (
+                ""
+              ) : (
+                <S.ChangeChoosenStatusBtn onClick={handleSetChoosenStatus}>
+                  Choose this contribution
+                </S.ChangeChoosenStatusBtn>
+              )}
+            </S.ChoosenStatusBlock>
+          </S.Block2Row>
         </S.Block2>
         <S.Block3>
           <S.Block3Center>
@@ -151,10 +178,7 @@ const ContributionDetail = () => {
           </S.Block3Center>
         </S.Block3>
         <S.ButtonGroup>
-          <div>
-            <S.ReturnBtn onClick={handleReturnPage}>Return</S.ReturnBtn>
-            <S.DeleteBtn>Remove submission</S.DeleteBtn>
-          </div>
+          <S.ReturnBtn onClick={handleReturnPage}>Return</S.ReturnBtn>
         </S.ButtonGroup>
       </S.Container>
     </S.Layout>

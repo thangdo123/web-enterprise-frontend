@@ -36,22 +36,25 @@ export const Block2Row = styled.div`
 `;
 
 export const LeftTitle = styled.div`
-  flex: 1;
+  width: 15%;
   padding: var(--s-4);
   background-color: var(--gray-light-1);
   border: var(--gray-light-2) solid 1px;
 `;
 
 export const Block2RightText = styled.div`
-  flex: 5;
+  width: 85%;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
 `;
 
 export const FileList = styled.div`
-  flex: 5;
+  width: 85%;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const FileItem = styled.div`
@@ -61,25 +64,46 @@ export const FileItem = styled.div`
 export const FileName = styled.div`
   color: var(--blue-2);
   padding-left: var(--s-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const CommentList = styled.div`
-  flex: 5;
+  width: 85%;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
 `;
 
 export const CommentItem = styled.div``;
 
+export const ChoosenStatusBlock = styled.div`
+  width: 85%;
+  padding: var(--s-4);
+  border: var(--gray-light-2) solid 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const ChoosenStatusBlockLeft = styled.div``;
+
+export const ChangeChoosenStatusBtn = styled.button`
+  padding: var(--s-1) var(--s-2);
+  background-color: var(--green);
+  color: white;
+  border-radius: var(--br-sm);
+`;
+
 export const Block3 = styled.div`
   display: flex;
-  justify-content:center;
+  justify-content: center;
   padding-top: var(--s-4);
 `;
 
 export const Block3Center = styled.div`
-  width:70%;
-  display:flex;
+  width: 70%;
+  display: flex;
   align-items: center;
   gap: 3%;
 `;
@@ -95,17 +119,13 @@ export const SubmitCommentBtn = styled.button`
   background-color: var(--blue-2);
   padding: var(--s-2) var(--s-4);
   border-radius: var(--br-sm);
+  color: white;
 `;
 
 export const ButtonGroup = styled.div`
   padding: var(--s-10);
   display: flex;
   justify-content: center;
-  div {
-    width: 30%;
-    display: flex;
-    justify-content: space-between;
-  }
 `;
 
 export const ReturnBtn = styled.button`
