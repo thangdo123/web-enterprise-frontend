@@ -29,6 +29,10 @@ const API_ENDPOINTS = {
   },
   MANAGER: {
     CHOSEN_CONTRIBUTIONS: "/manager/getChosenContributions",
+    DOWNLOAD_CONTRIBUTIONS: "/manager/downloadContribution",
+    PUBLISH_CONTRIBUTION: "/manager/publishContribution/",
+    STATS_BY_FACULTY_AND_YEAR: "/manager/getContributionsStatsByFacultyAndYear",
+    PERCENTAGE_BY_FACULTY: "/manager/getContributionPercentageByFaculty",
   },
   COORDINATOR: {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",

@@ -66,7 +66,7 @@ export default function Login() {
         reNewPassword: reNewPW,
       };
       dispatch(resetPassword(newPassword));
-      navigate("/");
+      navigate("/login");
     } else {
       dispatch(sendOtp({ email: mailInput }));
     }
