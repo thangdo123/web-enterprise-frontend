@@ -6,6 +6,7 @@ import { AppDispatch, RootState } from "../../store";
 import { fetchAllContributionsByFaculty } from "../../store/slices/Coordinator/coodinatorContribution";
 import { Loader } from "../../components/Loader/Loader.styled";
 import Pagination from "../../components/Pagination/Pagination";
+import { useNavigate } from "react-router";
 
 const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
 const dropdownTitle = "Sort";
@@ -19,17 +20,20 @@ const Homepage = () => {
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
 
-  const { contribution } = useSelector(
+  const { allMyContributions } = useSelector(
     (state: RootState) => state.coordinatorContributionState,
   );
 
+  const navigate = useNavigate();
+  const navigateContributionDetail = (id: string) => navigate(`${id}`);
+
   useEffect(() => {
     setPage((prevPage) =>
-      Math.min(Math.max(prevPage, 0), contribution.length - 1),
+      Math.min(Math.max(prevPage, 0), allMyContributions.length - 1),
     );
-    setTotalPage(contribution.length);
-  }, [page, contribution.length]);
-  console.log(contribution);
+    setTotalPage(allMyContributions.length);
+  }, [page, allMyContributions.length]);
+  console.log(allMyContributions);
   return (
     <S.Layout>
       <S.Container>
@@ -52,10 +56,10 @@ const Homepage = () => {
             Due Date: Thursday, 16 April 2023, 11:00 PM
           </S.Block2Right>
         </S.Block2>
-        {contribution && contribution[page] ? (
+        {allMyContributions && allMyContributions[page] ? (
           <S.Block3>
-            {contribution[page].map((item, index) => (
-              <S.Block3Items key={index}>
+            {allMyContributions[page].map((item, index) => (
+              <S.Block3Items key={index} onClick={()=>navigateContributionDetail(item.id!)}>
                 <S.ItemImage src={item.Image.length > 0 ? item.Image[0].path : "https://static.boredpanda.com/blog/wp-content/uploads/2020/07/expressive-cat-nana-1-1-5f16cfece24f8__700.jpg"} />
                 <S.ItemBottomBlock>
                   <S.ItemTitle>{item.title}</S.ItemTitle>

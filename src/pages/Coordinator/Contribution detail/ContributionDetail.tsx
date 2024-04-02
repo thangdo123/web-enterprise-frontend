@@ -1,37 +1,37 @@
-import React, { useEffect } from "react";
-import * as S from "./SubmissionDeatil.styled";
+import React, { useEffect, useState } from "react";
+import * as S from "./ContributionDetail.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store";
 
 import { useNavigate, useParams } from "react-router";
 import {
-  deleteContribution,
-  fetchContributionDetail,
-} from "../../../../store/slices/Student/contribution";
+  fetchContributionDetailCoordinator,
+  giveComment,
+} from "../../../store/slices/Coordinator/coodinatorContribution";
+import { AppDispatch, RootState } from "../../../store";
 
-const SubmissionDetail = () => {
+const ContributionDetail = () => {
+  const [commentTextArea, setCommentTextArea] = useState<string>("");
+
   const { id } = useParams();
   const navigate = useNavigate();
-
-  const navigateWithId = (id:string) => {
-    navigate(`/editsubmission/${id}`);
-  };
-
   const dispatch = useDispatch<AppDispatch>();
   useEffect(() => {
-    dispatch(fetchContributionDetail(id!));
+    dispatch(fetchContributionDetailCoordinator(id!));
   }, []);
   const { detailContribution } = useSelector(
-    (state: RootState) => state.contributionState,
+    (state: RootState) => state.coordinatorContributionState,
   );
 
-  const handleReturnPage = () => {
-    navigate("/viewsubmission");
+  const handleGiveComment = () => {
+    if (id) {
+      dispatch(giveComment({ content: commentTextArea, id }));
+    } else {
+      console.log("Undefined id");
+    }
   };
 
-  const handleDeleteSubmission = () => {
-    dispatch(deleteContribution(id!));
-    navigate("/viewsubmission");
+  const handleReturnPage = () => {
+    navigate("/");
   };
 
   const closureDate = new Date(detailContribution.academicYear.closure_date);
@@ -132,13 +132,28 @@ const SubmissionDetail = () => {
             </S.CommentList>
           </S.Block2Row>
         </S.Block2>
+        <S.Block3>
+          <S.Block3Center>
+            <S.CommentTxtArea
+              value={commentTextArea}
+              onChange={(e) => {
+                setCommentTextArea(e.target.value);
+              }}
+              placeholder="Enter comment for this contribution"
+            ></S.CommentTxtArea>
+            <S.SubmitCommentBtn
+              onClick={() => {
+                handleGiveComment();
+              }}
+            >
+              Submit comment
+            </S.SubmitCommentBtn>
+          </S.Block3Center>
+        </S.Block3>
         <S.ButtonGroup>
           <div>
             <S.ReturnBtn onClick={handleReturnPage}>Return</S.ReturnBtn>
-            <S.Editbtn onClick={()=>navigateWithId(id!)}>Edit submission</S.Editbtn>
-            <S.DeleteBtn onClick={handleDeleteSubmission}>
-              Remove submission
-            </S.DeleteBtn>
+            <S.DeleteBtn>Remove submission</S.DeleteBtn>
           </div>
         </S.ButtonGroup>
       </S.Container>
@@ -146,4 +161,4 @@ const SubmissionDetail = () => {
   );
 };
 
-export default SubmissionDetail;
+export default ContributionDetail;

@@ -18,7 +18,7 @@ const ViewMySubmission = () => {
     dispatch(fetchAllContributions());
   }, []);
 
-  const { contribution } = useSelector(
+  const { allMyContributions } = useSelector(
     (state: RootState) => state.contributionState,
   );
 
@@ -30,10 +30,10 @@ const ViewMySubmission = () => {
 
   useEffect(() => {
     setPage((prevPage) =>
-      Math.min(Math.max(prevPage, 0), contribution.length - 1),
+      Math.min(Math.max(prevPage, 0), allMyContributions.length - 1),
     );
-    setTotalPage(contribution.length);
-  }, [page, contribution.length]);
+    setTotalPage(allMyContributions.length);
+  }, [page, allMyContributions.length]);
 
   return (
     <>
@@ -69,9 +69,9 @@ const ViewMySubmission = () => {
                 </NavLink>
               </S.Block3TopRight>
             </S.Block3Top>
-            {contribution && contribution[page] ? (
+            {allMyContributions && allMyContributions[page] ? (
               <S.Block3SubmissionList>
-                {contribution[page].map((item, index) => (
+                {allMyContributions[page].map((item, index) => (
                   <S.Block3SubmissionItemsContainer
                     key={index}
                     onClick={() => navigateContributionDetail(item.id!)}
