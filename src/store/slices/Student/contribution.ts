@@ -124,7 +124,7 @@ export const contributionState = createSlice({
       state.allMyContributions = [];
     });
     builder.addCase(fetchAllContributions.fulfilled, (state, action) => {
-      state.contribution = action.payload.allMyContributions;
+      state.allMyContributions = action.payload.allMyContributions;
     });
     builder.addCase(fetchAllContributions.rejected, (state) => {
       state.allMyContributions = [];

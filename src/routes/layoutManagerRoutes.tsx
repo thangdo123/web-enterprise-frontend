@@ -1,8 +1,8 @@
 import React from "react";
 import { IRoute } from "../interfaces";
 import EditProfile from "../pages/EditProfile/EditProfile";
-import Statistic from "../pages/Manager/Statistic/Statistic";
-import ChosenContributions from "../pages/Manager/ChosenContributions/ChosenContributions";
+import ChosenContributions from "../pages/Manager/ChosenContributions/chosenContributions";
+import Statistic from "../pages/Manager/Statistic/statistic";
 
 export const layoutManagerRoutes: IRoute[] = [
   {
