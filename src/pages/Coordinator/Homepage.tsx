@@ -33,7 +33,6 @@ const Homepage = () => {
     );
     setTotalPage(allMyContributions.length);
   }, [page, allMyContributions.length]);
-  console.log(allMyContributions);
   return (
     <S.Layout>
       <S.Container>
@@ -63,7 +62,7 @@ const Homepage = () => {
                 <S.ItemImage src={item.Image.length > 0 ? item.Image[0].path : "https://static.boredpanda.com/blog/wp-content/uploads/2020/07/expressive-cat-nana-1-1-5f16cfece24f8__700.jpg"} />
                 <S.ItemBottomBlock>
                   <S.ItemTitle>{item.title}</S.ItemTitle>
-                  <S.ItemStatus>Suýt được chọn</S.ItemStatus>
+                  <S.ItemStatus>{item.is_choosen ? "Selected" : "Not Selected"}</S.ItemStatus>
                 </S.ItemBottomBlock>
               </S.Block3Items>
             ))}

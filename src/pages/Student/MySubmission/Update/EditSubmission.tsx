@@ -7,9 +7,10 @@ import {
   editContribution,
   fetchContributionDetail,
 } from "../../../../store/slices/Student/contribution";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditSubmission = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -43,6 +44,7 @@ const EditSubmission = () => {
     console.log(formData.get("files"));
     if (id) {
       dispatch(editContribution({ id, formData }));
+      navigate("/viewsubmission");
     } else {
       console.log(id);
     }

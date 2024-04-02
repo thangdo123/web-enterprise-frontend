@@ -36,6 +36,7 @@ const API_ENDPOINTS = {
   },
   COORDINATOR: {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",
+    CHOOSE_CONTRIBUTION: "/coordinator/chooseContribution/"
   },
 };
 

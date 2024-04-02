@@ -10,6 +10,7 @@ const initialState: ICoordinatorContributionState = {
       title: "",
       description: "",
       createdAt: "",
+      is_choosen: undefined,
     },
     academicYear: {
       closure_date: "",
@@ -55,7 +56,6 @@ export const fetchContributionDetailCoordinator = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
       );
-      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -79,6 +79,21 @@ export const giveComment = createAsyncThunk(
       return rejectWithValue(err);
     }
   },
+);
+
+export const chooseContribution = createAsyncThunk(
+  "contribution/chooseContribution",
+  async(id: string, {rejectWithValue}) => {
+    try{
+      const response = await axiosInstance.put(
+        API_BASE_URL + API_ENDPOINTS.COORDINATOR.CHOOSE_CONTRIBUTION + id,
+      );
+      return response.data;
+    } catch(err){
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  }
 );
 
 export const coordinatorContributionState = createSlice({
@@ -106,6 +121,9 @@ export const coordinatorContributionState = createSlice({
     );
     builder.addCase(giveComment.fulfilled, (state, action) => {
       state.detailContribution.comment.push(action.payload);
+    });
+    builder.addCase(chooseContribution.fulfilled, (state, action) => {
+      state.detailContribution.contribution.is_choosen = action.payload.is_choosen;
     });
   },
 });

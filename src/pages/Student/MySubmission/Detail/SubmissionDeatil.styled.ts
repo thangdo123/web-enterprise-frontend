@@ -36,22 +36,25 @@ export const Block2Row = styled.div`
 `;
 
 export const LeftTitle = styled.div`
-  flex: 1;
+  width: 15%;
   padding: var(--s-4);
   background-color: var(--gray-light-1);
   border: var(--gray-light-2) solid 1px;
 `;
 
 export const Block2RightText = styled.div`
-  flex: 5;
+  width: 85%;;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
 `;
 
 export const FileList = styled.div`
-  flex: 5;
+  width: 85%;;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const FileItem = styled.div`
@@ -61,10 +64,13 @@ export const FileItem = styled.div`
 export const FileName = styled.div`
   color: var(--blue-2);
   padding-left: var(--s-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const CommentList = styled.div`
-  flex: 5;
+  width: 85%;;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
 `;
