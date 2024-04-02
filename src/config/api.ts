@@ -2,6 +2,7 @@ const API_BASE_URL = "http://localhost:3000";
 
 const API_ENDPOINTS = {
   LOGIN: "/auth/login",
+  GIVE_COMMENT: "/comment/",
   ADMIN: {
     ACCOUNTS: "/admin/viewAllAccount",
     CREATE_ACCOUNTS: "/admin/registerForUser",
@@ -19,6 +20,7 @@ const API_ENDPOINTS = {
   USER: {
     CONTRIBUTIONS: "/user/viewMyContributions/",
     UPLOAD_CONTRIBUTION: "/user/uploadContribution",
+    EDIT_CONTRIBUTION: "/user/editMyContribution/",
     VIEW_PROFILE: "/user/viewProfile",
     UPDATE_PROFILE: "/user/editProfile/",
     SEND_OTP: "/user/otp",

@@ -1,3 +1,5 @@
+import { IContributionDetail } from "./contribution.interface";
+
 export interface ICoordinatorContribution {
   id?: string;
   title: string;
@@ -21,5 +23,6 @@ export interface ICoordinatorContribution {
 }
 
 export interface ICoordinatorContributionState {
-  contribution: ICoordinatorContribution[][];
+  allMyContributions: ICoordinatorContribution[][];
+  detailContribution: IContributionDetail;
 }

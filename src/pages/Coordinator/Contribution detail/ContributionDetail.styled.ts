@@ -71,6 +71,32 @@ export const CommentList = styled.div`
 
 export const CommentItem = styled.div``;
 
+export const Block3 = styled.div`
+  display: flex;
+  justify-content:center;
+  padding-top: var(--s-4);
+`;
+
+export const Block3Center = styled.div`
+  width:70%;
+  display:flex;
+  align-items: center;
+  gap: 3%;
+`;
+
+export const CommentTxtArea = styled.textarea`
+  border: var(--gray-light-2) solid 1px;
+  width: 80%;
+  padding: var(--s-3);
+`;
+
+export const SubmitCommentBtn = styled.button`
+  width: 17%;
+  background-color: var(--blue-2);
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--br-sm);
+`;
+
 export const ButtonGroup = styled.div`
   padding: var(--s-10);
   display: flex;
@@ -92,13 +118,6 @@ export const ReturnBtn = styled.button`
 export const DeleteBtn = styled.button`
   padding: var(--s-2) var(--s-4);
   background-color: red;
-  color: white;
-  border-radius: var(--br-sm);
-`;
-
-export const Editbtn = styled.button`
-  padding: var(--s-2) var(--s-4);
-  background-color: var(--green);
   color: white;
   border-radius: var(--br-sm);
 `;

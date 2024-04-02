@@ -5,6 +5,7 @@ import SubmissionDetail from "../pages/Student/MySubmission/Detail/SubmissionDet
 import CreateSubmission from "../pages/Student/MySubmission/Create/CreateSubmission";
 import { Navigate } from "react-router";
 import EditProfile from "../pages/EditProfile/EditProfile";
+import EditSubmission from "../pages/Student/MySubmission/Update/EditSubmission";
 
 
 export const layoutStudentRoutes: IRoute[] = [
@@ -27,5 +28,9 @@ export const layoutStudentRoutes: IRoute[] = [
   {
     path: "/editprofile",
     component: <EditProfile/>,
+  },
+  {
+    path: "/editsubmission/:id",
+    component: <EditSubmission/>,
   },
 ];

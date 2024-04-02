@@ -4,7 +4,7 @@ import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IContributionState } from "../../../interfaces/contribution.interface";
 
 const initialState: IContributionState = {
-  contribution: [],
+  allMyContributions: [],
   detailContribution: {
     contribution: {
       title: "",
@@ -54,7 +54,6 @@ export const fetchContributionDetail = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
       );
-      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -69,6 +68,23 @@ export const createContribution = createAsyncThunk(
     try {
       const response = await axiosInstanceFormData.post(
         API_BASE_URL + API_ENDPOINTS.USER.UPLOAD_CONTRIBUTION,
+        formData,
+      );
+
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const editContribution = createAsyncThunk(
+  "contributions/editContributions",
+  async ({id, formData} : {id: string, formData: FormData}, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstanceFormData.put(
+        API_BASE_URL + API_ENDPOINTS.USER.EDIT_CONTRIBUTION + id,
         formData,
       );
 
@@ -102,13 +118,13 @@ export const contributionState = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllContributions.pending, (state) => {
-      state.contribution = [];
+      state.allMyContributions = [];
     });
     builder.addCase(fetchAllContributions.fulfilled, (state, action) => {
-      state.contribution = action.payload.contribution;
+      state.allMyContributions = action.payload.allMyContributions;
     });
     builder.addCase(fetchAllContributions.rejected, (state) => {
-      state.contribution = [];
+      state.allMyContributions = [];
     });
     builder.addCase(fetchContributionDetail.fulfilled, (state, action) => {
       state.detailContribution = action.payload;

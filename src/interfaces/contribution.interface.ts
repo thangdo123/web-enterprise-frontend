@@ -56,6 +56,6 @@ export interface IContributionDetail {
 }
 
 export interface IContributionState {
-  contribution: IContribution[][];
+  allMyContributions: IContribution[][];
   detailContribution: IContributionDetail;
 }
