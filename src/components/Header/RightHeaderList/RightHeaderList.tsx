@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./RightHeaderList.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
@@ -7,10 +7,16 @@ import { useNavigate } from "react-router";
 export default function RightHeaderList() {
   const navigate = useNavigate();
 
-  const handleNavigate = ()=>{
+  const handleNavigate = () => {
     navigate("/editprofile");
   };
-  const {userProfile} = useSelector((state: RootState)=> state.adminProfileState);
+  const { userProfile } = useSelector(
+    (state: RootState) => state.adminProfileState,
+  );
+  const [name, setName] = useState<string>(userProfile.name);
+  useEffect(() => {
+    setName(userProfile.name);
+  }, [userProfile]);
   return (
     <S.RightHeaderList>
       <S.RightListItem>
@@ -19,7 +25,7 @@ export default function RightHeaderList() {
       <S.RightListItem>
         <i className="bi bi-bell"></i>
       </S.RightListItem>
-      <S.RightListItem onClick={handleNavigate}>User: {userProfile.name}</S.RightListItem>
+      <S.RightListItem onClick={handleNavigate}>User: {name}</S.RightListItem>
     </S.RightHeaderList>
   );
 }

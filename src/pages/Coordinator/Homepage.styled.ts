@@ -60,4 +60,6 @@ export const ItemBottomBlock = styled.div`
 
 export const ItemTitle = styled.div``;
 
-export const ItemStatus = styled.div``;
+export const ItemStatus = styled.div<{ $isChosen: boolean }>`
+  color: ${({ $isChosen }) => ($isChosen ? "var(--green)" : "var(--red)")};
+`;

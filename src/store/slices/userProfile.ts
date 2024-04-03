@@ -71,5 +71,8 @@ export const adminProfileState = createSlice({
     builder.addCase(getAdminProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload.userProfile;
     });
+    builder.addCase(updateUserProfile.fulfilled, (state, action) => {
+      state.userProfile = action.payload.user;
+    });
   },
 });
