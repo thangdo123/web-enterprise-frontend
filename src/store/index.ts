@@ -9,6 +9,7 @@ import { contributionState } from "./slices/Student/contribution";
 import { resetPasswordState } from "./slices/resetPassword";
 import { coordinatorContributionState } from "./slices/Coordinator/coodinatorContribution";
 import { chosenContributionState } from "./slices/Manager/chosenContributions";
+import { statisticState } from "./slices/Manager/statistic";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     [resetPasswordState.name]: resetPasswordState.reducer,
     [coordinatorContributionState.name]: coordinatorContributionState.reducer,
     [chosenContributionState.name]: chosenContributionState.reducer,
+    [statisticState.name]: statisticState.reducer,
   },
 });
 

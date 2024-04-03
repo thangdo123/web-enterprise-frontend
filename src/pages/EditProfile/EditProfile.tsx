@@ -5,15 +5,9 @@ import { AppDispatch, RootState } from "../../store";
 
 import { deleteCookie } from "../../utils/cookies";
 import { updateUserProfile } from "../../store/slices/userProfile";
-import { useNavigate } from "react-router";
 
 const EditProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
-
-  const handleReturnHome = () => {
-    navigate("/");
-  };
 
   const { userProfile } = useSelector(
     (state: RootState) => state.adminProfileState,
@@ -32,7 +26,6 @@ const EditProfile = () => {
       avatar: "asdasd",
     };
     dispatch(updateUserProfile(newAdminProfile));
-    handleReturnHome();
   };
 
   useEffect(() => {

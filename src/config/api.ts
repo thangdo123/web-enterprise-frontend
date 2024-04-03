@@ -33,10 +33,11 @@ const API_ENDPOINTS = {
     PUBLISH_CONTRIBUTION: "/manager/publishContribution/",
     STATS_BY_FACULTY_AND_YEAR: "/manager/getContributionsStatsByFacultyAndYear",
     PERCENTAGE_BY_FACULTY: "/manager/getContributionPercentageByFaculty",
+    COUNT_CONTRIBUTION: "/manager/CountContributionsStats",
   },
   COORDINATOR: {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",
-    CHOOSE_CONTRIBUTION: "/coordinator/chooseContribution/"
+    CHOOSE_CONTRIBUTION: "/coordinator/chooseContribution/",
   },
 };
 
