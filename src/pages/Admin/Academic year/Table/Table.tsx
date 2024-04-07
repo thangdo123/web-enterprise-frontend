@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../../store";
 import Pagination from "../../../../components/Pagination/Pagination";
 import { deleteAcademicYearById } from "../../../../store/slices/Admin/academicYear";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 interface ITableProps {
   handleEdit: () => void;
@@ -71,9 +73,16 @@ export default function Table({
                           Edit
                         </S.ActionTitle>
                         <S.ActionTitle
-                          onClick={() =>
-                            dispatch(deleteAcademicYearById(academicYear.id))
-                          }
+                          onClick={() => {
+                            dispatch(deleteAcademicYearById(academicYear.id));
+                            dispatch(
+                              setNotification({
+                                message:
+                                  "Academic year is deleted successfully",
+                                type: ENotificationType.Success,
+                              }),
+                            );
+                          }}
                         >
                           Delete
                         </S.ActionTitle>

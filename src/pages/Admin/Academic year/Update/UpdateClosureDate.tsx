@@ -3,6 +3,8 @@ import * as S from "./UpdateClosureDate.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { updateAcademicYearById } from "../../../../store/slices/Admin/academicYear";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 interface IAcademicYearUpdateProps {
   onClose: () => void;
@@ -31,6 +33,12 @@ const UpdateClosureDate = ({
       final_closure_date: new Date(finalClosureDateInput).toISOString(),
     };
     dispatch(updateAcademicYearById(selectedAcademicYear));
+    dispatch(
+      setNotification({
+        message: "Academic year is updated successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
 
   useEffect(() => {

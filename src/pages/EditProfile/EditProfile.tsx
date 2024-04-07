@@ -3,8 +3,10 @@ import * as S from "./EditProfile.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 
-import { deleteCookie } from "../../utils/cookies";
+import { deleteCookie } from "../../utils/cookies.utils";
 import { updateUserProfile } from "../../store/slices/userProfile";
+import { setNotification } from "../../store/slices/notification";
+import { ENotificationType } from "../../enum";
 
 const EditProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,6 +28,12 @@ const EditProfile = () => {
       avatar: "asdasd",
     };
     dispatch(updateUserProfile(newAdminProfile));
+    dispatch(
+      setNotification({
+        message: "Your profile is edited successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
 
   useEffect(() => {

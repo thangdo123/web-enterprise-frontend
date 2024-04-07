@@ -3,6 +3,8 @@ import * as S from "./CreateFaculty.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { createFaculty } from "../../../../store/slices/Admin/faculties";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,6 +15,12 @@ const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
     onClose();
     const newFaculty = { name: nameInput };
     dispatch(createFaculty(newFaculty));
+    dispatch(
+      setNotification({
+        message: "New faculty is created successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
   return (
     <S.CreateFacultyLayout>

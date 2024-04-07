@@ -69,14 +69,15 @@ export const chosenContributionState = createSlice({
     buider.addCase(downloadContributions.fulfilled, (state) => {
       state.isDownloading = true;
     });
-    // buider.addCase(publishContribution.fulfilled, (state, action) => {
-    //   state.allChosenContributions = state.allChosenContributions.map(
-    //     (chosenContributions) =>
-    //       chosenContributions.filter(
-    //         (chosenContribution) =>
-    //           chosenContribution.id !== action.payload.contribution.id,
-    //       ),
-    //   );
-    // });
+    buider.addCase(publishContribution.fulfilled, (state, action) => {
+      state.allChosenContributions = state.allChosenContributions.map(
+        (chosenContributions) =>
+          chosenContributions.map((chosenContribution) =>
+            chosenContribution.id === action.payload.contribution.id
+              ? action.payload.contribution
+              : chosenContribution,
+          ),
+      );
+    });
   },
 });

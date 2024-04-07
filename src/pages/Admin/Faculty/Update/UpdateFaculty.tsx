@@ -3,6 +3,8 @@ import * as S from "./UpdateFaculty.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { updateFacultyById } from "../../../../store/slices/Admin/faculties";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 interface IFacultyUpdateProps {
   onClose: () => void;
@@ -24,6 +26,12 @@ const UpdateFaculty = ({
     onClose();
     const selectedFaculty = { facultyId: facultyId, name: nameInput };
     dispatch(updateFacultyById(selectedFaculty));
+    dispatch(
+      setNotification({
+        message: "Faculty is updated successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
 
   useEffect(() => {

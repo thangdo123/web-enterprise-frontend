@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { createContribution } from "../../../../store/slices/Student/contribution";
 import { useNavigate } from "react-router-dom";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 const CreateSubmission = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +34,12 @@ const CreateSubmission = () => {
       .catch((error) => {
         console.error("Error submitting contribution:", error);
       });
+    dispatch(
+      setNotification({
+        message: "New submission is created successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
 
   const handleResetForm = () => {

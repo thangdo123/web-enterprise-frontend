@@ -3,6 +3,8 @@ import * as S from "./CreateClosureDate.styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { createAcademicYear } from "../../../../store/slices/Admin/academicYear";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 const CreateClosureDate = ({ onClose }: { onClose: () => void }) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,6 +22,12 @@ const CreateClosureDate = ({ onClose }: { onClose: () => void }) => {
       final_closure_date: new Date(finalClosureDate).toISOString(),
     };
     dispatch(createAcademicYear(newAcademicYear));
+    dispatch(
+      setNotification({
+        message: "New academic year is created successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
   return (
     <S.Layout>

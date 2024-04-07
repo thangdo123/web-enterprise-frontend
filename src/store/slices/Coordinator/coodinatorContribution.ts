@@ -18,11 +18,13 @@ const initialState: ICoordinatorContributionState = {
     document: [
       {
         name: "",
+        path: "",
       },
     ],
     image: [
       {
         name: "",
+        path: "",
       },
     ],
     comment: [

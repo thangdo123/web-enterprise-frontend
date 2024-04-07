@@ -6,6 +6,8 @@ import { AppDispatch, RootState } from "../../../../store";
 import { createAccount } from "../../../../store/slices/Admin/accounts";
 import { IAccount } from "../../../../interfaces/account.interfaces";
 import { fetchAllFaculties } from "../../../../store/slices/Admin/faculties";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 const CreateAccount = ({ onClose }: { onClose: () => void }) => {
   // const [visible, setvisible] = useState(false);
@@ -36,6 +38,12 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
     };
     onClose();
     dispatch(createAccount(newAccount));
+    dispatch(
+      setNotification({
+        message: "New account is updated successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
 
   useEffect(() => {

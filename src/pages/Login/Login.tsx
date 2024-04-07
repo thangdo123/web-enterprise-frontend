@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { postLogin } from "../../store/slices/login";
-import { getCookie } from "../../utils/cookies";
+import { getCookie } from "../../utils/cookies.utils";
 
 interface ILogin {
   email: string;

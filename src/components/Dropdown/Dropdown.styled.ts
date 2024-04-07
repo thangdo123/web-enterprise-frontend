@@ -29,6 +29,8 @@ const SortOptionContainer = styled.div<{ $isOpen: boolean }>`
   box-shadow: var(--shadow-md);
   gap: var(--s-2);
   background-color: var(--white);
+  overflow-y: scroll;
+  height: var(--s-13);
 `;
 
 const SortOption = styled.div`

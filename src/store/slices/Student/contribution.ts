@@ -17,11 +17,13 @@ const initialState: IContributionState = {
     document: [
       {
         name: "",
+        path: "",
       },
     ],
     image: [
       {
         name: "",
+        path: "",
       },
     ],
     comment: [
@@ -54,6 +56,7 @@ export const fetchContributionDetail = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
       );
+      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);

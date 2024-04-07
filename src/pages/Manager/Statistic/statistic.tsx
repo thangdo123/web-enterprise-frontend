@@ -9,7 +9,7 @@ import {
 } from "../../../store/slices/Manager/statistic";
 import "chart.js/auto";
 import { Bar, Pie } from "react-chartjs-2";
-import { generateRandomColor } from "../../../utils/randomColor";
+import { generateRandomColor } from "../../../utils/randomColor.utils";
 
 export default function Statistic() {
   const dispatch = useDispatch<AppDispatch>();
