@@ -3,6 +3,8 @@ import * as S from "./UpdateAccount.Styled";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { updateAccountById } from "../../../../store/slices/Admin/accounts";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 interface IAccountUpdateProps {
   onClose: () => void;
@@ -31,6 +33,12 @@ const UpdateAccount = ({
       is_locked: isLocked,
     };
     dispatch(updateAccountById(selectedAccount));
+    dispatch(
+      setNotification({
+        message: "Account is updated successfully",
+        type: ENotificationType.Success,
+      }),
+    );
   };
 
   const handleToggleLockStatus = () => setIsLocked(!isLocked);

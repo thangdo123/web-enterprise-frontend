@@ -1,3 +1,5 @@
+import { ENotificationType } from "../enum";
+
 export interface IRoute {
   path: string;
   component: JSX.Element;
@@ -9,7 +11,15 @@ export interface ISideHeader {
   icon: JSX.Element;
 }
 
-export interface ITopHeader{
+export interface ITopHeader {
   name: string;
   path: string;
+}
+
+export interface INotification {
+  message: string;
+  type: ENotificationType;
+}
+export interface INotificationState {
+  notification: INotification | null;
 }

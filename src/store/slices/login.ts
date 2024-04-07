@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
-import { setCookie } from "../../utils/cookies";
+import { setCookie } from "../../utils/cookies.utils";
 
 interface ILogin {
   email: string;

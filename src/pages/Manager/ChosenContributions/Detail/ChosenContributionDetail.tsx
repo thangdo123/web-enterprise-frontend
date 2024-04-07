@@ -4,6 +4,8 @@ import { IChosenContribution } from "../../../../interfaces/chosenContribution";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { publishContribution } from "../../../../store/slices/Manager/chosenContributions";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 interface IChosenContributionDetailProps {
   chosenContribution: IChosenContribution;
@@ -17,6 +19,12 @@ export default function ChosenContributionDetail({
   const dispatch = useDispatch<AppDispatch>();
   const handlePublishSubmission = () => {
     dispatch(publishContribution({ Id: chosenContribution.id }));
+    dispatch(
+      setNotification({
+        message: "The post is published successfully",
+        type: ENotificationType.Success,
+      }),
+    );
     onClose();
   };
   return (

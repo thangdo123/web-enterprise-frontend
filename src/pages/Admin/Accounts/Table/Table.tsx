@@ -38,7 +38,7 @@ export default function Table({
                 <S.TableHeadItem>Username</S.TableHeadItem>
                 <S.TableHeadItem>Email</S.TableHeadItem>
                 <S.TableHeadItem>Role</S.TableHeadItem>
-                <S.TableHeadItem>Created at</S.TableHeadItem>
+                <S.TableHeadItem>Lock Status</S.TableHeadItem>
                 <S.TableHeadItem>Actions</S.TableHeadItem>
               </S.TableHeadRow>
             </thead>
@@ -49,7 +49,9 @@ export default function Table({
                     <S.TableItem>{innerAccounts.name}</S.TableItem>
                     <S.TableItem>{innerAccounts.email}</S.TableItem>
                     <S.TableItem>{innerAccounts.role}</S.TableItem>
-                    <S.TableItem>{innerAccounts.createAt}</S.TableItem>
+                    <S.TableItem>
+                      {innerAccounts.is_locked ? "Locked" : "Not Locked"}
+                    </S.TableItem>
                     <S.TableItem>
                       <S.ActionItemContainer>
                         <S.ActionTitle

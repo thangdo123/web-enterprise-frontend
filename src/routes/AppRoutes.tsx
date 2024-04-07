@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router";
 
 import { standaloneRoutes } from "./standaloneRoutes";
-import { decodeCookie, getCookie } from "../utils/cookies";
+import { decodeCookie, getCookie } from "../utils/cookies.utils";
 import { layoutAdminRoutes } from "./layoutAdminRoutes";
 import LayoutAdmin from "../components/Layout/SideLayout/LayoutAdmin";
 import LayoutManager from "../components/Layout/SideLayout/LayoutManager";

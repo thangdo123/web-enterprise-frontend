@@ -33,26 +33,27 @@ export interface IContributionDetail {
     is_public?: boolean;
     AcademicYearId?: string;
   };
-  academicYear: 
-    {
-      closure_date: string;
-      final_closure_date?: string;
-    };
+  academicYear: {
+    closure_date: string;
+    final_closure_date?: string;
+  };
   document: [
     {
       name: string;
+      path: string;
     },
   ];
   image: [
     {
       name: string;
+      path: string;
     },
   ];
   comment: [
     {
       content: string;
-    }
-  ]
+    },
+  ];
 }
 
 export interface IContributionState {

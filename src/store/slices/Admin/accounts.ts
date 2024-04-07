@@ -130,7 +130,7 @@ export const accountState = createSlice({
       state.accounts.account = state.accounts.account.map((listOfAccounts) =>
         listOfAccounts.map((account) =>
           account.id === action.meta.arg.Id
-            ? { ...account, name: action.meta.arg.name }
+            ? action.payload.updatedUser
             : account,
         ),
       );

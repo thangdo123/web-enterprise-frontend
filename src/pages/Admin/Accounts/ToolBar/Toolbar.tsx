@@ -34,7 +34,7 @@ export default function Toolbar({
     } else if (type === "Marketing Manager") {
       dispatch(sortAccounts("MANAGER"));
     } else if (type === "Marketing Coordinator") {
-      dispatch(sortAccounts("COORDINATOR"));
+      dispatch(sortAccounts("COORDIONATOR"));
     }
   };
   return (
