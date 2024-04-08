@@ -106,13 +106,13 @@ const SubmissionDetail = () => {
               {detailContribution.image.map((value, index) => (
                 <S.FileItem key={index}>
                   <i className="bi bi-paperclip"></i>
-                  <S.FileName>{value.name}</S.FileName>
+                  <S.FileName href={value.path}>{value.name}</S.FileName>
                 </S.FileItem>
               ))}
               {detailContribution.document.map((value, index) => (
                 <S.FileItem key={index}>
                   <i className="bi bi-paperclip"></i>
-                  <S.FileName>{value.name}</S.FileName>
+                  <S.FileName href={value.path}>{value.name}</S.FileName>
                 </S.FileItem>
               ))}
             </S.FileList>

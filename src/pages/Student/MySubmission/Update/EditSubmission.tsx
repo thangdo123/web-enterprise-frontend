@@ -21,14 +21,48 @@ const EditSubmission = () => {
   const { detailContribution } = useSelector(
     (state: RootState) => state.contributionState,
   );
-  console.log(detailContribution);
+  
+  const convertToBlob = async (url:string) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return blob;
+  };
+
+  const createFileObject = async (url:string, filename:string) => {
+    const blob = await convertToBlob(url);
+    return new File([blob], filename);
+  };
+  
+  const [Files, setFiles] = useState<File[]>([]);
+
+  useEffect(() => {
+    const fetchFiles = async () => {
+      const existedFiles: File[] = [];
+  
+      if (detailContribution) {
+        for (const image of detailContribution.image) {
+          const imageFile = await createFileObject(image.path, image.name);
+          existedFiles.push(imageFile);
+        }
+  
+        for (const document of detailContribution.document) {
+          const documentFile = await createFileObject(document.path, document.name);
+          existedFiles.push(documentFile);
+        }
+      }
+      setFiles([...existedFiles]);
+    };
+  
+    fetchFiles();
+  }, [detailContribution]);
+
+  console.log(Files);
   const [titleInput, setTitleInput] = useState<string>(
     detailContribution.contribution.title,
   );
   const [description, setDescription] = useState<string>(
     detailContribution.contribution.description,
   );
-  const [Files, setFiles] = useState<File[]>([]);
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -82,7 +116,7 @@ const EditSubmission = () => {
           <S.Block3>
             <S.LeftTile>Files Submission:</S.LeftTile>
             <S.Block3Right>
-              <UploadSubmission handleImageFiles={setFiles} />
+              <UploadSubmission handleImageFiles={setFiles} propFiles={Files}/>
             </S.Block3Right>
           </S.Block3>
           <S.Block4>

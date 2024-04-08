@@ -46,6 +46,9 @@ export const Block2RightText = styled.div`
   width: 85%;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
+  &:hover{
+    background-color: var(--gray-light-1);
+  }
 `;
 
 export const FileList = styled.div`
@@ -55,13 +58,16 @@ export const FileList = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  &:hover{
+    background-color: var(--gray-light-1);
+  }
 `;
 
 export const FileItem = styled.div`
   display: flex;
 `;
 
-export const FileName = styled.div`
+export const FileName = styled.a`
   color: var(--blue-2);
   padding-left: var(--s-2);
   white-space: nowrap;
@@ -73,6 +79,9 @@ export const CommentList = styled.div`
   width: 85%;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
+  &:hover{
+    background-color: var(--gray-light-1);
+  }
 `;
 
 export const CommentItem = styled.div``;
@@ -84,13 +93,23 @@ export const ChoosenStatusBlock = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+    &:hover{
+    background-color: var(--gray-light-1);
+  }
 `;
 
 export const ChoosenStatusBlockLeft = styled.div``;
 
-export const ChangeChoosenStatusBtn = styled.button`
+export const ChoosenContributionBtn = styled.button`
   padding: var(--s-1) var(--s-2);
   background-color: var(--green);
+  color: white;
+  border-radius: var(--br-sm);
+`;
+
+export const UnselectContributionBtn = styled.button`
+  padding: var(--s-1) var(--s-2);
+  background-color: var(--red);
   color: white;
   border-radius: var(--br-sm);
 `;

@@ -15,6 +15,7 @@ const EditProfile = () => {
     (state: RootState) => state.adminProfileState,
   );
   const [nameInput, setNameInput] = useState<string>("");
+  const [avatarInput, setAvatarInput] = useState<string>("");
 
   const handleLogOut = () => {
     deleteCookie("token");
@@ -25,7 +26,7 @@ const EditProfile = () => {
     e.preventDefault();
     const newAdminProfile = {
       name: nameInput,
-      avatar: "asdasd",
+      avatar: avatarInput,
     };
     dispatch(updateUserProfile(newAdminProfile));
     dispatch(
@@ -39,6 +40,7 @@ const EditProfile = () => {
   useEffect(() => {
     if (userProfile) {
       setNameInput(userProfile.name);
+      setAvatarInput(userProfile.avatar!);
     }
   }, [userProfile]);
 
@@ -48,7 +50,7 @@ const EditProfile = () => {
         <S.EditProfileContainer onSubmit={handleOnSubmit}>
           <S.EditProfileBlock1>
             <h1>Edit Profile</h1>
-            <S.EditProfileBlock1Avatar>U</S.EditProfileBlock1Avatar>
+            <S.Avatar src={userProfile.avatar} alt="Invalid"/>
           </S.EditProfileBlock1>
           <S.EditProfileBlock2>
             <S.EditProfileBlock2Left>
@@ -73,6 +75,16 @@ const EditProfile = () => {
                 value={userProfile.email}
                 placeholder="Enter Email"
                 disabled
+              />
+            </div>
+          </S.EditProfileInputArea>
+          <S.EditProfileInputArea>
+            <p>Avatar</p>
+            <div>
+              <input
+                type="text"
+                value={avatarInput}
+                onChange={(e) => setAvatarInput(e.target.value)}
               />
             </div>
           </S.EditProfileInputArea>

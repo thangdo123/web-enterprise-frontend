@@ -1,61 +1,63 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 60%;
+  width: 60%;
 `;
 
 export const UploadingFileArea = styled.div`
-    text-align: center;
-    background-color: rgb(242, 242, 242);
-    padding: var(--s-6);
-    h3{
-        font-weight: var(--fw-normal);
-    }
+  text-align: center;
+  background-color: rgb(242, 242, 242);
+  padding: var(--s-6);
+  h3 {
+    font-weight: var(--fw-normal);
+  }
 `;
 
 export const UploadIcon = styled.div`
-    display: flex;
-    justify-content: center;
-    i{
-        font-size: var(--fs-6xl);
-        color: var(--blue-2);
-        &:hover{
-            cursor: pointer;
-            color: rgb(31, 16, 115);
-        }
+  display: flex;
+  justify-content: center;
+  i {
+    font-size: var(--fs-6xl);
+    color: var(--blue-2);
+    &:hover {
+      cursor: pointer;
+      color: rgb(31, 16, 115);
     }
+  }
 `;
 export const UploadDescription = styled.p`
-    color: var(--gray);
+  color: var(--gray);
 `;
 
-export const UploadedFilesArea = styled.div`
-`;
+export const UploadedFilesArea = styled.div``;
 
 export const FileItems = styled.div`
-    display: flex;
-    align-items: center;
-    background-color: rgb(242, 242, 242);
-    margin-top: var(--s-2);
+  display: flex;
+  align-items: center;
+  background-color: rgb(242, 242, 242);
+  margin-top: var(--s-2);
 `;
 
 export const LeftIcon = styled.p`
-    flex: 1;
-    color: var(--gray);
+  flex: 1;
+  color: var(--gray);
 `;
 
 export const Filename = styled.p`
-    flex: 20;
-    color: var(--blue-2);
+  flex: 20;
+  color: var(--blue-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const DeleteBtn = styled.p`
-    flex: 1;
-    color: red;
-    i{
-        &:hover{
-        cursor: pointer;
-        color: rgb(153, 14, 5);
-        }
+  flex: 1;
+  color: red;
+  i {
+    &:hover {
+      cursor: pointer;
+      color: rgb(153, 14, 5);
     }
+  }
 `;
