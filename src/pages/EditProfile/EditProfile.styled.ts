@@ -29,6 +29,13 @@ export const EditProfileBlock1Avatar = styled.div`
   border-radius: 50%;
 `;
 
+export const Avatar = styled.img`
+  width: 8%;
+  height: auto;
+  max-height: var(--s-14);
+  border-radius: 50%;
+`;
+
 export const EditProfileBlock2 = styled.div`
   display: flex;
   gap: 10px;

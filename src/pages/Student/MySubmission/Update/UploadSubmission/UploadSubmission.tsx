@@ -1,10 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {  useRef,  } from "react";
 import * as S from "./UploadSubmission.styled";
 
-const UploadSubmission = ({handleImageFiles}: {handleImageFiles: (imageFiles : File[])=>void}) => {
-  const [files, setFiles] = useState<File[]>([]);
-  
-
+const UploadSubmission = ({ handleImageFiles, propFiles }: { handleImageFiles: (imageFiles: File[]) => void, propFiles: File[] }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -13,29 +10,22 @@ const UploadSubmission = ({handleImageFiles}: {handleImageFiles: (imageFiles : F
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const newFiles = e.dataTransfer.files;
-    setFiles((prevFiles) => [...prevFiles, ...Array.from(newFiles)]);
+    const newFiles = Array.from(e.dataTransfer.files) as File[];
+    handleImageFiles([...propFiles, ...newFiles]);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const newFiles = e.target.files;
-      setFiles((prevFiles) => [...prevFiles, ...Array.from(newFiles)]);
-     
+      const newFiles = Array.from(e.target.files) as File[];
+      handleImageFiles([...propFiles, ...newFiles]);
     }
   };
 
   const handleRemoveFile = (index: number) => {
-    setFiles(prevFile => {
-      const updateFiles = [...prevFile];
-      updateFiles.splice(index, 1);
-      return updateFiles;
-    });
+    const updateFiles = [...propFiles];
+    updateFiles.splice(index, 1);
+    handleImageFiles(updateFiles);
   };
-
-  useEffect(()=>{
-    handleImageFiles(files);
-  }, [ files]);
 
   return (
     <S.Container >
@@ -60,8 +50,8 @@ const UploadSubmission = ({handleImageFiles}: {handleImageFiles: (imageFiles : F
         </S.UploadDescription>
       </S.UploadingFileArea>
       <S.UploadedFilesArea>
-        {files &&
-          Array.from(files).map((file, index) => (
+        {propFiles &&
+          Array.from(propFiles).map((file, index) => (
             <S.FileItems key={index}>
               <S.LeftIcon>
                 <i className="bi bi-paperclip"></i>

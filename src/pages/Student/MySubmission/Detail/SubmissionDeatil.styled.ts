@@ -61,7 +61,7 @@ export const FileItem = styled.div`
   display: flex;
 `;
 
-export const FileName = styled.div`
+export const FileName = styled.a`
   color: var(--blue-2);
   padding-left: var(--s-2);
   white-space: nowrap;

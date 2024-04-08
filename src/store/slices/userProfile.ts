@@ -37,11 +37,11 @@ export const getAdminProfile = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
   "user/updateUserProfile",
-  async ({ name }: { name: string }, { rejectWithValue }) => {
+  async ({ name, avatar }: { name: string, avatar: string }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.put(
         API_BASE_URL + API_ENDPOINTS.USER.UPDATE_PROFILE,
-        { name },
+        { name, avatar },
       );
       console.log(response.data);
       return response.data;

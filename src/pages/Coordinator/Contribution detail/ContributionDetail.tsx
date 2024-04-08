@@ -116,13 +116,13 @@ const ContributionDetail = () => {
               {detailContribution.image.map((value, index) => (
                 <S.FileItem key={index}>
                   <i className="bi bi-paperclip"></i>
-                  <S.FileName>{value.name}</S.FileName>
+                  <S.FileName href={value.path}>{value.name}</S.FileName>
                 </S.FileItem>
               ))}
               {detailContribution.document.map((value, index) => (
                 <S.FileItem key={index}>
                   <i className="bi bi-paperclip"></i>
-                  <S.FileName>{value.name}</S.FileName>
+                  <S.FileName href={value.path}>{value.name}</S.FileName>
                 </S.FileItem>
               ))}
             </S.FileList>
@@ -150,11 +150,13 @@ const ContributionDetail = () => {
                   : "This contribution hasn't been choosen"}
               </S.ChoosenStatusBlockLeft>
               {detailContribution.contribution.is_choosen ? (
-                ""
-              ) : (
-                <S.ChangeChoosenStatusBtn onClick={handleSetChoosenStatus}>
+                <S.ChoosenContributionBtn onClick={handleSetChoosenStatus}>
                   Choose this contribution
-                </S.ChangeChoosenStatusBtn>
+                </S.ChoosenContributionBtn>
+              ) : (
+                <S.UnselectContributionBtn onClick={handleSetChoosenStatus}>
+                  Unselect this contribution
+                </S.UnselectContributionBtn>
               )}
             </S.ChoosenStatusBlock>
           </S.Block2Row>
