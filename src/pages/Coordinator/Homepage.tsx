@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Homepage.styled";
-import Dropdown from "../../components/Dropdown/Dropdown";
+// import Dropdown from "../../components/Dropdown/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { fetchAllContributionsByFaculty } from "../../store/slices/Coordinator/coodinatorContribution";
@@ -8,8 +8,8 @@ import { Loader } from "../../components/Loader/Loader.styled";
 import Pagination from "../../components/Pagination/Pagination";
 import { useNavigate } from "react-router";
 
-const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
-const dropdownTitle = "Sort";
+// const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
+// const dropdownTitle = "Sort";
 
 const Homepage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -43,7 +43,7 @@ const Homepage = () => {
             submitted and also interact with them
           </S.Block1Desciption>
         </S.Block1>
-        <S.Block2>
+        {/* <S.Block2>
           <S.Block2Left>
             <Dropdown
               title={dropdownTitle}
@@ -54,7 +54,7 @@ const Homepage = () => {
           <S.Block2Right>
             Due Date: Thursday, 16 April 2023, 11:00 PM
           </S.Block2Right>
-        </S.Block2>
+        </S.Block2> */}
         {allMyContributions && allMyContributions[page] ? (
           <S.Block3>
             {allMyContributions[page].map((item, index) => (
@@ -66,7 +66,7 @@ const Homepage = () => {
                   src={
                     item.Image.length > 0
                       ? item.Image[0].path
-                      : "https://static.boredpanda.com/blog/wp-content/uploads/2020/07/expressive-cat-nana-1-1-5f16cfece24f8__700.jpg"
+                      : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
                   }
                 />
                 <S.ItemBottomBlock>
