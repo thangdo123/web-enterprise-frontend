@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./ViewMySubmission.styled";
-import Dropdown from "../../../components/Dropdown/Dropdown";
+// import Dropdown from "../../../components/Dropdown/Dropdown";
 import Card from "../../../components/Card/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
@@ -9,8 +9,8 @@ import Pagination from "../../../components/Pagination/Pagination";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
 
-const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
-const title = "Sort";
+// const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
+// const title = "Sort";
 
 const ViewMySubmission = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -52,7 +52,7 @@ const ViewMySubmission = () => {
             <S.Block3Title>My Submission List</S.Block3Title>
             <S.Block3Top>
               <S.Block3TopLeft>
-                <S.Block3Sort>
+                {/* <S.Block3Sort>
                   <Dropdown
                     onClick={() => console.log("")}
                     title={title}
@@ -61,7 +61,7 @@ const ViewMySubmission = () => {
                 </S.Block3Sort>
                 <S.Block3Date>
                   Due Date: Thursday, 16 April 2023, 11:00 PM
-                </S.Block3Date>
+                </S.Block3Date> */}
               </S.Block3TopLeft>
               <S.Block3TopRight>
                 <NavLink to={"/createsubmission"}>

@@ -32,6 +32,7 @@ const initialState: IContributionState = {
       },
     ],
   },
+  allChosenContribtution:[],
 };
 
 export const fetchAllContributions = createAsyncThunk(
@@ -55,6 +56,22 @@ export const fetchContributionDetail = createAsyncThunk(
     try {
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const fetchPublishedContributions = createAsyncThunk(
+  "contribution/fetchPublishedContributions",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.USER.GET_PUBLISHED_CONTRIBUTION,
       );
       console.log(response.data);
       return response.data;
@@ -134,6 +151,9 @@ export const contributionState = createSlice({
     });
     builder.addCase(fetchContributionDetail.fulfilled, (state, action) => {
       state.detailContribution = action.payload;
+    });
+    builder.addCase(fetchPublishedContributions.fulfilled, (state, action) => {
+      state.allChosenContribtution = action.payload.allChosenContributions;
     });
   },
 });

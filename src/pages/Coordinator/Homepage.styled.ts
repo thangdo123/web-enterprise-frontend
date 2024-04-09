@@ -12,6 +12,7 @@ export const Container = styled.div`
 export const Block1 = styled.div`
   padding: var(--s-12);
   text-align: center;
+  border-bottom: var(--gray-light-2) solid 1px;
 `;
 
 export const Block1Title = styled.div`

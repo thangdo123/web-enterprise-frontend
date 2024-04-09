@@ -19,7 +19,7 @@ const EditProfile = () => {
 
   const handleLogOut = () => {
     deleteCookie("token");
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   const handleOnSubmit = (e: FormEvent) => {
