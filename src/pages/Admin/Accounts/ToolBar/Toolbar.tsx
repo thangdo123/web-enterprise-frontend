@@ -4,7 +4,7 @@ import Dropdown from "../../../../components/Dropdown/Dropdown";
 import Searchbar from "../../../../components/Searchbar/Searchbar";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
-import { sortAccounts } from "../../../../store/slices/Admin/accounts";
+import { fetchAllAccounts } from "../../../../store/slices/Admin/accounts";
 
 interface IOption {
   value: string;
@@ -30,11 +30,11 @@ export default function Toolbar({
   const dispatch = useDispatch<AppDispatch>();
   const sortType = (type: string) => {
     if (type === "Student") {
-      dispatch(sortAccounts("STUDENT"));
+      dispatch(fetchAllAccounts("STUDENT"));
     } else if (type === "Marketing Manager") {
-      dispatch(sortAccounts("MANAGER"));
+      dispatch(fetchAllAccounts("MANAGER"));
     } else if (type === "Marketing Coordinator") {
-      dispatch(sortAccounts("COORDIONATOR"));
+      dispatch(fetchAllAccounts("COORDIONATOR"));
     }
   };
   return (

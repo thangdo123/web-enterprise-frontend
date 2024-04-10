@@ -24,7 +24,7 @@ export default function Faculty() {
   const OPTION_LIST = [{ value: "Ascending" }, { value: "Descending" }];
 
   useEffect(() => {
-    dispatch(fetchAllFaculties());
+    dispatch(fetchAllFaculties(""));
   }, []);
 
   return (
