@@ -8,21 +8,6 @@ import {
 
 export const fetchAllAccounts = createAsyncThunk(
   "accounts/fetchAllAcounts",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.ADMIN.ACCOUNTS,
-      );
-      return response.data;
-    } catch (err) {
-      console.log(err);
-      return rejectWithValue(err);
-    }
-  },
-);
-
-export const sortAccounts = createAsyncThunk(
-  "accounts/fetchAllAcounts",
   async (role: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(

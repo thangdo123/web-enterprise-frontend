@@ -5,22 +5,6 @@ import { IFacultyState } from "../../../interfaces/faculty.interfaces";
 
 export const fetchAllFaculties = createAsyncThunk(
   "faculties/fetchAllFaculties",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.ADMIN.FACULTIES,
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-      return rejectWithValue(err);
-    }
-  },
-);
-
-export const sortFaculties = createAsyncThunk(
-  "faculties/fetchAllFaculties",
   async (sort: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
@@ -121,12 +105,6 @@ export const facultyState = createSlice({
     builder.addCase(fetchAllFaculties.rejected, (state) => {
       state.allFaculties = [];
     });
-    // builder.addCase(sortFaculties.fulfilled, (state, action) => {
-    //   state.allFaculties = action.payload.allFaculties;
-    // });
-    // builder.addCase(searchFaculty.fulfilled, (state, action) => {
-    //   state.allFaculties = action.payload.allFaculties;
-    // });
     builder.addCase(deleteFacultyById.fulfilled, (state, action) => {
       state.allFaculties = state.allFaculties.map((faculties) =>
         faculties.filter((faculty) => faculty.id !== action.payload),

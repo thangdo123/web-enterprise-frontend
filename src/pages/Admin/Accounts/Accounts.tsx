@@ -28,7 +28,7 @@ export default function Accounts() {
   ];
 
   useEffect(() => {
-    dispatch(fetchAllAccounts());
+    dispatch(fetchAllAccounts(""));
   }, []);
   return (
     <S.PageContainer>

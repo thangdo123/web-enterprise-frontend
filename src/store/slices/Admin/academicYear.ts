@@ -5,22 +5,6 @@ import { IAcademicYearsState } from "../../../interfaces/academicYear.interfaces
 
 export const fetchAcademicYears = createAsyncThunk(
   "academicYears/fetchAcademicYears",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.ADMIN.ACADEMIC_YEARS,
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue(error);
-    }
-  },
-);
-
-export const sortAcademicYears = createAsyncThunk(
-  "academicYears/fetchAcademicYears",
   async (sort: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(

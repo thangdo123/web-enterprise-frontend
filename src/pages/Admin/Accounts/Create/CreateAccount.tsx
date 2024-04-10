@@ -47,7 +47,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchAllFaculties());
+    dispatch(fetchAllFaculties(""));
   }, []);
 
   return (
