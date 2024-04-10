@@ -6,12 +6,12 @@ import CreateSubmission from "../pages/Student/MySubmission/Create/CreateSubmiss
 import { Navigate } from "react-router";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import EditSubmission from "../pages/Student/MySubmission/Update/EditSubmission";
-
+import Chat from "../pages/Chat/Chat";
 
 export const layoutStudentRoutes: IRoute[] = [
   {
     path: "/",
-    component: <Navigate to={"/viewsubmission"}/>,
+    component: <Navigate to={"/viewsubmission"} />,
   },
   {
     path: "/createsubmission",
@@ -23,14 +23,18 @@ export const layoutStudentRoutes: IRoute[] = [
   },
   {
     path: "/viewsubmission/:id",
-    component: <SubmissionDetail/>,
+    component: <SubmissionDetail />,
   },
   {
     path: "/editprofile",
-    component: <EditProfile/>,
+    component: <EditProfile />,
   },
   {
     path: "/editsubmission/:id",
-    component: <EditSubmission/>,
+    component: <EditSubmission />,
+  },
+  {
+    path: "/contact",
+    component: <Chat />,
   },
 ];

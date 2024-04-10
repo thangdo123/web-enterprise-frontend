@@ -10,6 +10,7 @@ import { coordinatorContributionState } from "./slices/Coordinator/coodinatorCon
 import { chosenContributionState } from "./slices/Manager/chosenContributions";
 import { statisticState } from "./slices/Manager/statistic";
 import notificationState from "./slices/notification";
+import { contactState } from "./slices/viewCoordinator";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     [coordinatorContributionState.name]: coordinatorContributionState.reducer,
     [chosenContributionState.name]: chosenContributionState.reducer,
     [statisticState.name]: statisticState.reducer,
+    [contactState.name]: contactState.reducer,
   },
 });
 
