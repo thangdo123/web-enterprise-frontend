@@ -40,7 +40,7 @@ export default function ChosenContributionDetail({
 
               <S.FileList>
                 {chosenContribution.Image.map((value, index) => (
-                  <S.FileItem key={index} href={value.path}>
+                  <S.FileItem key={index} href={value.path} target="_blank">
                     <i className="bi bi-paperclip"></i>
                     <S.FileName>{value.name}</S.FileName>
                   </S.FileItem>

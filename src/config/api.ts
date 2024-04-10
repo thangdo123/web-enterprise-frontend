@@ -26,6 +26,7 @@ const API_ENDPOINTS = {
     SEND_OTP: "/user/otp",
     RESET_PASSWORD: "/user/resetPassword",
     DELETE_CONTRIBUTION: "/user/deleteContribution/",
+    VIEW_COORDINATOR_BY_FACULTY: "/user/viewCoordinator/",
     GET_PUBLISHED_CONTRIBUTION: "/user/getPublishContributions/",
   },
   MANAGER: {

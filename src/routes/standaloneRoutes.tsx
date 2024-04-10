@@ -8,7 +8,7 @@ import HomePage from "../pages/Homepage/Homepage";
 export const standaloneRoutes: IRoute[] = [
   {
     path: "*",
-    component: <Loader/>,
+    component: <Loader />,
   },
   {
     path: "/",

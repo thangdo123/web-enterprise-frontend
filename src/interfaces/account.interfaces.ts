@@ -8,6 +8,7 @@ export interface IAccount {
   createAt?: React.ReactNode;
   avatar?: string;
   faculty?: string;
+  FacultyId?: string;
   is_locked?: boolean;
   password?: string;
 }
