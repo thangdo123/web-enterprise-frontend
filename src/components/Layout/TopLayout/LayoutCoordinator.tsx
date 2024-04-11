@@ -4,17 +4,17 @@ import Header from "../../Header/Header";
 import { Outlet } from "react-router";
 import Footer from "../../Footer/Footer";
 
-
 const HEADER_LINKS = [
   { name: "Homepage", path: "/" },
+  { name: "Contact", path: "/contact" },
 ];
 
 export default function LayoutCoordinator() {
   return (
     <S.LayoutContainer>
-      <Header headerLink={HEADER_LINKS}/>
+      <Header headerLink={HEADER_LINKS} />
       <Outlet />
-      <Footer/>
+      <Footer />
     </S.LayoutContainer>
   );
 }

@@ -21,6 +21,22 @@ export const viewCoordinatorByFacultyId = createAsyncThunk(
   },
 );
 
+export const viewStudentByFacultyId = createAsyncThunk(
+  "coordinator/viewStudentByFacultyId",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.COORDINATOR.VIEW_STUDENT_BY_FACULTY,
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const initialState: IContactState = {
   coordinator: [],
 };
@@ -32,6 +48,9 @@ export const contactState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(viewCoordinatorByFacultyId.fulfilled, (state, action) => {
       state.coordinator = action.payload.coordinator;
+    });
+    builder.addCase(viewStudentByFacultyId.fulfilled, (state, action) => {
+      state.coordinator = action.payload.students;
     });
   },
 });

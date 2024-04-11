@@ -4,7 +4,7 @@ import { AppDispatch } from "../../../store";
 import * as S from "./ChosenContributions.styled";
 import {
   downloadContributions,
-  getAllChoosenContributions,
+  getAllChosenContributions,
 } from "../../../store/slices/Manager/chosenContributions";
 import Toolbar from "./ToolBar/Toolbar";
 import Table from "./Table/Table";
@@ -22,7 +22,7 @@ export default function ChosenContributions() {
   const handlePopupDetail = () => setShowDetail(!showDetail);
   const handleDownloadContributions = () => dispatch(downloadContributions());
   useEffect(() => {
-    dispatch(getAllChoosenContributions(""));
+    dispatch(getAllChosenContributions(""));
   }, []);
   return (
     <S.PageContainer>

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
 import Searchbar from "../../../../components/Searchbar/Searchbar";
-import { getAllChoosenContributions } from "../../../../store/slices/Manager/chosenContributions";
+import { getAllChosenContributions } from "../../../../store/slices/Manager/chosenContributions";
 
 interface IOption {
   value: string;
@@ -30,9 +30,9 @@ export default function Toolbar({
   const dispatch = useDispatch<AppDispatch>();
   const sortType = (type: string) => {
     if (type === "Ascending") {
-      dispatch(getAllChoosenContributions("asc"));
+      dispatch(getAllChosenContributions("asc"));
     } else if (type === "Descending") {
-      dispatch(getAllChoosenContributions("desc"));
+      dispatch(getAllChosenContributions("desc"));
     }
   };
   return (

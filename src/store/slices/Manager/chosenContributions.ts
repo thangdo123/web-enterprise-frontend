@@ -3,7 +3,7 @@ import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IChosenContributionState } from "../../../interfaces/chosenContribution";
 
-export const getAllChoosenContributions = createAsyncThunk(
+export const getAllChosenContributions = createAsyncThunk(
   "contributions/getAllChoosenContributions",
   async (sort: string, { rejectWithValue }) => {
     try {
@@ -63,7 +63,7 @@ export const chosenContributionState = createSlice({
   initialState,
   reducers: {},
   extraReducers: (buider) => {
-    buider.addCase(getAllChoosenContributions.fulfilled, (state, action) => {
+    buider.addCase(getAllChosenContributions.fulfilled, (state, action) => {
       state.allChosenContributions = action.payload.allChosenContributions;
     });
     buider.addCase(downloadContributions.fulfilled, (state) => {
