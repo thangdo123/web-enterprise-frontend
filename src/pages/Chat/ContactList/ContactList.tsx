@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import * as S from "./ContactList.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
-import { viewCoordinatorByFacultyId } from "../../../store/slices/viewCoordinator";
+import {
+  viewCoordinatorByFacultyId,
+  viewStudentByFacultyId,
+} from "../../../store/slices/viewCoordinator";
 import socket from "../../../socket";
 
 interface IConversationList {
@@ -28,8 +31,10 @@ export default function ContactList({ getConversationId }: IConversationList) {
   };
 
   useEffect(() => {
-    if (userProfile) {
+    if (userProfile.role === "STUDENT") {
       dispatch(viewCoordinatorByFacultyId(userProfile.FacultyId!));
+    } else {
+      dispatch(viewStudentByFacultyId());
     }
   }, [userProfile]);
 
