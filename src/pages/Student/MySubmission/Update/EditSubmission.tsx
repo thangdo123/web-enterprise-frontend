@@ -120,7 +120,7 @@ const EditSubmission = () => {
             </S.Block3Right>
           </S.Block3>
           <S.Block4>
-            <S.LeftTile>Submission Title:</S.LeftTile>
+            <S.LeftTile>Submission Description:</S.LeftTile>
             <S.Block4RightTxtArea>
               <textarea
                 cols={10}
