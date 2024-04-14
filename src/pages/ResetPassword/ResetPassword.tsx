@@ -3,7 +3,7 @@ import * as S from "./ResetPassword.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { resetPassword, sendOtp } from "../../store/slices/resetPassword";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export default function Login() {
   const [time, setTime] = useState<number>(300);
@@ -13,6 +13,7 @@ export default function Login() {
   const [reNewPW, setReNewPW] = useState<string>("");
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const location = useLocation();
   const { isSentOtp } = useSelector(
     (state: RootState) => state.resetPasswordState,
   );
@@ -54,6 +55,12 @@ export default function Login() {
       clearInterval(interval);
     };
   }, [time]);
+
+  useEffect(() => {
+    if (location.state.email) {
+      setMailInput(location.state.email);
+    }
+  }, [location.state.email]);
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
