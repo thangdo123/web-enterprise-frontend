@@ -23,7 +23,6 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
     { value: "Manager" },
     { value: "Coordionator" },
   ];
-  const title = "Role";
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -80,16 +79,16 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
           <S.CreateAccountLeftTitle>Role:</S.CreateAccountLeftTitle>
           <Dropdown
             onClick={(option) => setRole(option.value!)}
-            title={title}
+            title={"Role"}
             optionList={dropDownItems}
           />
         </S.CreateAccountBlock3>
         {role === "Student" || role === "Coordionator" ? (
           <S.CreateAccountBlock3>
-            <S.CreateAccountLeftTitle>Faculties:</S.CreateAccountLeftTitle>
+            <S.CreateAccountLeftTitle>Faculty:</S.CreateAccountLeftTitle>
             <Dropdown
               onClick={(option) => setFaculty(option.id!)}
-              title={title}
+              title={"Faculty"}
               optionList={allFaculties[0]}
             />
           </S.CreateAccountBlock3>

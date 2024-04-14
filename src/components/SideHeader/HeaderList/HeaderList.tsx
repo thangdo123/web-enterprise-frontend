@@ -2,6 +2,7 @@ import React from "react";
 import * as S from "./HeaderList.styled";
 import HeaderItem from "../HeaderItem/HeaderItem";
 import { ISideHeader } from "../../../interfaces";
+import { useLocation } from "react-router";
 
 interface IHeaderListProps {
   OpenState: boolean;
@@ -12,7 +13,8 @@ export default function HeaderList({
   OpenState,
   headerList,
 }: IHeaderListProps) {
-  const selectedHeaderItem = window.location.pathname;
+  const location = useLocation();
+  const selectedHeader = location.pathname;
   return (
     <S.ListContainer>
       {headerList.map(({ title, path, icon }, index) => (
@@ -22,7 +24,7 @@ export default function HeaderList({
             path={path}
             icon={icon}
             openState={OpenState}
-            isSelected={selectedHeaderItem === path}
+            isSelected={selectedHeader === path}
           />
         </S.HeaderItemWrapper>
       ))}
