@@ -7,10 +7,11 @@ import { deleteCookie } from "../../utils/cookies.utils";
 import { updateUserProfile } from "../../store/slices/userProfile";
 import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
+import { useNavigate } from "react-router";
 
 const EditProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
-
+  const navigate = useNavigate();
   const { userProfile } = useSelector(
     (state: RootState) => state.adminProfileState,
   );
@@ -50,7 +51,7 @@ const EditProfile = () => {
         <S.EditProfileContainer onSubmit={handleOnSubmit}>
           <S.EditProfileBlock1>
             <h1>Edit Profile</h1>
-            <S.Avatar src={userProfile.avatar} alt="Invalid"/>
+            <S.Avatar src={userProfile.avatar} alt="Invalid" />
           </S.EditProfileBlock1>
           <S.EditProfileBlock2>
             <S.EditProfileBlock2Left>
@@ -90,7 +91,16 @@ const EditProfile = () => {
           </S.EditProfileInputArea>
           <S.BottomButtons>
             <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.SaveBtn>Reset Password</S.SaveBtn>
+            <S.SaveBtn
+              onClick={() => {
+                deleteCookie("token");
+                navigate("/resetpassword", {
+                  state: { email: userProfile.email },
+                });
+              }}
+            >
+              Reset Password
+            </S.SaveBtn>
             <S.CancelBtn type="button" onClick={handleLogOut}>
               Logout
             </S.CancelBtn>
