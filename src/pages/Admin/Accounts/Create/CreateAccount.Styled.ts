@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveBreakpoints";
 
 export const CreateAccountLayout = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ export const CreateAccountContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 40%;
+
+  @media ${DEVICES.TABLET} {
+    width: 100%;
+  }
 `;
 
 export const CreateAccountBlock1 = styled.div`
@@ -63,6 +68,7 @@ export const HidePasswordBtn = styled.div`
 export const CreateAccountBlock3 = styled.div`
   display: flex;
   width: 100%;
+  align-items: start;
 `;
 
 export const CreateAccountBlock3Right = styled.div`
@@ -85,11 +91,7 @@ export const RoleChoosingItems = styled.div`
 export const BottomBtn = styled.div`
   display: flex;
   justify-content: center;
-  div {
-    width: 50%;
-    display: flex;
-    justify-content: space-evenly;
-  }
+  gap: var(--s-4);
 `;
 
 export const SaveBtn = styled.button`

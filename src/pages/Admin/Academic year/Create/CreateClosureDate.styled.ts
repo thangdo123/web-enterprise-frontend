@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveBreakpoints";
 
 export const Layout = styled.div`
   display: flex;
@@ -17,6 +18,11 @@ export const Container = styled.form`
 export const InputContainer = styled.div`
   display: flex;
   justify-content: space-between;
+
+  @media ${DEVICES.TABLET} {
+    flex-direction: column;
+    gap: var(--s-5);
+  }
 `;
 
 export const SetDateBlock = styled.div`
@@ -36,6 +42,10 @@ export const RightCalendar = styled.div`
     border: var(--gray) solid 1px;
     border-radius: 5px;
     font-size: 20px;
+
+    @media ${DEVICES.TABLET} {
+      font-size: var(--fs-md);
+    }
   }
 `;
 

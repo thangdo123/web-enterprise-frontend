@@ -16,7 +16,13 @@ const EditProfile = () => {
     (state: RootState) => state.adminProfileState,
   );
   const [nameInput, setNameInput] = useState<string>("");
-  const [avatarInput, setAvatarInput] = useState<string>("");
+  const [files, setFiles] = useState<File[]>([]);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const newFiles = e.target.files;
+      setFiles((prevFiles) => [...prevFiles, ...Array.from(newFiles)]);
+    }
+  };
 
   const handleLogOut = () => {
     deleteCookie("token");
@@ -25,11 +31,12 @@ const EditProfile = () => {
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const newAdminProfile = {
-      name: nameInput,
-      avatar: avatarInput,
-    };
-    dispatch(updateUserProfile(newAdminProfile));
+    const formData = new FormData();
+    formData.append("name", nameInput);
+    files.forEach((item) => {
+      formData.append("files", item);
+    });
+    dispatch(updateUserProfile(formData));
     dispatch(
       setNotification({
         message: "Your profile is edited successfully",
@@ -41,7 +48,6 @@ const EditProfile = () => {
   useEffect(() => {
     if (userProfile) {
       setNameInput(userProfile.name);
-      setAvatarInput(userProfile.avatar!);
     }
   }, [userProfile]);
 
@@ -82,11 +88,7 @@ const EditProfile = () => {
           <S.EditProfileInputArea>
             <p>Avatar</p>
             <div>
-              <input
-                type="text"
-                value={avatarInput}
-                onChange={(e) => setAvatarInput(e.target.value)}
-              />
+              <input type="file" onChange={handleFileChange} />
             </div>
           </S.EditProfileInputArea>
           <S.BottomButtons>

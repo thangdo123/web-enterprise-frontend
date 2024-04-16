@@ -94,10 +94,8 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
           </S.CreateAccountBlock3>
         ) : null}
         <S.BottomBtn>
-          <div>
-            <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
-          </div>
+          <S.SaveBtn type="submit">Save</S.SaveBtn>
+          <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
         </S.BottomBtn>
       </S.CreateAccountContainer>
     </S.CreateAccountLayout>

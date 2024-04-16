@@ -18,7 +18,6 @@ const SortBtn = styled.div`
 const TitleBtn = styled.div`
   font-weight: var(--fw-light);
   position: static;
-  z-index: -1;
 `;
 
 const SortOptionContainer = styled.div<{ $isOpen: boolean }>`
