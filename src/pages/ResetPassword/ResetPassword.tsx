@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { resetPassword, sendOtp } from "../../store/slices/resetPassword";
 import { useLocation, useNavigate } from "react-router";
+import { deleteCookie } from "../../utils/cookies.utils";
 
 export default function Login() {
   const [time, setTime] = useState<number>(300);
@@ -14,7 +15,7 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
-  const { isSentOtp } = useSelector(
+  const { isSentOtp, checkOtp } = useSelector(
     (state: RootState) => state.resetPasswordState,
   );
 
@@ -64,6 +65,13 @@ export default function Login() {
     }
   }, [location.state]);
 
+  useEffect(() => {
+    if (checkOtp === true) {
+      deleteCookie("token");
+      navigate("/login");
+    }
+  }, [checkOtp]);
+
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
     handleShow();
@@ -75,7 +83,6 @@ export default function Login() {
         reNewPassword: reNewPW,
       };
       dispatch(resetPassword(newPassword));
-      navigate("/login");
     } else {
       dispatch(sendOtp({ email: mailInput }));
     }
