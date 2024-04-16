@@ -1,7 +1,11 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../../config/responsiveBreakpoints";
 
 export const Container = styled.div`
   width: 60%;
+  @media ${DEVICES.TABLET} {
+    width: 100%;
+  }
 `;
 
 export const UploadingFileArea = styled.div`

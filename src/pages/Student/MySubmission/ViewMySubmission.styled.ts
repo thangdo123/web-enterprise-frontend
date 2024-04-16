@@ -99,14 +99,19 @@ export const Block3TopRight = styled.div`
 
 export const Block3SubmissionList = styled.div`
   display: flex;
+  justify-content: space-evenly;
   gap: 1.5%;
   flex-wrap: wrap;
 `;
 
 export const Block3SubmissionItemsContainer = styled.div`
+  border: var(--gray-light-2) solid 1px;
   cursor: pointer;
-  width: 18.8%;
+  width: 250px;
   margin-bottom: var(--s-10);
+  @media(max-width: 534px){
+    width: 350px;
+  }
 `;
 
 export const Block3Bottom = styled.div`

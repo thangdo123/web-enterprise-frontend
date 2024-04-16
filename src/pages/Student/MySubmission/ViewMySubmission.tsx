@@ -52,16 +52,6 @@ const ViewMySubmission = () => {
             <S.Block3Title>My Submission List</S.Block3Title>
             <S.Block3Top>
               <S.Block3TopLeft>
-                {/* <S.Block3Sort>
-                  <Dropdown
-                    onClick={() => console.log("")}
-                    title={title}
-                    optionList={dropdownItems}
-                  />
-                </S.Block3Sort>
-                <S.Block3Date>
-                  Due Date: Thursday, 16 April 2023, 11:00 PM
-                </S.Block3Date> */}
               </S.Block3TopLeft>
               <S.Block3TopRight>
                 <NavLink to={"/createsubmission"}>

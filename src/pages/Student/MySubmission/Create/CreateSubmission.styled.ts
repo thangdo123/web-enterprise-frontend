@@ -62,6 +62,7 @@ export const Block3Right = styled.div`
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
+    gap:4%;
     margin-top: var(--s-10);
 `;
 
@@ -85,6 +86,16 @@ export const CancelBtn = styled.button`
     padding: 10px 20px;
     color: white;
     background-color: red;
+    border-radius: 3px;
+    &:hover{
+        cursor: pointer;
+    }
+`;
+
+export const ReturnBtn = styled.button`
+    padding: 10px 20px;
+    color: white;
+    background-color: var(--gray);
     border-radius: 3px;
     &:hover{
         cursor: pointer;

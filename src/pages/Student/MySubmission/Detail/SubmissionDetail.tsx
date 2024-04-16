@@ -13,7 +13,7 @@ const SubmissionDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const navigateWithId = (id:string) => {
+  const navigateWithId = (id: string) => {
     navigate(`/editsubmission/${id}`);
   };
 
@@ -106,13 +106,17 @@ const SubmissionDetail = () => {
               {detailContribution.image.map((value, index) => (
                 <S.FileItem key={index}>
                   <i className="bi bi-paperclip"></i>
-                  <S.FileName href={value.path}>{value.name}</S.FileName>
+                  <S.FileName href={value.path} target="_blank">
+                    {value.name}
+                  </S.FileName>
                 </S.FileItem>
               ))}
               {detailContribution.document.map((value, index) => (
                 <S.FileItem key={index}>
                   <i className="bi bi-paperclip"></i>
-                  <S.FileName href={value.path}>{value.name}</S.FileName>
+                  <S.FileName href={value.path} target="_blank">
+                    {value.name}
+                  </S.FileName>
                 </S.FileItem>
               ))}
             </S.FileList>
@@ -133,13 +137,13 @@ const SubmissionDetail = () => {
           </S.Block2Row>
         </S.Block2>
         <S.ButtonGroup>
-          <div>
-            <S.ReturnBtn onClick={handleReturnPage}>Return</S.ReturnBtn>
-            <S.Editbtn onClick={()=>navigateWithId(id!)}>Edit submission</S.Editbtn>
-            <S.DeleteBtn onClick={handleDeleteSubmission}>
-              Remove submission
-            </S.DeleteBtn>
-          </div>
+          <S.ReturnBtn onClick={handleReturnPage}>Return</S.ReturnBtn>
+          <S.Editbtn onClick={() => navigateWithId(id!)}>
+            Edit submission
+          </S.Editbtn>
+          <S.DeleteBtn onClick={handleDeleteSubmission}>
+            Remove submission
+          </S.DeleteBtn>
         </S.ButtonGroup>
       </S.Container>
     </S.Layout>

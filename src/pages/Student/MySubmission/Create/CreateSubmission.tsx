@@ -89,12 +89,13 @@ const CreateSubmission = () => {
             </S.Block4RightTxtArea>
           </S.Block4>
           <S.ButtonContainer>
-            <S.Buttons>
-              <S.SaveBtn type="submit">Save</S.SaveBtn>
-              <S.CancelBtn type="button" onClick={handleResetForm}>
-                Cancel
-              </S.CancelBtn>
-            </S.Buttons>
+            <S.SaveBtn type="submit">Save</S.SaveBtn>
+            <S.CancelBtn type="button" onClick={handleResetForm}>
+              Clear
+            </S.CancelBtn>
+            <S.ReturnBtn type="button" onClick={() => navigate("/")}>
+              Return
+            </S.ReturnBtn>
           </S.ButtonContainer>
         </S.Container>
       </S.Layout>

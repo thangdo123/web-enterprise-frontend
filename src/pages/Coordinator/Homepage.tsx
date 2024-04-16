@@ -43,18 +43,6 @@ const Homepage = () => {
             submitted and also interact with them
           </S.Block1Desciption>
         </S.Block1>
-        {/* <S.Block2>
-          <S.Block2Left>
-            <Dropdown
-              title={dropdownTitle}
-              optionList={dropdownItems}
-              onClick={() => console.log("")}
-            />
-          </S.Block2Left>
-          <S.Block2Right>
-            Due Date: Thursday, 16 April 2023, 11:00 PM
-          </S.Block2Right>
-        </S.Block2> */}
         {allMyContributions && allMyContributions[page] ? (
           <S.Block3>
             {allMyContributions[page].map((item, index) => (
