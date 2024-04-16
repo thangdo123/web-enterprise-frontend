@@ -19,6 +19,11 @@ const HEADER_LIST = [
     path: "/editprofile",
     icon: <i className="bi bi-person-circle"></i>,
   },
+  {
+    title: "Exception Reports",
+    path: "/exceptionreports",
+    icon: <i className="bi bi-file-earmark-post"></i>,
+  },
 ];
 
 export default function Layout() {

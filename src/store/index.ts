@@ -11,6 +11,7 @@ import { chosenContributionState } from "./slices/Manager/chosenContributions";
 import { statisticState } from "./slices/Manager/statistic";
 import notificationState from "./slices/notification";
 import { contactState } from "./slices/viewCoordinator";
+import { exceptionReportsState } from "./slices/Manager/exceptionReports";
 
 const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ const store = configureStore({
     [chosenContributionState.name]: chosenContributionState.reducer,
     [statisticState.name]: statisticState.reducer,
     [contactState.name]: contactState.reducer,
+    [exceptionReportsState.name]: exceptionReportsState.reducer,
   },
 });
 

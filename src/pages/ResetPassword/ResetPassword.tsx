@@ -57,10 +57,12 @@ export default function Login() {
   }, [time]);
 
   useEffect(() => {
-    if (location.state.email) {
+    if (location.state) {
       setMailInput(location.state.email);
+    } else {
+      setMailInput("");
     }
-  }, [location.state.email]);
+  }, [location.state]);
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
