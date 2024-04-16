@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://139.59.32.173:3000";
+const API_BASE_URL = "http://vmttk.zapto.org";
 
 const API_ENDPOINTS = {
   LOGIN: "/auth/login",
@@ -36,6 +36,7 @@ const API_ENDPOINTS = {
     STATS_BY_FACULTY_AND_YEAR: "/manager/getContributionsStatsByFacultyAndYear",
     PERCENTAGE_BY_FACULTY: "/manager/getContributionPercentageByFaculty",
     COUNT_CONTRIBUTION: "/manager/CountContributionsStats",
+    EXCEPTION_REPORTS: "/manager/viewExceptionReports",
   },
   COORDINATOR: {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",
