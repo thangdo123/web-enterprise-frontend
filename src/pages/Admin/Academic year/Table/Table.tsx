@@ -38,70 +38,76 @@ export default function Table({
     <S.TableContainer>
       {allAcademicYears && allAcademicYears[page] && (
         <>
-          <S.Table>
-            <thead>
-              <S.TableHeadRow>
-                <S.TableHeadItem>Year</S.TableHeadItem>
-                <S.TableHeadItem>Closure Date</S.TableHeadItem>
-                <S.TableHeadItem>Final Closure Date</S.TableHeadItem>
-                <S.TableHeadItem>Actions</S.TableHeadItem>
-              </S.TableHeadRow>
-            </thead>
-            <tbody>
-              {allAcademicYears[page].map((academicYear, index) => (
-                <React.Fragment key={index}>
-                  <S.TableRow>
-                    <S.TableItem>
-                      {academicYear.final_closure_date.slice(0, 4)}
-                    </S.TableItem>
-                    <S.TableItem>{academicYear.closure_date}</S.TableItem>
-                    <S.TableItem>{academicYear.final_closure_date}</S.TableItem>
-                    <S.TableItem>
-                      <S.ActionItemContainer>
-                        <S.ActionTitle
-                          onClick={() => {
-                            handleEdit();
-                            handleSelectedAcademicYearId(academicYear.id);
-                            handleSelectedClosureDate(
-                              academicYear.closure_date,
-                            );
-                            handleSelectedFinalClosureDate(
-                              academicYear.final_closure_date,
-                            );
-                          }}
-                        >
-                          Edit
-                        </S.ActionTitle>
-                        <S.ActionTitle
-                          onClick={() => {
-                            dispatch(deleteAcademicYearById(academicYear.id));
-                            dispatch(
-                              setNotification({
-                                message:
-                                  "Academic year is deleted successfully",
-                                type: ENotificationType.Success,
-                              }),
-                            );
-                          }}
-                        >
-                          Delete
-                        </S.ActionTitle>
-                      </S.ActionItemContainer>
-                    </S.TableItem>
-                  </S.TableRow>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </S.Table>
+          <S.Container>
+            <S.Table>
+              <thead>
+                <S.TableHeadRow>
+                  <S.TableHeadItem>Year</S.TableHeadItem>
+                  <S.TableHeadItem>Closure Date</S.TableHeadItem>
+                  <S.TableHeadItem>Final Closure Date</S.TableHeadItem>
+                  <S.TableHeadItem>Actions</S.TableHeadItem>
+                </S.TableHeadRow>
+              </thead>
+              <tbody>
+                {allAcademicYears[page].map((academicYear, index) => (
+                  <React.Fragment key={index}>
+                    <S.TableRow>
+                      <S.TableItem>
+                        {academicYear.final_closure_date.slice(0, 4)}
+                      </S.TableItem>
+                      <S.TableItem>{academicYear.closure_date}</S.TableItem>
+                      <S.TableItem>
+                        {academicYear.final_closure_date}
+                      </S.TableItem>
+                      <S.TableItem>
+                        <S.ActionItemContainer>
+                          <S.ActionTitle
+                            onClick={() => {
+                              handleEdit();
+                              handleSelectedAcademicYearId(academicYear.id);
+                              handleSelectedClosureDate(
+                                academicYear.closure_date,
+                              );
+                              handleSelectedFinalClosureDate(
+                                academicYear.final_closure_date,
+                              );
+                            }}
+                          >
+                            Edit
+                          </S.ActionTitle>
+                          <S.ActionTitle
+                            onClick={() => {
+                              dispatch(deleteAcademicYearById(academicYear.id));
+                              dispatch(
+                                setNotification({
+                                  message:
+                                    "Academic year is deleted successfully",
+                                  type: ENotificationType.Success,
+                                }),
+                              );
+                            }}
+                          >
+                            Delete
+                          </S.ActionTitle>
+                        </S.ActionItemContainer>
+                      </S.TableItem>
+                    </S.TableRow>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </S.Table>
+          </S.Container>
 
           {totalPage && (
-            <Pagination
-              changePage={setPage}
-              currentPage={page}
-              totalPage={totalPage}
-              nextPage={() => setPage(page + 1)}
-              prevPage={() => setPage(page - 1)}
-            />
+            <S.PaginationContainer>
+              <Pagination
+                changePage={setPage}
+                currentPage={page}
+                totalPage={totalPage}
+                nextPage={() => setPage(page + 1)}
+                prevPage={() => setPage(page - 1)}
+              />
+            </S.PaginationContainer>
           )}
         </>
       )}

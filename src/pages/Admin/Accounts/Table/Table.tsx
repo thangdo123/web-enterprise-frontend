@@ -32,56 +32,60 @@ export default function Table({
     <S.TableContainer>
       {accounts.account && accounts.account[page] && (
         <>
-          <S.Table>
-            <thead>
-              <S.TableHeadRow>
-                <S.TableHeadItem>Username</S.TableHeadItem>
-                <S.TableHeadItem>Email</S.TableHeadItem>
-                <S.TableHeadItem>Role</S.TableHeadItem>
-                <S.TableHeadItem>Lock Status</S.TableHeadItem>
-                <S.TableHeadItem>Actions</S.TableHeadItem>
-              </S.TableHeadRow>
-            </thead>
-            <tbody>
-              {accounts.account[page].map((innerAccounts, index) => (
-                <React.Fragment key={index}>
-                  <S.TableRow>
-                    <S.TableItem>{innerAccounts.name}</S.TableItem>
-                    <S.TableItem>{innerAccounts.email}</S.TableItem>
-                    <S.TableItem>{innerAccounts.role}</S.TableItem>
-                    <S.TableItem>
-                      {innerAccounts.is_locked ? "Locked" : "Not Locked"}
-                    </S.TableItem>
-                    <S.TableItem>
-                      <S.ActionItemContainer>
-                        <S.ActionTitle
-                          onClick={() => {
-                            handleEdit();
-                            handleSelectedAccountId(innerAccounts.id!);
-                            handleSelectedAccountIsLocked(
-                              innerAccounts.is_locked!,
-                            );
-                            handleSelectedAccountName(innerAccounts.name);
-                          }}
-                        >
-                          Edit
-                        </S.ActionTitle>
-                      </S.ActionItemContainer>
-                    </S.TableItem>
-                  </S.TableRow>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </S.Table>
+          <S.Container>
+            <S.Table>
+              <thead>
+                <S.TableHeadRow>
+                  <S.TableHeadItem>Username</S.TableHeadItem>
+                  <S.TableHeadItem>Email</S.TableHeadItem>
+                  <S.TableHeadItem>Role</S.TableHeadItem>
+                  <S.TableHeadItem>Lock Status</S.TableHeadItem>
+                  <S.TableHeadItem>Actions</S.TableHeadItem>
+                </S.TableHeadRow>
+              </thead>
+              <tbody>
+                {accounts.account[page].map((innerAccounts, index) => (
+                  <React.Fragment key={index}>
+                    <S.TableRow>
+                      <S.TableItem>{innerAccounts.name}</S.TableItem>
+                      <S.TableItem>{innerAccounts.email}</S.TableItem>
+                      <S.TableItem>{innerAccounts.role}</S.TableItem>
+                      <S.TableItem>
+                        {innerAccounts.is_locked ? "Locked" : "Not Locked"}
+                      </S.TableItem>
+                      <S.TableItem>
+                        <S.ActionItemContainer>
+                          <S.ActionTitle
+                            onClick={() => {
+                              handleEdit();
+                              handleSelectedAccountId(innerAccounts.id!);
+                              handleSelectedAccountIsLocked(
+                                innerAccounts.is_locked!,
+                              );
+                              handleSelectedAccountName(innerAccounts.name);
+                            }}
+                          >
+                            Edit
+                          </S.ActionTitle>
+                        </S.ActionItemContainer>
+                      </S.TableItem>
+                    </S.TableRow>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </S.Table>
+          </S.Container>
 
           {totalPage && (
-            <Pagination
-              changePage={setPage}
-              currentPage={page}
-              totalPage={totalPage}
-              nextPage={() => setPage(page + 1)}
-              prevPage={() => setPage(page - 1)}
-            />
+            <S.PaginationContainer>
+              <Pagination
+                changePage={setPage}
+                currentPage={page}
+                totalPage={totalPage}
+                nextPage={() => setPage(page + 1)}
+                prevPage={() => setPage(page - 1)}
+              />
+            </S.PaginationContainer>
           )}
         </>
       )}

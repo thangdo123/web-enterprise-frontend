@@ -35,60 +35,64 @@ export default function Table({
     <S.TableContainer>
       {allFaculties && allFaculties[page] && (
         <>
-          <S.Table>
-            <thead>
-              <S.TableHeadRow>
-                <S.TableHeadItem>Name</S.TableHeadItem>
-                <S.TableHeadItem>Created at</S.TableHeadItem>
-                <S.TableHeadItem>Actions</S.TableHeadItem>
-              </S.TableHeadRow>
-            </thead>
-            <tbody>
-              {allFaculties[page].map((faculty, index) => (
-                <React.Fragment key={index}>
-                  <S.TableRow>
-                    <S.TableItem>{faculty.name}</S.TableItem>
-                    <S.TableItem>{faculty.createAt}</S.TableItem>
-                    <S.TableItem>
-                      <S.ActionItemContainer>
-                        <S.ActionTitle
-                          onClick={() => {
-                            handleEdit();
-                            handleSelectedFacultyId(faculty.id);
-                            handleSelectedFacultyName(faculty.name);
-                          }}
-                        >
-                          Edit
-                        </S.ActionTitle>
-                        <S.ActionTitle
-                          onClick={() => {
-                            dispatch(deleteFacultyById(faculty.id));
-                            dispatch(
-                              setNotification({
-                                message: "Faculty is deleted successfully",
-                                type: ENotificationType.Success,
-                              }),
-                            );
-                          }}
-                        >
-                          Delete
-                        </S.ActionTitle>
-                      </S.ActionItemContainer>
-                    </S.TableItem>
-                  </S.TableRow>
-                </React.Fragment>
-              ))}
-            </tbody>
-          </S.Table>
+          <S.Container>
+            <S.Table>
+              <thead>
+                <S.TableHeadRow>
+                  <S.TableHeadItem>Name</S.TableHeadItem>
+                  <S.TableHeadItem>Created at</S.TableHeadItem>
+                  <S.TableHeadItem>Actions</S.TableHeadItem>
+                </S.TableHeadRow>
+              </thead>
+              <tbody>
+                {allFaculties[page].map((faculty, index) => (
+                  <React.Fragment key={index}>
+                    <S.TableRow>
+                      <S.TableItem>{faculty.name}</S.TableItem>
+                      <S.TableItem>{faculty.createAt}</S.TableItem>
+                      <S.TableItem>
+                        <S.ActionItemContainer>
+                          <S.ActionTitle
+                            onClick={() => {
+                              handleEdit();
+                              handleSelectedFacultyId(faculty.id);
+                              handleSelectedFacultyName(faculty.name);
+                            }}
+                          >
+                            Edit
+                          </S.ActionTitle>
+                          <S.ActionTitle
+                            onClick={() => {
+                              dispatch(deleteFacultyById(faculty.id));
+                              dispatch(
+                                setNotification({
+                                  message: "Faculty is deleted successfully",
+                                  type: ENotificationType.Success,
+                                }),
+                              );
+                            }}
+                          >
+                            Delete
+                          </S.ActionTitle>
+                        </S.ActionItemContainer>
+                      </S.TableItem>
+                    </S.TableRow>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </S.Table>
+          </S.Container>
 
           {totalPage && (
-            <Pagination
-              changePage={setPage}
-              currentPage={page}
-              totalPage={totalPage}
-              nextPage={() => setPage(page + 1)}
-              prevPage={() => setPage(page - 1)}
-            />
+            <S.PaginationContainer>
+              <Pagination
+                changePage={setPage}
+                currentPage={page}
+                totalPage={totalPage}
+                nextPage={() => setPage(page + 1)}
+                prevPage={() => setPage(page - 1)}
+              />
+            </S.PaginationContainer>
           )}
         </>
       )}

@@ -66,7 +66,7 @@ export default function Login() {
   }, [location.state]);
 
   useEffect(() => {
-    if (checkOtp === true) {
+    if (checkOtp) {
       deleteCookie("token");
       navigate("/login");
     }
@@ -74,7 +74,6 @@ export default function Login() {
 
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    handleShow();
     if (isSentOtp) {
       const newPassword = {
         email: mailInput,
@@ -84,6 +83,7 @@ export default function Login() {
       };
       dispatch(resetPassword(newPassword));
     } else {
+      handleShow();
       dispatch(sendOtp({ email: mailInput }));
     }
   };

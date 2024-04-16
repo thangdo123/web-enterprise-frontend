@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../config/responsiveBreakpoints";
 
 const PageContainer = styled.div`
   display: flex;
@@ -7,6 +8,10 @@ const PageContainer = styled.div`
   padding-right: var(--s-4);
   width: 100%;
   gap: var(--s-4);
+
+  @media ${DEVICES.TABLET} {
+    padding: var(--s-4);
+  }
 `;
 
 export { PageContainer };

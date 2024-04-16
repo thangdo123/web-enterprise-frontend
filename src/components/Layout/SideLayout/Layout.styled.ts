@@ -5,5 +5,5 @@ export const LayoutContainer = styled.div`
   flex-direction: row;
   gap: var(--s-4);
   height: 100%;
-  min-height: 100vh;
+  width: 100%;
 `;
