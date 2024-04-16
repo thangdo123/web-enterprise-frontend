@@ -10,4 +10,14 @@ const HeaderItemWrapper = styled.div`
   display: block;
 `;
 
-export { ListContainer, HeaderItemWrapper };
+const Logout = styled.div`
+  cursor: pointer;
+  color: var(--red);
+  padding: var(--s-4);
+
+  &:hover {
+    background-color: var(--blue-light);
+  }
+`;
+
+export { ListContainer, HeaderItemWrapper, Logout };

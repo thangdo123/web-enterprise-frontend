@@ -2,17 +2,22 @@ import styled from "styled-components";
 import { DEVICES } from "../../../../config/responsiveBreakpoints";
 
 const TableContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  margin-bottom: var(--s-4);
+`;
+
+const Container = styled.div`
+  overflow-x: auto;
 `;
 
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
   box-shadow: var(--shadow-sm);
+  overflow-x: scroll;
 `;
 
 const TableHeadRow = styled.tr`
@@ -44,8 +49,15 @@ const ActionItemContainer = styled.div`
   flex-direction: row;
   width: 100%;
   gap: var(--s-4);
-  @media ${DEVICES.TABLET}{
-    flex-wrap:wrap;
+`;
+
+const PaginationContainer = styled.div`
+  padding: var(--s-4);
+  @media ${DEVICES.TABLET} {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 `;
 
@@ -56,6 +68,7 @@ const ActionTitle = styled.div`
 
 export {
   TableContainer,
+  Container,
   Table,
   TableHeadItem,
   TableItem,
@@ -63,4 +76,5 @@ export {
   TableRow,
   ActionItemContainer,
   ActionTitle,
+  PaginationContainer,
 };

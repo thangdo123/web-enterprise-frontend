@@ -11,11 +11,14 @@ const SortBtn = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   cursor: pointer;
 `;
 
 const TitleBtn = styled.div`
   font-weight: var(--fw-light);
+  position: static;
+  z-index: -1;
 `;
 
 const SortOptionContainer = styled.div<{ $isOpen: boolean }>`

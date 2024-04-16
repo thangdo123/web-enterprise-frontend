@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../config/responsiveBreakpoints";
 
 const PageContainer = styled.div`
   display: flex;
@@ -7,12 +8,20 @@ const PageContainer = styled.div`
   padding-right: var(--s-4);
   width: 100%;
   gap: var(--s-4);
+
+  @media ${DEVICES.TABLET} {
+    padding: var(--s-4);
+  }
 `;
 
 const ChartContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+
+  @media ${DEVICES.TABLET} {
+    overflow-x: auto;
+  }
 `;
 
 const Chart = styled.div`
