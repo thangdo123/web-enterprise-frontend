@@ -62,6 +62,7 @@ export const Block3Right = styled.div`
 export const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
+    gap: 4%;
     margin-top: var(--s-10);
 `;
 

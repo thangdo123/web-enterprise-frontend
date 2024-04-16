@@ -87,11 +87,6 @@ const EditSubmission = () => {
     }
   };
 
-  const handleResetForm = () => {
-    setTitleInput("");
-    setDescription("");
-  };
-
   return (
     <>
       <S.Layout onSubmit={handleOnSubmit}>
@@ -134,15 +129,10 @@ const EditSubmission = () => {
             </S.Block4RightTxtArea>
           </S.Block4>
           <S.ButtonContainer>
-            <S.Buttons>
-              <S.SaveBtn type="submit">Save</S.SaveBtn>
-              <S.CancelBtn type="button" onClick={handleResetForm}>
-                Reset
-              </S.CancelBtn>
-              <S.CancelBtn type="button" onClick={() => navigate(-1)}>
-                Cancel
-              </S.CancelBtn>
-            </S.Buttons>
+            <S.SaveBtn type="submit">Save</S.SaveBtn>
+            <S.CancelBtn type="button" onClick={() => navigate(-1)}>
+              Cancel
+            </S.CancelBtn>
           </S.ButtonContainer>
         </S.Container>
       </S.Layout>

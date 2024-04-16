@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../config/responsiveBreakpoints";
 
 export const Layout = styled.div`
   display: flex;
@@ -40,14 +41,20 @@ export const LeftTitle = styled.div`
   padding: var(--s-4);
   background-color: var(--gray-light-1);
   border: var(--gray-light-2) solid 1px;
+  @media ${DEVICES.TABLET} {
+    width: 30%;
+  }
 `;
 
 export const Block2RightText = styled.div`
   width: 85%;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
-  &:hover{
+  &:hover {
     background-color: var(--gray-light-1);
+  }
+  @media ${DEVICES.TABLET} {
+    width: 70%;
   }
 `;
 
@@ -58,8 +65,11 @@ export const FileList = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  &:hover{
+  &:hover {
     background-color: var(--gray-light-1);
+  }
+  @media ${DEVICES.TABLET} {
+    width: 70%;
   }
 `;
 
@@ -79,8 +89,11 @@ export const CommentList = styled.div`
   width: 85%;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
-  &:hover{
+  &:hover {
     background-color: var(--gray-light-1);
+  }
+  @media ${DEVICES.TABLET} {
+    width: 70%;
   }
 `;
 
@@ -93,8 +106,11 @@ export const ChoosenStatusBlock = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-    &:hover{
+  &:hover {
     background-color: var(--gray-light-1);
+  }
+  @media ${DEVICES.TABLET} {
+    width: 70%;
   }
 `;
 
@@ -125,12 +141,18 @@ export const Block3Center = styled.div`
   display: flex;
   align-items: center;
   gap: 3%;
+  @media ${DEVICES.TABLET} {
+    width: 100%;
+  }
 `;
 
 export const CommentTxtArea = styled.textarea`
   border: var(--gray-light-2) solid 1px;
   width: 80%;
   padding: var(--s-3);
+  @media ${DEVICES.PHONE} {
+    width: 67%;
+  }
 `;
 
 export const SubmitCommentBtn = styled.button`
@@ -139,6 +161,9 @@ export const SubmitCommentBtn = styled.button`
   padding: var(--s-2) var(--s-4);
   border-radius: var(--br-sm);
   color: white;
+  @media ${DEVICES.PHONE} {
+    width: 30%;
+  }
 `;
 
 export const ButtonGroup = styled.div`

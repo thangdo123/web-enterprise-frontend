@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveBreakpoints";
+// import { DEVICES } from "../../../../config/responsiveBreakpoints";
 
 export const Layout = styled.div`
   display: flex;
@@ -40,12 +42,21 @@ export const LeftTitle = styled.div`
   padding: var(--s-4);
   background-color: var(--gray-light-1);
   border: var(--gray-light-2) solid 1px;
+  @media ${DEVICES.TABLET}{
+    width: 30%;
+  }
 `;
 
 export const Block2RightText = styled.div`
   width: 85%;;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
+  &:hover {
+    background-color: var(--gray-light-1);
+  }
+  @media ${DEVICES.TABLET}{
+    width: 70%;
+  }
 `;
 
 export const FileList = styled.div`
@@ -55,6 +66,12 @@ export const FileList = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  &:hover {
+    background-color: var(--gray-light-1);
+  }
+  @media ${DEVICES.TABLET}{
+    width: 70%;
+  }
 `;
 
 export const FileItem = styled.div`
@@ -73,6 +90,12 @@ export const CommentList = styled.div`
   width: 85%;;
   padding: var(--s-4);
   border: var(--gray-light-2) solid 1px;
+  &:hover {
+    background-color: var(--gray-light-1);
+  }
+  @media ${DEVICES.TABLET}{
+    width: 70%;
+  }
 `;
 
 export const CommentItem = styled.div``;
@@ -81,11 +104,7 @@ export const ButtonGroup = styled.div`
   padding: var(--s-10);
   display: flex;
   justify-content: center;
-  div {
-    width: 30%;
-    display: flex;
-    justify-content: space-between;
-  }
+  gap: 4%;
 `;
 
 export const ReturnBtn = styled.button`

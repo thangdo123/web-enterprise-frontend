@@ -11,12 +11,16 @@ export const CardImage = styled.div`
   overflow-y: hidden;
   img {
     width: 100%;
+    height: 230px;
+    @media(max-width: 534px){
+      height: 320px;
+    }
   }
 `;
 
 export const CardTitle = styled.div`
   height: 100%;
-  border: var(--gray-light-2) solid 1px;
+  border-top: var(--gray-light-2) solid 1px;
   padding: var(--s-6);
   white-space: nowrap;
   overflow: hidden;

@@ -36,6 +36,7 @@ export const Block2Right = styled.div``;
 
 export const Block3 = styled.div`
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 1.5%;
   padding-top: var(--s-7);
@@ -43,19 +44,27 @@ export const Block3 = styled.div`
 
 export const Block3Items = styled.div`
   cursor: pointer;
-  width: 18.8%;
-  padding-bottom: var(--s-5);
+  width: 250px;
+  margin-bottom: var(--s-5);
+  border: var(--gray-light-2) solid 1px;
+  @media(max-width: 534px){
+    width: 350px;
+  }
 `;
 
 export const ItemImage = styled.img`
   width: 100%;
+  height: 230px;
+  @media(max-width: 534px){
+    height: 320px;
+  }
 `;
 
 export const ItemBottomBlock = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  border: var(--gray-light-2) solid 1px;
+  border-top: var(--gray-light-2) solid 1px;
   padding: var(--s-6);
 `;
 
