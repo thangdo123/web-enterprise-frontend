@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveBreakpoints";
 
 export const CreateAccountLayout = styled.div`
   display: flex;
@@ -10,6 +11,10 @@ export const CreateAccountContainer = styled.form`
   display: flex;
   flex-direction: column;
   width: 40%;
+
+  @media ${DEVICES.TABLET} {
+    width: 100%;
+  }
 `;
 
 export const CreateAccountBlock1 = styled.div`

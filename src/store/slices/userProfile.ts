@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../lib/axios";
+import { axiosInstance, axiosInstanceFormData } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
 import { IAccount } from "../../interfaces/account.interfaces";
 
@@ -37,11 +37,11 @@ export const getAdminProfile = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
   "user/updateUserProfile",
-  async ({ name, avatar }: { name: string, avatar: string }, { rejectWithValue }) => {
+  async (formData: FormData, { rejectWithValue }) => {
     try {
-      const response = await axiosInstance.put(
+      const response = await axiosInstanceFormData.put(
         API_BASE_URL + API_ENDPOINTS.USER.UPDATE_PROFILE,
-        { name, avatar },
+        formData,
       );
       console.log(response.data);
       return response.data;

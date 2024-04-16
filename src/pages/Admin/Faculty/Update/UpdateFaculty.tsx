@@ -51,10 +51,8 @@ const UpdateFaculty = ({
           </S.CreateFacultyBlock1Right>
         </S.CreateFacultyBlock1>
         <S.BottomBtn>
-          <div>
-            <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
-          </div>
+          <S.SaveBtn type="submit">Save</S.SaveBtn>
+          <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
         </S.BottomBtn>
       </S.CreateFacultyContainer>
     </S.CreateFacultyLayout>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../../config/responsiveBreakpoints";
 
 export const Layout = styled.div`
   display: flex;
@@ -61,6 +62,9 @@ export const FileItem = styled.a`
 export const FileName = styled.div`
   color: var(--blue-2);
   padding-left: var(--s-2);
+  @media ${DEVICES.TABLET} {
+    word-break: break-all;
+  }
 `;
 
 export const CommentList = styled.div`
