@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes } from "react-router";
 
 import { standaloneRoutes } from "./standaloneRoutes";
 import { decodeCookie, getCookie } from "../utils/cookies.utils";
@@ -19,13 +19,6 @@ import { layoutCoordinatorRoutes } from "./layoutCoordinator";
 export default function AppRoutes() {
   const dispatch = useDispatch<AppDispatch>();
   const token = getCookie("token");
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/");
-    }
-  }, [token]);
 
   useEffect(() => {
     if (decodeCookie(token) === "ADMIN") {
@@ -68,10 +61,9 @@ export default function AppRoutes() {
         </Route>
       )}
 
-      {token === "" &&
-        standaloneRoutes.map(({ path, component }) => (
-          <Route key={path} path={path} element={component} />
-        ))}
+      {standaloneRoutes.map(({ path, component }) => (
+        <Route key={path} path={path} element={component} />
+      ))}
     </Routes>
   );
 }

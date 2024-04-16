@@ -21,38 +21,41 @@ const EditSubmission = () => {
   const { detailContribution } = useSelector(
     (state: RootState) => state.contributionState,
   );
-  
-  const convertToBlob = async (url:string) => {
+
+  const convertToBlob = async (url: string) => {
     const response = await fetch(url);
     const blob = await response.blob();
     return blob;
   };
 
-  const createFileObject = async (url:string, filename:string) => {
+  const createFileObject = async (url: string, filename: string) => {
     const blob = await convertToBlob(url);
     return new File([blob], filename);
   };
-  
+
   const [Files, setFiles] = useState<File[]>([]);
 
   useEffect(() => {
     const fetchFiles = async () => {
       const existedFiles: File[] = [];
-  
+
       if (detailContribution) {
         for (const image of detailContribution.image) {
           const imageFile = await createFileObject(image.path, image.name);
           existedFiles.push(imageFile);
         }
-  
+
         for (const document of detailContribution.document) {
-          const documentFile = await createFileObject(document.path, document.name);
+          const documentFile = await createFileObject(
+            document.path,
+            document.name,
+          );
           existedFiles.push(documentFile);
         }
       }
       setFiles([...existedFiles]);
     };
-  
+
     fetchFiles();
   }, [detailContribution]);
 
@@ -116,7 +119,7 @@ const EditSubmission = () => {
           <S.Block3>
             <S.LeftTile>Files Submission:</S.LeftTile>
             <S.Block3Right>
-              <UploadSubmission handleImageFiles={setFiles} propFiles={Files}/>
+              <UploadSubmission handleImageFiles={setFiles} propFiles={Files} />
             </S.Block3Right>
           </S.Block3>
           <S.Block4>
@@ -134,6 +137,9 @@ const EditSubmission = () => {
             <S.Buttons>
               <S.SaveBtn type="submit">Save</S.SaveBtn>
               <S.CancelBtn type="button" onClick={handleResetForm}>
+                Reset
+              </S.CancelBtn>
+              <S.CancelBtn type="button" onClick={() => navigate(-1)}>
                 Cancel
               </S.CancelBtn>
             </S.Buttons>
