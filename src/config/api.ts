@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://vmttk.zapto.org";
+const API_BASE_URL = "http://139.59.32.173:3000";
 
 const API_ENDPOINTS = {
   LOGIN: "/auth/login",

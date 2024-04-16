@@ -93,7 +93,6 @@ const EditProfile = () => {
             <S.SaveBtn type="submit">Save</S.SaveBtn>
             <S.SaveBtn
               onClick={() => {
-                deleteCookie("token");
                 navigate("/resetpassword", {
                   state: { email: userProfile.email },
                 });

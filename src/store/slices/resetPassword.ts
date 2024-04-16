@@ -51,10 +51,12 @@ export const resetPassword = createAsyncThunk(
 
 interface IResetPasswordState {
   isSentOtp: boolean;
+  checkOtp: boolean;
 }
 
 const initialState: IResetPasswordState = {
   isSentOtp: false,
+  checkOtp: false,
 };
 
 export const resetPasswordState = createSlice({
@@ -64,6 +66,9 @@ export const resetPasswordState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(sendOtp.fulfilled, (state) => {
       state.isSentOtp = true;
+    });
+    builder.addCase(resetPassword.fulfilled, (state) => {
+      state.checkOtp = true;
     });
   },
 });
