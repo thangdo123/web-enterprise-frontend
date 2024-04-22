@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = "http://159.89.206.44:3000";
 
 const API_ENDPOINTS = {
   AUTH: {
@@ -7,6 +7,7 @@ const API_ENDPOINTS = {
   },
   GIVE_COMMENT: "/comment/",
   GUEST: {
+    REGISTER: "/guest/register",
     GET_FACULTY: "/guest/faculties/",
   },
   ADMIN: {
@@ -48,9 +49,6 @@ const API_ENDPOINTS = {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",
     CHOOSE_CONTRIBUTION: "/coordinator/chooseContribution/",
     VIEW_STUDENT_BY_FACULTY: "/coordinator/getAllStudentInFaculty",
-  },
-  GUEST: {
-    REGISTER: "/guest/register",
   },
 };
 

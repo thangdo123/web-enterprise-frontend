@@ -10,11 +10,6 @@ import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import Logo from "../../assets/images/gw-logo.png";
 
-interface ILogin {
-  email: string;
-  password: string;
-}
-
 export default function Login() {
   const [visible, setvisible] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
