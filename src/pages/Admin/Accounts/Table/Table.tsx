@@ -17,20 +17,18 @@ export default function Table({
   handleSelectedAccountIsLocked,
   handleSelectedAccountName,
 }: ITableProps) {
-  const { accounts } = useSelector((state: RootState) => state.accountState);
+  const { account } = useSelector((state: RootState) => state.accountState);
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    setPage((prevPage) =>
-      Math.min(Math.max(prevPage, 0), accounts.account.length - 1),
-    );
-    setTotalPage(accounts.account.length);
-  }, [page, accounts.account.length]);
+    setPage((prevPage) => Math.min(Math.max(prevPage, 0), account.length - 1));
+    setTotalPage(account.length);
+  }, [page, account.length]);
 
   return (
     <S.TableContainer>
-      {accounts.account && accounts.account[page] && (
+      {account && account[page] && (
         <>
           <S.Container>
             <S.Table>
@@ -44,7 +42,7 @@ export default function Table({
                 </S.TableHeadRow>
               </thead>
               <tbody>
-                {accounts.account[page].map((innerAccounts, index) => (
+                {account[page].map((innerAccounts, index) => (
                   <React.Fragment key={index}>
                     <S.TableRow>
                       <S.TableItem>{innerAccounts.name}</S.TableItem>

@@ -5,8 +5,8 @@ import { Outlet } from "react-router";
 import Header from "../../SideHeader/Header";
 const HEADER_LIST = [
   {
-    title: "Overview",
-    path: "/",
+    title: "Chosen Contribution",
+    path: "/chosencontributions",
     icon: <i className="bi bi-house-door-fill"></i>,
   },
   {

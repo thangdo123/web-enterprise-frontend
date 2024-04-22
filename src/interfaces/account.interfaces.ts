@@ -14,7 +14,5 @@ export interface IAccount {
 }
 
 export interface IAccountState {
-  accounts: {
-    account: IAccount[][];
-  };
+  account: IAccount[][];
 }

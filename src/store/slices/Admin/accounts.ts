@@ -13,6 +13,7 @@ export const fetchAllAccounts = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.ADMIN.ACCOUNTS + `/?role=${role}`,
       );
+      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -81,9 +82,7 @@ export const updateAccountById = createAsyncThunk(
 );
 
 const initialState: IAccountState = {
-  accounts: {
-    account: [],
-  },
+  account: [],
 };
 
 export const accountState = createSlice({
@@ -92,27 +91,27 @@ export const accountState = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllAccounts.pending, (state) => {
-      state.accounts.account = [];
+      state.account = [];
     });
     builder.addCase(fetchAllAccounts.fulfilled, (state, action) => {
-      state.accounts = action.payload;
+      state.account = action.payload.account;
       console.log(action.payload);
     });
     builder.addCase(fetchAllAccounts.rejected, (state) => {
-      state.accounts.account = [];
+      state.account = [];
     });
     builder.addCase(createAccount.fulfilled, (state, action) => {
-      const { account } = state.accounts;
+      const { account } = state;
       const accountsWithLessThan10 = account.find((arr) => arr.length < 10);
 
       if (accountsWithLessThan10) {
         accountsWithLessThan10.push(action.payload.user);
       } else {
-        state.accounts.account.push([action.payload.user]);
+        state.account.push([action.payload.user]);
       }
     });
     builder.addCase(updateAccountById.fulfilled, (state, action) => {
-      state.accounts.account = state.accounts.account.map((listOfAccounts) =>
+      state.account = state.account.map((listOfAccounts) =>
         listOfAccounts.map((account) =>
           account.id === action.meta.arg.Id
             ? action.payload.updatedUser

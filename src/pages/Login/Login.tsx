@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { postLogin } from "../../store/slices/login";
 import { getCookie } from "../../utils/cookies.utils";
+import { ILogin } from "../../interfaces";
+import { setNotification } from "../../store/slices/notification";
+import { ENotificationType } from "../../enum";
 import Logo from "../../assets/images/gw-logo.png";
 
 interface ILogin {
@@ -15,16 +18,23 @@ interface ILogin {
 export default function Login() {
   const [visible, setvisible] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const isLoggedIn = useSelector(
-    (state: RootState) => state.loginState.isLoggedin,
-  );
+  const { authStatus } = useSelector((state: RootState) => state.loginState);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const account: ILogin = {
       email: emailInput,
       password: passwordInput,
     };
-    dispatch(postLogin(account));
+    dispatch(postLogin(account))
+      .unwrap()
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
 
   const [emailInput, setEmailInput] = useState<string>("");
@@ -36,21 +46,17 @@ export default function Login() {
 
   useEffect(() => {
     const token = getCookie("token");
-    if (isLoggedIn || token) {
+    if (authStatus || token) {
       window.location.href = "/";
     }
-  }, [isLoggedIn]); // Run whenever isLoggedIn changes
+  }, [authStatus]);
 
   return (
     <S.LoginContainter>
       <S.LoginCenter>
         <div className="login-logo">
           <S.LoginLogoBanner>
-            <S.LogoImg
-              className="logo-img"
-              src={Logo}
-              alt=""
-            />
+            <S.LogoImg className="logo-img" src={Logo} alt="" />
             <h1>Greenwich University</h1>
           </S.LoginLogoBanner>
           <S.LogoDescription>
@@ -65,13 +71,13 @@ export default function Login() {
             </S.LoginFieldText>
             <S.InputField>
               <p>
-                <i className="bi bi-person-circle"></i>
+                <i className="bi bi-envelope"></i>
               </p>
               <input
                 value={emailInput}
                 onChange={(e) => setEmailInput(e.target.value)}
                 type="email"
-                placeholder="Enter username"
+                placeholder="Enter email"
                 required
               />
             </S.InputField>
@@ -96,6 +102,9 @@ export default function Login() {
             </S.InputField>
             <S.ForgotPassword>
               <Link to="/resetpassword">Forgot Password?</Link>
+            </S.ForgotPassword>
+            <S.ForgotPassword>
+              <Link to="/register">Register as Guest</Link>
             </S.ForgotPassword>
             <S.SignInBtn className="sign-in-btn">Sign in</S.SignInBtn>
           </S.LoginFieldContainer>

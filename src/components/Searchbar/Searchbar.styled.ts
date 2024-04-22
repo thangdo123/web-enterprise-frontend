@@ -19,6 +19,7 @@ const Icon = styled.button`
 const Input = styled.input`
   display: block;
   background-color: inherit;
+  width: 100%;
 `;
 
 export { SearchContainer, Icon, Input };

@@ -23,3 +23,18 @@ export interface INotification {
 export interface INotificationState {
   notification: INotification | null;
 }
+
+export interface IRegister {
+  email: string;
+  name: string;
+  avatar: string;
+}
+
+export interface ILogin {
+  email: string;
+  password: string;
+}
+
+export interface IAuthState {
+  authStatus: boolean;
+}
