@@ -15,6 +15,8 @@ import { AppDispatch } from "../store";
 import { getAdminProfile, getUserProfile } from "../store/slices/userProfile";
 import LayoutCoordinator from "../components/Layout/TopLayout/LayoutCoordinator";
 import { layoutCoordinatorRoutes } from "./layoutCoordinator";
+import LayoutGuest from "../components/Layout/TopLayout/LayoutGuest";
+import { layoutGuestRoutes } from "./layoutGuest";
 
 export default function AppRoutes() {
   const dispatch = useDispatch<AppDispatch>();
@@ -63,6 +65,14 @@ export default function AppRoutes() {
       {decodeCookie(token) === "COORDIONATOR" && (
         <Route path="/" element={<LayoutCoordinator />}>
           {layoutCoordinatorRoutes.map(({ path, component }) => (
+            <Route key={path} path={path} element={component} />
+          ))}
+        </Route>
+      )}
+
+      {decodeCookie(token) === "GUEST" && (
+        <Route path="/" element={<LayoutGuest/>}>
+          {layoutGuestRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />
           ))}
         </Route>

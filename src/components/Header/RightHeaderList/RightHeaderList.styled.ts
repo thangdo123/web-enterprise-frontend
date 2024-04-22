@@ -14,6 +14,7 @@ const RightListItem = styled.div`
   color: var(--black);
   padding: var(--s-3) var(--s-2);
   cursor: pointer;
+  border-bottom: 1px solid white;
 
   &:hover {
     background-color: var(--gray-light);

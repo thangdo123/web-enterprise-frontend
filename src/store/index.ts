@@ -12,6 +12,7 @@ import { statisticState } from "./slices/Manager/statistic";
 import notificationState from "./slices/notification";
 import { contactState } from "./slices/viewCoordinator";
 import { exceptionReportsState } from "./slices/Manager/exceptionReports";
+import { guestState } from "./slices/Guest/guest";
 
 const store = configureStore({
   reducer: {
@@ -28,6 +29,7 @@ const store = configureStore({
     [statisticState.name]: statisticState.reducer,
     [contactState.name]: contactState.reducer,
     [exceptionReportsState.name]: exceptionReportsState.reducer,
+    [guestState.name]: guestState.reducer,
   },
 });
 

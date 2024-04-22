@@ -1,25 +1,29 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
 import * as S from "./Carousels.styled";
+import carousel1 from "../../../assets/images/carousel1.jpg";
+import carousel2 from "../../../assets/images/carousel2.jpg";
+import carousel3 from "../../../assets/images/carousel3.jpg";
+
 const Carousels = () => {
   return (
     <Carousel fade>
       <Carousel.Item>
-        <S.CarouselImg src="https://law.depaul.edu/academics/centers-institutes-initiatives/center-for-intellectual-property-law-and-information-technology/PublishingImages/IP_Spring_preLaw21crop.jpg"/>
+        <S.CarouselImg src={carousel1}/>
         <Carousel.Caption>
           <h3>Endeavor</h3>
           <p>Hard labor and effort are critical components in the attainment of success.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <S.CarouselImg src="https://cdn.elearningindustry.com/wp-content/uploads/2022/04/shutterstock_1964806165.jpg" />
+        <S.CarouselImg src={carousel2} />
         <Carousel.Caption>
           <h3>Knowledge</h3>
           <p>Acquiring knowledge is crucial in establishing a pathway to future grandeur.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <S.CarouselImg src="https://tigosoftware.com/sites/default/files/2022-09/Enterprise-SEO-Strategies-for-Knowledge-Base-Self-Serve-Customer-Success.png" />
+        <S.CarouselImg src={carousel3} />
         <Carousel.Caption>
           <h3>Times</h3>
           <p>

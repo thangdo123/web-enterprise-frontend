@@ -9,6 +9,7 @@ import { fetchPublishedContributions } from "../../store/slices/Student/contribu
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 import Footer from "../../components/Footer/Footer";
+import NavbarLogo from "../../assets/images/headerlogo.png";
 
 const HomePage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -33,7 +34,7 @@ const HomePage = () => {
     <>
       <S.Navbar>
         <S.NavbarLeft>Greenwich Contributions</S.NavbarLeft>
-        <S.NavbarLogo src="https://cdn.haitrieu.com/wp-content/uploads/2022/12/Logo-Truong-Dai-hoc-Greenwich-Viet-Nam-am-ban.png" />
+        <S.NavbarLogo src={NavbarLogo} />
         <S.NavbarRight>
           <S.LoginBtn as={Link} to={"/login"}>
             Login
