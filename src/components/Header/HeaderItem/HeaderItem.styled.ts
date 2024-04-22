@@ -5,6 +5,7 @@ const NavLink = styled(BaseNavLink)`
   text-decoration: none;
   color: var(--black);
   padding: var(--s-3) var(--s-2);
+  border-bottom: 1px solid white;
 
   &:hover {
     background-color: var(--gray-light);

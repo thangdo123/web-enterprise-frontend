@@ -9,7 +9,7 @@ export default function Header({headerLink}:{headerLink:ITopHeader[]}) {
   return (
     <S.HeaderContainer>
       <LeftHeaderList headerLink={headerLink}/>
-      <Sidebar />
+      <Sidebar headerLink={headerLink}/>
       <S.Logo>
         <S.Icon className="bi bi-book"></S.Icon>
       </S.Logo>

@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from "../../store";
 import { resetPassword, sendOtp } from "../../store/slices/resetPassword";
 import { useLocation, useNavigate } from "react-router";
 import { deleteCookie } from "../../utils/cookies.utils";
+import Logo from "../../assets/images/gw-logo.png";
 
 export default function Login() {
   const [time, setTime] = useState<number>(300);
@@ -95,7 +96,7 @@ export default function Login() {
           <S.LoginLogoBanner>
             <S.LogoImg
               className="logo-img"
-              src="https://cdn.haitrieu.com/wp-content/uploads/2022/12/Icon-Truong-Dai-hoc-Greenwich-Viet-Nam.png"
+              src={Logo}
               alt=""
             />
             <h1>Greenwich University</h1>

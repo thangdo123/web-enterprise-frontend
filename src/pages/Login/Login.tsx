@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { postLogin } from "../../store/slices/login";
 import { getCookie } from "../../utils/cookies.utils";
+import Logo from "../../assets/images/gw-logo.png";
 
 interface ILogin {
   email: string;
@@ -47,7 +48,7 @@ export default function Login() {
           <S.LoginLogoBanner>
             <S.LogoImg
               className="logo-img"
-              src="https://cdn.haitrieu.com/wp-content/uploads/2022/12/Icon-Truong-Dai-hoc-Greenwich-Viet-Nam.png"
+              src={Logo}
               alt=""
             />
             <h1>Greenwich University</h1>

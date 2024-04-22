@@ -3,6 +3,9 @@ const API_BASE_URL = "http://localhost:3000";
 const API_ENDPOINTS = {
   LOGIN: "/auth/login",
   GIVE_COMMENT: "/comment/",
+  GUEST: {
+    GET_FACULTY: "/guest/faculties/",
+  },
   ADMIN: {
     ACCOUNTS: "/admin/viewAllAccount",
     CREATE_ACCOUNTS: "/admin/registerForUser",

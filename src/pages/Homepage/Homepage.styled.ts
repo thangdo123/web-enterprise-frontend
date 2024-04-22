@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../config/responsiveBreakpoints";
 
 export const Navbar = styled.div`
   border-bottom: var(--gray-light-1) solid 1px;
@@ -13,10 +14,22 @@ export const NavbarLeft = styled.div`
   font-weight: var(--fw-semibold);
   width: 30%;
   font-family: "Merriweather", serif;
+  @media ${DEVICES.TABLET}{
+    font-size: var(--fs-2xl);
+  }
+  @media ${DEVICES.PHONE}{
+    font-size: var(--fs-xl);
+  }
+  @media (max-width: 430px){
+    font-size: var(--fs-md);
+  }
 `;
 
 export const NavbarLogo = styled.img`
   width: 15%;
+  @media ${DEVICES.TABLET}{
+    width: 35%;
+  }
 `;
 
 export const NavbarRight = styled.div`
