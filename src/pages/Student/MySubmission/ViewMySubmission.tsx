@@ -18,7 +18,7 @@ const ViewMySubmission = () => {
     dispatch(fetchAllContributions());
   }, []);
 
-  const { allMyContributions } = useSelector(
+  const { allMyContributions, isLoading } = useSelector(
     (state: RootState) => state.contributionState,
   );
 
@@ -59,7 +59,9 @@ const ViewMySubmission = () => {
                 </NavLink>
               </S.Block3TopRight>
             </S.Block3Top>
-            {allMyContributions && allMyContributions[page] ? (
+            {isLoading ? (
+              <Loader />
+            ) : allMyContributions && allMyContributions[page] ? (
               <S.Block3SubmissionList>
                 {allMyContributions[page].map((item, index) => (
                   <S.Block3SubmissionItemsContainer
@@ -87,7 +89,7 @@ const ViewMySubmission = () => {
                 )}
               </S.Block3SubmissionList>
             ) : (
-              <Loader />
+              <S.EmtyItemText>There is no available contribution</S.EmtyItemText>
             )}
           </S.Block3>
         </S.Container>

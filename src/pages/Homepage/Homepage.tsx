@@ -16,7 +16,7 @@ const HomePage = () => {
     dispatch(fetchPublishedContributions());
   }, []);
 
-  const { allChosenContribtution } = useSelector(
+  const { allChosenContribtution, isLoading } = useSelector(
     (state: RootState) => state.contributionState,
   );
 
@@ -52,7 +52,9 @@ const HomePage = () => {
               chosen by manager in this academic year.
             </S.Block2Description>
           </S.Block2>
-          {allChosenContribtution && allChosenContribtution[page] ? (
+          {isLoading ? (
+            <Loader />
+          ) : allChosenContribtution && allChosenContribtution[page] ? (
             <S.Block3>
               {allChosenContribtution[page].map((item, index) => (
                 <S.Block3Items key={index}>
@@ -66,7 +68,9 @@ const HomePage = () => {
                     />
                   </a>
                   <S.Block3ItemsBottom>
-                    <S.Block3ItemsTitle>Contrbution Title: {item.title}</S.Block3ItemsTitle>
+                    <S.Block3ItemsTitle>
+                      Contrbution Title: {item.title}
+                    </S.Block3ItemsTitle>
                     <S.Block3ItemsAuthor>
                       Author: {item.user.name}
                     </S.Block3ItemsAuthor>
@@ -84,7 +88,7 @@ const HomePage = () => {
               )}
             </S.Block3>
           ) : (
-            <Loader />
+            <S.EmtyItemText>There is no available contribution</S.EmtyItemText>
           )}
         </S.BottomBlockContainer>
       </S.BottomBlockLayout>

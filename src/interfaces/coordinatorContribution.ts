@@ -25,4 +25,5 @@ export interface ICoordinatorContribution {
 export interface ICoordinatorContributionState {
   allMyContributions: ICoordinatorContribution[][];
   detailContribution: IContributionDetail;
+  isLoading: boolean;
 }
