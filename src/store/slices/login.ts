@@ -2,20 +2,16 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
 import { setCookie } from "../../utils/cookies.utils";
+import { IAuthState, ILogin } from "../../interfaces";
 
-interface ILogin {
-  email: string;
-  password: string;
-}
 export const postLogin = createAsyncThunk(
   "type/postData",
   async (data: ILogin, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.post(
-        API_BASE_URL + API_ENDPOINTS.LOGIN,
+        API_BASE_URL + API_ENDPOINTS.AUTH.LOGIN,
         data,
       );
-      console.log(response);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -24,12 +20,8 @@ export const postLogin = createAsyncThunk(
   },
 );
 
-interface ILoginState {
-  isLoggedin: boolean;
-}
-
-const initialState: ILoginState = {
-  isLoggedin: false,
+const initialState: IAuthState = {
+  authStatus: false,
 };
 
 export const loginState = createSlice({
@@ -38,14 +30,16 @@ export const loginState = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(postLogin.pending, (state) => {
-      state.isLoggedin = false;
+      state.authStatus = false;
     });
     builder.addCase(postLogin.fulfilled, (state, action) => {
-      state.isLoggedin = true;
+      state.authStatus = true;
+      console.log(1);
       setCookie("token", action.payload.token);
     });
-    builder.addCase(postLogin.rejected, (state) => {
-      state.isLoggedin = false;
+    /* eslint-disable*/
+    builder.addCase(postLogin.rejected, (state, action: any) => {
+      state.authStatus = false;
     });
   },
 });

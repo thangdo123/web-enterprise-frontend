@@ -62,19 +62,27 @@ export const chosenContributionState = createSlice({
   name: "chosenContributionState",
   initialState,
   reducers: {},
-  extraReducers: (buider) => {
-    buider.addCase(getAllChosenContributions.fulfilled, (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(getAllChosenContributions.fulfilled, (state, action) => {
       state.allChosenContributions = action.payload.allChosenContributions;
     });
-    buider.addCase(downloadContributions.fulfilled, (state) => {
+    builder.addCase(downloadContributions.fulfilled, (state) => {
       state.isDownloading = true;
     });
-    buider.addCase(publishContribution.fulfilled, (state, action) => {
+    /* eslint-disable */
+    builder.addCase(publishContribution.fulfilled, (state, action) => {
       state.allChosenContributions = state.allChosenContributions.map(
         (chosenContributions) =>
           chosenContributions.map((chosenContribution) =>
             chosenContribution.id === action.payload.contribution.id
-              ? action.payload.contribution
+              ? {
+                  ...chosenContribution,
+                  user: {
+                    ...chosenContribution.user,
+                    name: action.payload.user,
+                  },
+                  is_public: action.payload.contribution.is_public,
+                }
               : chosenContribution,
           ),
       );

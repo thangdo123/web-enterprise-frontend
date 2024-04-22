@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, KeyboardEvent, useEffect, useState } from "react";
 import * as S from "./ChatBoxstyled";
 import socket from "../../../socket";
 import { IMessage } from "../../../interfaces/chat.interfaces";
@@ -34,6 +34,13 @@ export default function ChatBox({ conversationId }: IChatBox) {
     sendMessage();
   };
 
+  const onEnterPress = (e: KeyboardEvent) => {
+    if (e.key === "Enter" && e.shiftKey == false) {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
+
   useEffect(() => {
     socket.emit("get-message", {
       conversationId: conversationId,
@@ -59,6 +66,7 @@ export default function ChatBox({ conversationId }: IChatBox) {
             placeholder="Enter message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={onEnterPress}
           />
         </S.InputContainer>
         <S.SendBtn onClick={sendMessage}>Send</S.SendBtn>

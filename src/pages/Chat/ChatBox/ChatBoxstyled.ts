@@ -5,6 +5,7 @@ const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
+  width: 100%;
 `;
 
 const ReceiverInfo = styled.div`
@@ -50,7 +51,7 @@ const InputContainer = styled.div`
 const MessageInput = styled.textarea`
   width: 100%;
   word-wrap: break-word;
-  min-height: 100%;
+  height: fit-content;
 `;
 
 const SendBtn = styled(Button)`

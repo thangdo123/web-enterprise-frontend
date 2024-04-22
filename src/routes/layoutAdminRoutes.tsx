@@ -4,8 +4,13 @@ import Accounts from "../pages/Admin/Accounts/Accounts";
 import EditProfile from "../pages/EditProfile/EditProfile";
 import Faculty from "../pages/Admin/Faculty/Faculty";
 import AcademicYear from "../pages/Admin/Academic year/AcademicYear";
+import { Navigate } from "react-router";
 
 export const layoutAdminRoutes: IRoute[] = [
+  {
+    path: "/",
+    component: <Navigate to={"/accounts"} />,
+  },
   {
     path: "/accounts",
     component: <Accounts />,
