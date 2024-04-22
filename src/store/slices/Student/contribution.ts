@@ -33,6 +33,7 @@ const initialState: IContributionState = {
     ],
   },
   allChosenContribtution:[],
+  isLoading: true,
 };
 
 export const fetchAllContributions = createAsyncThunk(
@@ -142,9 +143,11 @@ export const contributionState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAllContributions.pending, (state) => {
       state.allMyContributions = [];
+      state.isLoading = true;
     });
     builder.addCase(fetchAllContributions.fulfilled, (state, action) => {
       state.allMyContributions = action.payload.allMyContributions;
+      state.isLoading = false;
     });
     builder.addCase(fetchAllContributions.rejected, (state) => {
       state.allMyContributions = [];
@@ -152,8 +155,16 @@ export const contributionState = createSlice({
     builder.addCase(fetchContributionDetail.fulfilled, (state, action) => {
       state.detailContribution = action.payload;
     });
+    builder.addCase(fetchPublishedContributions.pending, (state) => {
+      state.allChosenContribtution = [];
+      state.isLoading = true;
+    });
+    builder.addCase(fetchPublishedContributions.rejected, (state) => {
+      state.allChosenContribtution = [];
+    });
     builder.addCase(fetchPublishedContributions.fulfilled, (state, action) => {
       state.allChosenContribtution = action.payload.allChosenContributions;
+      state.isLoading = false;
     });
   },
 });

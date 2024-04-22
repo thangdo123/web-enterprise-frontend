@@ -63,19 +63,28 @@ export const Block2Description = styled.div`
 `;
 
 export const Block3 = styled.div`
-  padding-top: var(--s-7);
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 1.5%;
+  padding-top: var(--s-7);
 `;
 
 export const Block3Items = styled.div`
-  width: 23.8%;
-  padding-bottom: var(--s-5);
+  width: 250px;
+  margin-bottom: var(--s-5);
+  border: var(--gray-light-2) solid 1px;
+  @media (max-width: 534px) {
+    width: 350px;
+  }
 `;
 
 export const Block3ItemsImg = styled.img`
   width: 100%;
+  height: 230px;
+  @media (max-width: 534px) {
+    height: 320px;
+  }
 `;
 
 export const Block3ItemsBottom = styled.div`
@@ -94,4 +103,12 @@ export const Block3ItemsAuthor = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+`;
+
+export const EmtyItemText = styled.div`
+  text-align: center;
+  font-size: var(--fs-4xl);
+  font-family: "Times New Roman", Times, serif;
+  font-weight: var(--fw-semibold);
+  padding: var(--s-8) 0;
 `;

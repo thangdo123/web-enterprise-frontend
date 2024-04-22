@@ -103,4 +103,5 @@ export interface IContributionState {
   allMyContributions: IContribution[][];
   detailContribution: IContributionDetail;
   allChosenContribtution: IChosenContribution[][];
+  isLoading: boolean;
 }

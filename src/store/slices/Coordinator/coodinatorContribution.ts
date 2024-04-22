@@ -33,6 +33,7 @@ const initialState: ICoordinatorContributionState = {
       },
     ],
   },
+  isLoading: true,
 };
 
 export const fetchAllContributionsByFaculty = createAsyncThunk(
@@ -109,11 +110,13 @@ export const coordinatorContributionState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAllContributionsByFaculty.pending, (state) => {
       state.allMyContributions = [];
+      state.isLoading = true;
     });
     builder.addCase(
       fetchAllContributionsByFaculty.fulfilled,
       (state, action) => {
         state.allMyContributions = action.payload.allMyContributions;
+        state.isLoading = false;
       },
     );
     builder.addCase(fetchAllContributionsByFaculty.rejected, (state) => {

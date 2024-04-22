@@ -70,6 +70,14 @@ export const ItemBottomBlock = styled.div`
 
 export const ItemTitle = styled.div``;
 
+export const EmtyItemText = styled.div`
+  text-align: center;
+  font-size: var(--fs-4xl);
+  font-family: "Times New Roman", Times, serif;
+  font-weight: var(--fw-semibold);
+  padding: var(--s-8) 0;
+`;
+
 export const ItemStatus = styled.div<{ $isChosen: boolean }>`
   color: ${({ $isChosen }) => ($isChosen ? "var(--green)" : "var(--red)")};
 `;

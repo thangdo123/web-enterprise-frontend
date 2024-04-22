@@ -20,7 +20,7 @@ const Homepage = () => {
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
 
-  const { allMyContributions } = useSelector(
+  const { allMyContributions, isLoading } = useSelector(
     (state: RootState) => state.coordinatorContributionState,
   );
 
@@ -43,7 +43,9 @@ const Homepage = () => {
             submitted and also interact with them
           </S.Block1Desciption>
         </S.Block1>
-        {allMyContributions && allMyContributions[page] ? (
+        {isLoading ? (
+          <Loader />
+        ) : allMyContributions && allMyContributions[page] ? (
           <S.Block3>
             {allMyContributions[page].map((item, index) => (
               <S.Block3Items
@@ -76,7 +78,7 @@ const Homepage = () => {
             )}
           </S.Block3>
         ) : (
-          <Loader />
+          <S.EmtyItemText>There is no available contribution</S.EmtyItemText>
         )}
       </S.Container>
     </S.Layout>

@@ -124,3 +124,11 @@ export const Block3Bottom = styled.div`
     padding: 5px 10px;
   }
 `;
+
+export const EmtyItemText = styled.div`
+  text-align: center;
+  font-size: var(--fs-4xl);
+  font-family: "Times New Roman", Times, serif;
+  font-weight: var(--fw-semibold);
+  padding: var(--s-8) 0;
+`;
