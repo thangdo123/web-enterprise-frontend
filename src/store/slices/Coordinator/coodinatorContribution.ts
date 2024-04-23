@@ -34,8 +34,40 @@ const initialState: ICoordinatorContributionState = {
       },
     ],
   },
+  notifications: [],
+  count: 0,
   isLoading: true,
 };
+
+export const fetchNotificationCount = createAsyncThunk(
+  "coordinator/getNotiCount",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.COORDINATOR.GET_NOTIFICATION_COUNT,
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
+export const fetchNotifications = createAsyncThunk(
+  "coordinator/fetchNotifications",
+  async (_, { rejectWithValue }) =>{
+    try{
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.COORDINATOR.VIEW_NOTIFICATIONS,
+      );
+      return response.data;
+    } catch(err){
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  }
+);
 
 export const fetchAllContributionsByFaculty = createAsyncThunk(
   "contributions/fetchAllContributionsByFaculty",
@@ -151,6 +183,12 @@ export const coordinatorContributionState = createSlice({
         setCookie("token", action.payload.accessToken);
         location.reload();
       }
+    });
+    builder.addCase(fetchNotificationCount.fulfilled, (state, action) => {
+      state.count = action.payload.count;
+    });
+    builder.addCase(fetchNotifications.fulfilled, (state, action) => {
+      state.notifications = action.payload.notifications;
     });
   },
 });

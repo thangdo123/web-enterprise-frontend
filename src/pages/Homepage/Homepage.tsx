@@ -59,15 +59,13 @@ const HomePage = () => {
             <S.Block3>
               {allChosenContribtution[page].map((item, index) => (
                 <S.Block3Items key={index}>
-                  <a target="_blank" href={item.Image[0].path} rel="noreferrer">
-                    <S.Block3ItemsImg
-                      src={
-                        item.Image.length > 0
-                          ? item.Image[0].path
-                          : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
-                      }
-                    />
-                  </a>
+                  <S.Block3ItemsImg
+                    src={
+                      item.Image.length > 0
+                        ? item.Image[0].path
+                        : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
+                    }
+                  />
                   <S.Block3ItemsBottom>
                     <S.Block3ItemsTitle>
                       Contrbution Title: {item.title}
