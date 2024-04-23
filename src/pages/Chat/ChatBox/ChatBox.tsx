@@ -13,7 +13,7 @@ export default function ChatBox({ conversationId }: IChatBox) {
   const [message, setMessage] = useState<string>("");
   const [messageList, setMessageList] = useState<IMessage[]>([]);
   const { userProfile } = useSelector(
-    (state: RootState) => state.adminProfileState,
+    (state: RootState) => state.userProfileState,
   );
 
   const sendMessage = () => {

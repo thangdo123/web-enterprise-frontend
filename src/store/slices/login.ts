@@ -20,6 +20,22 @@ export const postLogin = createAsyncThunk(
   },
 );
 
+export const getRefreshToken = createAsyncThunk(
+  "get/getRefreshToken",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.AUTH.REFRESH_TOKEN,
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
 const initialState: IAuthState = {
   authStatus: false,
 };
@@ -34,11 +50,10 @@ export const loginState = createSlice({
     });
     builder.addCase(postLogin.fulfilled, (state, action) => {
       state.authStatus = true;
-      console.log(1);
       setCookie("token", action.payload.token);
     });
     /* eslint-disable*/
-    builder.addCase(postLogin.rejected, (state, action: any) => {
+    builder.addCase(postLogin.rejected, (state) => {
       state.authStatus = false;
     });
   },

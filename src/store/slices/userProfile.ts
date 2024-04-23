@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance, axiosInstanceFormData } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
 import { IAccount } from "../../interfaces/account.interfaces";
+import { setCookie } from "../../utils/cookies.utils";
 
 export const getUserProfile = createAsyncThunk(
   "user/getUserProfile",
@@ -52,16 +53,16 @@ export const updateUserProfile = createAsyncThunk(
   },
 );
 
-interface IAdminProfileState {
+interface IProfileState {
   userProfile: IAccount;
 }
 
-const initialState: IAdminProfileState = {
+const initialState: IProfileState = {
   userProfile: { name: "", email: "", role: "" },
 };
 
-export const adminProfileState = createSlice({
-  name: "adminProfileState",
+export const userProfileState = createSlice({
+  name: "userProfileState",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -70,6 +71,11 @@ export const adminProfileState = createSlice({
     });
     builder.addCase(getAdminProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload.userProfile;
+      console.log(action.payload.accessToken);
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
     builder.addCase(updateUserProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload.user;

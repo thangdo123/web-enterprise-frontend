@@ -4,6 +4,7 @@ const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
+  flex: 2;
 `;
 
 const ListTitle = styled.div`
@@ -35,6 +36,9 @@ const ItemAva = styled.div`
   background-color: var(--blue);
 `;
 
+const ItemName = styled.div`
+  font-weight: var(--fw-bold);
+`;
 const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -42,14 +46,11 @@ const ItemInfo = styled.div`
 `;
 
 const ItemMsg = styled.div`
+  max-width: 200px;
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   font-weight: var(--fw-light);
-`;
-
-const ItemName = styled.div`
-  font-weight: var(--fw-medium);
 `;
 
 export {

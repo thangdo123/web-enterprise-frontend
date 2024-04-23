@@ -1,9 +1,10 @@
-const API_BASE_URL = "http://159.89.206.44:3000";
+const API_BASE_URL = "http://localhost:3000";
 
 const API_ENDPOINTS = {
   AUTH: {
     LOGIN: "/auth/login",
     RESET_DEFAULT_PASSWORD: "/auth/resetDefaultPassword/",
+    REFRESH_TOKEN: "/auth/refreshAccessToken",
   },
   GIVE_COMMENT: "/comment/",
   GUEST: {

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IChosenContributionState } from "../../../interfaces/chosenContribution";
+import { setCookie } from "../../../utils/cookies.utils";
 
 export const getAllChosenContributions = createAsyncThunk(
   "contributions/getAllChoosenContributions",
@@ -65,6 +66,10 @@ export const chosenContributionState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllChosenContributions.fulfilled, (state, action) => {
       state.allChosenContributions = action.payload.allChosenContributions;
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
     builder.addCase(downloadContributions.fulfilled, (state) => {
       state.isDownloading = true;

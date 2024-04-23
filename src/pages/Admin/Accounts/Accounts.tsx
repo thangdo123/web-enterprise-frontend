@@ -26,7 +26,6 @@ export default function Accounts() {
     { value: "Marketing Manager" },
     { value: "Marketing Coordinator" },
   ];
-
   useEffect(() => {
     dispatch(fetchAllAccounts(""));
   }, []);

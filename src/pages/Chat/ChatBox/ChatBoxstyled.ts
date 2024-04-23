@@ -6,6 +6,7 @@ const ChatContainer = styled.div`
   flex-direction: column;
   gap: var(--s-4);
   width: 100%;
+  flex: 8;
 `;
 
 const ReceiverInfo = styled.div`

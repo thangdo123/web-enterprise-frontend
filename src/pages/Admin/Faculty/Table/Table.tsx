@@ -25,11 +25,13 @@ export default function Table({
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
   useEffect(() => {
-    setPage((prevPage) =>
-      Math.min(Math.max(prevPage, 0), allFaculties.length - 1),
-    );
-    setTotalPage(allFaculties.length);
-  }, [page, allFaculties.length]);
+    if (allFaculties && allFaculties.length > 0) {
+      setPage((prevPage) =>
+        Math.min(Math.max(prevPage, 0), allFaculties.length - 1),
+      );
+      setTotalPage(allFaculties.length);
+    }
+  }, [page, allFaculties]);
 
   return (
     <S.TableContainer>

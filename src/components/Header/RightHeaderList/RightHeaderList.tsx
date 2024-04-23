@@ -11,7 +11,7 @@ export default function RightHeaderList() {
     navigate("/editprofile");
   };
   const { userProfile } = useSelector(
-    (state: RootState) => state.adminProfileState,
+    (state: RootState) => state.userProfileState,
   );
   const [name, setName] = useState<string>(userProfile.name);
   useEffect(() => {
