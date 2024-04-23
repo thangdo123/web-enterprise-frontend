@@ -3,10 +3,14 @@ import * as S from "./Homepage.styled";
 // import Dropdown from "../../components/Dropdown/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { fetchAllContributionsByFaculty } from "../../store/slices/Coordinator/coodinatorContribution";
+import {
+  fetchAllContributionsByFaculty,
+  fetchNotificationCount,
+} from "../../store/slices/Coordinator/coodinatorContribution";
 import { Loader } from "../../components/Loader/Loader.styled";
 import Pagination from "../../components/Pagination/Pagination";
 import { useNavigate } from "react-router";
+import Notification from "./Notification/Notification";
 
 // const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
 // const dropdownTitle = "Sort";
@@ -16,11 +20,12 @@ const Homepage = () => {
 
   useEffect(() => {
     dispatch(fetchAllContributionsByFaculty());
+    dispatch(fetchNotificationCount());
   }, []);
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
 
-  const { allMyContributions, isLoading } = useSelector(
+  const { allMyContributions, isLoading, count } = useSelector(
     (state: RootState) => state.coordinatorContributionState,
   );
 
@@ -33,6 +38,11 @@ const Homepage = () => {
     );
     setTotalPage(allMyContributions.length);
   }, [page, allMyContributions.length]);
+
+  //notification
+  const [isOpenNoti, setOpenNoti] = useState(false);
+  // const [notificationCount, setNotificationCount] = useState(count);
+  // console.log(notificationCount);
   return (
     <S.Layout>
       <S.Container>
@@ -81,6 +91,15 @@ const Homepage = () => {
           <S.EmtyItemText>There is no available contribution</S.EmtyItemText>
         )}
       </S.Container>
+      <S.NotificationBtn
+        onClick={() => {
+          setOpenNoti(!isOpenNoti);
+        }}
+      >
+        <i className="bi bi-bell-fill"></i>
+      </S.NotificationBtn>
+      <S.NotificationCount>{count}</S.NotificationCount>
+      {isOpenNoti ? <Notification /> : ""}
     </S.Layout>
   );
 };

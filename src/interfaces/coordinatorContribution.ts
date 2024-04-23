@@ -22,8 +22,17 @@ export interface ICoordinatorContribution {
   ];
 }
 
+export interface INotification {
+  id: string;
+  content: string;
+  contributionId:string;
+  userId: string;
+}
+
 export interface ICoordinatorContributionState {
   allMyContributions: ICoordinatorContribution[][];
   detailContribution: IContributionDetail;
+  count: number;
+  notifications: INotification[];
   isLoading: boolean;
 }

@@ -56,7 +56,7 @@ const GuestHomepage = () => {
         <S.Block2>
           <S.Block2LeftTitle>All Published Contributions</S.Block2LeftTitle>
           <S.Block2Right>
-            <S.Block2RightText>Faculty: </S.Block2RightText>
+            <S.Block2RightText>Choose a faculty: </S.Block2RightText>
             <S.Block2DropDown>
               {faculties && (
                 <Dropdown
@@ -115,16 +115,6 @@ const GuestHomepage = () => {
             There is no published contribution found in this faculty
           </S.Block3ItemsIfEmptyArr>
         )}
-
-        {/* <S.Block3>
-          <S.Block3Items>
-            <S.Block3ItemImg src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBsAoBnqOB3DiQ0fYhkFT5PNPtPXYOGTRZ13i9DLellg&s" />
-            <S.Block3ItemBottom>
-              <S.Block3ItemTitle>Title: asdasd</S.Block3ItemTitle>
-              <S.Block3ItemAuthor>Author: ibriergreg</S.Block3ItemAuthor>
-            </S.Block3ItemBottom>
-          </S.Block3Items>
-        </S.Block3> */}
       </S.Container>
     </S.Layout>
   );
