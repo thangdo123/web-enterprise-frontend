@@ -28,11 +28,13 @@ export default function Table({
   const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    setPage((prevPage) =>
-      Math.min(Math.max(prevPage, 0), allAcademicYears.length - 1),
-    );
-    setTotalPage(allAcademicYears.length);
-  }, [page, allAcademicYears.length]);
+    if (allAcademicYears && allAcademicYears.length > 0) {
+      setPage((prevPage) =>
+        Math.min(Math.max(prevPage, 0), allAcademicYears.length - 1),
+      );
+      setTotalPage(allAcademicYears.length);
+    }
+  }, [page, allAcademicYears]);
 
   return (
     <S.TableContainer>

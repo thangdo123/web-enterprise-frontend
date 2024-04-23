@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IChosenContributionState } from "../../../interfaces/chosenContribution";
+import { setCookie } from "../../../utils/cookies.utils";
 
 export const getAllExceptionReports = createAsyncThunk(
   "exceptionReports/getAllExceptionReports",
@@ -31,6 +32,10 @@ export const exceptionReportsState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllExceptionReports.fulfilled, (state, action) => {
       state.allChosenContributions = action.payload.allContributions;
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
   },
 });

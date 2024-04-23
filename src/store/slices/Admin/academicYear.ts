@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IAcademicYearsState } from "../../../interfaces/academicYear.interfaces";
+import { setCookie } from "../../../utils/cookies.utils";
 
 export const fetchAcademicYears = createAsyncThunk(
   "academicYears/fetchAcademicYears",
@@ -24,7 +25,9 @@ export const deleteAcademicYearById = createAsyncThunk(
   async (academicYearId: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.delete(
-        API_BASE_URL + API_ENDPOINTS.ADMIN.DELETE_ACADEMIC_YEARS + academicYearId,
+        API_BASE_URL +
+          API_ENDPOINTS.ADMIN.DELETE_ACADEMIC_YEARS +
+          academicYearId,
       );
       console.log(response.data);
       return academicYearId;
@@ -51,7 +54,9 @@ export const updateAcademicYearById = createAsyncThunk(
   ) => {
     try {
       const response = await axiosInstance.put(
-        API_BASE_URL + API_ENDPOINTS.ADMIN.UPDATE_ACADEMIC_YEARS + academicYearId,
+        API_BASE_URL +
+          API_ENDPOINTS.ADMIN.UPDATE_ACADEMIC_YEARS +
+          academicYearId,
         { closure_date, final_closure_date },
       );
       console.log(response.data);
@@ -100,6 +105,10 @@ export const academicYearState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAcademicYears.fulfilled, (state, action) => {
       state.allAcademicYears = action.payload.allAcademicYears;
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        window.location.href = "/";
+      }
     });
     builder.addCase(deleteAcademicYearById.fulfilled, (state, action) => {
       state.allAcademicYears = state.allAcademicYears.map((academicYears) =>
@@ -108,15 +117,16 @@ export const academicYearState = createSlice({
         ),
       );
     });
+    /* eslint-disable */
     builder.addCase(updateAcademicYearById.fulfilled, (state, action) => {
       state.allAcademicYears = state.allAcademicYears.map((academicYears) =>
         academicYears.map((academicYear) =>
           academicYear.id === action.payload
             ? {
-              ...academicYear,
-              closure_date: action.meta.arg.closure_date,
-              final_closure_date: action.meta.arg.final_closure_date,
-            }
+                ...academicYear,
+                closure_date: action.meta.arg.closure_date,
+                final_closure_date: action.meta.arg.final_closure_date,
+              }
             : academicYear,
         ),
       );

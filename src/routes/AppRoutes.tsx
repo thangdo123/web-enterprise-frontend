@@ -64,7 +64,7 @@ export default function AppRoutes() {
       )}
 
       {decodeCookie(token) === "GUEST" && (
-        <Route path="/" element={<LayoutGuest/>}>
+        <Route path="/" element={<LayoutGuest />}>
           {layoutGuestRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />
           ))}

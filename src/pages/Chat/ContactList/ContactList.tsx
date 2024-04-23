@@ -16,7 +16,7 @@ export default function ContactList({ getConversationId }: IConversationList) {
   const [conversationId, setConversationId] = useState<string>("");
   const dispatch = useDispatch<AppDispatch>();
   const { userProfile } = useSelector(
-    (state: RootState) => state.adminProfileState,
+    (state: RootState) => state.userProfileState,
   );
   const { coordinator } = useSelector((state: RootState) => state.contactState);
 

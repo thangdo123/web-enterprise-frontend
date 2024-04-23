@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance, axiosInstanceFormData } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IContributionState } from "../../../interfaces/contribution.interface";
+import { setCookie } from "../../../utils/cookies.utils";
 
 const initialState: IContributionState = {
   allMyContributions: [],
@@ -32,7 +33,7 @@ const initialState: IContributionState = {
       },
     ],
   },
-  allChosenContribtution:[],
+  allChosenContribtution: [],
   isLoading: true,
 };
 
@@ -148,12 +149,20 @@ export const contributionState = createSlice({
     builder.addCase(fetchAllContributions.fulfilled, (state, action) => {
       state.allMyContributions = action.payload.allMyContributions;
       state.isLoading = false;
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
     builder.addCase(fetchAllContributions.rejected, (state) => {
       state.allMyContributions = [];
     });
     builder.addCase(fetchContributionDetail.fulfilled, (state, action) => {
       state.detailContribution = action.payload;
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
     builder.addCase(fetchPublishedContributions.pending, (state) => {
       state.allChosenContribtution = [];
@@ -165,6 +174,10 @@ export const contributionState = createSlice({
     builder.addCase(fetchPublishedContributions.fulfilled, (state, action) => {
       state.allChosenContribtution = action.payload.allChosenContributions;
       state.isLoading = false;
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
   },
 });

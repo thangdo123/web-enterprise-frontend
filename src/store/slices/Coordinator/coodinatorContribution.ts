@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { ICoordinatorContributionState } from "../../../interfaces/coordinatorContribution";
+import { setCookie } from "../../../utils/cookies.utils";
 
 const initialState: ICoordinatorContributionState = {
   allMyContributions: [],
@@ -117,6 +118,10 @@ export const coordinatorContributionState = createSlice({
       (state, action) => {
         state.allMyContributions = action.payload.allMyContributions;
         state.isLoading = false;
+        if (action.payload.accessToken) {
+          setCookie("token", action.payload.accessToken);
+          location.reload();
+        }
       },
     );
     builder.addCase(fetchAllContributionsByFaculty.rejected, (state) => {
@@ -126,14 +131,26 @@ export const coordinatorContributionState = createSlice({
       fetchContributionDetailCoordinator.fulfilled,
       (state, action) => {
         state.detailContribution = action.payload;
+        if (action.payload.accessToken) {
+          setCookie("token", action.payload.accessToken);
+          location.reload();
+        }
       },
     );
     builder.addCase(giveComment.fulfilled, (state, action) => {
       state.detailContribution.comment.push(action.payload);
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
     builder.addCase(chooseContribution.fulfilled, (state, action) => {
       state.detailContribution.contribution.is_choosen =
         action.payload.chosenContribution.is_choosen;
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
   },
 });

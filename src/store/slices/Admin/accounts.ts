@@ -5,6 +5,7 @@ import {
   IAccount,
   IAccountState,
 } from "../../../interfaces/account.interfaces";
+import { setCookie } from "../../../utils/cookies.utils";
 
 export const fetchAllAccounts = createAsyncThunk(
   "accounts/fetchAllAcounts",
@@ -95,7 +96,10 @@ export const accountState = createSlice({
     });
     builder.addCase(fetchAllAccounts.fulfilled, (state, action) => {
       state.account = action.payload.account;
-      console.log(action.payload);
+      if (action.payload.accessToken) {
+        setCookie("token", action.payload.accessToken);
+        location.reload();
+      }
     });
     builder.addCase(fetchAllAccounts.rejected, (state) => {
       state.account = [];

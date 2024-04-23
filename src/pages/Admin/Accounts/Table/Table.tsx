@@ -22,10 +22,13 @@ export default function Table({
   const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    setPage((prevPage) => Math.min(Math.max(prevPage, 0), account.length - 1));
-    setTotalPage(account.length);
-  }, [page, account.length]);
-
+    if (account && account.length > 0) {
+      setPage((prevPage) =>
+        Math.min(Math.max(prevPage, 0), account.length - 1),
+      );
+      setTotalPage(account.length);
+    }
+  }, [page, account]);
   return (
     <S.TableContainer>
       {account && account[page] && (
