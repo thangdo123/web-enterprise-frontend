@@ -8,6 +8,7 @@ import { fetchAllContributions } from "../../../store/slices/Student/contributio
 import Pagination from "../../../components/Pagination/Pagination";
 import { NavLink, useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
+import BlackIMG from "../../../assets/images/unset.png";
 
 // const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
 // const title = "Sort";
@@ -72,7 +73,7 @@ const ViewMySubmission = () => {
                       imgUrl={
                         item.Image.length > 0
                           ? item.Image[0].path
-                          : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
+                          : BlackIMG
                       }
                       cardTitle={item.title}
                     />

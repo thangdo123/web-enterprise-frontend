@@ -10,6 +10,7 @@ import {
 import "chart.js/auto";
 import { Bar, Pie } from "react-chartjs-2";
 import { generateRandomColor } from "../../../utils/randomColor.utils";
+import "./style.css";
 
 export default function Statistic() {
   const dispatch = useDispatch<AppDispatch>();
@@ -62,6 +63,35 @@ export default function Statistic() {
   }, []);
   return (
     <S.PageContainer>
+      <S.Block1>
+        <S.Block1Items>
+          <S.Block1ItemLeft>
+            <i className="bi bi-journal-text"></i>
+          </S.Block1ItemLeft>
+          <S.Block1ItemRight>
+            <S.B1RightTitle>Total contributions</S.B1RightTitle>
+            <S.B1RightCount>23</S.B1RightCount>
+          </S.Block1ItemRight>
+        </S.Block1Items>
+        <S.Block1Items>
+          <S.Block1ItemLeft>
+            <i className="bi bi-journal-text"></i>
+          </S.Block1ItemLeft>
+          <S.Block1ItemRight>
+            <S.B1RightTitle>Total contributions</S.B1RightTitle>
+            <S.B1RightCount>23</S.B1RightCount>
+          </S.Block1ItemRight>
+        </S.Block1Items>
+        <S.Block1Items>
+          <S.Block1ItemLeft>
+            <i className="bi bi-journal-text"></i>
+          </S.Block1ItemLeft>
+          <S.Block1ItemRight>
+            <S.B1RightTitle>Total contributions</S.B1RightTitle>
+            <S.B1RightCount>23</S.B1RightCount>
+          </S.Block1ItemRight>
+        </S.Block1Items>
+      </S.Block1>
       <S.ChartContainer>
         <S.Chart>
           <S.ChartTitle>Contributions in each faculty</S.ChartTitle>

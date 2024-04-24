@@ -3,10 +3,14 @@ import * as S from "./RightHeaderList.styled";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { useNavigate } from "react-router";
+import Searchbar from "../../Searchbar/Searchbar";
 
-export default function RightHeaderList() {
+interface IRightHeaderProps{
+  onSearch: (input: string) => void;
+}
+
+export default function RightHeaderList({onSearch}:IRightHeaderProps) {
   const navigate = useNavigate();
-
   const handleNavigate = () => {
     navigate("/editprofile");
   };
@@ -19,9 +23,7 @@ export default function RightHeaderList() {
   }, [userProfile]);
   return (
     <S.RightHeaderList>
-      <S.RightListItem>
-        <i className="bi bi-search"></i>
-      </S.RightListItem>
+      <Searchbar onSearch={onSearch} />
       <S.RightListItem>
         <i className="bi bi-bell"></i>
       </S.RightListItem>

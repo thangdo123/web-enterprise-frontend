@@ -8,6 +8,7 @@ const initialState: IGuestState = {
   faculties: [],
   allPublicContributions: [],
   isLoading: true,
+  id: "",
 };
 
 export const fetchAllGuestFaculty = createAsyncThunk(
@@ -26,9 +27,26 @@ export const fetchAllGuestFaculty = createAsyncThunk(
   },
 );
 
+export const searchContributions = createAsyncThunk(
+  "contribution/searchContributions",
+  async ( {id, keyword} : {id : string, keyword: string}, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.GUEST.GET_FACULTY + id + "?title=" + keyword,
+      );
+      console.log(response.data);
+      checkAccessToken(response.data.accessToken);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
 export const fetchAllPublishedContributionInFaculty = createAsyncThunk(
   "faculties/fetchAllPublishedContributionInFaculty",
-  async (id: string, { rejectWithValue }) => {
+  async ({id}: {id: string}, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.GUEST.GET_FACULTY + id,
@@ -69,6 +87,24 @@ export const guestState = createSlice({
     );
     builder.addCase(
       fetchAllPublishedContributionInFaculty.fulfilled,
+      (state, action) => {
+        state.allPublicContributions = action.payload.allPublicContributions;
+        state.isLoading = false;
+        state.id = action.meta.arg.id;
+      },
+    );
+    builder.addCase(searchContributions.pending, (state) => {
+      state.allPublicContributions = [];
+      state.isLoading = true;
+    });
+    builder.addCase(
+      searchContributions.rejected,
+      (state) => {
+        state.allPublicContributions = [];
+      },
+    );
+    builder.addCase(
+      searchContributions.fulfilled,
       (state, action) => {
         state.allPublicContributions = action.payload.allPublicContributions;
         state.isLoading = false;

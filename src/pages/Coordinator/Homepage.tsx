@@ -11,6 +11,7 @@ import { Loader } from "../../components/Loader/Loader.styled";
 import Pagination from "../../components/Pagination/Pagination";
 import { useNavigate } from "react-router";
 import Notification from "./Notification/Notification";
+import BlackIMG from "../../assets/images/unset.png";
 
 // const dropdownItems = [{ value: "Lastest" }, { value: "Oldest" }];
 // const dropdownTitle = "Sort";
@@ -73,7 +74,7 @@ const Homepage = () => {
                   src={
                     item.Image.length > 0
                       ? item.Image[0].path
-                      : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
+                      : BlackIMG
                   }
                 />
                 <S.ItemBottomBlock>

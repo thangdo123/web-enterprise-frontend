@@ -10,6 +10,7 @@ import {
 import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 import { useNavigate } from "react-router";
+import BlackIMG from "../../assets/images/unset.png";
 
 const GuestHomepage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,7 +24,7 @@ const GuestHomepage = () => {
   const [facultyId, setFacultyId] = useState<string>("");
 
   useEffect(() => {
-    dispatch(fetchAllPublishedContributionInFaculty(facultyId));
+    dispatch(fetchAllPublishedContributionInFaculty({id: facultyId}));
   }, [facultyId]);
 
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ const GuestHomepage = () => {
                   src={
                     value.Image[0]
                       ? value.Image[0].path
-                      : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBsAoBnqOB3DiQ0fYhkFT5PNPtPXYOGTRZ13i9DLellg&s"
+                      : BlackIMG
                   }
                 />
                 <S.Block3ItemBottom>

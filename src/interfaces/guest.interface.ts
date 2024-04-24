@@ -27,4 +27,5 @@ export interface IGuestState {
     faculties: IGuestFaculty[],
     allPublicContributions: IPublishedContributions[][],
     isLoading: boolean;
+    id: string;
 }
