@@ -4,8 +4,7 @@ import EditProfile from "../pages/EditProfile/EditProfile";
 import Statistic from "../pages/Manager/Statistic/statistic";
 import ExceptionReports from "../pages/Manager/ExceptionReports/ExceptionReports";
 import { Navigate } from "react-router";
-import ChosenContributions from "../pages/Manager/ChosenContributions/chosenContributions";
-
+import ChosenContributions from "../pages/Manager/ChosenContributions/ChosenContributions";
 
 export const layoutManagerRoutes: IRoute[] = [
   {
