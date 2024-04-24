@@ -10,6 +10,7 @@ import Pagination from "../../components/Pagination/Pagination";
 import Loader from "../../components/Loader/Loader";
 import Footer from "../../components/Footer/Footer";
 import NavbarLogo from "../../assets/images/headerlogo.png";
+import BlackIMG from "../../assets/images/unset.png";
 
 const HomePage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -63,7 +64,7 @@ const HomePage = () => {
                     src={
                       item.Image.length > 0
                         ? item.Image[0].path
-                        : "https://play-lh.googleusercontent.com/YUBDky2apqeojcw6eexQEpitWuRPOK7kPe_UbqQNv-A4Pi_fXm-YQ8vTCwPKtxIPgius"
+                        : BlackIMG
                     }
                   />
                   <S.Block3ItemsBottom>

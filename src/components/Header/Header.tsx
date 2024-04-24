@@ -5,7 +5,12 @@ import RightHeaderList from "./RightHeaderList/RightHeaderList";
 import Sidebar from "./SideBar/Sidebar";
 import { ITopHeader } from "../../interfaces";
 
-export default function Header({headerLink}:{headerLink:ITopHeader[]}) {
+interface IHeaderProps{
+  onSearch: (input: string) => void;
+  headerLink:ITopHeader[];
+}
+
+export default function Header({headerLink, onSearch}:IHeaderProps) {
   return (
     <S.HeaderContainer>
       <LeftHeaderList headerLink={headerLink}/>
@@ -13,7 +18,7 @@ export default function Header({headerLink}:{headerLink:ITopHeader[]}) {
       <S.Logo>
         <S.Icon className="bi bi-book"></S.Icon>
       </S.Logo>
-      <RightHeaderList />
+      <RightHeaderList onSearch={onSearch}/>
     </S.HeaderContainer>
   );
 }

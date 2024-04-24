@@ -27,6 +27,7 @@ const API_ENDPOINTS = {
   },
   USER: {
     CONTRIBUTIONS: "/user/viewMyContributions/",
+    SEARCH_CONTRIBUTIONS: "/user/viewMyContributions?title=",
     UPLOAD_CONTRIBUTION: "/user/uploadContribution",
     EDIT_CONTRIBUTION: "/user/editMyContribution/",
     VIEW_PROFILE: "/user/viewProfile",
@@ -48,6 +49,7 @@ const API_ENDPOINTS = {
   },
   COORDINATOR: {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",
+    SEARCH_CONTRIBUTIONS: "/coordinator/viewContribution?title=",
     CHOOSE_CONTRIBUTION: "/coordinator/chooseContribution/",
     VIEW_STUDENT_BY_FACULTY: "/coordinator/getAllStudentInFaculty",
     GET_NOTIFICATION_COUNT: "/coordinator/countNotifications/",

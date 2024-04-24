@@ -10,6 +10,12 @@ const RightHeaderList = styled.div`
   justify-content: flex-end;
 `;
 
+export const SearchBar = styled.input`
+  border: var(--gray-light-2) solid 1px;
+  border-radius: 99px;
+  padding: 5px 10px;
+`;
+
 const RightListItem = styled.div`
   color: var(--black);
   padding: var(--s-3) var(--s-2);

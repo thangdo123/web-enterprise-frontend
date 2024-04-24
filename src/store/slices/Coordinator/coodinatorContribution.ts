@@ -88,6 +88,23 @@ export const fetchAllContributionsByFaculty = createAsyncThunk(
   },
 );
 
+export const searchContributions = createAsyncThunk(
+  "contribution/searchContributions",
+  async ( keyword: string, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.COORDINATOR.SEARCH_CONTRIBUTIONS + keyword,
+      );
+      console.log(response.data);
+      checkAccessToken(response.data.accessToken);
+      return response.data;
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
 export const fetchContributionDetailCoordinator = createAsyncThunk(
   "contribution/fetchContributionDetailCoordinator",
   async (contributionId: string, { rejectWithValue }) => {
@@ -179,6 +196,20 @@ export const coordinatorContributionState = createSlice({
     });
     builder.addCase(fetchNotifications.fulfilled, (state, action) => {
       state.notifications = action.payload.notifications;
+    });
+    builder.addCase(searchContributions.pending, (state) => {
+      state.allMyContributions = [];
+      state.isLoading = true;
+    });
+    builder.addCase(
+      searchContributions.fulfilled,
+      (state, action) => {
+        state.allMyContributions = action.payload.allMyContributions;
+        state.isLoading = false;
+      },
+    );
+    builder.addCase(searchContributions.rejected, (state) => {
+      state.allMyContributions = [];
     });
   },
 });
