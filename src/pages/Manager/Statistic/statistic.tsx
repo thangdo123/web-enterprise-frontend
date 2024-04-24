@@ -29,6 +29,8 @@ export default function Statistic() {
       },
     ],
   };
+
+  /* eslint-disable */
   const barData = {
     labels: [
       "Total contributions",
@@ -39,7 +41,9 @@ export default function Statistic() {
         label: "Contributions",
         data: [
           countContribution.totalContributions,
-          ...Object.values(countContribution.contributionsByFaculty),
+          ...Object.values(countContribution.contributionsByFaculty).map(
+            (item: any) => item.totalContributions,
+          ),
         ],
         backgroundColor: [
           "Total contributions",
@@ -49,6 +53,7 @@ export default function Statistic() {
       },
     ],
   };
+  /* eslint-disable */
 
   useEffect(() => {
     dispatch(getContributionPercentageByFaculty());

@@ -9,6 +9,8 @@ import {
   giveComment,
 } from "../../../store/slices/Coordinator/coodinatorContribution";
 import { AppDispatch, RootState } from "../../../store";
+import { setNotification } from "../../../store/slices/notification";
+import { ENotificationType } from "../../../enum";
 
 const ContributionDetail = () => {
   const [commentTextArea, setCommentTextArea] = useState<string>("");
@@ -25,7 +27,24 @@ const ContributionDetail = () => {
 
   const handleGiveComment = () => {
     if (id) {
-      dispatch(giveComment({ content: commentTextArea, id }));
+      dispatch(giveComment({ content: commentTextArea, id }))
+        .unwrap()
+        .then((action) => {
+          dispatch(
+            setNotification({
+              message: action.message,
+              type: ENotificationType.Success,
+            }),
+          );
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          dispatch(
+            setNotification({
+              message: rejectedValueOrSerializedError.response.data.message,
+              type: ENotificationType.Error,
+            }),
+          );
+        });
       setCommentTextArea("");
     } else {
       console.log("Undefined id");
@@ -38,7 +57,24 @@ const ContributionDetail = () => {
 
   const handleSetChoosenStatus = () => {
     if (id) {
-      dispatch(chooseContribution(id));
+      dispatch(chooseContribution(id))
+        .unwrap()
+        .then((action) => {
+          dispatch(
+            setNotification({
+              message: action.message,
+              type: ENotificationType.Success,
+            }),
+          );
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          dispatch(
+            setNotification({
+              message: rejectedValueOrSerializedError.response.data.message,
+              type: ENotificationType.Error,
+            }),
+          );
+        });
     } else {
       console.log("Undefined id");
     }

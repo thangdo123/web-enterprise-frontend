@@ -36,13 +36,24 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
       faculty: faculty,
     };
     onClose();
-    dispatch(createAccount(newAccount));
-    dispatch(
-      setNotification({
-        message: "New account is updated successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(createAccount(newAccount))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
 
   useEffect(() => {

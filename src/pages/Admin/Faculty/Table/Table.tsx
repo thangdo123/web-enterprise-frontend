@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./Table.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../store";
 import Pagination from "../../../../components/Pagination/Pagination";
-import { deleteFacultyById } from "../../../../store/slices/Admin/faculties";
-import { setNotification } from "../../../../store/slices/notification";
-import { ENotificationType } from "../../../../enum";
 
 interface ITableProps {
   handleEdit: () => void;
@@ -21,7 +18,7 @@ export default function Table({
   const { allFaculties } = useSelector(
     (state: RootState) => state.facultyState,
   );
-  const dispatch = useDispatch<AppDispatch>();
+
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
   useEffect(() => {
@@ -62,19 +59,6 @@ export default function Table({
                             }}
                           >
                             Edit
-                          </S.ActionTitle>
-                          <S.ActionTitle
-                            onClick={() => {
-                              dispatch(deleteFacultyById(faculty.id));
-                              dispatch(
-                                setNotification({
-                                  message: "Faculty is deleted successfully",
-                                  type: ENotificationType.Success,
-                                }),
-                              );
-                            }}
-                          >
-                            Delete
                           </S.ActionTitle>
                         </S.ActionItemContainer>
                       </S.TableItem>

@@ -32,13 +32,24 @@ const UpdateAccount = ({
       name: nameInput,
       is_locked: isLocked,
     };
-    dispatch(updateAccountById(selectedAccount));
-    dispatch(
-      setNotification({
-        message: "Account is updated successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(updateAccountById(selectedAccount))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
 
   const handleToggleLockStatus = () => setIsLocked(!isLocked);

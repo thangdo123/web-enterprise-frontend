@@ -28,18 +28,24 @@ const CreateSubmission = () => {
     });
     console.log(formData.get("files"));
     dispatch(createContribution(formData))
-      .then(() => {
+      .unwrap()
+      .then((action) => {
         navigate("/viewsubmission");
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
       })
-      .catch((error) => {
-        console.error("Error submitting contribution:", error);
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
       });
-    dispatch(
-      setNotification({
-        message: "New submission is created successfully",
-        type: ENotificationType.Success,
-      }),
-    );
   };
 
   const handleResetForm = () => {

@@ -8,6 +8,8 @@ import {
   fetchContributionDetail,
 } from "../../../../store/slices/Student/contribution";
 import { useNavigate, useParams } from "react-router-dom";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 const EditSubmission = () => {
   const navigate = useNavigate();
@@ -80,7 +82,24 @@ const EditSubmission = () => {
     });
     console.log(formData.get("files"));
     if (id) {
-      dispatch(editContribution({ id, formData }));
+      dispatch(editContribution({ id, formData }))
+        .unwrap()
+        .then((action) => {
+          dispatch(
+            setNotification({
+              message: action.message,
+              type: ENotificationType.Success,
+            }),
+          );
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          dispatch(
+            setNotification({
+              message: rejectedValueOrSerializedError.response.data.message,
+              type: ENotificationType.Error,
+            }),
+          );
+        });
       navigate("/viewsubmission");
     } else {
       console.log(id);

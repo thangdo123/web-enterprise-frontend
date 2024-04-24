@@ -17,7 +17,7 @@ const PageContainer = styled.div`
 const ToolBar = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: var(--s-4);
 `;
 
 const Title = styled.div`

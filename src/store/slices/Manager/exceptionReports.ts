@@ -6,10 +6,12 @@ import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const getAllExceptionReports = createAsyncThunk(
   "exceptionReports/getAllExceptionReports",
-  async (_, { rejectWithValue }) => {
+  async (sort: boolean | string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.MANAGER.EXCEPTION_REPORTS,
+        API_BASE_URL +
+          API_ENDPOINTS.MANAGER.EXCEPTION_REPORTS +
+          `?in14days=${sort}`,
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);

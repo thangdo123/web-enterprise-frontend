@@ -11,7 +11,7 @@ export const getAllChosenContributions = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL +
           API_ENDPOINTS.MANAGER.CHOSEN_CONTRIBUTIONS +
-          `/?sort=${sort}`,
+          `/?sort=${sort}&title=${sort}`,
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);

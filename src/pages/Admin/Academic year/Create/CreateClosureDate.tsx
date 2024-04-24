@@ -21,13 +21,24 @@ const CreateClosureDate = ({ onClose }: { onClose: () => void }) => {
       closure_date: new Date(closureDate).toISOString(),
       final_closure_date: new Date(finalClosureDate).toISOString(),
     };
-    dispatch(createAcademicYear(newAcademicYear));
-    dispatch(
-      setNotification({
-        message: "New academic year is created successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(createAcademicYear(newAcademicYear))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
   return (
     <S.Layout>

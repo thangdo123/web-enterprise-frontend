@@ -23,7 +23,10 @@ export const fetchAcademicYears = createAsyncThunk(
 
 export const deleteAcademicYearById = createAsyncThunk(
   "academicYear/deleteAcademicYearById",
-  async (academicYearId: string, { rejectWithValue }) => {
+  async (
+    { academicYearId }: { academicYearId: string },
+    { rejectWithValue },
+  ) => {
     try {
       const response = await axiosInstance.delete(
         API_BASE_URL +
@@ -32,7 +35,7 @@ export const deleteAcademicYearById = createAsyncThunk(
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);
-      return academicYearId;
+      return response.data;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error);
@@ -63,7 +66,7 @@ export const updateAcademicYearById = createAsyncThunk(
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);
-      return academicYearId;
+      return response.data;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error);
@@ -113,7 +116,7 @@ export const academicYearState = createSlice({
     builder.addCase(deleteAcademicYearById.fulfilled, (state, action) => {
       state.allAcademicYears = state.allAcademicYears.map((academicYears) =>
         academicYears.filter(
-          (academicYear) => academicYear.id !== action.payload,
+          (academicYear) => academicYear.id !== action.meta.arg.academicYearId,
         ),
       );
     });
@@ -121,7 +124,7 @@ export const academicYearState = createSlice({
     builder.addCase(updateAcademicYearById.fulfilled, (state, action) => {
       state.allAcademicYears = state.allAcademicYears.map((academicYears) =>
         academicYears.map((academicYear) =>
-          academicYear.id === action.payload
+          academicYear.id === action.meta.arg.academicYearId
             ? {
                 ...academicYear,
                 closure_date: action.meta.arg.closure_date,

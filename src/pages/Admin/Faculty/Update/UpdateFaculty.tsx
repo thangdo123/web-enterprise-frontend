@@ -25,13 +25,24 @@ const UpdateFaculty = ({
     e.preventDefault();
     onClose();
     const selectedFaculty = { facultyId: facultyId, name: nameInput };
-    dispatch(updateFacultyById(selectedFaculty));
-    dispatch(
-      setNotification({
-        message: "Faculty is updated successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(updateFacultyById(selectedFaculty))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
 
   useEffect(() => {

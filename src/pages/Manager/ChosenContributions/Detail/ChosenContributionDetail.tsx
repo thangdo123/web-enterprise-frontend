@@ -18,13 +18,24 @@ export default function ChosenContributionDetail({
 }: IChosenContributionDetailProps) {
   const dispatch = useDispatch<AppDispatch>();
   const handlePublishSubmission = () => {
-    dispatch(publishContribution({ Id: chosenContribution.id }));
-    dispatch(
-      setNotification({
-        message: "The post is published successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(publishContribution({ Id: chosenContribution.id }))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
     onClose();
   };
   return (
