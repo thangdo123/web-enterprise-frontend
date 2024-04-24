@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IGuestState } from "../../../interfaces/guest.interface";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 const initialState: IGuestState = {
   faculties: [],
@@ -11,40 +12,41 @@ const initialState: IGuestState = {
 
 export const fetchAllGuestFaculty = createAsyncThunk(
   "faculties/fetchAllGuestFaculties",
-  async (_, {rejectWithValue}) => {
-    try{
+  async (_, { rejectWithValue }) => {
+    try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.GUEST.GET_FACULTY
+        API_BASE_URL + API_ENDPOINTS.GUEST.GET_FACULTY,
       );
-
+      checkAccessToken(response.data.accessToken);
       return response.data;
-    }catch(err){
+    } catch (err) {
       console.log(err);
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 export const fetchAllPublishedContributionInFaculty = createAsyncThunk(
   "faculties/fetchAllPublishedContributionInFaculty",
-  async ( id: string, {rejectWithValue}) => {
-    try{
+  async (id: string, { rejectWithValue }) => {
+    try {
       const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.GUEST.GET_FACULTY + id
+        API_BASE_URL + API_ENDPOINTS.GUEST.GET_FACULTY + id,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
-    }catch(err){
+    } catch (err) {
       console.log(err);
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 export const guestState = createSlice({
   name: "guestState",
   initialState,
-  reducers:{},
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllGuestFaculty.pending, (state) => {
       state.faculties = [];
@@ -59,12 +61,18 @@ export const guestState = createSlice({
       state.allPublicContributions = [];
       state.isLoading = true;
     });
-    builder.addCase(fetchAllPublishedContributionInFaculty.rejected, (state) => {
-      state.allPublicContributions = [];
-    });
-    builder.addCase(fetchAllPublishedContributionInFaculty.fulfilled, (state, action) => {
-      state.allPublicContributions = action.payload.allPublicContributions;
-      state.isLoading = false;
-    });
+    builder.addCase(
+      fetchAllPublishedContributionInFaculty.rejected,
+      (state) => {
+        state.allPublicContributions = [];
+      },
+    );
+    builder.addCase(
+      fetchAllPublishedContributionInFaculty.fulfilled,
+      (state, action) => {
+        state.allPublicContributions = action.payload.allPublicContributions;
+        state.isLoading = false;
+      },
+    );
   },
 });

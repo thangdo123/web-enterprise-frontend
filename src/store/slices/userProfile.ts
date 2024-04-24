@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance, axiosInstanceFormData } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
 import { IAccount } from "../../interfaces/account.interfaces";
-import { setCookie } from "../../utils/cookies.utils";
+import { checkAccessToken } from "../../utils/cookies.utils";
 
 export const getUserProfile = createAsyncThunk(
   "user/getUserProfile",
@@ -12,6 +12,7 @@ export const getUserProfile = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.USER.VIEW_PROFILE,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -28,6 +29,7 @@ export const getAdminProfile = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.ADMIN.VIEW_ADMIN_PROFILE,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -45,6 +47,7 @@ export const updateUserProfile = createAsyncThunk(
         formData,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -72,10 +75,6 @@ export const userProfileState = createSlice({
     builder.addCase(getAdminProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload.userProfile;
       console.log(action.payload.accessToken);
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(updateUserProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload.user;

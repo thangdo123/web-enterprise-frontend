@@ -5,7 +5,7 @@ import {
   IAccount,
   IAccountState,
 } from "../../../interfaces/account.interfaces";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const fetchAllAccounts = createAsyncThunk(
   "accounts/fetchAllAcounts",
@@ -15,6 +15,7 @@ export const fetchAllAccounts = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.ADMIN.ACCOUNTS + `/?role=${role}`,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -32,6 +33,7 @@ export const searchAccount = createAsyncThunk(
           API_ENDPOINTS.ADMIN.ACCOUNTS +
           `/?email=${input}&name=${input}`,
       );
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -55,6 +57,7 @@ export const createAccount = createAsyncThunk(
         },
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -74,6 +77,7 @@ export const updateAccountById = createAsyncThunk(
         { name, is_locked, avatar: "sdfsd" },
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -96,10 +100,6 @@ export const accountState = createSlice({
     });
     builder.addCase(fetchAllAccounts.fulfilled, (state, action) => {
       state.account = action.payload.account;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(fetchAllAccounts.rejected, (state) => {
       state.account = [];

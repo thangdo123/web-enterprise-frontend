@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IChosenContributionState } from "../../../interfaces/chosenContribution";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const getAllExceptionReports = createAsyncThunk(
   "exceptionReports/getAllExceptionReports",
@@ -12,6 +12,7 @@ export const getAllExceptionReports = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.MANAGER.EXCEPTION_REPORTS,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -32,10 +33,6 @@ export const exceptionReportsState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllExceptionReports.fulfilled, (state, action) => {
       state.allChosenContributions = action.payload.allContributions;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
   },
 });

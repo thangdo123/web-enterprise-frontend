@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance, axiosInstanceFormData } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IContributionState } from "../../../interfaces/contribution.interface";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 const initialState: IContributionState = {
   allMyContributions: [],
@@ -44,6 +44,7 @@ export const fetchAllContributions = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS,
       );
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -60,6 +61,7 @@ export const fetchContributionDetail = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -76,6 +78,7 @@ export const fetchPublishedContributions = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.USER.GET_PUBLISHED_CONTRIBUTION,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -92,8 +95,8 @@ export const createContribution = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.USER.UPLOAD_CONTRIBUTION,
         formData,
       );
-
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -112,8 +115,8 @@ export const editContribution = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.USER.EDIT_CONTRIBUTION + id,
         formData,
       );
-
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -130,6 +133,7 @@ export const deleteContribution = createAsyncThunk(
       );
       console.log(API_BASE_URL + API_ENDPOINTS.USER.DELETE_CONTRIBUTION + id);
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -149,20 +153,12 @@ export const contributionState = createSlice({
     builder.addCase(fetchAllContributions.fulfilled, (state, action) => {
       state.allMyContributions = action.payload.allMyContributions;
       state.isLoading = false;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(fetchAllContributions.rejected, (state) => {
       state.allMyContributions = [];
     });
     builder.addCase(fetchContributionDetail.fulfilled, (state, action) => {
       state.detailContribution = action.payload;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(fetchPublishedContributions.pending, (state) => {
       state.allChosenContribtution = [];
@@ -174,10 +170,6 @@ export const contributionState = createSlice({
     builder.addCase(fetchPublishedContributions.fulfilled, (state, action) => {
       state.allChosenContribtution = action.payload.allChosenContributions;
       state.isLoading = false;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
   },
 });
