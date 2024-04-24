@@ -39,18 +39,23 @@ export const Block2Right = styled.div``;
 
 export const Block3 = styled.div`
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 1.5%;
   padding-top: var(--s-7);
+  @media ${DEVICES.TABLET}{
+    justify-content: space-evenly;
+  }
 `;
 
 export const Block3Items = styled.div`
   cursor: pointer;
-  width: 250px;
+  width: 18.8%;
   margin-bottom: var(--s-5);
   border: var(--gray-light-2) solid 1px;
-  @media (max-width: 534px) {
+  @media ${DEVICES.TABLET}{
+    width: 250px;
+  }
+  @media(max-width: 534px){
     width: 350px;
   }
 `;

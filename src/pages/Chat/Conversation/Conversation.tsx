@@ -43,7 +43,7 @@ export default function ConversationList({
               <S.ItemAva />
               <S.ItemInfo>
                 <S.ItemName>{conversation.name}</S.ItemName>
-                <S.ItemMsg>{conversation.latestMessage.text}</S.ItemMsg>
+                <S.ItemMsg>{conversation.latestMessage && conversation.latestMessage.text ? conversation.latestMessage.text : ""}</S.ItemMsg>
               </S.ItemInfo>
             </S.ListItem>
           ))}
