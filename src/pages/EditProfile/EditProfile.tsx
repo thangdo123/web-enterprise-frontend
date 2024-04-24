@@ -45,13 +45,25 @@ const EditProfile = () => {
     files.forEach((item) => {
       formData.append("files", item);
     });
-    dispatch(updateUserProfile(formData));
-    dispatch(
-      setNotification({
-        message: "Your profile is edited successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(updateUserProfile(formData))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
+    setNameInput(userProfile.name);
   };
 
   useEffect(() => {

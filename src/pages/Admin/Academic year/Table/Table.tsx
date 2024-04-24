@@ -79,14 +79,32 @@ export default function Table({
                           </S.ActionTitle>
                           <S.ActionTitle
                             onClick={() => {
-                              dispatch(deleteAcademicYearById(academicYear.id));
+                              /* eslint-disable */
                               dispatch(
-                                setNotification({
-                                  message:
-                                    "Academic year is deleted successfully",
-                                  type: ENotificationType.Success,
+                                deleteAcademicYearById({
+                                  academicYearId: academicYear.id,
                                 }),
-                              );
+                              )
+                                .unwrap()
+                                .then((action) => {
+                                  console.log(action);
+                                  dispatch(
+                                    setNotification({
+                                      message: action.message,
+                                      type: ENotificationType.Success,
+                                    }),
+                                  );
+                                })
+                                .catch((rejectedValueOrSerializedError) => {
+                                  dispatch(
+                                    setNotification({
+                                      message:
+                                        rejectedValueOrSerializedError.response
+                                          .data.message,
+                                      type: ENotificationType.Error,
+                                    }),
+                                  );
+                                });
                             }}
                           >
                             Delete

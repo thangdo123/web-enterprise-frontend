@@ -32,13 +32,24 @@ const UpdateClosureDate = ({
       closure_date: new Date(closureDateInput).toISOString(),
       final_closure_date: new Date(finalClosureDateInput).toISOString(),
     };
-    dispatch(updateAcademicYearById(selectedAcademicYear));
-    dispatch(
-      setNotification({
-        message: "Academic year is updated successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(updateAcademicYearById(selectedAcademicYear))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
 
   useEffect(() => {

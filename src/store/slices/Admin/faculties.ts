@@ -40,14 +40,14 @@ export const searchFaculty = createAsyncThunk(
 
 export const deleteFacultyById = createAsyncThunk(
   "faculties/deleteFacultyById",
-  async (facultyId: string, { rejectWithValue }) => {
+  async ({ facultyId }: { facultyId: string }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.delete(
         API_BASE_URL + API_ENDPOINTS.ADMIN.DELETE_FACULTIES + facultyId,
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);
-      return facultyId;
+      return response.data;
     } catch (err) {
       console.log(err);
       return rejectWithValue(err);
@@ -68,7 +68,7 @@ export const updateFacultyById = createAsyncThunk(
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);
-      return facultyId;
+      return response.data;
     } catch (err) {
       console.log(err);
       return rejectWithValue(err);
@@ -113,13 +113,13 @@ export const facultyState = createSlice({
     });
     builder.addCase(deleteFacultyById.fulfilled, (state, action) => {
       state.allFaculties = state.allFaculties.map((faculties) =>
-        faculties.filter((faculty) => faculty.id !== action.payload),
+        faculties.filter((faculty) => faculty.id !== action.meta.arg.facultyId),
       );
     });
     builder.addCase(updateFacultyById.fulfilled, (state, action) => {
       state.allFaculties = state.allFaculties.map((faculties) =>
         faculties.map((faculty) =>
-          faculty.id === action.payload
+          faculty.id === action.meta.arg.facultyId
             ? { ...faculty, name: action.meta.arg.name }
             : faculty,
         ),

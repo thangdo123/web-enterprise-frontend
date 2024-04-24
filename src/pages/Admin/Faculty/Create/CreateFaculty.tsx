@@ -14,13 +14,24 @@ const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
     e.preventDefault();
     onClose();
     const newFaculty = { name: nameInput };
-    dispatch(createFaculty(newFaculty));
-    dispatch(
-      setNotification({
-        message: "New faculty is created successfully",
-        type: ENotificationType.Success,
-      }),
-    );
+    dispatch(createFaculty(newFaculty))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
   return (
     <S.CreateFacultyLayout>
