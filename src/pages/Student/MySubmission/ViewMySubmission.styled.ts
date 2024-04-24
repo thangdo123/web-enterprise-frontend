@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICES } from "../../../config/responsiveBreakpoints";
 
 export const Layout = styled.div`
   display: flex;
@@ -99,16 +100,22 @@ export const Block3TopRight = styled.div`
 
 export const Block3SubmissionList = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  
   gap: 1.5%;
   flex-wrap: wrap;
+  @media ${DEVICES.TABLET}{
+    justify-content: space-evenly;
+  }
 `;
 
 export const Block3SubmissionItemsContainer = styled.div`
   border: var(--gray-light-2) solid 1px;
   cursor: pointer;
-  width: 250px;
+  width: 18.8%;
   margin-bottom: var(--s-10);
+  @media ${DEVICES.TABLET}{
+    width: 250px;
+  }
   @media(max-width: 534px){
     width: 350px;
   }

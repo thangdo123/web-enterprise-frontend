@@ -106,7 +106,7 @@ export const Block4RightTxtArea = styled.div`
     textarea{
         font-size: var(--fs-md);
         width: 100%;
-        height: var(--s-12);
+        height: var(--s-13);
         max-height: 500px;
     }
 `;

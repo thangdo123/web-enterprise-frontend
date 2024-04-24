@@ -77,17 +77,22 @@ export const Block2Description = styled.div`
 
 export const Block3 = styled.div`
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 1.5%;
   padding-top: var(--s-7);
+  @media ${DEVICES.TABLET}{
+    justify-content: space-evenly;
+  }
 `;
 
 export const Block3Items = styled.div`
-  width: 250px;
   margin-bottom: var(--s-5);
   border: var(--gray-light-2) solid 1px;
-  @media (max-width: 534px) {
+  width: 18.8%;
+  @media ${DEVICES.TABLET}{
+    width: 250px;
+  }
+  @media(max-width: 534px){
     width: 350px;
   }
 `;
@@ -102,7 +107,7 @@ export const Block3ItemsImg = styled.img`
 
 export const Block3ItemsBottom = styled.div`
   padding: var(--s-6);
-  border: var(--gray-light-2) solid 1px;
+  border-top: var(--gray-light-2) solid 1px;
 `;
 
 export const Block3ItemsTitle = styled.div`

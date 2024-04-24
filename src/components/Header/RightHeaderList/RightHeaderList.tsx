@@ -24,9 +24,6 @@ export default function RightHeaderList({onSearch}:IRightHeaderProps) {
   return (
     <S.RightHeaderList>
       <Searchbar onSearch={onSearch} />
-      <S.RightListItem>
-        <i className="bi bi-bell"></i>
-      </S.RightListItem>
       <S.RightListItem onClick={handleNavigate}>User: {name}</S.RightListItem>
     </S.RightHeaderList>
   );
