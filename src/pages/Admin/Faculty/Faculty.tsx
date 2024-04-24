@@ -19,8 +19,12 @@ export default function Faculty() {
   const [updateFacultyName, setUpdateFacultyName] = useState<string>("");
   const [updateFacultyId, setUpdateFacultyId] = useState<string>("");
 
-  const handlePopupCreate = () => setShowCreate(!showCreate);
-  const handlePopupUpdate = () => setShowUpdate(!showUpdate);
+  const handlePopupCreate = () => {
+    setShowCreate(!showCreate);
+  };
+  const handlePopupUpdate = () => {
+    setShowUpdate(!showUpdate);
+  };
   const OPTION_LIST = [{ value: "Ascending" }, { value: "Descending" }];
 
   useEffect(() => {
@@ -41,13 +45,17 @@ export default function Faculty() {
         <CreateFaculty onClose={handlePopupCreate} />
       </Popup>
 
-      <Popup show={showUpdate} onClose={handlePopupUpdate}>
-        <UpdateFaculty
-          facultyId={updateFacultyId}
-          facultyInput={updateFacultyName}
-          onClose={handlePopupUpdate}
-        />
-      </Popup>
+      {showUpdate ? (
+        <Popup show={true} onClose={handlePopupUpdate}>
+          <UpdateFaculty
+            facultyId={updateFacultyId}
+            facultyInput={updateFacultyName}
+            onClose={handlePopupUpdate}
+          />
+        </Popup>
+      ) : (
+        ""
+      )}
       <Table
         handleSelectedFacultyId={setUpdateFacultyId}
         handleSelectedFacultyName={setUpdateFacultyName}

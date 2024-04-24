@@ -21,6 +21,14 @@ export default function Register() {
     };
     dispatch(registerAsGuest(account))
       .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
       .catch((rejectedValueOrSerializedError) => {
         dispatch(
           setNotification({

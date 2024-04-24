@@ -38,10 +38,13 @@ const CreateSubmission = () => {
           }),
         );
       })
+
       .catch((rejectedValueOrSerializedError) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: rejectedValueOrSerializedError.response.data.message
+              ? rejectedValueOrSerializedError.response.data.message
+              : "Only support docx and image files, please change your files",
             type: ENotificationType.Error,
           }),
         );

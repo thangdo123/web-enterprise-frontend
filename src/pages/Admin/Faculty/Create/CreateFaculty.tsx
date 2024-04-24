@@ -42,7 +42,7 @@ const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
             <input
               value={nameInput}
               onChange={(e) => setNameInput(e.target.value)}
-              placeholder="Enter Username"
+              placeholder="Enter Faculty"
               required
             />
           </S.CreateFacultyBlock1Right>

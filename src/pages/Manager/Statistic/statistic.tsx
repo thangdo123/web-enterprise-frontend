@@ -21,12 +21,13 @@ export default function Statistic() {
     countContribution,
     totalContributions,
     newContributions,
+    totalCoordinators,
   } = useSelector((state: RootState) => state.statisticState);
   const pieData = {
     labels: Object.keys(percentage),
     datasets: [
       {
-        label: "My First Dataset",
+        label: "Contributions",
         data: Object.values(percentage),
         backgroundColor: Object.keys(percentage).map(() =>
           generateRandomColor(),
@@ -94,8 +95,8 @@ export default function Statistic() {
             <i className="bi bi-journal-text"></i>
           </S.Block1ItemLeft>
           <S.Block1ItemRight>
-            <S.B1RightTitle>Total contributions</S.B1RightTitle>
-            <S.B1RightCount>23</S.B1RightCount>
+            <S.B1RightTitle>Total coordinators</S.B1RightTitle>
+            <S.B1RightCount>{totalCoordinators}</S.B1RightCount>
           </S.Block1ItemRight>
         </S.Block1Items>
       </S.Block1>

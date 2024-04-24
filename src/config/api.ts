@@ -48,7 +48,7 @@ const API_ENDPOINTS = {
     EXCEPTION_REPORTS: "/manager/viewExceptionReports",
     TOTAL_CONTRIBUTIONS_TODAY: "/manager/viewAllNewContributionsToday",
     TOTAL_CONTRIBUTIONS: "/manager/getTotalContribution",
-    TOTAL_COORDINATORS_IN_FACULTY: "/manager/getAllCoordinatorInFaculty",
+    TOTAL_COORDINATORS_IN_FACULTY: "/manager/totalCoordinators",
   },
   COORDINATOR: {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",

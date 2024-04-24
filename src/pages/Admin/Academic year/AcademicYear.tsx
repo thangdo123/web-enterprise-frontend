@@ -39,14 +39,19 @@ export default function Faculty() {
         <CreateAcademicYear onClose={handlePopupCreate} />
       </Popup>
 
-      <Popup show={showUpdate} onClose={handlePopupUpdate}>
-        <UpdateClosureDate
-          academicYearId={updateAcademicYearId}
-          closureDate={updateClosureDate.slice(0, 16)}
-          finalClosureDate={updateFinalClosureDate.slice(0, 16)}
-          onClose={handlePopupUpdate}
-        />
-      </Popup>
+      {showUpdate ? (
+        <Popup show={true} onClose={handlePopupUpdate}>
+          <UpdateClosureDate
+            academicYearId={updateAcademicYearId}
+            closureDate={updateClosureDate.slice(0, 16)}
+            finalClosureDate={updateFinalClosureDate.slice(0, 16)}
+            onClose={handlePopupUpdate}
+          />
+        </Popup>
+      ) : (
+        ""
+      )}
+
       <Table
         handleSelectedAcademicYearId={setUpdateAcademicYearId}
         handleSelectedClosureDate={setUpdateClosureDate}
