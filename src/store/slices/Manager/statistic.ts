@@ -92,7 +92,7 @@ const initialState = {
   percentage: {},
   countContribution: {
     totalContributions: "",
-    contributionsByFaculty: {},
+    contributionsByFaculty: [],
   },
   statsByFacultyAndYear: {},
   totalContributions: undefined,

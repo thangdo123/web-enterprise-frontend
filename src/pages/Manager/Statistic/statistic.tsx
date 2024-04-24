@@ -14,6 +14,11 @@ import { Bar, Pie } from "react-chartjs-2";
 import { generateRandomColor } from "../../../utils/randomColor.utils";
 import "./style.css";
 
+interface IContributionByFaculty {
+  facultyName: string;
+  contributionInFaculty: number;
+}
+
 export default function Statistic() {
   const dispatch = useDispatch<AppDispatch>();
   const {
@@ -41,20 +46,25 @@ export default function Statistic() {
   const barData = {
     labels: [
       "Total contributions",
-      ...Object.keys(countContribution.contributionsByFaculty),
+      ...countContribution.contributionsByFaculty.map(
+        (contribution: IContributionByFaculty) => contribution.facultyName,
+      ),
     ],
     datasets: [
       {
         label: "Contributions",
         data: [
           countContribution.totalContributions,
-          ...Object.values(countContribution.contributionsByFaculty).map(
-            (item: any) => item.totalContributions,
+          ...countContribution.contributionsByFaculty.map(
+            (contribution: IContributionByFaculty) =>
+              contribution.contributionInFaculty,
           ),
         ],
         backgroundColor: [
           "Total contributions",
-          ...Object.keys(countContribution.contributionsByFaculty),
+          ...countContribution.contributionsByFaculty.map(
+            (contribution: IContributionByFaculty) => contribution.facultyName,
+          ),
         ].map(() => generateRandomColor()),
         hoverOffset: 4,
       },
