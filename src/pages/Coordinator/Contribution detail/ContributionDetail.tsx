@@ -18,12 +18,12 @@ const ContributionDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  useEffect(() => {
-    dispatch(fetchContributionDetailCoordinator(id!));
-  }, []);
   const { detailContribution } = useSelector(
     (state: RootState) => state.coordinatorContributionState,
   );
+  useEffect(() => {
+    dispatch(fetchContributionDetailCoordinator(id!));
+  }, []);
 
   const handleGiveComment = () => {
     if (id) {
@@ -36,6 +36,7 @@ const ContributionDetail = () => {
               type: ENotificationType.Success,
             }),
           );
+          dispatch(fetchContributionDetailCoordinator(id!));
         })
         .catch((rejectedValueOrSerializedError) => {
           dispatch(

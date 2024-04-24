@@ -90,7 +90,7 @@ export const fetchAllContributionsByFaculty = createAsyncThunk(
 
 export const searchContributions = createAsyncThunk(
   "contribution/searchContributions",
-  async ( keyword: string, { rejectWithValue }) => {
+  async (keyword: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.COORDINATOR.SEARCH_CONTRIBUTIONS + keyword,
@@ -113,6 +113,7 @@ export const fetchContributionDetailCoordinator = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
       );
       checkAccessToken(response.data.accessToken);
+      console.log(response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -185,7 +186,7 @@ export const coordinatorContributionState = createSlice({
       },
     );
     builder.addCase(giveComment.fulfilled, (state, action) => {
-      state.detailContribution.comment.push(action.payload);
+      state.detailContribution.comment.push(action.payload.comment.content);
     });
     builder.addCase(chooseContribution.fulfilled, (state, action) => {
       state.detailContribution.contribution.is_choosen =
@@ -201,13 +202,10 @@ export const coordinatorContributionState = createSlice({
       state.allMyContributions = [];
       state.isLoading = true;
     });
-    builder.addCase(
-      searchContributions.fulfilled,
-      (state, action) => {
-        state.allMyContributions = action.payload.allMyContributions;
-        state.isLoading = false;
-      },
-    );
+    builder.addCase(searchContributions.fulfilled, (state, action) => {
+      state.allMyContributions = action.payload.allMyContributions;
+      state.isLoading = false;
+    });
     builder.addCase(searchContributions.rejected, (state) => {
       state.allMyContributions = [];
     });
