@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import * as S from "./Toolbar.styled";
 import Dropdown from "../../../../components/Dropdown/Dropdown";
-import Searchbar from "../../../../components/Searchbar/Searchbar";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../store";
 import { fetchAcademicYears } from "../../../../store/slices/Admin/academicYear";
-import Popup from "../../../../components/PopUp/Popup";
 
 interface IOption {
   value: string;
@@ -13,7 +11,6 @@ interface IOption {
 
 interface IToolbarProps {
   onCreate: () => void;
-  onSearch: (input: string) => void;
   pageTitle: string;
   sortTitle: string;
   btnTitle: string;
@@ -22,7 +19,6 @@ interface IToolbarProps {
 
 export default function Toolbar({
   onCreate,
-  onSearch,
   pageTitle,
   sortTitle,
   btnTitle,
@@ -36,10 +32,6 @@ export default function Toolbar({
       dispatch(fetchAcademicYears("desc"));
     }
   };
-  const [show, setShow] = useState<boolean>(false);
-  const handleClose = () => {
-    setShow(!show);
-  };
   return (
     <S.ToolBarContainer>
       <S.Title>{pageTitle}</S.Title>
@@ -49,15 +41,6 @@ export default function Toolbar({
           title={sortTitle}
           optionList={optionList}
         />
-        <S.SearchbarIcon>
-          <i onClick={handleClose} className="bi bi-search"></i>
-        </S.SearchbarIcon>
-        <Popup show={show} onClose={handleClose}>
-          <Searchbar onSearch={onSearch} />
-        </Popup>
-        <S.ToolSearchbar>
-          <Searchbar onSearch={onSearch} />
-        </S.ToolSearchbar>
         <S.AddBtn onClick={onCreate}>{btnTitle}</S.AddBtn>
       </S.ToolBar>
     </S.ToolBarContainer>

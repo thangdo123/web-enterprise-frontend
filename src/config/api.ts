@@ -46,6 +46,9 @@ const API_ENDPOINTS = {
     PERCENTAGE_BY_FACULTY: "/manager/getContributionPercentageByFaculty",
     COUNT_CONTRIBUTION: "/manager/CountContributionsStats",
     EXCEPTION_REPORTS: "/manager/viewExceptionReports",
+    TOTAL_CONTRIBUTIONS_TODAY: "/manager/viewAllNewContributionsToday",
+    TOTAL_CONTRIBUTIONS: "/manager/getTotalContribution",
+    TOTAL_COORDINATORS_IN_FACULTY: "/manager/getAllCoordinatorInFaculty",
   },
   COORDINATOR: {
     VIEW_ALL_CONTRIBUTION: "/coordinator/viewContribution",

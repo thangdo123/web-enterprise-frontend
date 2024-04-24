@@ -25,18 +25,18 @@ export default function ChosenContributions() {
   const handleDownloadContributions = () =>
     dispatch(downloadContributions())
       .unwrap()
-      .then((action) => {
+      .then(() => {
         dispatch(
           setNotification({
-            message: action.message,
+            message: "Download successfully",
             type: ENotificationType.Success,
           }),
         );
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch(() => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: "Failed to download",
             type: ENotificationType.Error,
           }),
         );

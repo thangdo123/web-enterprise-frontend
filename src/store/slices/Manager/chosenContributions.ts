@@ -29,9 +29,22 @@ export const downloadContributions = createAsyncThunk(
     try {
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.MANAGER.DOWNLOAD_CONTRIBUTIONS,
+        {
+          responseType: "blob", // Important for handling binary data
+        },
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);
+
+      const blob = new Blob([response.data], { type: "application/zip" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "output.zip";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
       return response.data;
     } catch (error) {
       console.log(error);

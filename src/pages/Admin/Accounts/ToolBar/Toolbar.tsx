@@ -36,6 +36,8 @@ export default function Toolbar({
       dispatch(fetchAllAccounts("MANAGER"));
     } else if (type === "Marketing Coordinator") {
       dispatch(fetchAllAccounts("COORDIONATOR"));
+    } else if (type === "Guest") {
+      dispatch(fetchAllAccounts("GUEST"));
     }
   };
 

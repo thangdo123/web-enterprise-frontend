@@ -3,23 +3,6 @@ import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { checkAccessToken } from "../../../utils/cookies.utils";
 
-export const getContributionsStatsByFacultyAndYear = createAsyncThunk(
-  "statistic/getContributionsStatsByFacultyAndYear",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.MANAGER.STATS_BY_FACULTY_AND_YEAR,
-      );
-      checkAccessToken(response.data.accessToken);
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-      return rejectWithValue(error);
-    }
-  },
-);
-
 export const getContributionPercentageByFaculty = createAsyncThunk(
   "statistic/getContributionPercentageByFaculty",
   async (_, { rejectWithValue }) => {
@@ -54,6 +37,57 @@ export const getCountContributionsStats = createAsyncThunk(
   },
 );
 
+export const getTotalContributions = createAsyncThunk(
+  "contributions/getTotalContributions",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.MANAGER.TOTAL_CONTRIBUTIONS,
+      );
+      checkAccessToken(response.data.accessToken);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const getTotalContributionsToday = createAsyncThunk(
+  "contributions/getTotalContributionsToday",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.MANAGER.TOTAL_CONTRIBUTIONS_TODAY,
+      );
+      checkAccessToken(response.data.accessToken);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
+export const getTotalCoordinators = createAsyncThunk(
+  "contributions/getTotalContributionsToday",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get(
+        API_BASE_URL + API_ENDPOINTS.MANAGER.TOTAL_COORDINATORS_IN_FACULTY,
+      );
+      checkAccessToken(response.data.accessToken);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error);
+    }
+  },
+);
+
 const initialState = {
   percentage: {},
   countContribution: {
@@ -61,6 +95,8 @@ const initialState = {
     contributionsByFaculty: {},
   },
   statsByFacultyAndYear: {},
+  totalContributions: "",
+  newContributions: "",
 };
 
 export const statisticState = createSlice({
@@ -77,11 +113,11 @@ export const statisticState = createSlice({
     builder.addCase(getCountContributionsStats.fulfilled, (state, action) => {
       state.countContribution = action.payload;
     });
-    builder.addCase(
-      getContributionsStatsByFacultyAndYear.fulfilled,
-      (state, action) => {
-        state.statsByFacultyAndYear = action.payload;
-      },
-    );
+    builder.addCase(getTotalContributions.fulfilled, (state, action) => {
+      state.totalContributions = action.payload.totalContributions;
+    });
+    builder.addCase(getTotalContributionsToday.fulfilled, (state, action) => {
+      state.newContributions = action.payload.newContributions;
+    });
   },
 });

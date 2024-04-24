@@ -21,6 +21,9 @@ export default function ChangePassword() {
     };
     dispatch(resetDefaultPassword(account))
       .unwrap()
+      .then(() => {
+        window.location.href = "/login";
+      })
       .catch((rejectedValueOrSerializedError) => {
         dispatch(
           setNotification({
