@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../store";
 import {
   getContributionPercentageByFaculty,
-  getContributionsStatsByFacultyAndYear,
   getCountContributionsStats,
+  getTotalContributions,
+  getTotalContributionsToday,
+  getTotalCoordinators,
 } from "../../../store/slices/Manager/statistic";
 import "chart.js/auto";
 import { Bar, Pie } from "react-chartjs-2";
@@ -14,9 +16,12 @@ import "./style.css";
 
 export default function Statistic() {
   const dispatch = useDispatch<AppDispatch>();
-  const { percentage, countContribution } = useSelector(
-    (state: RootState) => state.statisticState,
-  );
+  const {
+    percentage,
+    countContribution,
+    totalContributions,
+    newContributions,
+  } = useSelector((state: RootState) => state.statisticState);
   const pieData = {
     labels: Object.keys(percentage),
     datasets: [
@@ -57,8 +62,10 @@ export default function Statistic() {
   /* eslint-disable */
 
   useEffect(() => {
+    dispatch(getTotalContributions());
+    dispatch(getTotalContributionsToday());
+    dispatch(getTotalCoordinators());
     dispatch(getContributionPercentageByFaculty());
-    dispatch(getContributionsStatsByFacultyAndYear());
     dispatch(getCountContributionsStats());
   }, []);
   return (
@@ -70,7 +77,7 @@ export default function Statistic() {
           </S.Block1ItemLeft>
           <S.Block1ItemRight>
             <S.B1RightTitle>Total contributions</S.B1RightTitle>
-            <S.B1RightCount>23</S.B1RightCount>
+            <S.B1RightCount>{totalContributions}</S.B1RightCount>
           </S.Block1ItemRight>
         </S.Block1Items>
         <S.Block1Items>
@@ -78,8 +85,8 @@ export default function Statistic() {
             <i className="bi bi-journal-text"></i>
           </S.Block1ItemLeft>
           <S.Block1ItemRight>
-            <S.B1RightTitle>Total contributions</S.B1RightTitle>
-            <S.B1RightCount>23</S.B1RightCount>
+            <S.B1RightTitle>Total new contributions today</S.B1RightTitle>
+            <S.B1RightCount>{newContributions}</S.B1RightCount>
           </S.Block1ItemRight>
         </S.Block1Items>
         <S.Block1Items>

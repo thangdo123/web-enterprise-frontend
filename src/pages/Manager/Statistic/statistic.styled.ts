@@ -15,14 +15,10 @@ const PageContainer = styled.div`
 
 const ChartContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   overflow: auto;
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-4);
+  gap: 20px;
 `;
 
 const Chart = styled.div`

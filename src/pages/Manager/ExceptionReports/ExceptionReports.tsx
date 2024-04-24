@@ -22,7 +22,7 @@ export default function ExceptionReports() {
   return (
     <S.PageContainer>
       <S.ToolBar>
-        <S.Title>Exception Reports</S.Title>
+        <S.Title>Exception Reports (contributions without comments) </S.Title>
         <Dropdown
           onClick={(option) => sortType(option.value!)}
           title="Sort"

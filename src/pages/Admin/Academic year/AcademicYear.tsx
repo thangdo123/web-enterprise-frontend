@@ -30,7 +30,6 @@ export default function Faculty() {
     <S.PageContainer>
       <Toolbar
         onCreate={handlePopupCreate}
-        onSearch={(input: string) => console.log(input)}
         pageTitle="Academic Years List"
         sortTitle="Sort"
         btnTitle="Add new closure date"
