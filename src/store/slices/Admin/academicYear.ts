@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IAcademicYearsState } from "../../../interfaces/academicYear.interfaces";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const fetchAcademicYears = createAsyncThunk(
   "academicYears/fetchAcademicYears",
@@ -12,6 +12,7 @@ export const fetchAcademicYears = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.ADMIN.ACADEMIC_YEARS + `/?sort=${sort}`,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -30,6 +31,7 @@ export const deleteAcademicYearById = createAsyncThunk(
           academicYearId,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return academicYearId;
     } catch (error) {
       console.log(error);
@@ -60,6 +62,7 @@ export const updateAcademicYearById = createAsyncThunk(
         { closure_date, final_closure_date },
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return academicYearId;
     } catch (error) {
       console.log(error);
@@ -86,6 +89,7 @@ export const createAcademicYear = createAsyncThunk(
         { closure_date, final_closure_date },
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -105,10 +109,6 @@ export const academicYearState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchAcademicYears.fulfilled, (state, action) => {
       state.allAcademicYears = action.payload.allAcademicYears;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        window.location.href = "/";
-      }
     });
     builder.addCase(deleteAcademicYearById.fulfilled, (state, action) => {
       state.allAcademicYears = state.allAcademicYears.map((academicYears) =>
@@ -131,6 +131,7 @@ export const academicYearState = createSlice({
         ),
       );
     });
+    /* eslint-disable */
     builder.addCase(createAcademicYear.fulfilled, (state, action) => {
       const { allAcademicYears } = state;
       const academicYearsWithLessThan10 = allAcademicYears.find(

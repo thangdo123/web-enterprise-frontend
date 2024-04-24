@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const getContributionsStatsByFacultyAndYear = createAsyncThunk(
   "statistic/getContributionsStatsByFacultyAndYear",
@@ -10,6 +10,8 @@ export const getContributionsStatsByFacultyAndYear = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.MANAGER.STATS_BY_FACULTY_AND_YEAR,
       );
+      checkAccessToken(response.data.accessToken);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -25,6 +27,8 @@ export const getContributionPercentageByFaculty = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.MANAGER.PERCENTAGE_BY_FACULTY,
       );
+      checkAccessToken(response.data.accessToken);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -40,6 +44,8 @@ export const getCountContributionsStats = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.MANAGER.COUNT_CONTRIBUTION,
       );
+      checkAccessToken(response.data.accessToken);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -66,27 +72,15 @@ export const statisticState = createSlice({
       getContributionPercentageByFaculty.fulfilled,
       (state, action) => {
         state.percentage = action.payload;
-        if (action.payload.accessToken) {
-          setCookie("token", action.payload.accessToken);
-          location.reload();
-        }
       },
     );
     builder.addCase(getCountContributionsStats.fulfilled, (state, action) => {
       state.countContribution = action.payload;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(
       getContributionsStatsByFacultyAndYear.fulfilled,
       (state, action) => {
         state.statsByFacultyAndYear = action.payload;
-        if (action.payload.accessToken) {
-          setCookie("token", action.payload.accessToken);
-          location.reload();
-        }
       },
     );
   },

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IFacultyState } from "../../../interfaces/faculty.interfaces";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const fetchAllFaculties = createAsyncThunk(
   "faculties/fetchAllFaculties",
@@ -12,6 +12,7 @@ export const fetchAllFaculties = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.ADMIN.FACULTIES + `/?sort=${sort}`,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -28,6 +29,7 @@ export const searchFaculty = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.ADMIN.FACULTIES + `/?name=${name}`,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -44,6 +46,7 @@ export const deleteFacultyById = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.ADMIN.DELETE_FACULTIES + facultyId,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return facultyId;
     } catch (err) {
       console.log(err);
@@ -64,6 +67,7 @@ export const updateFacultyById = createAsyncThunk(
         { name },
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return facultyId;
     } catch (err) {
       console.log(err);
@@ -81,6 +85,7 @@ export const createFaculty = createAsyncThunk(
         { name },
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       return rejectWithValue(err);
@@ -102,10 +107,6 @@ export const facultyState = createSlice({
     });
     builder.addCase(fetchAllFaculties.fulfilled, (state, action) => {
       state.allFaculties = action.payload.allFaculties;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(fetchAllFaculties.rejected, (state) => {
       state.allFaculties = [];

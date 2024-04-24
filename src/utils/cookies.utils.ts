@@ -40,3 +40,11 @@ export function decodeCookie(token: string | null) {
     return null;
   }
 }
+
+export function checkAccessToken(accessToken: string) {
+  if (!accessToken) {
+    return null;
+  }
+  setCookie("token", accessToken);
+  location.reload();
+}

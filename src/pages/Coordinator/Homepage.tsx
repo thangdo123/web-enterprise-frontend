@@ -16,12 +16,19 @@ import Notification from "./Notification/Notification";
 // const dropdownTitle = "Sort";
 
 const Homepage = () => {
+  const seenNotifications = localStorage.getItem("seenNotifications");
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchAllContributionsByFaculty());
     dispatch(fetchNotificationCount());
-  }, []);
+    const interval = setInterval(() => {
+      dispatch(fetchNotificationCount());
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [dispatch]);
+
   const [totalPage, setTotalPage] = useState<number>();
   const [page, setPage] = useState<number>(0);
 
@@ -94,11 +101,16 @@ const Homepage = () => {
       <S.NotificationBtn
         onClick={() => {
           setOpenNoti(!isOpenNoti);
+          localStorage.setItem("seenNotifications", `${count}`);
         }}
       >
         <i className="bi bi-bell-fill"></i>
       </S.NotificationBtn>
-      <S.NotificationCount>{count}</S.NotificationCount>
+      <S.NotificationCount>
+        {seenNotifications && count
+          ? count - parseInt(seenNotifications!)
+          : count}
+      </S.NotificationCount>
       {isOpenNoti ? <Notification /> : ""}
     </S.Layout>
   );

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { IChosenContributionState } from "../../../interfaces/chosenContribution";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const getAllChosenContributions = createAsyncThunk(
   "contributions/getAllChoosenContributions",
@@ -14,6 +14,7 @@ export const getAllChosenContributions = createAsyncThunk(
           `/?sort=${sort}`,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -30,6 +31,7 @@ export const downloadContributions = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.MANAGER.DOWNLOAD_CONTRIBUTIONS,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -46,6 +48,7 @@ export const publishContribution = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.MANAGER.PUBLISH_CONTRIBUTION + Id,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -66,10 +69,6 @@ export const chosenContributionState = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllChosenContributions.fulfilled, (state, action) => {
       state.allChosenContributions = action.payload.allChosenContributions;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(downloadContributions.fulfilled, (state) => {
       state.isDownloading = true;

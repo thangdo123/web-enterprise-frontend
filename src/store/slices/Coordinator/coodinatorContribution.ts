@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../../config/api";
 import { ICoordinatorContributionState } from "../../../interfaces/coordinatorContribution";
-import { setCookie } from "../../../utils/cookies.utils";
+import { checkAccessToken } from "../../../utils/cookies.utils";
 
 const initialState: ICoordinatorContributionState = {
   allMyContributions: [],
@@ -46,6 +46,7 @@ export const fetchNotificationCount = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.COORDINATOR.GET_NOTIFICATION_COUNT,
       );
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -56,17 +57,19 @@ export const fetchNotificationCount = createAsyncThunk(
 
 export const fetchNotifications = createAsyncThunk(
   "coordinator/fetchNotifications",
-  async (_, { rejectWithValue }) =>{
-    try{
+  async (_, { rejectWithValue }) => {
+    try {
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.COORDINATOR.VIEW_NOTIFICATIONS,
       );
+      console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
-    } catch(err){
+    } catch (err) {
       console.log(err);
       return rejectWithValue(err);
     }
-  }
+  },
 );
 
 export const fetchAllContributionsByFaculty = createAsyncThunk(
@@ -76,7 +79,7 @@ export const fetchAllContributionsByFaculty = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.COORDINATOR.VIEW_ALL_CONTRIBUTION,
       );
-
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -92,6 +95,7 @@ export const fetchContributionDetailCoordinator = createAsyncThunk(
       const response = await axiosInstance.get(
         API_BASE_URL + API_ENDPOINTS.USER.CONTRIBUTIONS + contributionId,
       );
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -112,6 +116,7 @@ export const giveComment = createAsyncThunk(
         { content },
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -128,6 +133,7 @@ export const chooseContribution = createAsyncThunk(
         API_BASE_URL + API_ENDPOINTS.COORDINATOR.CHOOSE_CONTRIBUTION + id,
       );
       console.log(response.data);
+      checkAccessToken(response.data.accessToken);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -150,10 +156,6 @@ export const coordinatorContributionState = createSlice({
       (state, action) => {
         state.allMyContributions = action.payload.allMyContributions;
         state.isLoading = false;
-        if (action.payload.accessToken) {
-          setCookie("token", action.payload.accessToken);
-          location.reload();
-        }
       },
     );
     builder.addCase(fetchAllContributionsByFaculty.rejected, (state) => {
@@ -163,26 +165,14 @@ export const coordinatorContributionState = createSlice({
       fetchContributionDetailCoordinator.fulfilled,
       (state, action) => {
         state.detailContribution = action.payload;
-        if (action.payload.accessToken) {
-          setCookie("token", action.payload.accessToken);
-          location.reload();
-        }
       },
     );
     builder.addCase(giveComment.fulfilled, (state, action) => {
       state.detailContribution.comment.push(action.payload);
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(chooseContribution.fulfilled, (state, action) => {
       state.detailContribution.contribution.is_choosen =
         action.payload.chosenContribution.is_choosen;
-      if (action.payload.accessToken) {
-        setCookie("token", action.payload.accessToken);
-        location.reload();
-      }
     });
     builder.addCase(fetchNotificationCount.fulfilled, (state, action) => {
       state.count = action.payload.count;
