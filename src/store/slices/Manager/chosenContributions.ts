@@ -6,12 +6,15 @@ import { checkAccessToken } from "../../../utils/cookies.utils";
 
 export const getAllChosenContributions = createAsyncThunk(
   "contributions/getAllChoosenContributions",
-  async (sort: string, { rejectWithValue }) => {
+  async (
+    { sort, title }: { sort: string; title: string },
+    { rejectWithValue },
+  ) => {
     try {
       const response = await axiosInstance.get(
         API_BASE_URL +
           API_ENDPOINTS.MANAGER.CHOSEN_CONTRIBUTIONS +
-          `/?sort=${sort}&title=${sort}`,
+          `/?sort=${sort}&title=${title}`,
       );
       console.log(response.data);
       checkAccessToken(response.data.accessToken);

@@ -41,7 +41,7 @@ export const resetPassword = createAsyncThunk(
         { otp, email, newPassword, reNewPassword },
       );
       console.log(response.data);
-      return email;
+      return response.data;
     } catch (error) {
       console.log(error);
       return rejectWithValue(error);
@@ -62,7 +62,12 @@ const initialState: IResetPasswordState = {
 export const resetPasswordState = createSlice({
   name: "resetPasswordState",
   initialState,
-  reducers: {},
+  reducers: {
+    clearCheckOtp: (state) => {
+      state.checkOtp = false;
+      state.isSentOtp = false;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(sendOtp.fulfilled, (state) => {
       state.isSentOtp = true;
@@ -72,3 +77,5 @@ export const resetPasswordState = createSlice({
     });
   },
 });
+
+export const { clearCheckOtp } = resetPasswordState.actions;

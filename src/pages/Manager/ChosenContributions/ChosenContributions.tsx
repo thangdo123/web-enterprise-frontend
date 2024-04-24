@@ -42,12 +42,24 @@ export default function ChosenContributions() {
         );
       });
   useEffect(() => {
-    dispatch(getAllChosenContributions(""));
+    dispatch(
+      getAllChosenContributions({
+        sort: "",
+        title: "",
+      }),
+    );
   }, []);
   return (
     <S.PageContainer>
       <Toolbar
-        onSearch={(input: string) => dispatch(getAllChosenContributions(input))}
+        onSearch={(input: string) =>
+          dispatch(
+            getAllChosenContributions({
+              sort: "",
+              title: input,
+            }),
+          )
+        }
         pageTitle="Chosen Contributions"
         sortTitle="Sort"
         optionList={OPTION_LIST}

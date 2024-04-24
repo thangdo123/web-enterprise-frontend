@@ -31,9 +31,19 @@ export default function Toolbar({
   const dispatch = useDispatch<AppDispatch>();
   const sortType = (type: string) => {
     if (type === "Ascending") {
-      dispatch(getAllChosenContributions("asc"));
+      dispatch(
+        getAllChosenContributions({
+          sort: "asc",
+          title: "",
+        }),
+      );
     } else if (type === "Descending") {
-      dispatch(getAllChosenContributions("desc"));
+      dispatch(
+        getAllChosenContributions({
+          sort: "desc",
+          title: "",
+        }),
+      );
     }
   };
   const [show, setShow] = useState<boolean>(false);

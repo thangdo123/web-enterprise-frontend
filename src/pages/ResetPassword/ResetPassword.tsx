@@ -2,10 +2,16 @@ import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./ResetPassword.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { resetPassword, sendOtp } from "../../store/slices/resetPassword";
+import {
+  clearCheckOtp,
+  resetPassword,
+  sendOtp,
+} from "../../store/slices/resetPassword";
 import { useLocation, useNavigate } from "react-router";
 import { deleteCookie } from "../../utils/cookies.utils";
 import Logo from "../../assets/images/gw-logo.png";
+import { setNotification } from "../../store/slices/notification";
+import { ENotificationType } from "../../enum";
 
 export default function Login() {
   const [time, setTime] = useState<number>(300);
@@ -26,7 +32,25 @@ export default function Login() {
 
   const handleResendCode = () => {
     setTime(300);
-    dispatch(sendOtp({ email: mailInput }));
+    console.log(mailInput);
+    dispatch(sendOtp({ email: mailInput }))
+      .unwrap()
+      .then((action) => {
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
 
   const handleTime = (time: number) => {
@@ -70,6 +94,7 @@ export default function Login() {
     if (checkOtp) {
       deleteCookie("token");
       navigate("/login");
+      dispatch(clearCheckOtp());
     }
   }, [checkOtp]);
 
@@ -82,10 +107,44 @@ export default function Login() {
         newPassword: newPW,
         reNewPassword: reNewPW,
       };
-      dispatch(resetPassword(newPassword));
+      dispatch(resetPassword(newPassword))
+        .unwrap()
+        .then((action) => {
+          dispatch(
+            setNotification({
+              message: action.message,
+              type: ENotificationType.Success,
+            }),
+          );
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          dispatch(
+            setNotification({
+              message: rejectedValueOrSerializedError.response.data.message,
+              type: ENotificationType.Error,
+            }),
+          );
+        });
     } else {
       handleShow();
-      dispatch(sendOtp({ email: mailInput }));
+      dispatch(sendOtp({ email: mailInput }))
+        .unwrap()
+        .then((action) => {
+          dispatch(
+            setNotification({
+              message: action.message,
+              type: ENotificationType.Success,
+            }),
+          );
+        })
+        .catch((rejectedValueOrSerializedError) => {
+          dispatch(
+            setNotification({
+              message: rejectedValueOrSerializedError.response.data.message,
+              type: ENotificationType.Error,
+            }),
+          );
+        });
     }
   };
 
@@ -94,11 +153,7 @@ export default function Login() {
       <S.LoginCenter>
         <div className="login-logo">
           <S.LoginLogoBanner>
-            <S.LogoImg
-              className="logo-img"
-              src={Logo}
-              alt=""
-            />
+            <S.LogoImg className="logo-img" src={Logo} alt="" />
             <h1>Greenwich University</h1>
           </S.LoginLogoBanner>
           <S.LogoDescription>

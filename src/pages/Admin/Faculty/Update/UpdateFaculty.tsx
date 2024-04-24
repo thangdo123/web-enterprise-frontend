@@ -50,22 +50,26 @@ const UpdateFaculty = ({
   }, [facultyInput]);
   return (
     <S.CreateFacultyLayout>
-      <S.CreateFacultyContainer onSubmit={handleOnSubmit}>
-        <S.CreateFacultyBlock1>
-          <S.CreateFacultyLeftTitle>Name:</S.CreateFacultyLeftTitle>
-          <S.CreateFacultyBlock1Right>
-            <input
-              value={nameInput}
-              onChange={(e) => setNameInput(e.target.value)}
-              placeholder="Enter Username"
-            />
-          </S.CreateFacultyBlock1Right>
-        </S.CreateFacultyBlock1>
-        <S.BottomBtn>
-          <S.SaveBtn type="submit">Save</S.SaveBtn>
-          <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
-        </S.BottomBtn>
-      </S.CreateFacultyContainer>
+      {facultyInput && (
+        <S.CreateFacultyContainer onSubmit={handleOnSubmit}>
+          <S.CreateFacultyBlock1>
+            <S.CreateFacultyLeftTitle>Name:</S.CreateFacultyLeftTitle>
+            <S.CreateFacultyBlock1Right>
+              <input
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                placeholder="Enter Faculty"
+              />
+            </S.CreateFacultyBlock1Right>
+          </S.CreateFacultyBlock1>
+          <S.BottomBtn>
+            <S.SaveBtn type="submit">Save</S.SaveBtn>
+            <S.CancelBtn type="button" onClick={onClose}>
+              Cancel
+            </S.CancelBtn>
+          </S.BottomBtn>
+        </S.CreateFacultyContainer>
+      )}
     </S.CreateFacultyLayout>
   );
 };

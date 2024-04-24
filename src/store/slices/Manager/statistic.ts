@@ -72,7 +72,7 @@ export const getTotalContributionsToday = createAsyncThunk(
 );
 
 export const getTotalCoordinators = createAsyncThunk(
-  "contributions/getTotalContributionsToday",
+  "coordinators/getTotalCoordinators",
   async (_, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
@@ -95,8 +95,9 @@ const initialState = {
     contributionsByFaculty: {},
   },
   statsByFacultyAndYear: {},
-  totalContributions: "",
-  newContributions: "",
+  totalContributions: undefined,
+  newContributions: undefined,
+  totalCoordinators: undefined,
 };
 
 export const statisticState = createSlice({
@@ -118,6 +119,9 @@ export const statisticState = createSlice({
     });
     builder.addCase(getTotalContributionsToday.fulfilled, (state, action) => {
       state.newContributions = action.payload.newContributions;
+    });
+    builder.addCase(getTotalCoordinators.fulfilled, (state, action) => {
+      state.totalCoordinators = action.payload.totalCoordinators;
     });
   },
 });
