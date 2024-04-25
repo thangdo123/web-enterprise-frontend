@@ -97,6 +97,15 @@ const CreateSubmission = () => {
               ></textarea>
             </S.Block4RightTxtArea>
           </S.Block4>
+          <S.Block5>
+            <S.LeftTile></S.LeftTile>
+            <S.CheckBoxContainer>
+              <S.CheckBox type="checkbox" required/>
+              <div>
+                I accept the terms and conditions before I provide my work.
+              </div>
+            </S.CheckBoxContainer>
+          </S.Block5>
           <S.ButtonContainer>
             <S.SaveBtn type="submit">Save</S.SaveBtn>
             <S.CancelBtn type="button" onClick={handleResetForm}>
