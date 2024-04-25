@@ -49,16 +49,16 @@ export default function Login() {
   return (
     <S.LoginContainter>
       <S.LoginCenter>
-        <div className="login-logo">
+        <S.LoginContainer>
           <S.LoginLogoBanner>
             <S.LogoImg className="logo-img" src={Logo} alt="" />
             <h1>Greenwich University</h1>
           </S.LoginLogoBanner>
-          <S.LogoDescription>
-            University of Greenwich in London and Kent was established in 1890.
-            We are located on the banks of the River Thames in South London.
-          </S.LogoDescription>
-        </div>
+        </S.LoginContainer>
+        <S.LogoDescription>
+          University of Greenwich in London and Kent was established in 1890. We
+          are located on the banks of the River Thames in South London.
+        </S.LogoDescription>
         <S.LoginField>
           <S.LoginFieldContainer onSubmit={handleOnSubmit}>
             <S.LoginFieldText>

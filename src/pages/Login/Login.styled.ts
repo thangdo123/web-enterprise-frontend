@@ -6,7 +6,7 @@ export const LoginContainter = styled.div`
   justify-content: center;
   background-color: var(--gray-light-1);
   height: 900px;
-  p{
+  p {
     margin: 0;
   }
 `;
@@ -16,7 +16,7 @@ export const LoginCenter = styled.div`
   p {
     color: var(--gray);
   }
-  @media ${DEVICES.TABLET}{
+  @media ${DEVICES.TABLET} {
     width: 100%;
   }
 `;
@@ -25,17 +25,32 @@ export const LogoDescription = styled.p`
   text-align: center;
 `;
 
+export const LoginContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const LoginLogoBanner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: var(--fw-medium);
     width: 80%;
+    text-align: center;
+    margin: 0;
+    @media (max-width: 1430px) {
+      width: 100%;
+    }
+  }
+  @media (max-width: 1430px) {
+    flex-direction: column;
   }
 `;
 
 export const LogoImg = styled.img`
-  width: 20%;
+  width: var(--s-13);
 `;
 
 export const LoginField = styled.div`
@@ -80,9 +95,7 @@ export const InputField = styled.div`
   }
 `;
 
-export const HidePasswordBtn = styled.div`
-
-`;
+export const HidePasswordBtn = styled.div``;
 
 export const ForgotPassword = styled.div`
   margin-top: 20px;

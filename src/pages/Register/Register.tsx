@@ -7,7 +7,7 @@ import { clearAuthStatus, registerAsGuest } from "../../store/slices/register";
 import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import { useNavigate } from "react-router";
-
+import Logo from "../../assets/images/gw-logo.png";
 export default function Register() {
   const dispatch = useDispatch<AppDispatch>();
   const { authStatus } = useSelector((state: RootState) => state.registerState);
@@ -56,20 +56,16 @@ export default function Register() {
   return (
     <S.LoginContainter>
       <S.LoginCenter>
-        <div className="login-logo">
+        <S.LoginContainer>
           <S.LoginLogoBanner>
-            <S.LogoImg
-              className="logo-img"
-              src="https://cdn.haitrieu.com/wp-content/uploads/2022/12/Icon-Truong-Dai-hoc-Greenwich-Viet-Nam.png"
-              alt=""
-            />
+            <S.LogoImg className="logo-img" src={Logo} alt="" />
             <h1>Greenwich University</h1>
           </S.LoginLogoBanner>
-          <S.LogoDescription>
-            University of Greenwich in London and Kent was established in 1890.
-            We are located on the banks of the River Thames in South London.
-          </S.LogoDescription>
-        </div>
+        </S.LoginContainer>
+        <S.LogoDescription>
+          University of Greenwich in London and Kent was established in 1890. We
+          are located on the banks of the River Thames in South London.
+        </S.LogoDescription>
         <S.LoginField>
           <S.LoginFieldContainer onSubmit={handleOnSubmit}>
             <S.LoginFieldText>
