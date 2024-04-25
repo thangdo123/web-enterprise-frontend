@@ -16,16 +16,45 @@ const PageContainer = styled.div`
 const ChartContainer = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
-  overflow: auto;
+  /* overflow: auto; */
   gap: 20px;
+  
+  @media ${DEVICES.TABLET} {
+    flex-direction: column;
+  }
 `;
 
 const Chart = styled.div`
-  width: 100%;
-  max-height: 90vh;
+  width: 50%;
+  max-height: 60vh;
   display: flex;
   flex-direction: column;
+  @media ${DEVICES.TABLET} {
+    width: 99%;
+  }
+  @media ${DEVICES.PHONE} {
+    width: 99%;
+    padding: var(--s-3);
+  }
+  box-shadow: var(--shadow-xl);
+  border: var(--gray-light-2) solid 1px;
+  border-radius: var(--br-lg);
+  padding: var(--s-8);
+`;
+
+export const PieChart = styled.div`
+  width: 50%;
+  max-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  @media ${DEVICES.TABLET} {
+    width: 99%;
+  }
+  box-shadow: var(--shadow-xl);
+  border: var(--gray-light-2) solid 1px;
+  border-radius: var(--br-lg);
+  padding: var(--s-8);
+  padding-bottom: var(--s-13);
 `;
 
 const ChartTitle = styled.div`
@@ -38,6 +67,7 @@ export { PageContainer, Chart, ChartContainer, ChartTitle };
 
 export const Block1 = styled.div`
   display: flex;
+  justify-content: center;
   gap: 3%;
   @media ${DEVICES.TABLET} {
     flex-direction: column;
