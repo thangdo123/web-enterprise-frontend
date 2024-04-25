@@ -63,7 +63,6 @@ const EditProfile = () => {
           }),
         );
       });
-    setNameInput(userProfile.name);
   };
 
   useEffect(() => {

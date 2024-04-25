@@ -9,7 +9,7 @@ export interface IMessage {
 }
 
 export interface IContactState {
-  coordinator: IAccount[];
+  contactList: IAccount[];
 }
 
 export interface IConversation {

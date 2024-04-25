@@ -74,7 +74,6 @@ export const userProfileState = createSlice({
     });
     builder.addCase(getAdminProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload.userProfile;
-      console.log(action.payload.accessToken);
     });
     builder.addCase(updateUserProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload.user;

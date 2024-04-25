@@ -4,7 +4,6 @@ const API_ENDPOINTS = {
   AUTH: {
     LOGIN: "/auth/login",
     RESET_DEFAULT_PASSWORD: "/auth/resetDefaultPassword/",
-    REFRESH_TOKEN: "/auth/refreshAccessToken",
   },
   GIVE_COMMENT: "/comment/",
   GUEST: {

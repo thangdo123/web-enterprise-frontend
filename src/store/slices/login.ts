@@ -20,22 +20,6 @@ export const postLogin = createAsyncThunk(
   },
 );
 
-export const getRefreshToken = createAsyncThunk(
-  "get/getRefreshToken",
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get(
-        API_BASE_URL + API_ENDPOINTS.AUTH.REFRESH_TOKEN,
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-      return rejectWithValue(err);
-    }
-  },
-);
-
 const initialState: IAuthState = {
   authStatus: false,
 };

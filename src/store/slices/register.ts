@@ -13,12 +13,10 @@ export const registerAsGuest = createAsyncThunk(
       );
       console.log(response.data);
       return response.data;
-      /* eslint-disable */
-    } catch (err: any) {
+    } catch (err) {
       console.log(err);
       return rejectWithValue(err);
     }
-    /* eslint-disable */
   },
 );
 
