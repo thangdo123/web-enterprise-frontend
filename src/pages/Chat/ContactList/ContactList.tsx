@@ -18,7 +18,7 @@ export default function ContactList({ getConversationId }: IConversationList) {
   const { userProfile } = useSelector(
     (state: RootState) => state.userProfileState,
   );
-  const { coordinator } = useSelector((state: RootState) => state.contactState);
+  const { contactList } = useSelector((state: RootState) => state.contactState);
 
   const handleOpenConversation = (id: string) => {
     socket.emit("join", {
@@ -45,8 +45,8 @@ export default function ContactList({ getConversationId }: IConversationList) {
     <S.ListContainer>
       <S.ListTitle>Contacts</S.ListTitle>
       <S.ListItemsContainer>
-        {coordinator &&
-          coordinator.map((value, index) => (
+        {contactList &&
+          contactList.map((value, index) => (
             <S.ListItem
               key={index}
               onClick={() => handleOpenConversation(value.id!)}

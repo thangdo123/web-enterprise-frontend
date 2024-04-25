@@ -7,11 +7,18 @@ interface IConversationList {
 }
 
 interface IConversation {
-  conversation: string;
+  conversationId: string;
   latestMessage: {
     text: string;
   };
   name: string;
+}
+
+interface IConversationResponse {
+  body: {
+    conversations: IConversation[];
+    message: string;
+  };
 }
 
 export default function ConversationList({
@@ -22,8 +29,8 @@ export default function ConversationList({
 
   useEffect(() => {
     socket.emit("get-conversation");
-    socket.on("get-conversation-response", (data: IConversation[]) => {
-      setConversationList(data);
+    socket.on("get-conversation-response", (data: IConversationResponse) => {
+      setConversationList(data.body.conversations);
     });
   });
 
@@ -38,12 +45,16 @@ export default function ConversationList({
           conversationList.map((conversation, index) => (
             <S.ListItem
               key={index}
-              onClick={() => setConversationId(conversation.conversation)}
+              onClick={() => setConversationId(conversation.conversationId)}
             >
               <S.ItemAva />
               <S.ItemInfo>
                 <S.ItemName>{conversation.name}</S.ItemName>
-                <S.ItemMsg>{conversation.latestMessage && conversation.latestMessage.text ? conversation.latestMessage.text : ""}</S.ItemMsg>
+                <S.ItemMsg>
+                  {conversation.latestMessage && conversation.latestMessage.text
+                    ? conversation.latestMessage.text
+                    : ""}
+                </S.ItemMsg>
               </S.ItemInfo>
             </S.ListItem>
           ))}

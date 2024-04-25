@@ -38,7 +38,7 @@ export const viewStudentByFacultyId = createAsyncThunk(
 );
 
 const initialState: IContactState = {
-  coordinator: [],
+  contactList: [],
 };
 
 export const contactState = createSlice({
@@ -47,10 +47,10 @@ export const contactState = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(viewCoordinatorByFacultyId.fulfilled, (state, action) => {
-      state.coordinator = action.payload.coordinator;
+      state.contactList = action.payload.coordinator;
     });
     builder.addCase(viewStudentByFacultyId.fulfilled, (state, action) => {
-      state.coordinator = action.payload.students;
+      state.contactList = action.payload.students;
     });
   },
 });
