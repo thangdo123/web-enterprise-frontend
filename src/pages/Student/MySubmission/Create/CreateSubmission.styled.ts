@@ -120,3 +120,18 @@ export const Block4RightTxtArea = styled.div`
         max-height: 500px;
     }
 `;
+
+export const Block5 = styled.div`
+    display: flex;
+    justify-content: center;
+    padding-top: var(--s-4);
+`;
+
+export const CheckBoxContainer = styled.div`
+    flex: 7;
+    display: flex;
+`;
+
+export const CheckBox = styled.input`
+    margin-right: 5px;
+`;
