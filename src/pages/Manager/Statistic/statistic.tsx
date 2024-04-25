@@ -115,7 +115,7 @@ export default function Statistic() {
           <S.ChartTitle>Contributions in each faculty</S.ChartTitle>
           <Bar data={barData} />
         </S.Chart>
-        <S.Chart>
+        <S.PieChart>
           <S.ChartTitle>
             Percentage of contributions in each faculty compared to all
             contributions
@@ -127,7 +127,7 @@ export default function Statistic() {
             }}
             data={pieData}
           />
-        </S.Chart>
+        </S.PieChart>
       </S.ChartContainer>
     </S.PageContainer>
   );
