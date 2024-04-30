@@ -12,8 +12,10 @@ import { deleteCookie } from "../../utils/cookies.utils";
 import Logo from "../../assets/images/gw-logo.png";
 import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
+import { CapsLockOn, ValidatePassword } from "../../utils/validate.utils";
 
-export default function Login() {
+export default function ResetPassword() {
+  const [capsLockStatus, setCapsLockStatus] = useState<boolean>(false);
   const [time, setTime] = useState<number>(300);
   const [mailInput, setMailInput] = useState<string>("");
   const [otp, setOtp] = useState<string>("");
@@ -22,6 +24,7 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
+
   const { isSentOtp, checkOtp } = useSelector(
     (state: RootState) => state.resetPasswordState,
   );
@@ -31,11 +34,11 @@ export default function Login() {
   };
 
   const handleResendCode = () => {
-    setTime(300);
     console.log(mailInput);
     dispatch(sendOtp({ email: mailInput }))
       .unwrap()
       .then((action) => {
+        setTime(300);
         dispatch(
           setNotification({
             message: action.message,
@@ -201,26 +204,40 @@ export default function Login() {
                 <input
                   value={newPW}
                   onChange={(e) => setNewPW(e.target.value)}
+                  onKeyUp={(e) => setCapsLockStatus(CapsLockOn(e))}
                   type="password"
                   placeholder="enter your new password"
                   required
                 />
+                <S.CheckIcon $valid={ValidatePassword(newPW)}>
+                  <i className="bi bi-check"></i>
+                </S.CheckIcon>
               </S.InputField>
             )}
             {isSentOtp && (
-              <S.InputField>
-                <p>
-                  <i className="bi bi-key"></i>
-                </p>
+              <>
+                <S.InputField>
+                  <p>
+                    <i className="bi bi-key"></i>
+                  </p>
 
-                <input
-                  value={reNewPW}
-                  onChange={(e) => setReNewPW(e.target.value)}
-                  type="password"
-                  placeholder="Confirm your new password"
-                  required
-                />
-              </S.InputField>
+                  <input
+                    value={reNewPW}
+                    onChange={(e) => setReNewPW(e.target.value)}
+                    type="password"
+                    onKeyUp={(e) => setCapsLockStatus(CapsLockOn(e))}
+                    placeholder="Confirm your new password"
+                    required
+                  />
+                </S.InputField>
+                <S.CapsLockStatus $show={capsLockStatus}>
+                  Caps Lock is on
+                </S.CapsLockStatus>
+                <S.PasswordStatus $valid={ValidatePassword(newPW)}>
+                  Password must have at least 8 characters and contain numbers,
+                  lowercase letters, uppercase letters, and special characters.
+                </S.PasswordStatus>
+              </>
             )}
             <S.Btn $show={isSentOtp}>Send code</S.Btn>
             <S.SendBtn $show={isSentOtp}>Submit</S.SendBtn>

@@ -6,8 +6,10 @@ import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import { useParams } from "react-router";
 import { resetDefaultPassword } from "../../store/slices/resetDefaultPassword";
+import { CapsLockOn, ValidatePassword } from "../../utils/validate.utils";
 
 export default function ChangePassword() {
+  const [capsLockStatus, setCapsLockStatus] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const { email } = useParams();
   const { default_pasword } = useParams();
@@ -70,11 +72,15 @@ export default function ChangePassword() {
               <input
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
+                onKeyUp={(e) => setCapsLockStatus(CapsLockOn(e))}
                 type="password"
                 placeholder="Enter your new password"
                 required
               />
             </S.InputField>
+            <S.CheckIcon $valid={ValidatePassword(newPassword)}>
+              <i className="bi bi-check"></i>
+            </S.CheckIcon>
             <S.InputField>
               <p>
                 <i className="bi bi-person-circle"></i>
@@ -87,6 +93,9 @@ export default function ChangePassword() {
                 required
               />
             </S.InputField>
+            <S.CapsLockStatus $show={capsLockStatus}>
+              Caps Lock is on
+            </S.CapsLockStatus>
             <S.SignInBtn className="sign-in-btn">Submit</S.SignInBtn>
           </S.LoginFieldContainer>
         </S.LoginField>

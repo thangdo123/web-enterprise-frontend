@@ -6,7 +6,7 @@ export const LoginContainter = styled.div`
   justify-content: center;
   background-color: var(--gray-light-1);
   height: 900px;
-  p{
+  p {
     margin: 0;
   }
 `;
@@ -16,7 +16,7 @@ export const LoginCenter = styled.div`
   p {
     color: var(--gray);
   }
-  @media ${DEVICES.TABLET}{
+  @media ${DEVICES.TABLET} {
     width: 100%;
   }
 `;
@@ -119,4 +119,25 @@ export const ResendBtn = styled.button<{ $show: boolean }>`
 
 export const TimeContainer = styled.div<{ $show: boolean }>`
   display: ${({ $show }) => ($show ? "block" : "none")};
+`;
+
+export const CapsLockStatus = styled.div<{ $show: boolean }>`
+  display: ${({ $show }) => ($show ? "block" : "none")};
+  color: var(--red);
+  font-weight: var(--fw-medium);
+  padding: var(--s-2) 0;
+  font-size: var(--fs-sm);
+`;
+
+export const PasswordStatus = styled.div<{ $valid: boolean }>`
+  display: ${({ $valid }) => ($valid ? "none" : "block")};
+  color: var(--red);
+  font-weight: var(--fw-medium);
+  padding: var(--s-2) 0;
+  font-size: var(--fs-sm);
+`;
+
+export const CheckIcon = styled.div<{ $valid: boolean }>`
+  display: ${({ $valid }) => ($valid ? "block" : "none")};
+  color: var(--green);
 `;

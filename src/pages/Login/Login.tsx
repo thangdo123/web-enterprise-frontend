@@ -9,9 +9,11 @@ import { ILogin } from "../../interfaces";
 import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import Logo from "../../assets/images/gw-logo.png";
+import { CapsLockOn } from "../../utils/validate.utils";
 
 export default function Login() {
   const [visible, setvisible] = useState(false);
+  const [capsLockStatus, setCapsLockStatus] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const { authStatus } = useSelector((state: RootState) => state.loginState);
 
@@ -25,7 +27,9 @@ export default function Login() {
       .catch((rejectedValueOrSerializedError) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message:
+              rejectedValueOrSerializedError.response.data.message ||
+              rejectedValueOrSerializedError.response.data.error,
             type: ENotificationType.Error,
           }),
         );
@@ -83,6 +87,7 @@ export default function Login() {
               <input
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
+                onKeyUp={(e) => setCapsLockStatus(CapsLockOn(e))}
                 type={visible ? "text" : "password"}
                 placeholder="Enter password"
                 required
@@ -95,6 +100,9 @@ export default function Login() {
                 )}
               </S.HidePasswordBtn>
             </S.InputField>
+            <S.CapsLockStatus $show={capsLockStatus}>
+              Caps Lock is on
+            </S.CapsLockStatus>
             <S.ForgotPassword>
               <Link to="/resetpassword">Forgot Password?</Link>
             </S.ForgotPassword>
