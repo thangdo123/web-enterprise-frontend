@@ -8,6 +8,8 @@ import {
   deleteContribution,
   fetchContributionDetail,
 } from "../../../../store/slices/Student/contribution";
+import { setNotification } from "../../../../store/slices/notification";
+import { ENotificationType } from "../../../../enum";
 
 const SubmissionDetail = () => {
   const { id } = useParams();
@@ -30,8 +32,25 @@ const SubmissionDetail = () => {
   };
 
   const handleDeleteSubmission = () => {
-    dispatch(deleteContribution(id!));
-    navigate("/viewsubmission");
+    dispatch(deleteContribution(id!))
+      .unwrap()
+      .then((action) => {
+        navigate("/viewsubmission");
+        dispatch(
+          setNotification({
+            message: action.message,
+            type: ENotificationType.Success,
+          }),
+        );
+      })
+      .catch((rejectedValueOrSerializedError) => {
+        dispatch(
+          setNotification({
+            message: rejectedValueOrSerializedError.response.data.message,
+            type: ENotificationType.Error,
+          }),
+        );
+      });
   };
 
   const closureDate = new Date(detailContribution.academicYear.closure_date);

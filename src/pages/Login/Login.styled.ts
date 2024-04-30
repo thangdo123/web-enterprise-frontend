@@ -117,3 +117,11 @@ export const SignInBtn = styled.button`
   border: none;
   border-radius: 5px;
 `;
+
+export const CapsLockStatus = styled.div<{ $show: boolean }>`
+  display: ${({ $show }) => ($show ? "block" : "none")};
+  color: var(--red);
+  font-weight: var(--fw-medium);
+  padding: var(--s-2) 0;
+  font-size: var(--fs-sm);
+`;
