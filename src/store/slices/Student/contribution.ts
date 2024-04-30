@@ -199,5 +199,8 @@ export const contributionState = createSlice({
     builder.addCase(searchContributions.rejected, (state) => {
       state.allMyContributions = [];
     });
+    builder.addCase(editContribution.fulfilled, (state, action) => {
+      state.allMyContributions.push(action.payload);
+    });
   },
 });
