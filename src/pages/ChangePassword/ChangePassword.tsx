@@ -29,7 +29,9 @@ export default function ChangePassword() {
       .catch((rejectedValueOrSerializedError) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message:
+              rejectedValueOrSerializedError.response.data.message ||
+              rejectedValueOrSerializedError.response.data.errors[0].msg,
             type: ENotificationType.Error,
           }),
         );
@@ -88,6 +90,7 @@ export default function ChangePassword() {
               <input
                 value={reNewPassword}
                 onChange={(e) => setReNewPassword(e.target.value)}
+                onKeyUp={(e) => setCapsLockStatus(CapsLockOn(e))}
                 type="password"
                 placeholder="Re-enter your new password"
                 required
@@ -96,6 +99,10 @@ export default function ChangePassword() {
             <S.CapsLockStatus $show={capsLockStatus}>
               Caps Lock is on
             </S.CapsLockStatus>
+            <S.PasswordStatus $valid={ValidatePassword(newPassword)}>
+              Password must have at least 8 characters and contain numbers,
+              lowercase letters, uppercase letters, and special characters.
+            </S.PasswordStatus>
             <S.SignInBtn className="sign-in-btn">Submit</S.SignInBtn>
           </S.LoginFieldContainer>
         </S.LoginField>
