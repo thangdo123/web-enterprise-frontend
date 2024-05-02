@@ -21,14 +21,17 @@ const RightListItem = styled.div`
   padding: var(--s-3) var(--s-2);
   cursor: pointer;
   border-bottom: 1px solid white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover {
     background-color: var(--gray-light);
     border-bottom: 1px solid var(--blue);
     color: var(--blue);
   }
-  @media ${DEVICES.PHONE}{
-    i{
+  @media ${DEVICES.PHONE} {
+    i {
       display: none;
     }
   }
