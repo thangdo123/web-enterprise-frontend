@@ -123,7 +123,9 @@ export default function ResetPassword() {
         .catch((rejectedValueOrSerializedError) => {
           dispatch(
             setNotification({
-              message: rejectedValueOrSerializedError.response.data.message,
+              message:
+                rejectedValueOrSerializedError.response.data.message ||
+                rejectedValueOrSerializedError.response.data.errors[0].msg,
               type: ENotificationType.Error,
             }),
           );
