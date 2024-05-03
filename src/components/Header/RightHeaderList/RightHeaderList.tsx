@@ -5,11 +5,11 @@ import { RootState } from "../../../store";
 import { useNavigate } from "react-router";
 import Searchbar from "../../Searchbar/Searchbar";
 
-interface IRightHeaderProps{
+interface IRightHeaderProps {
   onSearch: (input: string) => void;
 }
 
-export default function RightHeaderList({onSearch}:IRightHeaderProps) {
+export default function RightHeaderList({ onSearch }: IRightHeaderProps) {
   const navigate = useNavigate();
   const handleNavigate = () => {
     navigate("/editprofile");
@@ -17,6 +17,7 @@ export default function RightHeaderList({onSearch}:IRightHeaderProps) {
   const { userProfile } = useSelector(
     (state: RootState) => state.userProfileState,
   );
+  if (!userProfile) return null;
   const [name, setName] = useState<string>(userProfile.name);
   useEffect(() => {
     setName(userProfile.name);

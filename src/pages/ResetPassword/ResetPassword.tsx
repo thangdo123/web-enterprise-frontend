@@ -10,7 +10,7 @@ import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import { CapsLockOn, ValidatePassword } from "../../utils/validate.utils";
 
-const TIMEOUT = 60;
+const TIMEOUT = 300;
 
 export default function ResetPassword() {
   const dateTime = new Date();
