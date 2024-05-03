@@ -4,7 +4,7 @@ const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: var(--s-4);
-  flex: 2;
+  width: 20%;
 `;
 
 const ListTitle = styled.div`
