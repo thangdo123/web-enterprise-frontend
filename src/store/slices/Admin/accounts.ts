@@ -29,9 +29,7 @@ export const searchAccount = createAsyncThunk(
   async (input: string, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.get(
-        API_BASE_URL +
-          API_ENDPOINTS.ADMIN.ACCOUNTS +
-          `/?email=${input}&name=${input}`,
+        API_BASE_URL + API_ENDPOINTS.ADMIN.ACCOUNTS + `/?email=&name=${input}`,
       );
       checkAccessToken(response.data.accessToken);
       return response.data;
@@ -52,7 +50,7 @@ export const createAccount = createAsyncThunk(
           name,
           email,
           role,
-          avatar: "sd",
+          avatar: "",
           faculty,
         },
       );

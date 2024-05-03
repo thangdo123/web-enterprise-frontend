@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from "react";
 import * as S from "./Login.styled";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
 import { ILogin } from "../../interfaces";
 import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
@@ -14,9 +14,6 @@ export default function Login() {
   const [visible, setvisible] = useState(false);
   const [capsLockStatus, setCapsLockStatus] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { userProfile } = useSelector(
-    (state: RootState) => state.userProfileState,
-  );
 
   const handleLogin = async () => {
     const account: ILogin = {
@@ -39,12 +36,12 @@ export default function Login() {
   const [passwordInput, setPasswordInput] = useState<string>("");
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    window.location.href = "/";
     handleLogin();
   };
 
   return (
     <S.LoginContainter>
-      {userProfile && (window.location.href = "/")}
       <S.LoginCenter>
         <S.LoginContainer>
           <S.LoginLogoBanner>
