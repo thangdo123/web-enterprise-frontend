@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import * as S from "./Login.styled";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { ILogin } from "../../interfaces";
@@ -44,7 +44,7 @@ export default function Login() {
 
   return (
     <S.LoginContainter>
-      {userProfile && <Navigate to="/" />}
+      {userProfile && (window.location.href = "/")}
       <S.LoginCenter>
         <S.LoginContainer>
           <S.LoginLogoBanner>
