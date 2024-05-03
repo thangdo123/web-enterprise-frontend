@@ -62,10 +62,11 @@ export const Block3Items = styled.div`
 
 export const ItemImage = styled.img`
   width: 100%;
-  height: 230px;
+  aspect-ratio: 1/0.8;
+  /* height: 230px;
   @media (max-width: 534px) {
     height: 320px;
-  }
+  } */
 `;
 
 export const ItemBottomBlock = styled.div`
