@@ -33,6 +33,9 @@ export default function ChangePassword() {
             type: ENotificationType.Error,
           }),
         );
+        if (message === "Invalid password") {
+          window.location.href = "/login";
+        }
       });
   };
 

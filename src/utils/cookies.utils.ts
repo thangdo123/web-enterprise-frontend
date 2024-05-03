@@ -16,7 +16,6 @@ export function setCookie(name: string, value: string, days: number = 7) {
 }
 
 export function getCookie(name: string) {
-  console.log(document.cookie);
   const cookieValue = document.cookie.match(
     "(^|;)\\s*" + name + "\\s*=\\s*([^;]+)",
   );
