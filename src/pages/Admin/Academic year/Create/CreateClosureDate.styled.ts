@@ -26,8 +26,9 @@ export const InputContainer = styled.div`
 `;
 
 export const SetDateBlock = styled.div`
-  width: 50%;
   display: flex;
+  flex: 1;
+  justify-content: center;
   gap: 10px;
   align-items: center;
 `;
