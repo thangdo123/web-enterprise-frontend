@@ -100,7 +100,11 @@ const EditProfile = () => {
           <S.EditProfileInputArea>
             <p>Avatar</p>
             <div>
-              <input type="file" onChange={handleFileChange} />
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg, image/jfif"
+                onChange={handleFileChange}
+              />
             </div>
           </S.EditProfileInputArea>
           <S.BottomButtons>
