@@ -37,6 +37,7 @@ axiosInstanceFormData.interceptors.request.use(
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log(error);
     const message =
       error?.response?.data?.error ||
       error?.response?.data?.message ||
@@ -50,12 +51,12 @@ axiosInstance.interceptors.response.use(
 axiosInstanceFormData.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log(error);
     const message =
       error?.response?.data?.error ||
       error?.response?.data?.message ||
       (error?.response?.data?.errors && error.response.data.errors[0].msg) ||
-      error?.message ||
-      "Something went wrong!";
+      "Only .docx, .jpg, .jpeg, .png, and .gif files are allowed";
     return Promise.reject(message);
   },
 );

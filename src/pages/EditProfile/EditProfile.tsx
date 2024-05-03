@@ -26,6 +26,7 @@ const EditProfile = () => {
 
   const handleLogOut = () => {
     deleteCookie("token");
+    localStorage.removeItem("isSentOtp");
     window.location.href = "/";
   };
 

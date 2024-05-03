@@ -42,9 +42,7 @@ const CreateSubmission = () => {
       .catch((message) => {
         dispatch(
           setNotification({
-            message: message
-              ? message
-              : "Only support docx and image files, please change your files",
+            message: message,
             type: ENotificationType.Error,
           }),
         );

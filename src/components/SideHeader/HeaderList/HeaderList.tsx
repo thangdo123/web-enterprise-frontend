@@ -17,6 +17,7 @@ export default function HeaderList({
   const location = useLocation();
   const selectedHeader = location.pathname;
   const handleLogOut = () => {
+    localStorage.removeItem("isSentOtp");
     deleteCookie("token");
     window.location.href = "/";
   };
