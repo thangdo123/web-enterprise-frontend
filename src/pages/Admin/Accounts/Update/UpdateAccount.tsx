@@ -86,7 +86,9 @@ const UpdateAccount = ({
         <S.BottomBtn>
           <div>
             <S.SaveBtn type="submit">Save</S.SaveBtn>
-            <S.CancelBtn onClick={onClose}>Cancel</S.CancelBtn>
+            <S.CancelBtn type="button" onClick={onClose}>
+              Cancel
+            </S.CancelBtn>
           </div>
         </S.BottomBtn>
       </S.CreateAccountContainer>
