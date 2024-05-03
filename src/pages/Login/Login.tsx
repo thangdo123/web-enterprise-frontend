@@ -24,12 +24,10 @@ export default function Login() {
     };
     dispatch(postLogin(account))
       .unwrap()
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message:
-              rejectedValueOrSerializedError.response.data.message ||
-              rejectedValueOrSerializedError.response.data.error,
+            message: message,
             type: ENotificationType.Error,
           }),
         );
@@ -104,7 +102,12 @@ export default function Login() {
               Caps Lock is on
             </S.CapsLockStatus>
             <S.ForgotPassword>
-              <Link to="/resetpassword">Forgot Password?</Link>
+              <Link
+                to="/resetpassword"
+                onClick={() => localStorage.setItem("isSentOtp", "false")}
+              >
+                Forgot Password?
+              </Link>
             </S.ForgotPassword>
             <S.ForgotPassword>
               <Link to="/register">Register as Guest</Link>

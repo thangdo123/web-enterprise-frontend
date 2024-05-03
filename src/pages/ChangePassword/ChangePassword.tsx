@@ -26,12 +26,10 @@ export default function ChangePassword() {
       .then(() => {
         window.location.href = "/login";
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message:
-              rejectedValueOrSerializedError.response.data.message ||
-              rejectedValueOrSerializedError.response.data.errors[0].msg,
+            message: message,
             type: ENotificationType.Error,
           }),
         );

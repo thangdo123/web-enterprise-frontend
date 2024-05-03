@@ -5,7 +5,6 @@ import { facultyState } from "./slices/Admin/faculties";
 import { academicYearState } from "./slices/Admin/academicYear";
 import { userProfileState } from "./slices/userProfile";
 import { contributionState } from "./slices/Student/contribution";
-import { resetPasswordState } from "./slices/resetPassword";
 import { coordinatorContributionState } from "./slices/Coordinator/coodinatorContribution";
 import { chosenContributionState } from "./slices/Manager/chosenContributions";
 import { statisticState } from "./slices/Manager/statistic";
@@ -24,7 +23,6 @@ const store = configureStore({
     [academicYearState.name]: academicYearState.reducer,
     [userProfileState.name]: userProfileState.reducer,
     [contributionState.name]: contributionState.reducer,
-    [resetPasswordState.name]: resetPasswordState.reducer,
     [coordinatorContributionState.name]: coordinatorContributionState.reducer,
     [chosenContributionState.name]: chosenContributionState.reducer,
     [statisticState.name]: statisticState.reducer,

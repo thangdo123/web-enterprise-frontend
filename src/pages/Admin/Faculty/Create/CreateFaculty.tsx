@@ -24,10 +24,10 @@ const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
           }),
         );
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: message,
             type: ENotificationType.Error,
           }),
         );
@@ -40,6 +40,7 @@ const CreateFaculty = ({ onClose }: { onClose: () => void }) => {
           <S.CreateFacultyLeftTitle>Name:</S.CreateFacultyLeftTitle>
           <S.CreateFacultyBlock1Right>
             <input
+              type="text"
               value={nameInput}
               onChange={(e) => setNameInput(e.target.value)}
               placeholder="Enter Faculty"

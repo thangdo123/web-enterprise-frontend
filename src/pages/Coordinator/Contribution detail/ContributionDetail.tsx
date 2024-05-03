@@ -38,10 +38,10 @@ const ContributionDetail = () => {
           );
           dispatch(fetchContributionDetailCoordinator(id!));
         })
-        .catch((rejectedValueOrSerializedError) => {
+        .catch((message) => {
           dispatch(
             setNotification({
-              message: rejectedValueOrSerializedError.response.data.message,
+              message: message,
               type: ENotificationType.Error,
             }),
           );
@@ -68,10 +68,10 @@ const ContributionDetail = () => {
             }),
           );
         })
-        .catch((rejectedValueOrSerializedError) => {
+        .catch((message) => {
           dispatch(
             setNotification({
-              message: rejectedValueOrSerializedError.response.data.message,
+              message: message,
               type: ENotificationType.Error,
             }),
           );

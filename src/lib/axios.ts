@@ -13,7 +13,6 @@ const updateHeaders = (config: InternalAxiosRequestConfig) => {
 export const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    // "Authorization": `Bearer ${token}`,
     "Content-Type": "application/json",
   },
 });
@@ -21,7 +20,6 @@ export const axiosInstance = axios.create({
 export const axiosInstanceFormData = axios.create({
   baseURL: API_BASE_URL,
   headers: {
-    // "Authorization": `Bearer ${token}`,
     "Content-Type": "multipart/form-data",
   },
 });
@@ -34,4 +32,30 @@ axiosInstance.interceptors.request.use(
 axiosInstanceFormData.interceptors.request.use(
   (config) => updateHeaders(config),
   (error) => Promise.reject(error),
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const message =
+      error?.response?.data?.error ||
+      error?.response?.data?.message ||
+      (error?.response?.data?.errors && error.response.data.errors[0].msg) ||
+      error?.message ||
+      "Something went wrong!";
+    return Promise.reject(message);
+  },
+);
+
+axiosInstanceFormData.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const message =
+      error?.response?.data?.error ||
+      error?.response?.data?.message ||
+      (error?.response?.data?.errors && error.response.data.errors[0].msg) ||
+      error?.message ||
+      "Something went wrong!";
+    return Promise.reject(message);
+  },
 );

@@ -35,10 +35,10 @@ const UpdateFaculty = ({
           }),
         );
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: message,
             type: ENotificationType.Error,
           }),
         );
@@ -57,6 +57,7 @@ const UpdateFaculty = ({
             <S.CreateFacultyBlock1Right>
               <input
                 value={nameInput}
+                type="text"
                 onChange={(e) => setNameInput(e.target.value)}
                 placeholder="Enter Faculty"
               />

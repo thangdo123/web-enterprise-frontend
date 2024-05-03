@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
 
@@ -48,34 +48,3 @@ export const resetPassword = createAsyncThunk(
     }
   },
 );
-
-interface IResetPasswordState {
-  isSentOtp: boolean;
-  checkOtp: boolean;
-}
-
-const initialState: IResetPasswordState = {
-  isSentOtp: false,
-  checkOtp: false,
-};
-
-export const resetPasswordState = createSlice({
-  name: "resetPasswordState",
-  initialState,
-  reducers: {
-    clearCheckOtp: (state) => {
-      state.checkOtp = false;
-      state.isSentOtp = false;
-    },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(sendOtp.fulfilled, (state) => {
-      state.isSentOtp = true;
-    });
-    builder.addCase(resetPassword.fulfilled, (state) => {
-      state.checkOtp = true;
-    });
-  },
-});
-
-export const { clearCheckOtp } = resetPasswordState.actions;

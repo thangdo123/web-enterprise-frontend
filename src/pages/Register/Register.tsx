@@ -29,10 +29,10 @@ export default function Register() {
           }),
         );
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: message,
             type: ENotificationType.Error,
           }),
         );

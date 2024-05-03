@@ -39,11 +39,11 @@ const CreateSubmission = () => {
         );
       })
 
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message
-              ? rejectedValueOrSerializedError.response.data.message
+            message: message
+              ? message
               : "Only support docx and image files, please change your files",
             type: ENotificationType.Error,
           }),
@@ -100,7 +100,7 @@ const CreateSubmission = () => {
           <S.Block5>
             <S.LeftTile></S.LeftTile>
             <S.CheckBoxContainer>
-              <S.CheckBox type="checkbox" required/>
+              <S.CheckBox type="checkbox" required />
               <div>
                 I accept the terms and conditions before I provide my work.
               </div>
