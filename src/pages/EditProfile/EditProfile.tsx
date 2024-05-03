@@ -55,10 +55,10 @@ const EditProfile = () => {
           }),
         );
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: message,
             type: ENotificationType.Error,
           }),
         );
@@ -106,7 +106,7 @@ const EditProfile = () => {
             <p>Email</p>
             <div>
               <input
-                type="text"
+                type="email"
                 value={userProfile.email}
                 placeholder="Enter Email"
                 disabled

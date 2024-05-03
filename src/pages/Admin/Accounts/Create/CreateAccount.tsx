@@ -46,10 +46,10 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
           }),
         );
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: message,
             type: ENotificationType.Error,
           }),
         );
@@ -67,6 +67,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
           <S.CreateAccountLeftTitle>Username:</S.CreateAccountLeftTitle>
           <S.CreateAccountBlock1Right>
             <input
+              type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter Username"
@@ -78,6 +79,7 @@ const CreateAccount = ({ onClose }: { onClose: () => void }) => {
           <S.CreateAccountLeftTitle>Email:</S.CreateAccountLeftTitle>
           <S.CreateAccountBlock1Right>
             <input
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter Email"

@@ -42,10 +42,10 @@ const UpdateAccount = ({
           }),
         );
       })
-      .catch((rejectedValueOrSerializedError) => {
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: message,
             type: ENotificationType.Error,
           }),
         );
@@ -66,6 +66,7 @@ const UpdateAccount = ({
           <S.CreateAccountLeftTitle>Username:</S.CreateAccountLeftTitle>
           <S.CreateAccountBlock1Right>
             <input
+              type="text"
               value={nameInput}
               onChange={(e) => setNameInput(e.target.value)}
               placeholder="Enter Username"

@@ -1,12 +1,8 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import * as S from "./ResetPassword.styled";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
-import {
-  clearCheckOtp,
-  resetPassword,
-  sendOtp,
-} from "../../store/slices/resetPassword";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../store";
+import { resetPassword, sendOtp } from "../../store/slices/resetPassword";
 import { useLocation, useNavigate } from "react-router";
 import { deleteCookie } from "../../utils/cookies.utils";
 import Logo from "../../assets/images/gw-logo.png";
@@ -14,9 +10,14 @@ import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import { CapsLockOn, ValidatePassword } from "../../utils/validate.utils";
 
+const TIMEOUT = 60;
+
 export default function ResetPassword() {
+  const dateTime = new Date();
+  const now = Math.floor(dateTime.getTime() / 1000);
+  const expiresTime = localStorage.getItem("expiresTime");
   const [capsLockStatus, setCapsLockStatus] = useState<boolean>(false);
-  const [time, setTime] = useState<number>(300);
+  const [time, setTime] = useState<number>(parseInt(expiresTime!) - now);
   const [mailInput, setMailInput] = useState<string>("");
   const [otp, setOtp] = useState<string>("");
   const [newPW, setNewPW] = useState<string>("");
@@ -25,31 +26,30 @@ export default function ResetPassword() {
   const dispatch = useDispatch<AppDispatch>();
   const location = useLocation();
 
-  const { isSentOtp, checkOtp } = useSelector(
-    (state: RootState) => state.resetPasswordState,
-  );
+  const otpStatus = localStorage.getItem("isSentOtp") === "true";
+  const userMail = localStorage.getItem("userMail");
 
   const handleShow = () => {
-    setTime(300);
+    localStorage.setItem("expiresTime", (now + TIMEOUT).toString());
+    setTime(TIMEOUT);
   };
 
   const handleResendCode = () => {
-    console.log(mailInput);
-    dispatch(sendOtp({ email: mailInput }))
+    dispatch(sendOtp({ email: userMail! }))
       .unwrap()
-      .then((action) => {
-        setTime(300);
+      .then((action) =>
         dispatch(
           setNotification({
             message: action.message,
             type: ENotificationType.Success,
           }),
-        );
-      })
-      .catch((rejectedValueOrSerializedError) => {
+        ),
+      )
+      .then(() => handleShow())
+      .catch((message) => {
         dispatch(
           setNotification({
-            message: rejectedValueOrSerializedError.response.data.message,
+            message: message,
             type: ENotificationType.Error,
           }),
         );
@@ -80,6 +80,10 @@ export default function ResetPassword() {
       }
     }, 1000);
 
+    if (time <= 0) {
+      setTime(0);
+    }
+
     return () => {
       clearInterval(interval);
     };
@@ -93,19 +97,12 @@ export default function ResetPassword() {
     }
   }, [location.state]);
 
-  useEffect(() => {
-    if (checkOtp) {
-      deleteCookie("token");
-      navigate("/login");
-      dispatch(clearCheckOtp());
-    }
-  }, [checkOtp]);
-
   const handleOnSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (isSentOtp) {
+    localStorage.setItem("userMail", mailInput);
+    if (otpStatus) {
       const newPassword = {
-        email: mailInput,
+        email: userMail!,
         otp: otp,
         newPassword: newPW,
         reNewPassword: reNewPW,
@@ -113,6 +110,9 @@ export default function ResetPassword() {
       dispatch(resetPassword(newPassword))
         .unwrap()
         .then((action) => {
+          navigate("/login");
+          deleteCookie("token");
+          localStorage.setItem("isSentOtp", "false");
           dispatch(
             setNotification({
               message: action.message,
@@ -120,18 +120,15 @@ export default function ResetPassword() {
             }),
           );
         })
-        .catch((rejectedValueOrSerializedError) => {
+        .catch((message) => {
           dispatch(
             setNotification({
-              message:
-                rejectedValueOrSerializedError.response.data.message ||
-                rejectedValueOrSerializedError.response.data.errors[0].msg,
+              message: message,
               type: ENotificationType.Error,
             }),
           );
         });
     } else {
-      handleShow();
       dispatch(sendOtp({ email: mailInput }))
         .unwrap()
         .then((action) => {
@@ -142,10 +139,12 @@ export default function ResetPassword() {
             }),
           );
         })
-        .catch((rejectedValueOrSerializedError) => {
+        .then(() => localStorage.setItem("isSentOtp", "true"))
+        .then(() => handleShow())
+        .catch((message) => {
           dispatch(
             setNotification({
-              message: rejectedValueOrSerializedError.response.data.message,
+              message: message,
               type: ENotificationType.Error,
             }),
           );
@@ -175,7 +174,7 @@ export default function ResetPassword() {
               <p>
                 <i className="bi bi-envelope"></i>
               </p>
-              {!isSentOtp && (
+              {!otpStatus && (
                 <input
                   value={mailInput}
                   onChange={(e) => setMailInput(e.target.value)}
@@ -184,7 +183,7 @@ export default function ResetPassword() {
                   required
                 />
               )}
-              {isSentOtp && (
+              {otpStatus && (
                 <input
                   type="text"
                   value={otp}
@@ -193,11 +192,11 @@ export default function ResetPassword() {
                   required
                 />
               )}
-              <S.TimeContainer $show={isSentOtp}>
+              <S.TimeContainer $show={otpStatus}>
                 {handleTime(time)}
               </S.TimeContainer>
             </S.InputField>
-            {isSentOtp && (
+            {otpStatus && (
               <S.InputField>
                 <p>
                   <i className="bi bi-key"></i>
@@ -216,7 +215,7 @@ export default function ResetPassword() {
                 </S.CheckIcon>
               </S.InputField>
             )}
-            {isSentOtp && (
+            {otpStatus && (
               <>
                 <S.InputField>
                   <p>
@@ -241,12 +240,12 @@ export default function ResetPassword() {
                 </S.PasswordStatus>
               </>
             )}
-            <S.Btn $show={isSentOtp}>Send code</S.Btn>
-            <S.SendBtn $show={isSentOtp}>Submit</S.SendBtn>
+            <S.Btn $show={otpStatus}>Send code</S.Btn>
+            <S.SendBtn $show={otpStatus}>Submit</S.SendBtn>
             <S.ResendBtn
               type="button"
               onClick={handleResendCode}
-              $show={isSentOtp}
+              $show={otpStatus}
             >
               Resend code
             </S.ResendBtn>
