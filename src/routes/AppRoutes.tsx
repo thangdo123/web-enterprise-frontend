@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Routes } from "react-router";
 
 import { standaloneRoutes } from "./standaloneRoutes";
-import { decodeCookie, getCookie } from "../utils/cookies.utils";
 import { layoutAdminRoutes } from "./layoutAdminRoutes";
 import LayoutAdmin from "../components/Layout/SideLayout/LayoutAdmin";
 import LayoutManager from "../components/Layout/SideLayout/LayoutManager";
@@ -10,36 +9,29 @@ import { layoutManagerRoutes } from "./layoutManagerRoutes";
 
 import LayoutStudent from "../components/Layout/TopLayout/LayoutStudent";
 import { layoutStudentRoutes } from "./layoutStudentRoutes";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
-import { getAdminProfile, getUserProfile } from "../store/slices/userProfile";
+import { useSelector } from "react-redux";
+
 import LayoutCoordinator from "../components/Layout/TopLayout/LayoutCoordinator";
 import { layoutCoordinatorRoutes } from "./layoutCoordinator";
 import LayoutGuest from "../components/Layout/TopLayout/LayoutGuest";
 import { layoutGuestRoutes } from "./layoutGuest";
+import { RootState } from "../store";
 
 export default function AppRoutes() {
-  const dispatch = useDispatch<AppDispatch>();
-  const token = getCookie("token");
-
-  useEffect(() => {
-    if (decodeCookie(token) === "ADMIN") {
-      dispatch(getAdminProfile());
-    } else {
-      dispatch(getUserProfile());
-    }
-  }, []);
+  const { userProfile } = useSelector(
+    (state: RootState) => state.userProfileState,
+  );
 
   return (
     <Routes>
-      {decodeCookie(token) === "ADMIN" && (
+      {userProfile?.role === "ADMIN" && (
         <Route path="/" element={<LayoutAdmin />}>
           {layoutAdminRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />
           ))}
         </Route>
       )}
-      {decodeCookie(token) === "MANAGER" && (
+      {userProfile?.role === "MANAGER" && (
         <Route path="/" element={<LayoutManager />}>
           {layoutManagerRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />
@@ -47,7 +39,7 @@ export default function AppRoutes() {
         </Route>
       )}
 
-      {decodeCookie(token) === "STUDENT" && (
+      {userProfile?.role === "STUDENT" && (
         <Route path="/" element={<LayoutStudent />}>
           {layoutStudentRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />
@@ -55,7 +47,7 @@ export default function AppRoutes() {
         </Route>
       )}
 
-      {decodeCookie(token) === "COORDIONATOR" && (
+      {userProfile?.role === "COORDIONATOR" && (
         <Route path="/" element={<LayoutCoordinator />}>
           {layoutCoordinatorRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />
@@ -63,7 +55,7 @@ export default function AppRoutes() {
         </Route>
       )}
 
-      {decodeCookie(token) === "GUEST" && (
+      {userProfile?.role === "GUEST" && (
         <Route path="/" element={<LayoutGuest />}>
           {layoutGuestRoutes.map(({ path, component }) => (
             <Route key={path} path={path} element={component} />

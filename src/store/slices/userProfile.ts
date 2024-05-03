@@ -2,7 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosInstance, axiosInstanceFormData } from "../../lib/axios";
 import { API_BASE_URL, API_ENDPOINTS } from "../../config/api";
 import { IAccount } from "../../interfaces/account.interfaces";
-import { checkAccessToken } from "../../utils/cookies.utils";
+import { checkAccessToken, setCookie } from "../../utils/cookies.utils";
+import { ILogin } from "../../interfaces";
 
 export const getUserProfile = createAsyncThunk(
   "user/getUserProfile",
@@ -56,12 +57,30 @@ export const updateUserProfile = createAsyncThunk(
   },
 );
 
+export const postLogin = createAsyncThunk(
+  "user/postLogin",
+  async (data: ILogin, { rejectWithValue, dispatch }) => {
+    try {
+      const response = await axiosInstance.post(
+        API_BASE_URL + API_ENDPOINTS.AUTH.LOGIN,
+        data,
+      );
+      setCookie("token", response.data.token);
+      dispatch(getUserProfile());
+      dispatch(getAdminProfile());
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err);
+    }
+  },
+);
+
 interface IProfileState {
-  userProfile: IAccount;
+  userProfile: IAccount | null;
 }
 
 const initialState: IProfileState = {
-  userProfile: { name: "", email: "", role: "" },
+  userProfile: null,
 };
 
 export const userProfileState = createSlice({

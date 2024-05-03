@@ -19,7 +19,7 @@ export default function ContactList({ getConversationId }: IConversationList) {
     (state: RootState) => state.userProfileState,
   );
   const { contactList } = useSelector((state: RootState) => state.contactState);
-
+  if (!userProfile) return null;
   const handleOpenConversation = (id: string) => {
     socket.emit("join", {
       users: `${userProfile.id}, ${id}`,

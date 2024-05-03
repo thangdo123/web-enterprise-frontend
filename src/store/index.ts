@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { loginState } from "./slices/login";
 import { accountState } from "./slices/Admin/accounts";
 import { facultyState } from "./slices/Admin/faculties";
 import { academicYearState } from "./slices/Admin/academicYear";
@@ -17,7 +16,6 @@ import { guestState } from "./slices/Guest/guest";
 const store = configureStore({
   reducer: {
     [notificationState.name]: notificationState.reducer,
-    [loginState.name]: loginState.reducer,
     [accountState.name]: accountState.reducer,
     [facultyState.name]: facultyState.reducer,
     [academicYearState.name]: academicYearState.reducer,

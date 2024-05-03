@@ -3,23 +3,14 @@ import * as S from "./EditProfile.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 
-import {
-  decodeCookie,
-  deleteCookie,
-  getCookie,
-} from "../../utils/cookies.utils";
-import {
-  getAdminProfile,
-  getUserProfile,
-  updateUserProfile,
-} from "../../store/slices/userProfile";
+import { deleteCookie } from "../../utils/cookies.utils";
+import { updateUserProfile } from "../../store/slices/userProfile";
 import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import { useNavigate } from "react-router";
 
 const EditProfile = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const token = getCookie("token");
   const navigate = useNavigate();
   const { userProfile } = useSelector(
     (state: RootState) => state.userProfileState,
@@ -64,14 +55,6 @@ const EditProfile = () => {
         );
       });
   };
-
-  useEffect(() => {
-    if (decodeCookie(token) === "ADMIN") {
-      dispatch(getAdminProfile());
-    } else {
-      dispatch(getUserProfile());
-    }
-  }, []);
 
   useEffect(() => {
     if (userProfile) {

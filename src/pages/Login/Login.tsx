@@ -1,21 +1,22 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import * as S from "./Login.styled";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
-import { postLogin } from "../../store/slices/login";
-import { getCookie } from "../../utils/cookies.utils";
 import { ILogin } from "../../interfaces";
 import { setNotification } from "../../store/slices/notification";
 import { ENotificationType } from "../../enum";
 import Logo from "../../assets/images/gw-logo.png";
 import { CapsLockOn } from "../../utils/validate.utils";
+import { postLogin } from "../../store/slices/userProfile";
 
 export default function Login() {
   const [visible, setvisible] = useState(false);
   const [capsLockStatus, setCapsLockStatus] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
-  const { authStatus } = useSelector((state: RootState) => state.loginState);
+  const { userProfile } = useSelector(
+    (state: RootState) => state.userProfileState,
+  );
 
   const handleLogin = async () => {
     const account: ILogin = {
@@ -41,15 +42,9 @@ export default function Login() {
     handleLogin();
   };
 
-  useEffect(() => {
-    const token = getCookie("token");
-    if (authStatus || token) {
-      window.location.href = "/";
-    }
-  }, [authStatus]);
-
   return (
     <S.LoginContainter>
+      {userProfile && <Navigate to="/" />}
       <S.LoginCenter>
         <S.LoginContainer>
           <S.LoginLogoBanner>

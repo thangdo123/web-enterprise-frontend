@@ -15,7 +15,7 @@ export default function ChatBox({ conversationId }: IChatBox) {
   const { userProfile } = useSelector(
     (state: RootState) => state.userProfileState,
   );
-
+  if (!userProfile) return null;
   const sendMessage = () => {
     const messageContent = {
       userId: userProfile.id!,
