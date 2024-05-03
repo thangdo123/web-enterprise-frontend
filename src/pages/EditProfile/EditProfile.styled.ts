@@ -32,6 +32,7 @@ export const EditProfileBlock1Avatar = styled.div`
 export const Avatar = styled.img`
   width: 8%;
   height: auto;
+  aspect-ratio: 1/1;
   max-height: var(--s-14);
   border-radius: 50%;
 `;
