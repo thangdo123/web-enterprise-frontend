@@ -1,4 +1,4 @@
-const API_BASE_URL = "http://159.89.206.44:3000";
+const API_BASE_URL = "https://web-enterprise.onrender.com";
 
 const API_ENDPOINTS = {
   AUTH: {
