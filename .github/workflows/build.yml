@@ -9,7 +9,7 @@ on:
 env:
   REGISTRY: registry.digitalocean.com/web-enterprise
   USERNAME: trantanminh0603@gmail.com
-  PASSWORD: dop_v1_7e8d145490b41e6f7eef1b493044585fe0a78252d62d4b59399260d7addcfca5
+  PASSWORD: dop_v1_c16d7ee1cf9f298b410a3a5c99fbd5d0332ccc8ca87ec4f7ae6475710e0c62fc
 
 jobs:
   build:
